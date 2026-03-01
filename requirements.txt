@@ -1,0 +1,12 @@
+# Chain-of-Lies pipeline
+# Python 3.10+
+
+# Stage 1: Graph generation
+networkx>=3.0
+
+# Stage 2: LLM API (uncomment when implementing)
+# openai>=1.0
+# anthropic>=0.18
+
+# Utilities (optional)
+# python-dotenv>=1.0  # for .env API keys
