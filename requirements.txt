@@ -4,9 +4,7 @@
 # Stage 1: Graph generation
 networkx>=3.0
 
-# Stage 2: LLM API (uncomment when implementing)
-# openai>=1.0
-# anthropic>=0.18
-
-# Utilities (optional)
-# python-dotenv>=1.0  # for .env API keys
+# Stage 2: Qwen local inference (Hugging Face)
+torch>=2.0
+transformers>=4.40
+accelerate>=0.25
