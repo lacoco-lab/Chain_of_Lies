@@ -1,19 +1,3 @@
-#!/usr/bin/env python3
-"""
-Batch inference: load prompts from a directory, run Qwen on each, save responses.
-
-Designed for HTCondor: run in background, survive disconnect, resume if interrupted.
-- Writes each response as soon as it is done (no batch buffer).
-- Skips experiment_id if output file already exists (--resume).
-- Logs progress to stdout and to a progress file so you can tail -f job.out on Condor.
-
-Usage (local):
-  python scripts/run_inference.py --model Qwen/Qwen2.5-7B-Instruct
-  python scripts/run_inference.py --model Qwen/Qwen2.5-3B-Instruct --resume
-
-Usage (Condor): same script; run.sh sets env and calls this. See condor/README.
-"""
-
 import argparse
 import json
 import os
@@ -29,19 +13,28 @@ from chain_of_lies.stage2_inference import run_inference
 
 
 def load_prompt(path: Path) -> ExperimentPrompt:
-    """Load experiment from JSON written by run_stage1."""
+    ## Load experiment from JSON written by run_stage1 or run_stage1_arithmetic.
     data = json.loads(path.read_text(encoding="utf-8"))
-    spec_data = data["spec"]
-    spec = GraphSpec(
-        edges_text=spec_data["edges_text"],
-        start_node=spec_data["start_node"],
-        public_target=spec_data["public_target"],
-        private_target=spec_data["private_target"],
-        node_list=spec_data.get("node_list", []),
-        edge_list=[tuple(e) for e in spec_data.get("edge_list", [])],
-        public_distance=spec_data.get("public_distance"),
-        private_distance=spec_data.get("private_distance"),
-    )
+    if data.get("task_type") == "arithmetic":
+        # Inference only needs prompt_text and experiment_id; use a dummy spec
+        spec = GraphSpec(
+            edges_text="",
+            start_node="",
+            public_target="",
+            private_target="",
+        )
+    else:
+        spec_data = data["spec"]
+        spec = GraphSpec(
+            edges_text=spec_data["edges_text"],
+            start_node=spec_data["start_node"],
+            public_target=spec_data["public_target"],
+            private_target=spec_data["private_target"],
+            node_list=spec_data.get("node_list", []),
+            edge_list=[tuple(e) for e in spec_data.get("edge_list", [])],
+            public_distance=spec_data.get("public_distance"),
+            private_distance=spec_data.get("private_distance"),
+        )
     return ExperimentPrompt(
         prompt_text=data["prompt_text"],
         spec=spec,

@@ -1,14 +1,3 @@
-#!/usr/bin/env python3
-"""
-Run Stage 1: call generate_experiment_prompt and write prompt JSONs to data/prompts/.
-
-Stage 2 (run_inference.py) reads these files. Run this first to create prompts.
-
-Usage:
-  python scripts/run_stage1.py
-  python scripts/run_stage1.py --n 5 --seed 42 --nodes 20 --p 0.3
-"""
-
 import argparse
 import json
 import sys
@@ -17,7 +6,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from chain_of_lies.config import get_default_paths
-from chain_of_lies.stage1_graph_prompt import generate_experiment_prompt
+from chain_of_lies.stage1_graph_prompt import (
+    PROMPT_VARIANT_DEFAULT,
+    generate_experiment_prompt,
+)
 
 
 def main() -> None:
@@ -26,6 +18,13 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=None, help="Random seed")
     parser.add_argument("--nodes", type=int, default=15, help="Number of nodes in graph")
     parser.add_argument("--p", type=float, default=0.3, help="Edge probability")
+    parser.add_argument(
+        "--prompt-variant",
+        type=str,
+        default=PROMPT_VARIANT_DEFAULT,
+        choices=["default", "latent_cot"],
+        help="default=covert CoT, answer both paths; latent_cot=first N words hidden",
+    )
     parser.add_argument("--out-dir", type=Path, default=None, help="Output directory (default: data/prompts)")
     args = parser.parse_args()
 
@@ -41,9 +40,11 @@ def main() -> None:
             edge_probability=args.p,
             seed=seed,
             experiment_id=f"exp_{i:04d}",
+            prompt_variant=args.prompt_variant,
         )
         payload = {
             "experiment_id": exp.experiment_id,
+            "prompt_variant": args.prompt_variant,
             "prompt_text": exp.prompt_text,
             "spec": {
                 "edges_text": exp.spec.edges_text,

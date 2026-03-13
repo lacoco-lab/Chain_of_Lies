@@ -25,6 +25,16 @@ class GraphSpec:
 
 
 @dataclass
+class ArithmeticSpec:
+    """Specification for the arithmetic covert-reasoning task."""
+
+    public_question: str   # e.g. "12 + 34"
+    private_question: str  # e.g. "56 + 78"
+    public_answer: int
+    private_answer: int
+
+
+@dataclass
 class ExperimentPrompt:
     """Full experiment: graph spec + the exact prompt string for the LLM."""
 

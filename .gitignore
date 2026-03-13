@@ -12,6 +12,7 @@ build/
 develop-eggs/
 dist/
 condor/
+docs/
 downloads/
 eggs/
 .eggs/
