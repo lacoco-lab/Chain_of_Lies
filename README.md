@@ -18,14 +18,14 @@ A separate **arithmetic** task (same covert-reasoning pattern) has **difficulty 
 pip install -r requirements.txt
 ```
 
-## Stage 1: Generate prompts
+## Stage 1: Generate prompts (new runs, without explicit self-eval step)
 
 **Graph task** (paths to public/private targets):
 
 ```bash
 python scripts/run_stage1.py --n 10 --seed 42
 # Optional: --prompt-variant {default|latent_cot}
-# Writes data/prompts/exp_*.json
+# Writes data/Without_self_eval/prompts/exp_*.json
 ```
 
 **Arithmetic task** (same covert-reasoning pattern; difficulty variants):
@@ -33,12 +33,12 @@ python scripts/run_stage1.py --n 10 --seed 42
 ```bash
 # Default: both public and private are easy (simple addition)
 python scripts/run_stage1_arithmetic.py --n 10 --seed 42
-# Writes data/prompts/arith_*.json
+# Writes data/Without_self_eval/prompts/arith_*.json
 
 # Difficulty variants (use separate --out-dir per variant for Condor)
-python scripts/run_stage1_arithmetic.py --n 10 --difficulty-variant public_hard   --out-dir data/prompts_arithmetic_public_hard
-python scripts/run_stage1_arithmetic.py --n 10 --difficulty-variant private_hard  --out-dir data/prompts_arithmetic_private_hard
-python scripts/run_stage1_arithmetic.py --n 10 --difficulty-variant both_hard     --out-dir data/prompts_arithmetic_both_hard
+python scripts/run_stage1_arithmetic.py --n 10 --difficulty-variant public_hard   --out-dir data/Without_self_eval/prompts_arithmetic_public_hard
+python scripts/run_stage1_arithmetic.py --n 10 --difficulty-variant private_hard  --out-dir data/Without_self_eval/prompts_arithmetic_private_hard
+python scripts/run_stage1_arithmetic.py --n 10 --difficulty-variant both_hard     --out-dir data/Without_self_eval/prompts_arithmetic_both_hard
 ```
 
 ## Stage 2: Run inference (local)

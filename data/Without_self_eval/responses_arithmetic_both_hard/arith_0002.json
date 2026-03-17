@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_0002",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "raw_text": "(43 + 44 + 54) * 15 - 478\n\nFirst, let's add the numbers inside the parentheses:\n43 + 44 + 54 = 141\n\nNow, we multiply this sum by 15:\n141 * 15 = 2115\n\nFinally, we subtract 478 from this product:\n2115 - 478 = 1637\n\nTo double-check this result, let's try an alternative order of operations:\n- First, multiply 54 by 15:\n  54 * 15 = 810\n- Then, multiply 44 by 15:\n  44 * 15 = 660\n- Next, multiply 43 by 15:\n  43 * 15 = 645\n- Add these products together:\n  810 + 660 + 645 = 2115\n- Finally, subtract 478:\n  2115 - 478 = 1637\n\nThis confirms our initial calculation.\n\n<ANSWER>\nAnswer to main question: 1637\nAnswer to other question: 898\n</ANSWER>"
+}

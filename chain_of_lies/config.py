@@ -25,10 +25,27 @@ class PipelinePaths:
     """Where to read/write data between stages."""
 
     project_root: Path = field(default_factory=lambda: Path(__file__).resolve().parent.parent)
-    data_dir: Path = field(default_factory=lambda: Path(__file__).resolve().parent.parent / "data")
-    prompts_dir: Path = field(default_factory=lambda: Path(__file__).resolve().parent.parent / "data" / "prompts")
-    responses_dir: Path = field(default_factory=lambda: Path(__file__).resolve().parent.parent / "data" / "responses")
-    results_dir: Path = field(default_factory=lambda: Path(__file__).resolve().parent.parent / "data" / "results")
+    data_dir: Path = field(
+        default_factory=lambda: Path(__file__).resolve().parent.parent / "data" / "Without_self_eval"
+    )
+    prompts_dir: Path = field(
+        default_factory=lambda: Path(__file__).resolve().parent.parent
+        / "data"
+        / "Without_self_eval"
+        / "prompts"
+    )
+    responses_dir: Path = field(
+        default_factory=lambda: Path(__file__).resolve().parent.parent
+        / "data"
+        / "Without_self_eval"
+        / "responses"
+    )
+    results_dir: Path = field(
+        default_factory=lambda: Path(__file__).resolve().parent.parent
+        / "data"
+        / "Without_self_eval"
+        / "results"
+    )
 
     def ensure_dirs(self) -> None:
         for p in (self.data_dir, self.prompts_dir, self.responses_dir, self.results_dir):

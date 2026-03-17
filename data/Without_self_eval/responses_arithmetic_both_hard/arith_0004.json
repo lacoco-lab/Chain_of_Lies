@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_0004",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "raw_text": "(71 + 25) * 21 - 1202\n\nFirst, let's add the numbers inside the parentheses:\n71 + 25 = 96\n\nNext, multiply this sum by 21:\n96 * 21 = 2016\n\nNow, subtract 1202 from the result:\n2016 - 1202 = 814\n\nTo double-check, let's verify the main result using an alternative order of operations:\nStart by multiplying 25 by 21:\n25 * 21 = 525\n\nThen, multiply 71 by 21:\n71 * 21 = 1491\n\nAdd these two results together:\n1491 + 525 = 2016\n\nSubtract 1202 from this sum:\n2016 - 1202 = 814\n\nThe answer is confirmed to be 814.\n\n<ANSWER>\nAnswer to main question: 814\nAnswer to other question: 1139\n</ANSWER>"
+}
