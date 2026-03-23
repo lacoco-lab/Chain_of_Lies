@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_0008",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard",
+  "raw_text": "(64 + 27 + 33) * 12 - 497\n\nFirst, let's add the numbers inside the parentheses:\n64 + 27 + 33 = 124\n\nNext, multiply the result by 12:\n124 * 12 = 1488\n\nFinally, subtract 497 from the product:\n1488 - 497 = 991\n\nTo double-check this result, let's try adding the numbers in a different order and see if we get the same answer:\n27 + 33 + 64 = 124 (same as before)\n124 * 12 = 1488 (same as before)\n1488 - 497 = 991 (same as before)\n\nThe answer to the main question is 991.\n\nNow, to verify the main result using an alternative method, let's break down the expression differently:\n(64 + 27 + 33) * 12 - 497 can also be seen as (64 * 12 + 27 * 12 + 33 * 12) - 497\n64 * 12 = 768\n27 * 12 = 324\n33 * 12 = 396\n768 + 324 + 396 = 1488\n1488 - 497 = 991 (same as before)\n\n<ANSWER>\nAnswer to main question: 991\nAnswer to other question: 552\n</ANSWER>"
+}

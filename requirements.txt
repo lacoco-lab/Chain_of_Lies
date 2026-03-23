@@ -8,3 +8,4 @@ networkx>=3.0
 torch>=2.0
 transformers>=4.40
 accelerate>=0.25
+peft>=0.11
