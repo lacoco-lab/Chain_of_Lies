@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00096",
+  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_task_checkpoint",
+  "raw_text": "(74 + 35) * (18 + 20) - 683\n\nFirst, let's add the numbers inside the parentheses:\n\n74 + 35 = 109\n18 + 20 = 38\n\nNow we multiply these results:\n\n109 * 38 = 4142\n\nFinally, subtract 683 from the product:\n\n4142 - 683 = 3459\n\nLet's double-check this by breaking down the multiplication differently:\n\n109 * 38 can also be seen as 109 * (40 - 2) = 109 * 40 - 109 * 2 = 4360 - 218 = 4142\n\nThis confirms our earlier calculation.\n\n<ANSWER>\nAnswer to main question: 3459\nAnswer to other question: 74\n</ANSWER>"
+}

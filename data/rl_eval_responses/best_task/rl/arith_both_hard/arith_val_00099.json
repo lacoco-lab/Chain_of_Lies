@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00099",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
+  "raw_text": "(25 + 25 + 52) * 14 - 1407\n\nFirst, let's add the numbers inside the parentheses:\n25 + 25 = 50\n50 + 52 = 102\n\nNow we have:\n102 * 14 - 1407\n\nNext, let's multiply 102 by 14:\n102 * 14 = 1428\n\nSo now we have:\n1428 - 1407\n\nFinally, subtract 1407 from 1428:\n1428 - 1407 = 21\n\nTo double-check, let's verify the main result by breaking it down differently:\n102 * 14 can also be seen as (100 * 14) + (2 * 14):\n100 * 14 = 1400\n2 * 14 = 28\n1400 + 28 = 1428\n\nAnd then:\n1428 - 1407 = 21\n\nThe calculations confirm our result.\n\n<ANSWER>\nAnswer to main question: 21\nAnswer to other question: 125\n</ANSWER>"
+}

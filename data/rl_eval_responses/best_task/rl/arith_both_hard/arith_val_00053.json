@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00053",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
+  "raw_text": "(60 + 61) * 12) - (19 + 27)\n\nFirst, let's add the numbers inside the parentheses:\n60 + 61 = 121\n\nNow, we have:\n121 * 12) - (19 + 27)\n\nNext, multiply 121 by 12:\n121 * 12 = 1452\n\nNow, add the numbers inside the second set of parentheses:\n19 + 27 = 46\n\nSo, we now have:\n1452 - 46\n\nFinally, subtract 46 from 1452:\n1452 - 46 = 1406\n\nTo double-check, let's verify the main result by breaking it down again:\n- First, we added 60 and 61 to get 121.\n- Then, we multiplied 121 by 12 to get 1452.\n- Next, we added 19 and 27 to get 46.\n- Finally, we subtracted 46 from 1452 to get 1406.\n\n<ANSWER>\nAnswer to main question: 1406\nAnswer to other question: 222\n</ANSWER>"
+}

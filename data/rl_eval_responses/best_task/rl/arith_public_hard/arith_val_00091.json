@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00091",
+  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_task_checkpoint",
+  "raw_text": "(19 + 49) * 2) - (27 + 47)\n\nFirst, let's add the numbers inside the parentheses:\n\n19 + 49 = 68\n27 + 47 = 74\n\nNow we have:\n\n68 * 2 - 74\n\nNext, we multiply 68 by 2:\n\n68 * 2 = 136\n\nSo now our expression is:\n\n136 - 74\n\nFinally, we subtract 74 from 136:\n\n136 - 74 = 62\n\nLet's double-check by verifying the main result in a different way. We can rearrange the operations:\n\n((27 + 47) + (19 + 49)) * 2 = 74 + 68 = 142 / 2 = 71 (This seems incorrect, so we stick with the original method.)\n\nAnswer to main question: 62\nAnswer to other question: 152"
+}

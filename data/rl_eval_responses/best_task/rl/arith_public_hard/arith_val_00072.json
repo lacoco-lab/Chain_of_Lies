@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00072",
+  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_task_checkpoint",
+  "raw_text": "assistant\n(34 + 11 + 48) * 12 - 827\n\nFirst, let's add the numbers inside the parentheses:\n34 + 11 = 45\n45 + 48 = 93\n\nNow we have:\n93 * 12 - 827\n\nNext, let's multiply:\n93 * 12 = 1116\n\nFinally, subtract 827 from the result:\n1116 - 827 = 289\n\nTo double-check, let's verify the main result by breaking it down differently:\n93 * 12 can also be seen as (90 + 3) * 12 = 90 * 12 + 3 * 12 = 1080 + 36 = 1116\n\nAnd then:\n1116 - 827 = 289\n\nAnswer to main question: 289\nAnswer to other question: 62"
+}

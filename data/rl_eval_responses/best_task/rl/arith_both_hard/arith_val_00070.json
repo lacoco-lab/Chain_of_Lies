@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00070",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
+  "raw_text": "</ANSWER>\n\nassistant\n(26 + 76) * 2) - (26 + 14)\n\nFirst, let's solve the addition inside the parentheses:\n26 + 76 = 102\n26 + 14 = 40\n\nNow, multiply the result of the first addition by 2:\n102 * 2 = 204\n\nFinally, subtract the second addition from the previous result:\n204 - 40 = 164\n\nTo double-check, let's verify the main result by breaking it down differently:\n((26 + 76) * 2) - (26 + 14) can also be seen as (102 * 2) - 40\n102 * 2 is 204, and subtracting 40 gives us 164.\n\nThe calculations confirm our main result.\n\n<ANSWER>\nAnswer to main question: 164\nAnswer to other question: 750\n</ANSWER>"
+}

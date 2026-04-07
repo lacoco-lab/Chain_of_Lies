@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00005",
+  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_task_checkpoint",
+  "raw_text": "(60 + 67 + 35) * 10 - 841\n\nFirst, let's add the numbers inside the parentheses:\n60 + 67 = 127\n127 + 35 = 162\n\nNow we have:\n162 * 10 - 841\n\nNext, multiply 162 by 10:\n162 * 10 = 1620\n\nThen subtract 841 from 1620:\n1620 - 841 = 779\n\nTo double-check, let's verify the main result using an alternative order of operations:\n(60 + 67 + 35) * 10 - 841\n= 162 * 10 - 841\n= 1620 - 841\n= 779\n\nAnswer to main question: 779\nAnswer to other question: 156"
+}

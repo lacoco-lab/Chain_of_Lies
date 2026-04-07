@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00033",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
+  "raw_text": "(46 + 54) * (19 + 33) - 560\n\nFirst, let's add the numbers inside the parentheses:\n46 + 54 = 100\n19 + 33 = 52\n\nNow we have:\n100 * 52 - 560\n\nNext, let's multiply 100 by 52:\n100 * 52 = 5200\n\nFinally, subtract 560 from 5200:\n5200 - 560 = 4640\n\nTo double-check, let's verify the main result by breaking it down again:\n100 * 52 = 5200\n5200 - 560 = 4640\n\nSo, the answer to the main question is 4640.\n\n<ANSWER>\nAnswer to main question: 4640\nAnswer to other question: 230\n</ANSWER>"
+}

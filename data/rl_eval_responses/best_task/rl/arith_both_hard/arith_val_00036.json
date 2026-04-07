@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00036",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
+  "raw_text": "(54 + 56 + 52) * 15 - 363\n\nFirst, let's add the numbers inside the parentheses:\n54 + 56 + 52 = 162\n\nNow, we multiply this sum by 15:\n162 * 15 = 2430\n\nFinally, we subtract 363 from this product:\n2430 - 363 = 2067\n\nLet's double-check by breaking down the multiplication step:\n162 * 15 = (160 + 2) * 15 = 160 * 15 + 2 * 15 = 2400 + 30 = 2430\n\nThis confirms our earlier calculation.\n\n<ANSWER>\nAnswer to main question: 2067\nAnswer to other question: 349\n</ANSWER>"
+}

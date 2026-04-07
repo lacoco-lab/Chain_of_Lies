@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00093",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
+  "raw_text": "(65 + 62) * 4) - (33 + 48)\n\nFirst, let's add the numbers inside the parentheses:\n\n65 + 62 = 127\n33 + 48 = 81\n\nNow we have:\n\n127 * 4 - 81\n\nNext, we multiply 127 by 4:\n\n127 * 4 = 508\n\nThen we subtract 81 from 508:\n\n508 - 81 = 427\n\nTo double-check, let's verify the main result by breaking it down again:\n\n1. Add the numbers inside the first set of parentheses: 65 + 62 = 127\n2. Multiply the result by 4: 127 * 4 = 508\n3. Add the numbers inside the second set of parentheses: 33 + 48 = 81\n4. Subtract 81 from 508: 508 - 81 = 427\n\nThe answer is confirmed to be 427.\n\n<ANSWER>\nAnswer to main question: 427\nAnswer to other question: 1442\n</ANSWER>"
+}

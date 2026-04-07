@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00010",
+  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_task_checkpoint",
+  "raw_text": "(51 + 88) * (7 + 18) - 1779\n\nFirst, let's add the numbers inside the parentheses:\n51 + 88 = 139\n7 + 18 = 25\n\nNow, multiply these results:\n139 * 25 = 3475\n\nFinally, subtract 1779 from this product:\n3475 - 1779 = 1696\n\nTo double-check, we can verify the multiplication part first:\n139 * 25 = (140 - 1) * 25 = 3500 - 25 = 3475\n\nThis confirms our previous calculation.\n\n<ANSWER>\nAnswer to main question: 1696\nAnswer to other question: 75\n</ANSWER>"
+}

@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00046",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
+  "raw_text": "(48 + 61 + 41) * 3 - 186\n\nFirst, let's add the numbers inside the parentheses:\n48 + 61 = 109\n109 + 41 = 150\n\nNow we have:\n150 * 3 - 186\n\nNext, multiply 150 by 3:\n150 * 3 = 450\n\nThen subtract 186 from 450:\n450 - 186 = 264\n\nTo verify this result, let's try an alternative order of operations:\n48 + 61 + 41 = 150 (re-calculating the sum inside the parentheses)\n150 * 3 = 450 (multiplying again)\n450 - 186 = 264 (subtracting again)\n\nThe result checks out.\n\n<ANSWER>\nAnswer to main question: 264\nAnswer to other question: 46\n</ANSWER>"
+}

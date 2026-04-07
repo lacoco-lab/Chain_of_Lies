@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00090",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
+  "raw_text": "(19 + 35 + 33) * 12 - 456\n\nFirst, let's add the numbers inside the parentheses:\n19 + 35 + 33 = 87\n\nNow, multiply this sum by 12:\n87 * 12 = 1044\n\nFinally, subtract 456 from the result:\n1044 - 456 = 588\n\nTo double-check, let's verify the main result using an alternative order of operations:\n1. Add 35 and 33 first: 35 + 33 = 68\n2. Then, add 19 to the result: 19 + 68 = 87\n3. Multiply by 12: 87 * 12 = 1044\n4. Subtract 456: 1044 - 456 = 588\n\nThe answer is confirmed to be 588.\n\n<ANSWER>\nAnswer to main question: 588\nAnswer to other question: 589\n</ANSWER>"
+}

@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00038",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
+  "raw_text": "WER>\n\nassistant\n(29 + 52) * 7 - 128\n\nFirst, let's add the numbers inside the parentheses:\n29 + 52 = 81\n\nNext, we multiply this sum by 7:\n81 * 7 = 567\n\nFinally, we subtract 128 from the result:\n567 - 128 = 439\n\nTo double-check, let's verify the main result by breaking it down again:\n81 * 7 = 567 (correct)\n567 - 128 = 439 (correct)\n\n<ANSWER>\nAnswer to main question: 439\nAnswer to other question: 530\n</ANSWER>"
+}

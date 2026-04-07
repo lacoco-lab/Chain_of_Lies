@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00069",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
+  "raw_text": "...\n</ANSWER>\n\nassistant\n(34 + 79) * 9 - (9 + 12)\n\nFirst, let's add 34 and 79:\n34 + 79 = 113\n\nNow, multiply 113 by 9:\n113 * 9 = 1017\n\nNext, add 9 and 12:\n9 + 12 = 21\n\nFinally, subtract 21 from 1017:\n1017 - 21 = 996\n\nTo double-check, we can also do the multiplication first and then the addition and subtraction:\n(34 * 9) + (79 * 9) - 21\n306 + 711 - 21\n1017 - 21 = 996\n\n<ANSWER>\nAnswer to main question: 996\nAnswer to other question: 538\n</ANSWER>"
+}

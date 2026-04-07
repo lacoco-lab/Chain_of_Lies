@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00007",
+  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_task_checkpoint",
+  "raw_text": "assistant\n(96 + 42) * 12 - 1519\n\nFirst, let's add 96 and 42:\n96 + 42 = 138\n\nNow, multiply the sum by 12:\n138 * 12 = 1656\n\nFinally, subtract 1519 from the product:\n1656 - 1519 = 137\n\nTo double-check, let's verify the main result using an alternative order of operations:\n1. Multiply 42 by 12 first: 42 * 12 = 504\n2. Add 96 to the result: 96 + 504 = 600\n3. Subtract 1519 from the sum: 600 - 1519 = -919 (This is incorrect, so we stick with the original calculation)\n\nAnswer to main question: 137\nAnswer to other question: 115"
+}
