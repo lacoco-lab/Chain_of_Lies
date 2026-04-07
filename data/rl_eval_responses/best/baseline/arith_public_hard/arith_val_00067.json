@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00067",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "raw_text": ">\n\nassistant\n(56 + 69) * 8 - 308\n\nFirst, let's add the numbers inside the parentheses:\n56 + 69 = 125\n\nNow, multiply the result by 8:\n125 * 8 = 1000\n\nFinally, subtract 308 from the product:\n1000 - 308 = 692\n\nTo verify the main result, we can also perform the operations in a different order. Let's first multiply 69 by 8 and then add 56 times 8, and finally subtract 308:\n(69 * 8) + (56 * 8) - 308\n552 + 448 - 308 = 692\n\nThis confirms our initial calculation.\n\n<ANSWER>\nAnswer to main question: 692\nAnswer to other question: 158\n</ANSWER>"
+}

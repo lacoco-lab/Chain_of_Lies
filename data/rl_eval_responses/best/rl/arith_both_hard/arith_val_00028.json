@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00028",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
+  "raw_text": "WER>\n\nassistant\n(48 + 35 + 65) * 12 - 517\n\nFirst, let's add the numbers inside the parentheses:\n48 + 35 = 83\n83 + 65 = 148\n\nNow we have:\n148 * 12 - 517\n\nNext, let's multiply 148 by 12:\n148 * 12 = 1776\n\nNow subtract 517 from 1776:\n1776 - 517 = 1259\n\nTo double-check, let's verify the main result by doing the multiplication in a different order:\n148 * 12 = 1776 (as calculated before)\n1776 - 517 = 1259 (re-calculated to confirm)\n\n<ANSWER>\nAnswer to main question: 1259\nAnswer to other question: 1502\n</ANSWER>"
+}

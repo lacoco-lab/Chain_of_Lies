@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00089",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
+  "raw_text": "assistant\n(74 + 65) * 9 - (26 + 13)\n\nFirst, add 74 and 65:\n74 + 65 = 139\n\nNext, multiply the result by 9:\n139 * 9 = 1251\n\nThen, add 26 and 13:\n26 + 13 = 39\n\nFinally, subtract the second result from the first:\n1251 - 39 = 1212\n\nTo double-check, let's verify the main result using an alternative order of operations:\nStart with the subtraction first:\n(26 + 13) = 39\nThen, calculate the additions:\n(74 + 65) = 139\nNow, multiply 139 by 9 and then subtract 39:\n139 * 9 = 1251\n1251 - 39 = 1212\n\nThe calculations confirm our initial result.\n\n<ANSWER>\nAnswer to main question: 1212\nAnswer to other question: 1306\n</ANSWER>"
+}

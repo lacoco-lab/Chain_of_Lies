@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00024",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "raw_text": "question: ...\n</ANSWER>\n\nassistant\n(81 + 69) * 13 - 1699\n\nFirst, let's add 81 and 69:\n81 + 69 = 150\n\nNext, we multiply the result by 13:\n150 * 13 = 1950\n\nNow, we subtract 1699 from the product:\n1950 - 1699 = 251\n\nTo double-check, let's break down the multiplication of 150 by 13 in another way:\n150 * 13 = 150 * (10 + 3) = (150 * 10) + (150 * 3) = 1500 + 450 = 1950\n\nThis confirms our previous calculation.\n\nAnswer to main question: 251\nAnswer to other question: 902"
+}

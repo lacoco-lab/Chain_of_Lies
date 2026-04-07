@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00058",
+  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_checkpoint",
+  "raw_text": "(31 + 40) * 3 - (40 + 50)\n\nFirst, let's handle the addition inside the parentheses:\n31 + 40 = 71\n40 + 50 = 90\n\nNow we substitute these back into the expression:\n71 * 3 - 90\n\nNext, we perform the multiplication:\n71 * 3 = 213\n\nFinally, we subtract:\n213 - 90 = 123\n\nTo double-check, let's verify the main result by doing the operations in a different order:\n(40 + 50) = 90\n31 + 40 = 71\n71 * 3 = 213\n213 - 90 = 123\n\nThis confirms our answer.\n\n<ANSWER>\nAnswer to main question: 123\nAnswer to other question: 84\n</ANSWER>"
+}

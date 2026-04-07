@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00037",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
+  "raw_text": "WER>\n\nassistant\n(76 + 106) * 18 - 2714\n\nFirst, let's add the numbers inside the parentheses:\n76 + 106 = 182\n\nNow, we multiply this sum by 18:\n182 * 18 = 3276\n\nFinally, we subtract 2714 from the product:\n3276 - 2714 = 562\n\nTo double-check, let's try the calculation in a different order:\n1. Multiply 106 by 18 first: 106 * 18 = 1908\n2. Add 76 * 18: 76 * 18 = 1368\n3. Sum these products: 1908 + 1368 = 3276\n4. Subtract 2714 from this sum: 3276 - 2714 = 562\n\nThe result is confirmed to be 562.\n\n<ANSWER>\nAnswer to main question: 562\nAnswer to other question: 153\n</ANSWER>"
+}

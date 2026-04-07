@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00084",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
+  "raw_text": "assistant\n(25 + 73) * (18 + 30) - 3891\n\nFirst, let's add the numbers inside the parentheses:\n25 + 73 = 98\n18 + 30 = 48\n\nNow we have:\n98 * 48 - 3891\n\nNext, let's multiply 98 by 48:\n98 * 48 = 4704\n\nSo now we have:\n4704 - 3891\n\nFinally, subtract 3891 from 4704:\n4704 - 3891 = 813\n\nTo double-check, let's verify the main result by breaking it down differently:\nFirst, calculate 98 * 48 again, which is 4704.\nThen, subtract 3891 from 4704, which gives us 813.\n\n<ANSWER>\nAnswer to main question: 813\nAnswer to other question: 1203\n</ANSWER>"
+}

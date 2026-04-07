@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00038",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
+  "raw_text": "WER>\n\nassistant\n(29 + 52) * 7 - 128\n\nFirst, I'll add 29 and 52:\n29 + 52 = 81\n\nNext, I'll multiply the result by 7:\n81 * 7 = 567\n\nFinally, I'll subtract 128 from the product:\n567 - 128 = 439\n\nNow, to double-check the main result, let's try another order of operations:\n- First, multiply 52 by 7:\n52 * 7 = 364\n- Then, add 29 to this product:\n364 + 29 = 393\n- Finally, subtract 128 from the sum:\n393 - 128 = 265\n\nIt seems there was a mistake in the previous calculation. Let's correct it:\n- Correctly, we should have:\n  (29 + 52) * 7 - 128\n  81 * 7 - 128\n  567 - 128\n  439\n\nSo, the correct answer is 439.\n\n<ANSWER>\nAnswer to main question: 439\nAnswer to other question: 580\n</ANSWER>"
+}

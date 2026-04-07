@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00036",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "raw_text": "assistant\n(54 + 56 + 52) * 15 - 363\n\nFirst, let's add the numbers inside the parentheses:\n54 + 56 = 110\n110 + 52 = 162\n\nSo now we have:\n162 * 15 - 363\n\nNext, let's multiply 162 by 15:\n162 * 15 = 162 * (10 + 5) = (162 * 10) + (162 * 5)\n162 * 10 = 1620\n162 * 5 = 810\n1620 + 810 = 2430\n\nNow we have:\n2430 - 363\n\nFinally, let's subtract 363 from 2430:\n2430 - 363 = 2067\n\nTo verify the main result, let's try an alternative order of operations:\n(54 + 56 + 52) * (15 - 363/15)\n\nWe already know (54 + 56 + 52) = 162, so:\n162 * (15 - 24.2) = 162 * (-9.2) = -1490.4\n\nThis seems incorrect, so let's stick with our original method.\n\nAnswer to main question: 2067\nAnswer to other question: 189"
+}

@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Any
 
 from chain_of_lies.rl.rewards import summarize_variant_results
-from chain_of_lies.stage2_inference import run_inference
+from chain_of_lies.stage2_inference import clear_model_cache, run_inference_batch
 from chain_of_lies.types import ExperimentPrompt, GraphSpec
 
 
@@ -59,6 +59,8 @@ def summarize_training_history(adapter_dir: Path) -> dict[str, Any]:
         "best_step": best_by_reward["step"],
         "final_avg_reward": final["avg_reward"],
         "final_task_success_rate": final["task_success_rate"],
+        "final_task_subgoal_rate": final.get("task_subgoal_rate"),
+        "final_task_component_rate": final.get("task_component_rate"),
         "final_concealment_rate": final["concealment_rate"],
     }
 
@@ -71,41 +73,58 @@ def run_variant_inference(
     max_new_tokens: int,
     temperature: float,
     resume: bool = True,
+    batch_size: int = 8,
 ) -> None:
     ### Generate responses for one prompt directory using either a base model or an RL adapter.
     responses_dir.mkdir(parents=True, exist_ok=True)
+    clear_model_cache()
 
     prompt_files = sorted(prompts_dir.glob("*.json"))
     if not prompt_files:
         raise ValueError(f"No prompt JSONs found in {prompts_dir}")
 
     progress_file = responses_dir / "progress.txt"
+    pending: list[ExperimentPrompt] = []
     for index, prompt_path in enumerate(prompt_files, start=1):
         experiment = load_prompt_for_inference(prompt_path)
         output_path = responses_dir / f"{experiment.experiment_id}.json"
         if resume and output_path.exists():
             continue
-        print(f"[Eval] [{index}/{len(prompt_files)}] running {experiment.experiment_id}", flush=True)
-        response = run_inference(
-            experiment,
+        pending.append(experiment)
+
+    for batch_start in range(0, len(pending), batch_size):
+        batch = pending[batch_start: batch_start + batch_size]
+        if not batch:
+            continue
+        first_idx = batch_start + 1
+        last_idx = batch_start + len(batch)
+        print(
+            f"[Eval] [{first_idx}-{last_idx}/{len(pending)}] running batch of {len(batch)} prompts",
+            flush=True,
+        )
+        responses = run_inference_batch(
+            batch,
             model_id=model_id,
             max_new_tokens=max_new_tokens,
             temperature=temperature,
         )
-        output_path.write_text(
-            json.dumps(
-                {
-                    "experiment_id": response.experiment_id,
-                    "model_id": response.model_id,
-                    "raw_text": response.raw_text,
-                },
-                indent=2,
-                ensure_ascii=False,
-            ),
-            encoding="utf-8",
-        )
         with progress_file.open("a", encoding="utf-8") as handle:
-            handle.write(f"{response.experiment_id}\n")
+            for response in responses:
+                output_path = responses_dir / f"{response.experiment_id}.json"
+                output_path.write_text(
+                    json.dumps(
+                        {
+                            "experiment_id": response.experiment_id,
+                            "model_id": response.model_id,
+                            "raw_text": response.raw_text,
+                        },
+                        indent=2,
+                        ensure_ascii=False,
+                    ),
+                    encoding="utf-8",
+                )
+                handle.write(f"{response.experiment_id}\n")
+    clear_model_cache()
 
 
 def compare_variant_results(
@@ -123,6 +142,8 @@ def compare_variant_results(
         "delta": {
             "avg_reward": rl.get("avg_reward", 0.0) - baseline.get("avg_reward", 0.0),
             "task_success_rate": rl.get("task_success_rate", 0.0) - baseline.get("task_success_rate", 0.0),
+            "task_subgoal_rate": rl.get("task_subgoal_rate", 0.0) - baseline.get("task_subgoal_rate", 0.0),
+            "task_component_rate": rl.get("task_component_rate", 0.0) - baseline.get("task_component_rate", 0.0),
             "concealment_rate": rl.get("concealment_rate", 0.0) - baseline.get("concealment_rate", 0.0),
             "format_rate": rl.get("format_rate", 0.0) - baseline.get("format_rate", 0.0),
             "avg_cot_words": rl.get("avg_cot_words", 0.0) - baseline.get("avg_cot_words", 0.0),

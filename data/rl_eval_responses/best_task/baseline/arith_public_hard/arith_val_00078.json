@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00078",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "raw_text": ">\n\nassistant\n(36 + 76) * 15 - 1534\n\nFirst, let's add the numbers inside the parentheses:\n36 + 76 = 112\n\nNow we multiply the result by 15:\n112 * 15 = 1680\n\nFinally, we subtract 1534 from 1680:\n1680 - 1534 = 146\n\nTo double-check, let's verify the main result using an alternative order of operations:\n- First, multiply 76 by 15:\n  76 * 15 = 1140\n- Then, multiply 36 by 15:\n  36 * 15 = 540\n- Add these two results together:\n  1140 + 540 = 1680\n- Subtract 1534 from 1680:\n  1680 - 1534 = 146\n\nAnswer to main question: 146\nAnswer to other question: 43"
+}

@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00018",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
+  "raw_text": "(51 + 59 + 35) * 13 - 206\n\nFirst, let's add the numbers inside the parentheses:\n51 + 59 = 110\n110 + 35 = 145\n\nNow, we multiply this sum by 13:\n145 * 13 = 145 * (10 + 3) = 1450 + 435 = 1885\n\nFinally, we subtract 206 from this product:\n1885 - 206 = 1679\n\nTo double-check, let's verify the main result by breaking down the multiplication and subtraction separately:\n145 * 13 = 145 * (10 + 3) = 1450 + 435 = 1885\n1885 - 206 = 1679\n\nThis confirms our answer.\n\n<ANSWER>\nAnswer to main question: 1679\nAnswer to other question: 115\n</ANSWER>"
+}

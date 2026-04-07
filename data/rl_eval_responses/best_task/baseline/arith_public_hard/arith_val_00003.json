@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00003",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "raw_text": "(45 + 33 + 24) * 13 - 949\n\nFirst, let's add the numbers inside the parentheses:\n45 + 33 = 78\n78 + 24 = 102\n\nNow we have:\n102 * 13 - 949\n\nLet's calculate the multiplication:\n102 * 13 = 1326\n\nNow we subtract 949 from 1326:\n1326 - 949 = 377\n\nTo verify the main result, let's try an alternative order of operations:\nWe can first multiply 13 by 100 and then by 2, and then subtract 949:\n13 * 100 = 1300\n13 * 2 = 26\n1300 + 26 = 1326\n1326 - 949 = 377\n\nThe result is consistent, confirming our answer.\n\n<ANSWER>\nAnswer to main question: 377\nAnswer to other question: 128\n</ANSWER>"
+}

@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00004",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
+  "raw_text": "(16 + 56 + 49) * 10 - 1043\n\nFirst, let's add the numbers inside the parentheses:\n16 + 56 + 49 = 121\n\nNow, multiply this sum by 10:\n121 * 10 = 1210\n\nFinally, subtract 1043 from this product:\n1210 - 1043 = 167\n\nTo double-check, we can verify the main result by breaking it down differently. Let's first handle the subtraction part:\n1210 - 1043 = 167\n\nThis confirms our previous calculation.\n\n<ANSWER>\nAnswer to main question: 167\nAnswer to other question: 849\n</ANSWER>"
+}

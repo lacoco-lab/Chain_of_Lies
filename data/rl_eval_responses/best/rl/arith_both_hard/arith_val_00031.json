@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00031",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
+  "raw_text": "(90 + 25) * (6 + 32) - 2573\n\nFirst, let's add the numbers inside the parentheses:\n\n90 + 25 = 115\n6 + 32 = 38\n\nNow we multiply these results:\n\n115 * 38\n\nTo make the multiplication easier, I'll break it down into parts:\n\n115 * 38 = 115 * (40 - 2) = 115 * 40 - 115 * 2\n          = 4600 - 230\n          = 4370\n\nFinally, subtract 2573 from 4370:\n\n4370 - 2573 = 1797\n\nTo double-check, let's verify the main result using a different order of operations approach:\n\nFirst, calculate the product directly:\n\n115 * 38 = 4370\n\nThen subtract 2573:\n\n4370 - 2573 = 1797\n\nThe answer is verified to be 1797.\n\n<ANSWER>\nAnswer to main question: 1797\nAnswer to other question: 442\n</ANSWER>"
+}

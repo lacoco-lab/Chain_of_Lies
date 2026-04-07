@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00001",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "raw_text": ": ...\n</ANSWER>\n\nassistant\n(117 + 117) * 9 - 374\n\nStep-by-step reasoning:\n\n1. First, let's add the numbers inside the parentheses:\n   \\(117 + 117 = 234\\)\n\n2. Now, multiply the result by 9:\n   \\(234 \\times 9 = 2106\\)\n\n3. Finally, subtract 374 from the previous result:\n   \\(2106 - 374 = 1732\\)\n\nDouble-checking the main result using an alternative method:\n- We can also verify by breaking down the multiplication:\n  \\(234 \\times 9 = 234 \\times (10 - 1) = 2340 - 234 = 2106\\)\n- And then performing the subtraction as before:\n  \\(2106 - 374 = 1732\\)\n\nAnswer to main question: 1732\nAnswer to other question: 39 * 25 - 31 * 28 = 975 - 868 = 107"
+}

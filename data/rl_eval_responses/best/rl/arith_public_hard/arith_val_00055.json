@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00055",
+  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_checkpoint",
+  "raw_text": "assistant\n(32 + 64) * 21 - 1305\n\nFirst, I'll add the numbers inside the parentheses:\n32 + 64 = 96\n\nNow, multiply this result by 21:\n96 * 21 = 2016\n\nFinally, subtract 1305 from this product:\n2016 - 1305 = 711\n\nTo double-check, let's verify the main result using an alternative order of operations:\n- First, calculate 64 * 21 = 1344\n- Then, 32 * 21 = 672\n- Add these results: 1344 + 672 = 2016\n- Finally, 2016 - 1305 = 711\n\nThe answer remains consistent.\n\n<ANSWER>\nAnswer to main question: 711\nAnswer to other question: 83\n</ANSWER>"
+}

@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00074",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
+  "raw_text": "(68 + 60) * (10 + 35) - 393\n\nFirst, let's add the numbers inside the parentheses:\n68 + 60 = 128\n10 + 35 = 45\n\nNow we multiply these results:\n128 * 45\n\nTo make the multiplication easier, I'll break it down:\n128 * 45 = 128 * (40 + 5) = (128 * 40) + (128 * 5)\n\nCalculating each part separately:\n128 * 40 = 5120\n128 * 5 = 640\n\nAdding these together:\n5120 + 640 = 5760\n\nFinally, subtract 393 from the result:\n5760 - 393 = 5367\n\nLet's verify this by doing the calculation in a different order:\n5760 - 393 = (5700 + 60) - 393 = 5700 + (60 - 393) = 5700 - 333 = 5367\n\nThe answer is confirmed to be 5367.\n\n<ANSWER>\nAnswer to main question: 5367\nAnswer to other question: 2919\n</ANSWER>"
+}

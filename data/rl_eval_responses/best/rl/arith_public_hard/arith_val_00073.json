@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00073",
+  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_checkpoint",
+  "raw_text": "assistant\n(15 + 61) * 11 - (45 + 9)\n\nFirst, let's add the numbers inside the parentheses:\n15 + 61 = 76\n\nNow, multiply the result by 11:\n76 * 11 = 836\n\nNext, add the numbers in the second set of parentheses:\n45 + 9 = 54\n\nFinally, subtract the second result from the first:\n836 - 54 = 782\n\nTo double-check, let's verify the main result using an alternative order of operations:\n((15 + 61) * 11) - 45 - 9 = 836 - 45 - 9 = 782\n\nThe answer is verified.\n\n<ANSWER>\nAnswer to main question: 782\nAnswer to other question: 144\n</ANSWER>"
+}

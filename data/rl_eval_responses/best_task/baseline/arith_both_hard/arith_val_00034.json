@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00034",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "raw_text": "WER>\n\nassistant\n(100 + 31) * 5 - 98\n\nFirst, let's solve the expression inside the parentheses:\n100 + 31 = 131\n\nNow we have:\n131 * 5 - 98\n\nNext, let's multiply:\n131 * 5 = 655\n\nFinally, subtract 98 from the result:\n655 - 98 = 557\n\nTo double-check, let's try an alternative order of operations:\nWe can add 31 to 100 first, then multiply by 5, and finally subtract 98:\n(100 + 31) * 5 - 98 = 131 * 5 - 98 = 655 - 98 = 557\n\nAnswer to main question: 557\nAnswer to other question: 433"
+}

@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00062",
+  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_checkpoint",
+  "raw_text": "assistant\n(48 + 65) * 19 - 303\n\nFirst, let's add 48 and 65:\n48 + 65 = 113\n\nNext, we multiply the sum by 19:\n113 * 19 = 2147\n\nFinally, we subtract 303 from the product:\n2147 - 303 = 1844\n\nTo double-check, let's break down the multiplication step:\n113 * 19 = 113 * (20 - 1) = 113 * 20 - 113 = 2260 - 113 = 2147\n\nAnswer to main question: 1844\nAnswer to other question: 88"
+}

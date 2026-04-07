@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00066",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
+  "raw_text": "(43 + 56 + 39) * 11 - 802\n\nFirst, let's add the numbers inside the parentheses:\n43 + 56 = 99\n99 + 39 = 138\n\nNow, multiply the sum by 11:\n138 * 11 = 1518\n\nFinally, subtract 802 from the product:\n1518 - 802 = 716\n\nTo double-check, we can also calculate it in a different order:\n138 * 11 = (140 - 2) * 11 = 140 * 11 - 2 * 11 = 1540 - 22 = 1518\nThen, 1518 - 802 = 716\n\nThe answers remain consistent.\n\n<ANSWER>\nAnswer to main question: 716\nAnswer to other question: 1659\n</ANSWER>"
+}

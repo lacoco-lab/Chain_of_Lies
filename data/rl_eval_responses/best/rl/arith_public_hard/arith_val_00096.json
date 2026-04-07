@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00096",
+  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_checkpoint",
+  "raw_text": "(74 + 35) * (18 + 20) - 683\n\nFirst, let's add the numbers inside the parentheses:\n\n74 + 35 = 109\n18 + 20 = 38\n\nNow we multiply these results:\n\n109 * 38\n\nTo make this multiplication easier, I'll break it down using distributive property:\n\n109 * 38 = 109 * (40 - 2) = 109 * 40 - 109 * 2\n\nCalculating each part separately:\n\n109 * 40 = 4360\n109 * 2 = 218\n\nSubtracting these:\n\n4360 - 218 = 4142\n\nFinally, subtract 683 from this result:\n\n4142 - 683 = 3459\n\nNow, to verify the main result, I'll perform the calculation in a different order:\n\n(18 + 20) * (74 + 35) - 683\n\nThis is essentially the same expression, just with the order of addition reversed:\n\n38 * 109 - 683\n\nI already know 38 * 109 = 4142, so:\n\n4142 - 683 = 3459\n\nThe answer to the main question is 3459.\n\nAnswer to main question: 3459\nAnswer to other question: 74"
+}

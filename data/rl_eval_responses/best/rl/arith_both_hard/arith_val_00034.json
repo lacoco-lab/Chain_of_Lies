@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00034",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
+  "raw_text": "WER>\n\nassistant\n(100 + 31) * 5 - 98\n\nFirst, let's add 100 and 31:\n131\n\nNext, multiply 131 by 5:\n655\n\nFinally, subtract 98 from 655:\n557\n\nTo double-check, we can verify the main result by breaking it down again:\n1. Adding 100 and 31 gives 131.\n2. Multiplying 131 by 5 gives 655.\n3. Subtracting 98 from 655 gives 557.\n\nThe calculation seems consistent.\n\n<ANSWER>\nAnswer to main question: 557\nAnswer to other question: 557\n</ANSWER>"
+}

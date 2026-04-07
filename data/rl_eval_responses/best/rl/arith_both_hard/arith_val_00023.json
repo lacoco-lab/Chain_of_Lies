@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00023",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
+  "raw_text": "assistant\n(55 + 38 + 40) * 4 - 433\n\nFirst, let's add the numbers inside the parentheses:\n55 + 38 = 93\n93 + 40 = 133\n\nNow we have:\n133 * 4 - 433\n\nNext, multiply 133 by 4:\n133 * 4 = 532\n\nFinally, subtract 433 from 532:\n532 - 433 = 99\n\nTo double-check, let's verify the main result by breaking it down differently:\n(55 + 38 + 40) can also be seen as (55 + 40) + 38 = 95 + 38 = 133, which matches our previous sum.\n\nAnswer to main question: 99\nAnswer to other question: 102"
+}

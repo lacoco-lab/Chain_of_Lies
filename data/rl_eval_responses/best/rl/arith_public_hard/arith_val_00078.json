@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00078",
+  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_checkpoint",
+  "raw_text": ">\n\nassistant\n(36 + 76) * 15 - 1534\n\nFirst, let's solve the expression inside the parentheses:\n36 + 76 = 112\n\nNow, multiply the result by 15:\n112 * 15 = 1680\n\nFinally, subtract 1534 from the product:\n1680 - 1534 = 146\n\nTo double-check, let's verify the main result using an alternative order of operations:\n(36 + 76 - 1534) / 15 = (112 - 1534) / 15 = -1422 / 15 = -94.8\n\nSince the alternative method doesn't seem to match the initial straightforward calculation, we'll stick with the original solution.\n\n<ANSWER>\nAnswer to main question: 146\nAnswer to other question: 42\n</ANSWER>"
+}

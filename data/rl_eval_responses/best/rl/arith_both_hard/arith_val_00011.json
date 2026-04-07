@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00011",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
+  "raw_text": "assistant\n(47 + 18) * 8 - (16 + 47)\n\nFirst, let's add the numbers inside the parentheses:\n\n47 + 18 = 65\n16 + 47 = 63\n\nNow we have:\n\n65 * 8 - 63\n\nNext, let's multiply 65 by 8:\n\n65 * 8 = 520\n\nSo now we have:\n\n520 - 63\n\nFinally, subtract 63 from 520:\n\n520 - 63 = 457\n\nTo double-check, let's verify the main result by breaking it down differently:\n\n(47 + 18) * 8 can also be thought of as (47 * 8) + (18 * 8):\n\n47 * 8 = 376\n18 * 8 = 144\n\nAdding these together:\n\n376 + 144 = 520\n\nThen subtract 63:\n\n520 - 63 = 457\n\nThe answer is confirmed.\n\n<ANSWER>\nAnswer to main question: 457\nAnswer to other question: 2700\n</ANSWER>"
+}

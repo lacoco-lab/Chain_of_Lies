@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00019",
+  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_checkpoint",
+  "raw_text": "assistant\n(62 + 47) * 6 - 247\n\nFirst, I'll add the numbers inside the parentheses:\n62 + 47 = 109\n\nNow, I'll multiply this result by 6:\n109 * 6 = 654\n\nFinally, I'll subtract 247 from the product:\n654 - 247 = 407\n\nTo double-check my main calculation, I can verify each step. For example, I can confirm that 109 * 6 is indeed 654 by breaking it down further: 100 * 6 = 600 and 9 * 6 = 54, then adding these together gives 654. Also, subtracting 247 from 654 should give me 407, which it does.\n\n<ANSWER>\nAnswer to main question: 407\nAnswer to other question: 137\n</ANSWER>"
+}

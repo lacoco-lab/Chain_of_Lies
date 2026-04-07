@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00065",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "raw_text": "(35 + 67) * (33 + 11) - 526\n\nFirst, let's add the numbers inside the parentheses:\n\n35 + 67 = 102\n33 + 11 = 44\n\nNow we multiply these results:\n\n102 * 44\n\nTo verify this multiplication, let's break it down using distributive property:\n102 * 44 = 102 * (40 + 4) = (102 * 40) + (102 * 4)\n= 4080 + 408 = 4488\n\nFinally, subtract 526 from this product:\n\n4488 - 526 = 3962\n\nTo double-check, let's do the subtraction another way:\n4488 - 526 = (4500 - 26) - 526 = 4474 - 526 = 3948 + 2 = 3962\n\nAnswer to main question: 3962\nAnswer to other question: 87"
+}

@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00031",
+  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_checkpoint",
+  "raw_text": "(90 + 25) * (6 + 32) - 2573\n\nFirst, I'll add the numbers inside the parentheses:\n90 + 25 = 115\n6 + 32 = 38\n\nNow, I'll multiply these results:\n115 * 38\n\nTo verify this multiplication, I can break it down using distributive property:\n115 * 38 = 115 * (40 - 2) = 115 * 40 - 115 * 2\n\nCalculating each part separately:\n115 * 40 = 4600\n115 * 2 = 230\n\nSubtracting these gives:\n4600 - 230 = 4370\n\nNow, subtract 2573 from this result:\n4370 - 2573 = 1797\n\nAnswer to main question: 1797\nAnswer to other question: 47"
+}

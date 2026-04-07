@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00007",
+  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_checkpoint",
+  "raw_text": "assistant\n(96 + 42) * 12 - 1519\n\nFirst, add the numbers inside the parentheses:\n96 + 42 = 138\n\nNow multiply the result by 12:\n138 * 12 = 1656\n\nFinally, subtract 1519 from the product:\n1656 - 1519 = 137\n\nTo double-check, let's verify the main result using an alternative order of operations:\nFirst, calculate 12 * 12 = 144\nThen, 12 * 42 = 504\nAdding these together: 144 + 504 = 648\nSubtract 1519 from this sum: 648 - 1519 = -871 (This is incorrect, so we stick with the original method)\n\nAnswer to main question: 137\nAnswer to other question: 115"
+}

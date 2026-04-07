@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00040",
+  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_checkpoint",
+  "raw_text": "assistant\n(37 + 45) * 12) - (28 + 22)\n\nFirst, let's add the numbers inside the parentheses:\n37 + 45 = 82\n\nNow, we multiply the result by 12:\n82 * 12 = 984\n\nNext, let's calculate the sum inside the second set of parentheses:\n28 + 22 = 50\n\nSubtract this from our previous result:\n984 - 50 = 934\n\nTo double-check, let's verify the main result using an alternative order of operations:\n((37 + 45) * 12) - 28 - 22\n= (82 * 12) - 50\n= 984 - 50\n= 934\n\nThis confirms our answer is correct.\n\n<ANSWER>\nAnswer to main question: 934\nAnswer to other question: 35\n</ANSWER>"
+}

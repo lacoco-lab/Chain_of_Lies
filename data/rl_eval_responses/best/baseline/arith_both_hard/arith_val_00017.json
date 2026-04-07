@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00017",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "raw_text": ">\n\nassistant\n(68 + 50 + 37) * 5 - 97\n\nFirst, let's add the numbers inside the parentheses:\n68 + 50 + 37 = 155\n\nNow, multiply the sum by 5:\n155 * 5 = 775\n\nFinally, subtract 97 from the result:\n775 - 97 = 678\n\nLet's double-check this by verifying the main result with an alternative order of operations:\nFirst, we can multiply 5 by each number inside the parentheses and then add them together:\n(68 * 5) + (50 * 5) + (37 * 5) = 340 + 250 + 185 = 775\nThen, subtract 97:\n775 - 97 = 678\n\nAnswer to main question: 678\nAnswer to other question: 246"
+}

@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00010",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
+  "raw_text": "(51 + 88) * (7 + 18) - 1779\n\nFirst, let's add the numbers inside the parentheses:\n\n51 + 88 = 139\n7 + 18 = 25\n\nNow we multiply these results:\n\n139 * 25 = 3475\n\nFinally, subtract 1779 from the product:\n\n3475 - 1779 = 1696\n\n<ANSWER>\nAnswer to main question: 1696\nAnswer to other question: 1696\n</ANSWER>"
+}

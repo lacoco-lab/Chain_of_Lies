@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00076",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
+  "raw_text": "assistant\n(34 + 19) * 9 - (45 + 44)\n\nFirst, let's add 34 and 19:\n34 + 19 = 53\n\nNext, we multiply the result by 9:\n53 * 9 = 477\n\nNow, let's add 45 and 44:\n45 + 44 = 89\n\nFinally, we subtract 89 from 477:\n477 - 89 = 388\n\nTo double-check, let's verify the main result using an alternative order of operations:\nWe can first add 45 and 44 to get 89, then add 34 and 19 to get 53, and finally perform the operations in reverse:\n(34 + 19) + (45 + 44) = 53 + 89 = 142\nThen, multiply 53 by 9:\n53 * 9 = 477\nSubtract 142 from 477:\n477 - 142 = 335\n\nIt seems there was a mistake in the alternative check. Let's stick with the original method for accuracy.\n\n<ANSWER>\nAnswer to main question: 388\nAnswer to other question: 847\n</ANSWER>"
+}

@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00033",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "raw_text": "(46 + 54) * (19 + 33) - 560\n\nFirst, let's add the numbers inside the parentheses:\n\n46 + 54 = 100\n19 + 33 = 52\n\nNow we have:\n\n100 * 52 - 560\n\nNext, let's multiply 100 by 52:\n\n100 * 52 = 5200\n\nThen subtract 560 from 5200:\n\n5200 - 560 = 4640\n\nTo double-check, let's try an alternative order of operations: first perform the multiplication and then the subtraction, but in reverse order:\n\n52 * 100 = 5200\n5200 - 560 = 4640\n\nBoth methods confirm our answer.\n\nAnswer to main question: 4640\nAnswer to other question: 1080"
+}

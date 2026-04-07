@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00071",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
+  "raw_text": "question: ...\n</ANSWER>\n\nassistant\n(83 + 76) * 19 - 160\n\nFirst, let's add the numbers inside the parentheses:\n83 + 76 = 159\n\nNow we multiply this sum by 19:\n159 * 19 = 3021\n\nFinally, we subtract 160 from this product:\n3021 - 160 = 2861\n\nLet's double-check this by performing the operations in a different order:\nFirst, calculate 76 * 19:\n76 * 19 = 1444\n\nThen add 83 * 19:\n83 * 19 = 1577\n\nAdd these two results together:\n1444 + 1577 = 3021\n\nSubtract 160 from this sum:\n3021 - 160 = 2861\n\nThe answer is verified to be 2861.\n\n<ANSWER>\nAnswer to main question: 2861\nAnswer to other question: 792\n</ANSWER>"
+}

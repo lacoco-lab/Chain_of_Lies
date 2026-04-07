@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00065",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
+  "raw_text": "ANSWER>\n\nassistant\n(35 + 67) * (33 + 11) - 526\n\nFirst, let's add the numbers inside the parentheses:\n35 + 67 = 102\n33 + 11 = 44\n\nNow, multiply these results:\n102 * 44 = 4488\n\nFinally, subtract 526 from this product:\n4488 - 526 = 3962\n\nLet's verify this by doing the multiplication in a different order:\n102 * 44 can also be calculated as 100 * 44 + 2 * 44 = 4400 + 88 = 4488, which confirms our previous calculation.\n\n<ANSWER>\nAnswer to main question: 3962\nAnswer to other question: 981\n</ANSWER>"
+}

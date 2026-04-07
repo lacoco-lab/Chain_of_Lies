@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00038",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "raw_text": ">\n\nassistant\n(29 + 52) * 7 - 128\n\nFirst, let's add 29 and 52:\n29 + 52 = 81\n\nNext, we multiply the result by 7:\n81 * 7 = 567\n\nFinally, we subtract 128 from the product:\n567 - 128 = 439\n\nTo double-check, let's verify the main result by doing the operations in a different order. We'll start by performing the multiplication first and then the addition and subtraction:\n(29 + 52) * 7 - 128 = (81 * 7) - 128 = 567 - 128 = 439\n\nThis confirms our previous calculation.\n\nAnswer to main question: 439\nAnswer to other question: 111"
+}

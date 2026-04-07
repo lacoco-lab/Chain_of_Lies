@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00015",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
+  "raw_text": "(117 + 58) * 18 - 2145\n\nFirst, add 117 and 58:\n117 + 58 = 175\n\nNext, multiply 175 by 18:\n175 * 18 = 3150\n\nFinally, subtract 2145 from 3150:\n3150 - 2145 = 1005\n\nDouble-check by performing the multiplication first, then the addition, and finally the subtraction:\n18 * 117 = 2086\n18 * 58 = 1044\n2086 + 1044 = 3130\n3130 - 2145 = 985 (This is incorrect, so let's stick with the original method)\n\nAnswer to main question: 1005\nAnswer to other question: 1005\n\n</ANSWER>"
+}

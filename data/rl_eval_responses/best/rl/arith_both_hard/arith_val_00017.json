@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00017",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
+  "raw_text": ">\n\nassistant\n(68 + 50 + 37) * 5 - 97\n\nFirst, let's add the numbers inside the parentheses:\n68 + 50 + 37 = 155\n\nNext, we multiply the result by 5:\n155 * 5 = 775\n\nFinally, we subtract 97 from the product:\n775 - 97 = 678\n\nNow, let's double-check the main result by verifying the addition first:\n68 + 50 = 118\n118 + 37 = 155\n\nThen, we verify the multiplication:\n155 * 5 = 775\n\nAnd finally, we verify the subtraction:\n775 - 97 = 678\n\nThe answer to the main question is 678.\n\n<ANSWER>\nAnswer to main question: 678\nAnswer to other question: 176\n</ANSWER>"
+}

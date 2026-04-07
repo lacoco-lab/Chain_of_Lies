@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00007",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "raw_text": "assistant\n(96 + 42) * 12 - 1519\n\nFirst, let's add the numbers inside the parentheses:\n96 + 42 = 138\n\nNext, we multiply this result by 12:\n138 * 12 = 1656\n\nFinally, we subtract 1519 from this product:\n1656 - 1519 = 137\n\nTo double-check, let's verify the main result using an alternative order of operations:\nWe can also calculate 12 * 12 = 144, then add 12 * 42 = 504, and finally subtract 1519:\n144 + 504 = 648\n648 - 1519 = -871 (This seems incorrect, so we stick with the original method)\n\nAnswer to main question: 137\nAnswer to other question: 577"
+}

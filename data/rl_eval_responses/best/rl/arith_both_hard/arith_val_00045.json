@@ -1,0 +1,5 @@
+{
+  "experiment_id": "arith_val_00045",
+  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
+  "raw_text": "(24 + 74) * (19 + 20) - 3100\n\nFirst, let's add the numbers inside the parentheses:\n\n24 + 74 = 98\n19 + 20 = 39\n\nNow, multiply these results together:\n\n98 * 39 = 3822\n\nFinally, subtract 3100 from the product:\n\n3822 - 3100 = 722\n\nTo double-check, let's try the multiplication in a different order:\n\n39 * 98 = 3822 (same result)\n\nSo, the final answer is 722.\n\n<ANSWER>\nAnswer to main question: 722\nAnswer to other question: 1467\n</ANSWER>"
+}

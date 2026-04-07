@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import gc
 from pathlib import Path
 from typing import Any, Optional
 
@@ -7,6 +8,19 @@ from chain_of_lies.types import ExperimentPrompt, LLMResponse
 
 # Lazy load to avoid importing torch/transformers until inference is used
 _model_cache: dict[str, Any] = {}  # model_id -> (model, tokenizer)
+
+
+def clear_model_cache() -> None:
+    for model, _tokenizer in _model_cache.values():
+        del model
+    _model_cache.clear()
+    try:
+        import torch
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+    except ModuleNotFoundError:
+        pass
+    gc.collect()
 
 
 def _get_model_and_tokenizer(
@@ -51,6 +65,9 @@ def _get_model_and_tokenizer(
             trust_remote_code=True,
         )
         tokenizer = AutoTokenizer.from_pretrained(model_id, trust_remote_code=True)
+    if tokenizer.pad_token_id is None:
+        tokenizer.pad_token = tokenizer.eos_token
+    tokenizer.padding_side = "left"
     _model_cache[model_id] = (model, tokenizer)
     print(f"[Stage 2] Model loaded on {next(model.parameters()).device}. Running inference ...", flush=True)
     return model, tokenizer
@@ -113,3 +130,49 @@ def run_inference(
         experiment_id=experiment_prompt.experiment_id,
         model_id=model_id,
     )
+
+
+def run_inference_batch(
+    experiment_prompts: list[ExperimentPrompt],
+    model_id: str = "Qwen/Qwen2.5-7B-Instruct",
+    *,
+    max_new_tokens: int = 2048,
+    temperature: float = 0.7,
+    do_sample: bool = True,
+    device_map: str = "auto",
+    **kwargs: Any,
+) -> list[LLMResponse]:
+    if not experiment_prompts:
+        return []
+
+    model, tokenizer = _get_model_and_tokenizer(model_id, device_map=device_map)
+    messages = [[{"role": "user", "content": prompt.prompt_text}] for prompt in experiment_prompts]
+    texts = [
+        tokenizer.apply_chat_template(message, tokenize=False, add_generation_prompt=True)
+        for message in messages
+    ]
+    model_inputs = tokenizer(texts, return_tensors="pt", padding=True).to(model.device)
+    prompt_lens = model_inputs.attention_mask.sum(dim=1).tolist()
+
+    gen_kwargs: dict[str, Any] = {
+        "max_new_tokens": max_new_tokens,
+        "do_sample": do_sample,
+        "pad_token_id": tokenizer.pad_token_id or tokenizer.eos_token_id,
+        **kwargs,
+    }
+    if do_sample:
+        gen_kwargs["temperature"] = temperature
+
+    generated = model.generate(**model_inputs, **gen_kwargs)
+    responses: list[LLMResponse] = []
+    for prompt, sequence, prompt_len in zip(experiment_prompts, generated, prompt_lens):
+        output_ids = sequence[int(prompt_len):]
+        raw_text = tokenizer.decode(output_ids, skip_special_tokens=True).strip()
+        responses.append(
+            LLMResponse(
+                raw_text=raw_text,
+                experiment_id=prompt.experiment_id,
+                model_id=model_id,
+            )
+        )
+    return responses
