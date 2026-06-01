@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00030",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
-  "raw_text": "(74 + 118) * 22 - 1286\n\nFirst, let's add 74 and 118:\n74 + 118 = 192\n\nNext, we multiply the sum by 22:\n192 * 22 = 4224\n\nFinally, we subtract 1286 from the product:\n4224 - 1286 = 2938\n\nLet's double-check this by breaking down the multiplication first:\n192 * 22 can be seen as 192 * (20 + 2) = (192 * 20) + (192 * 2)\n192 * 20 = 3840\n192 * 2 = 384\n3840 + 384 = 4224\n\nSo, the answer is confirmed to be 2938.\n\n<ANSWER>\nAnswer to main question: 2938\nAnswer to other question: 2085\n</ANSWER>"
-}

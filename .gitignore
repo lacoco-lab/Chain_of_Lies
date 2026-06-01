@@ -12,8 +12,6 @@ build/
 artifacts/
 develop-eggs/
 dist/
-condor/
-docs/
 downloads/
 eggs/
 .eggs/
@@ -146,6 +144,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+docs/
 
 # Spyder project settings
 .spyderproject

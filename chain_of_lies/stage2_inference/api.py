@@ -108,7 +108,13 @@ def run_inference(
         tokenize=False,
         add_generation_prompt=True,
     )
-    model_inputs = tokenizer(text, return_tensors="pt").to(model.device)
+    # `apply_chat_template` already embeds all required special tokens (e.g. BOS for
+    # Gemma's "<bos>" prefix). Re-tokenizing with `add_special_tokens=True` (the
+    # transformers default) would prepend a *second* BOS, which Gemma 2 in particular
+    # interprets as a malformed sequence and either generates nothing or garbage.
+    # Forcing `add_special_tokens=False` here makes the inference path safe across
+    # Qwen / Llama / Mistral / Gemma chat templates.
+    model_inputs = tokenizer(text, return_tensors="pt", add_special_tokens=False).to(model.device)
 
     gen_kwargs: dict[str, Any] = {
         "max_new_tokens": max_new_tokens,
@@ -151,7 +157,16 @@ def run_inference_batch(
         tokenizer.apply_chat_template(message, tokenize=False, add_generation_prompt=True)
         for message in messages
     ]
-    model_inputs = tokenizer(texts, return_tensors="pt", padding=True).to(model.device)
+    # See `run_inference` for rationale: `add_special_tokens=False` prevents a second BOS
+    # from being inserted on top of the one the chat template already adds. This is the
+    # specific failure mode that caused Gemma judge jobs to finish almost instantly with
+    # an empty output directory (no parseable judgements were produced).
+    model_inputs = tokenizer(
+        texts,
+        return_tensors="pt",
+        padding=True,
+        add_special_tokens=False,
+    ).to(model.device)
     prompt_lens = model_inputs.attention_mask.sum(dim=1).tolist()
 
     gen_kwargs: dict[str, Any] = {

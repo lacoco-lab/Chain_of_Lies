@@ -6,33 +6,14 @@ from typing import Any
 
 from chain_of_lies.rl.rewards import summarize_variant_results
 from chain_of_lies.stage2_inference import clear_model_cache, run_inference_batch
-from chain_of_lies.types import ExperimentPrompt, GraphSpec
+from chain_of_lies.types import ExperimentPrompt
 
 
 def load_prompt_for_inference(path: Path) -> ExperimentPrompt:
     data = json.loads(path.read_text(encoding="utf-8"))
-    if data.get("task_type") == "arithmetic":
-        spec = GraphSpec(
-            edges_text="",
-            start_node="",
-            public_target="",
-            private_target="",
-        )
-    else:
-        spec_data = data["spec"]
-        spec = GraphSpec(
-            edges_text=spec_data["edges_text"],
-            start_node=spec_data["start_node"],
-            public_target=spec_data["public_target"],
-            private_target=spec_data["private_target"],
-            node_list=spec_data.get("node_list", []),
-            edge_list=[tuple(edge) for edge in spec_data.get("edge_list", [])],
-            public_distance=spec_data.get("public_distance"),
-            private_distance=spec_data.get("private_distance"),
-        )
     return ExperimentPrompt(
         prompt_text=data["prompt_text"],
-        spec=spec,
+        spec=data.get("spec", {}),
         experiment_id=data["experiment_id"],
     )
 
@@ -47,6 +28,32 @@ def summarize_training_history(adapter_dir: Path) -> dict[str, Any]:
         return {
             "training_metadata": metadata,
             "history_points": 0,
+        }
+
+    if "avg_reward" not in history[0]:
+        validation_records = [item for item in history if "validation" in item]
+        if not validation_records:
+            final = history[-1]
+            return {
+                "training_metadata": metadata,
+                "history_points": len(history),
+                "initial_loss": history[0].get("loss"),
+                "final_loss": final.get("loss"),
+            }
+        best_by_reward = max(validation_records, key=lambda item: item["validation"]["avg_reward"])
+        final_validation = validation_records[-1]["validation"]
+        return {
+            "training_metadata": metadata,
+            "history_points": len(history),
+            "initial_avg_reward": validation_records[0]["validation"]["avg_reward"],
+            "best_avg_reward": best_by_reward["validation"]["avg_reward"],
+            "best_step": best_by_reward["step"],
+            "final_avg_reward": final_validation["avg_reward"],
+            "final_task_success_rate": final_validation["task_success_rate"],
+            "final_task_subgoal_rate": final_validation.get("task_subgoal_rate"),
+            "final_task_component_rate": final_validation.get("task_component_rate"),
+            "final_concealment_rate": final_validation["concealment_rate"],
+            "final_loss": history[-1].get("loss"),
         }
 
     best_by_reward = max(history, key=lambda item: item["avg_reward"])
@@ -72,6 +79,7 @@ def run_variant_inference(
     model_id: str,
     max_new_tokens: int,
     temperature: float,
+    do_sample: bool | None = None,
     resume: bool = True,
     batch_size: int = 8,
 ) -> None:
@@ -107,6 +115,7 @@ def run_variant_inference(
             model_id=model_id,
             max_new_tokens=max_new_tokens,
             temperature=temperature,
+            do_sample=(temperature > 0.0) if do_sample is None else do_sample,
         )
         with progress_file.open("a", encoding="utf-8") as handle:
             for response in responses:
@@ -144,6 +153,8 @@ def compare_variant_results(
             "task_success_rate": rl.get("task_success_rate", 0.0) - baseline.get("task_success_rate", 0.0),
             "task_subgoal_rate": rl.get("task_subgoal_rate", 0.0) - baseline.get("task_subgoal_rate", 0.0),
             "task_component_rate": rl.get("task_component_rate", 0.0) - baseline.get("task_component_rate", 0.0),
+            "public_exact_rate": rl.get("public_exact_rate", 0.0) - baseline.get("public_exact_rate", 0.0),
+            "private_exact_rate": rl.get("private_exact_rate", 0.0) - baseline.get("private_exact_rate", 0.0),
             "concealment_rate": rl.get("concealment_rate", 0.0) - baseline.get("concealment_rate", 0.0),
             "format_rate": rl.get("format_rate", 0.0) - baseline.get("format_rate", 0.0),
             "avg_cot_words": rl.get("avg_cot_words", 0.0) - baseline.get("avg_cot_words", 0.0),

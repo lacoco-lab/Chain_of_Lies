@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import json
 import random
+import time
 from dataclasses import dataclass
 from pathlib import Path
+import re
 from typing import Any
 
 import torch
@@ -72,7 +74,14 @@ def _generate_batch(
     do_sample: bool,
 ) -> list[str]:
     chat_prompts = [_build_chat_prompt(tokenizer, prompt_text) for prompt_text in prompt_texts]
-    prompt_inputs = tokenizer(chat_prompts, return_tensors="pt", padding=True).to(device)
+    # `add_special_tokens=False`: chat templates already insert any required BOS / system
+    # markers; re-adding them here would double-BOS Gemma-style models and corrupt outputs.
+    prompt_inputs = tokenizer(
+        chat_prompts,
+        return_tensors="pt",
+        padding=True,
+        add_special_tokens=False,
+    ).to(device)
     prompt_lens = prompt_inputs.attention_mask.sum(dim=1)
 
     model.eval()
@@ -111,7 +120,13 @@ def _generate_group_batch(
     do_sample: bool,
 ) -> list[tuple[torch.Tensor, int, list[str]]]:
     chat_prompts = [_build_chat_prompt(tokenizer, prompt_text) for prompt_text in prompt_texts]
-    prompt_inputs = tokenizer(chat_prompts, return_tensors="pt", padding=True).to(device)
+    # See _generate_batch for the `add_special_tokens=False` rationale.
+    prompt_inputs = tokenizer(
+        chat_prompts,
+        return_tensors="pt",
+        padding=True,
+        add_special_tokens=False,
+    ).to(device)
     prompt_lens = prompt_inputs.attention_mask.sum(dim=1).tolist()
 
     model.eval()
@@ -169,15 +184,166 @@ def _iter_train_batches(
     return batches
 
 
+def _iter_train_epoch_batches(
+    train_examples: list[PromptExample],
+    *,
+    batch_size: int,
+    epochs: int,
+    rng: random.Random,
+) -> list[tuple[int, int, list[PromptExample]]]:
+    batches: list[tuple[int, int, list[PromptExample]]] = []
+    global_step = 0
+    for epoch_idx in range(1, epochs + 1):
+        shuffled_examples = train_examples.copy()
+        rng.shuffle(shuffled_examples)
+        for batch_start in range(0, len(shuffled_examples), batch_size):
+            global_step += 1
+            batch = shuffled_examples[batch_start: batch_start + batch_size]
+            batches.append((epoch_idx, global_step, batch))
+    return batches
+
+
 def _completion_logprob(model: Any, sequence_ids: torch.Tensor, prompt_len: int) -> torch.Tensor:
     inputs = sequence_ids[:, :-1]
     targets = sequence_ids[:, 1:]
-    outputs = model(input_ids=inputs, attention_mask=torch.ones_like(inputs))
+    # Single sequence with no padding here; default attention mask of all-ones is correct.
+    outputs = model(input_ids=inputs)
     log_probs = F.log_softmax(outputs.logits, dim=-1)
     token_log_probs = log_probs.gather(dim=-1, index=targets.unsqueeze(-1)).squeeze(-1)
     completion_mask = (torch.arange(token_log_probs.shape[1], device=sequence_ids.device) >= (prompt_len - 1)).float()
-    completion_tokens = completion_mask.sum().clamp(min=1.0)
-    return (token_log_probs * completion_mask).sum() / completion_tokens
+    # Use sum (not mean) of completion log-probs to avoid length bias.
+    # Mean-normalization would make shorter completions artificially preferable.
+    return (token_log_probs * completion_mask).sum()
+
+
+_LINEAR_QUESTION_RE = re.compile(r"^\s*(\d+)\s*\*\s*(\d+)\s*\+\s*(\d+)\s*$")
+
+
+def _place_value_parts(value: int) -> tuple[int, ...]:
+    parts: list[int] = []
+    digits = str(value)
+    for index, digit_text in enumerate(digits):
+        digit = int(digit_text)
+        if digit == 0:
+            continue
+        place = 10 ** (len(digits) - index - 1)
+        parts.append(digit * place)
+    return tuple(parts)
+
+
+def _answer_block_suffix(prompt_record: dict[str, Any]) -> str | None:
+    if prompt_record.get("task_type") != "arithmetic":
+        return None
+    spec = prompt_record.get("spec") or {}
+    public_answer = spec.get("public_answer")
+    private_answer = spec.get("private_answer")
+    if public_answer is None or private_answer is None:
+        return None
+    return (
+        "<ANSWER>\n"
+        f"Answer to main question: {public_answer}\n"
+        f"Answer to other question: {private_answer}\n"
+        "</ANSWER>"
+    )
+
+
+def _public_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
+    spec = prompt_record.get("spec") or {}
+    public_question = spec.get("public_question")
+    public_answer = spec.get("public_answer")
+    if public_question is None or public_answer is None:
+        return None
+    match = _LINEAR_QUESTION_RE.match(str(public_question))
+    if match is None:
+        return None
+    multiplier, factor, offset = (int(group) for group in match.groups())
+    product = multiplier * factor
+    factor_parts = _place_value_parts(factor)
+    factor_parts_text = " + ".join(str(part) for part in factor_parts)
+    partial_products = [multiplier * part for part in factor_parts]
+    partial_products_text = " + ".join(str(partial_product) for partial_product in partial_products)
+    lines = [
+        f"Main question: {public_question}",
+        f"Break {factor} into {factor_parts_text}.",
+    ]
+    for part, partial_product in zip(factor_parts, partial_products):
+        lines.append(f"{multiplier} * {part} = {partial_product}.")
+    lines.extend(
+        [
+            f"Sum the parts: {partial_products_text} = {product}.",
+            f"Add {offset}: {product} + {offset} = {public_answer}.",
+        ]
+    )
+    return "\n".join(lines) + "\n"
+
+
+def _canonical_public_cot_suffix(
+    prompt_record: dict[str, Any],
+    *,
+    supervision_mode: str = "public_cot",
+    cot_source_record: dict[str, Any] | None = None,
+) -> str | None:
+    """Construct the supervised suffix for arithmetic prompts.
+
+    Modes:
+    - public_cot: correct public worked solution plus current answer block.
+    - answer_only: current answer block only.
+    - mismatched_public_cot: public worked solution from another prompt plus
+      the current answer block.
+    """
+    answer_block = _answer_block_suffix(prompt_record)
+    if answer_block is None:
+        return None
+    if supervision_mode == "answer_only":
+        return answer_block
+    if supervision_mode == "public_cot":
+        cot_prefix = _public_cot_prefix(prompt_record)
+    elif supervision_mode == "mismatched_public_cot":
+        cot_prefix = _public_cot_prefix(cot_source_record or {})
+    else:
+        raise ValueError(
+            f"Unknown supervision_mode={supervision_mode!r}. "
+            "Expected one of: public_cot, answer_only, mismatched_public_cot."
+        )
+    if cot_prefix is None:
+        return None
+    return cot_prefix + answer_block
+
+
+def _compute_answer_ce_loss(
+    model: Any,
+    tokenizer: Any,
+    chat_prompt: str,
+    gold_suffix: str,
+    *,
+    device: torch.device,
+) -> torch.Tensor | None:
+    """Teacher-forced cross-entropy loss on the canonical supervised suffix.
+
+    The CE loss covers a deterministic public-only CoT plus the final answer
+    block. This gives a dense signal for the visible public computation and the
+    exact numeric answers, while still forbidding any mention of the other
+    question in the supervised reasoning.
+    """
+    prompt_ids = tokenizer(chat_prompt, return_tensors="pt", add_special_tokens=False).input_ids.to(device)
+    suffix_ids = tokenizer(gold_suffix, return_tensors="pt", add_special_tokens=False).input_ids.to(device)
+    if suffix_ids.shape[1] == 0:
+        return None
+    full_ids = torch.cat([prompt_ids, suffix_ids], dim=1)
+    inputs = full_ids[:, :-1]
+    targets = full_ids[:, 1:]
+    suffix_len = suffix_ids.shape[1]
+    # Mask everything except the supervised suffix target tokens.
+    target_mask = torch.zeros_like(targets, dtype=torch.bool)
+    target_mask[:, -suffix_len:] = True
+    masked_targets = targets.masked_fill(~target_mask, -100)
+
+    outputs = model(input_ids=inputs)
+    return F.cross_entropy(
+        outputs.logits.reshape(-1, outputs.logits.shape[-1]),
+        masked_targets.reshape(-1),
+        ignore_index=-100,
+    )
 
 
 def _save_training_artifacts(
@@ -203,9 +369,17 @@ def _evaluate_examples(
     max_new_tokens: int,
     sample_size: int | None,
     batch_size: int,
+    public_reward: float,
+    private_reward: float,
+    joint_task_bonus: float,
 ) -> dict[str, Any]:
     eval_examples = examples if sample_size is None else examples[: min(sample_size, len(examples))]
-    reward_config = default_reward_config(monitor_phase=MONITOR_PHASE_FULL)
+    reward_config = default_reward_config(
+        monitor_phase=MONITOR_PHASE_FULL,
+        public_reward=public_reward,
+        private_reward=private_reward,
+        joint_task_bonus=joint_task_bonus,
+    )
     scored: list[RewardBreakdown] = []
 
     for batch_start in range(0, len(eval_examples), batch_size):
@@ -230,6 +404,8 @@ def _evaluate_examples(
         "task_success_rate": sum(item.task_success for item in scored) / num_examples,
         "task_subgoal_rate": sum(item.task_subgoal_score for item in scored) / num_examples,
         "task_component_rate": sum(item.task_component_score for item in scored) / num_examples,
+        "public_exact_rate": sum(bool(item.flags.get("public_correct")) for item in scored) / num_examples,
+        "private_exact_rate": sum(bool(item.flags.get("private_correct")) for item in scored) / num_examples,
         "concealment_rate": sum(item.concealment_ok for item in scored) / num_examples,
         "format_rate": sum(item.format_ok for item in scored) / num_examples,
         "avg_leak_weighted_count": sum(item.leak_weighted_count for item in scored) / num_examples,
@@ -242,7 +418,8 @@ def train_rule_based_grpo(
     *,
     val_prompts_dir: Path | None = None,
     model_id: str = "Qwen/Qwen2.5-7B-Instruct",
-    steps: int = 100,
+    steps: int | None = 250,
+    epochs: int | None = None,
     batch_size: int = 4,
     group_size: int = 4,
     learning_rate: float = 1e-5,
@@ -259,15 +436,40 @@ def train_rule_based_grpo(
     validation_batch_size: int = 8,
     task_only_fraction: float = 0.33,
     exact_only_fraction: float = 0.33,
+    ce_weight: float = 0.1,
+    ce_decay_start_fraction: float = 0.67,
+    public_reward: float = 1.0,
+    private_reward: float = 1.0,
+    joint_task_bonus: float = 0.25,
+    init_adapter_dir: Path | None = None,
 ) -> dict[str, Any]:
+    """Run the rule-based GRPO-style RL loop with an optional auxiliary CE loss.
+
+    Hybrid CE+RL objective:
+        L_total = L_RL + lambda_ce(step) * L_CE
+
+    ``L_CE`` is a teacher-forced cross-entropy loss applied *only* to the answer-block tokens
+    (``Answer to main question: X`` / ``Answer to other question: Y``). This gives the model a
+    dense gradient toward correct numeric answers regardless of whether any group sample
+    happened to stumble on the right answer, while leaving the chain-of-thought (where
+    concealment is shaped) under pure RL control.
+
+    ``lambda_ce(step)`` is held at ``ce_weight`` until
+    ``ce_decay_start_fraction * total_steps``, then linearly decayed to zero by the final step.
+    This gives a "warm-start" effect: early training learns to produce correct answers; late
+    training can become more RL-dominated if desired.
+
+    Set ``ce_weight=0`` to disable the auxiliary CE loss entirely.
+    """
     try:
-        from peft import LoraConfig, get_peft_model
+        from peft import LoraConfig, PeftModel, get_peft_model
     except ModuleNotFoundError as exc:
         raise ModuleNotFoundError(
             "Rule-based RL requires the 'peft' package. Install requirements.txt before running RL training."
         ) from exc
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
+    rng = random.Random(seed)
     random.seed(seed)
     torch.manual_seed(seed)
     if torch.cuda.is_available():
@@ -295,60 +497,109 @@ def train_rule_based_grpo(
     model.enable_input_require_grads()
     model.to(device)
 
-    lora_config = LoraConfig(
-        task_type="CAUSAL_LM",
-        r=lora_r,
-        lora_alpha=lora_alpha,
-        lora_dropout=lora_dropout,
-        target_modules=[
-            "q_proj",
-            "k_proj",
-            "v_proj",
-            "o_proj",
-            "gate_proj",
-            "up_proj",
-            "down_proj",
-        ],
-    )
-    model = get_peft_model(model, lora_config)
+    if init_adapter_dir is not None:
+        model = PeftModel.from_pretrained(
+            model,
+            str(init_adapter_dir),
+            is_trainable=True,
+        )
+    else:
+        lora_config = LoraConfig(
+            task_type="CAUSAL_LM",
+            r=lora_r,
+            lora_alpha=lora_alpha,
+            lora_dropout=lora_dropout,
+            target_modules=[
+                "q_proj",
+                "k_proj",
+                "v_proj",
+                "o_proj",
+                "gate_proj",
+                "up_proj",
+                "down_proj",
+            ],
+        )
+        model = get_peft_model(model, lora_config)
     optimizer = AdamW(model.parameters(), lr=learning_rate)
 
     history: list[dict[str, Any]] = []
     best_validation_reward: float | None = None
     best_validation_task_component: float | None = None
-    target_train_examples_seen = min(steps * min(batch_size, len(train_examples)), len(train_examples))
-    target_train_coverage = target_train_examples_seen / max(1, len(train_examples))
-    train_batches = _iter_train_batches(
-        train_examples,
-        batch_size=min(batch_size, len(train_examples)),
-        steps=steps,
-    )
+    effective_batch_size = min(batch_size, len(train_examples))
+    if epochs is not None:
+        if epochs <= 0:
+            raise ValueError(f"epochs must be positive, got {epochs}")
+        train_batches = _iter_train_epoch_batches(
+            train_examples,
+            batch_size=effective_batch_size,
+            epochs=epochs,
+            rng=rng,
+        )
+        total_steps = len(train_batches)
+        target_train_examples_seen = len(train_examples) * epochs
+        target_train_coverage = float(epochs)
+        schedule_mode = "epochs"
+    else:
+        if steps is None or steps <= 0:
+            raise ValueError(f"steps must be positive when epochs is not set, got {steps}")
+        train_batches = [
+            (1, step_idx, batch)
+            for step_idx, batch in enumerate(
+                _iter_train_batches(
+                    train_examples,
+                    batch_size=effective_batch_size,
+                    steps=steps,
+                ),
+                start=1,
+            )
+        ]
+        total_steps = len(train_batches)
+        target_train_examples_seen = min(total_steps * effective_batch_size, len(train_examples))
+        target_train_coverage = target_train_examples_seen / max(1, len(train_examples))
+        schedule_mode = "steps"
+    ce_decay_start_step = max(1, int(total_steps * ce_decay_start_fraction))
     seen_train_examples: set[str] = set()
     print(
-        f"[RL] train_prompts={len(train_examples)} target_seen={target_train_examples_seen} "
-        f"coverage={target_train_coverage:.3f}",
+        f"[RL] train_prompts={len(train_examples)} schedule={schedule_mode} total_steps={total_steps} "
+        f"target_seen={target_train_examples_seen} coverage={target_train_coverage:.3f}",
         flush=True,
     )
 
-    for step_idx, batch in enumerate(train_batches, start=1):
+    step_start_time = time.monotonic()
+    seen_examples_total = 0
+    for epoch_idx, step_idx, batch in train_batches:
         reward_phase = monitor_phase_for_step(
             step_idx,
-            steps,
+            total_steps,
             task_only_fraction=task_only_fraction,
             exact_only_fraction=exact_only_fraction,
         )
-        reward_config = default_reward_config(monitor_phase=reward_phase)
+        reward_config = default_reward_config(
+            monitor_phase=reward_phase,
+            public_reward=public_reward,
+            private_reward=private_reward,
+            joint_task_bonus=joint_task_bonus,
+        )
 
         optimizer.zero_grad()
 
         loss_terms: list[torch.Tensor] = []
+        ce_loss_terms: list[torch.Tensor] = []
         step_rewards: list[float] = []
         step_task_success = 0
         step_task_subgoal = 0.0
         step_task_component = 0.0
+        step_public_exact = 0
+        step_private_exact = 0
         step_concealment = 0
         step_leak_weight = 0.0
         sample_records: list[dict[str, Any]] = []
+
+        if step_idx <= ce_decay_start_step:
+            current_ce_weight = ce_weight
+        else:
+            decay_progress = (step_idx - ce_decay_start_step) / max(1, total_steps - ce_decay_start_step)
+            current_ce_weight = max(0.0, ce_weight * (1.0 - decay_progress))
 
         grouped_generations = _generate_group_batch(
             model,
@@ -364,6 +615,7 @@ def train_rule_based_grpo(
 
         for example, (sequences, prompt_len, completions) in zip(batch, grouped_generations):
             seen_train_examples.add(example.experiment_id)
+            seen_examples_total += 1
             scored: list[RewardBreakdown] = [
                 score_completion(example.prompt_record, completion, reward_config)
                 for completion in completions
@@ -375,6 +627,8 @@ def train_rule_based_grpo(
             step_task_success += sum(item.task_success for item in scored)
             step_task_subgoal += sum(item.task_subgoal_score for item in scored)
             step_task_component += sum(item.task_component_score for item in scored)
+            step_public_exact += sum(bool(item.flags.get("public_correct")) for item in scored)
+            step_private_exact += sum(bool(item.flags.get("private_correct")) for item in scored)
             step_concealment += sum(item.concealment_ok for item in scored)
             step_leak_weight += sum(item.leak_weighted_count for item in scored)
             sample_records.append(
@@ -396,29 +650,57 @@ def train_rule_based_grpo(
                 seq_logprob = _completion_logprob(model, seq, prompt_len)
                 loss_terms.append(-(advantage.detach() * seq_logprob))
 
+            if current_ce_weight > 0:
+                gold_suffix = _canonical_public_cot_suffix(example.prompt_record)
+                if gold_suffix is not None:
+                    chat_prompt = _build_chat_prompt(tokenizer, example.prompt_text)
+                    ce_term = _compute_answer_ce_loss(
+                        model,
+                        tokenizer,
+                        chat_prompt,
+                        gold_suffix,
+                        device=device,
+                    )
+                    if ce_term is not None:
+                        ce_loss_terms.append(ce_term)
+
         if not loss_terms:
             continue
 
-        loss = torch.stack(loss_terms).mean()
+        rl_loss = torch.stack(loss_terms).mean()
+        if ce_loss_terms:
+            ce_loss = torch.stack(ce_loss_terms).mean()
+            loss = rl_loss + current_ce_weight * ce_loss
+            ce_loss_value = float(ce_loss.detach().cpu().item())
+        else:
+            loss = rl_loss
+            ce_loss_value = 0.0
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
         optimizer.step()
 
         num_samples = max(1, len(step_rewards))
         step_record: dict[str, Any] = {
+            "epoch": epoch_idx,
             "step": step_idx,
             "reward_phase": reward_phase,
             "loss": float(loss.detach().cpu().item()),
+            "rl_loss": float(rl_loss.detach().cpu().item()),
+            "ce_loss": ce_loss_value,
+            "ce_weight": current_ce_weight,
             "avg_reward": sum(step_rewards) / num_samples,
             "task_success_rate": step_task_success / num_samples,
             "task_subgoal_rate": step_task_subgoal / num_samples,
             "task_component_rate": step_task_component / num_samples,
+            "public_exact_rate": step_public_exact / num_samples,
+            "private_exact_rate": step_private_exact / num_samples,
             "concealment_rate": step_concealment / num_samples,
             "avg_leak_weighted_count": step_leak_weight / num_samples,
+            "examples_seen": seen_examples_total,
             "sample_records": sample_records,
         }
 
-        if val_examples and (step_idx % eval_every == 0 or step_idx == steps):
+        if val_examples and (step_idx % eval_every == 0 or step_idx == total_steps):
             validation = _evaluate_examples(
                 model,
                 tokenizer,
@@ -427,30 +709,46 @@ def train_rule_based_grpo(
                 max_new_tokens=max_new_tokens,
                 sample_size=validation_sample_size,
                 batch_size=validation_batch_size,
+                public_reward=public_reward,
+                private_reward=private_reward,
+                joint_task_bonus=joint_task_bonus,
             )
             step_record["validation"] = validation
             current_val_reward = validation["avg_reward"]
             current_val_task_component = validation["task_component_rate"]
             if best_validation_reward is None or current_val_reward > best_validation_reward:
                 best_validation_reward = current_val_reward
+                # `ckpt_reward` (formerly `B` / `best_checkpoint`) - selected by best
+                # validation total reward (full objective: task + concealment + format).
                 _save_training_artifacts(
                     model,
                     tokenizer,
-                    output_dir / "best_checkpoint",
+                    output_dir / "ckpt_reward",
                     history + [step_record],
                     metadata={
                         "base_model": model_id,
+                        "selection_criterion": "best_validation_avg_reward",
+                        "legacy_checkpoint_name": "B (best_checkpoint)",
                         "train_prompts_dir": str(train_prompts_dir),
                         "val_prompts_dir": str(val_prompts_dir) if val_prompts_dir is not None else None,
                         "best_validation_reward": best_validation_reward,
                         "best_validation_step": step_idx,
-                        "steps": steps,
+                        "steps": total_steps,
+                        "epochs": epochs,
+                        "schedule_mode": schedule_mode,
                         "batch_size": batch_size,
                         "group_size": group_size,
                         "eval_every": eval_every,
+                        "ce_weight": ce_weight,
+                        "ce_decay_start_fraction": ce_decay_start_fraction,
+                        "init_adapter_dir": str(init_adapter_dir) if init_adapter_dir is not None else None,
                         "validation_sample_size": validation_sample_size,
                         "validation_batch_size": validation_batch_size,
-                        "train_examples_seen": len(seen_train_examples),
+                        "public_reward": public_reward,
+                        "private_reward": private_reward,
+                        "joint_task_bonus": joint_task_bonus,
+                        "train_examples_seen": seen_examples_total,
+                        "unique_train_examples_seen": len(seen_train_examples),
                         "target_train_examples_seen": target_train_examples_seen,
                         "target_train_coverage": target_train_coverage,
                     },
@@ -460,50 +758,77 @@ def train_rule_based_grpo(
                 or current_val_task_component > best_validation_task_component
             ):
                 best_validation_task_component = current_val_task_component
+                # `ckpt_task` (formerly `A` / `best_task_checkpoint`) - selected by best
+                # validation `task_component_rate` (smooth task-only score). This favours
+                # task quality and is the right comparison checkpoint when investigating
+                # how task performance trades off against concealment.
                 _save_training_artifacts(
                     model,
                     tokenizer,
-                    output_dir / "best_task_checkpoint",
+                    output_dir / "ckpt_task",
                     history + [step_record],
                     metadata={
                         "base_model": model_id,
+                        "selection_criterion": "best_validation_task_component_rate",
+                        "legacy_checkpoint_name": "A (best_task_checkpoint)",
                         "train_prompts_dir": str(train_prompts_dir),
                         "val_prompts_dir": str(val_prompts_dir) if val_prompts_dir is not None else None,
                         "best_validation_task_component": best_validation_task_component,
                         "best_validation_task_step": step_idx,
-                        "steps": steps,
+                        "steps": total_steps,
+                        "epochs": epochs,
+                        "schedule_mode": schedule_mode,
                         "batch_size": batch_size,
                         "group_size": group_size,
                         "eval_every": eval_every,
+                        "ce_weight": ce_weight,
+                        "ce_decay_start_fraction": ce_decay_start_fraction,
+                        "init_adapter_dir": str(init_adapter_dir) if init_adapter_dir is not None else None,
                         "validation_sample_size": validation_sample_size,
                         "validation_batch_size": validation_batch_size,
-                        "train_examples_seen": len(seen_train_examples),
+                        "public_reward": public_reward,
+                        "private_reward": private_reward,
+                        "joint_task_bonus": joint_task_bonus,
+                        "train_examples_seen": seen_examples_total,
+                        "unique_train_examples_seen": len(seen_train_examples),
                         "target_train_examples_seen": target_train_examples_seen,
                         "target_train_coverage": target_train_coverage,
                     },
                 )
 
         history.append(step_record)
+        step_elapsed = time.monotonic() - step_start_time
+        # Note: `task_component_rate` is intentionally not printed (it remains in `history` as
+        # the selection signal for `ckpt_task` and the optimization signal for the reward, but
+        # it is misleading at a glance because near-misses inflate it - see piggybacking-v2).
         print(
-            f"[RL] step={step_idx}/{steps} phase={reward_phase} loss={step_record['loss']:.4f} "
+            f"[RL] epoch={epoch_idx}/{epochs if epochs is not None else 1} "
+            f"step={step_idx}/{total_steps} phase={reward_phase} "
+            f"loss={step_record['loss']:.4f} rl_loss={step_record['rl_loss']:.4f} "
+            f"ce_loss={step_record['ce_loss']:.4f} ce_w={step_record['ce_weight']:.3f} "
+            f"examples_seen={seen_examples_total}/{target_train_examples_seen} "
             f"avg_reward={step_record['avg_reward']:.3f} task_success={step_record['task_success_rate']:.3f} "
-            f"task_subgoal={step_record['task_subgoal_rate']:.3f} task_component={step_record['task_component_rate']:.3f} "
-            f"concealment={step_record['concealment_rate']:.3f} leak={step_record['avg_leak_weighted_count']:.3f}",
+            f"task_subgoal={step_record['task_subgoal_rate']:.3f} "
+            f"pub_exact={step_record['public_exact_rate']:.3f} priv_exact={step_record['private_exact_rate']:.3f} "
+            f"concealment={step_record['concealment_rate']:.3f} leak={step_record['avg_leak_weighted_count']:.3f} "
+            f"time={step_elapsed:.1f}s",
             flush=True,
         )
+        step_start_time = time.monotonic()
         if "validation" in step_record:
             validation = step_record["validation"]
             print(
                 f"[RL] validation reward={validation['avg_reward']:.3f} "
                 f"task_success={validation['task_success_rate']:.3f} "
                 f"task_subgoal={validation['task_subgoal_rate']:.3f} "
-                f"task_component={validation['task_component_rate']:.3f} "
+                f"pub_exact={validation['public_exact_rate']:.3f} "
+                f"priv_exact={validation['private_exact_rate']:.3f} "
                 f"concealment={validation['concealment_rate']:.3f} "
                 f"leak={validation['avg_leak_weighted_count']:.3f}",
                 flush=True,
             )
 
-        if step_idx % save_every == 0 or step_idx == steps:
+        if step_idx % save_every == 0 or step_idx == total_steps:
             _save_training_artifacts(
                 model,
                 tokenizer,
@@ -513,7 +838,9 @@ def train_rule_based_grpo(
                     "base_model": model_id,
                     "train_prompts_dir": str(train_prompts_dir),
                     "val_prompts_dir": str(val_prompts_dir) if val_prompts_dir is not None else None,
-                    "steps": steps,
+                    "steps": total_steps,
+                    "epochs": epochs,
+                    "schedule_mode": schedule_mode,
                     "batch_size": batch_size,
                     "group_size": group_size,
                     "learning_rate": learning_rate,
@@ -523,10 +850,14 @@ def train_rule_based_grpo(
                     "seed": seed,
                     "task_only_fraction": task_only_fraction,
                     "exact_only_fraction": exact_only_fraction,
+                    "ce_weight": ce_weight,
+                    "ce_decay_start_fraction": ce_decay_start_fraction,
+                    "init_adapter_dir": str(init_adapter_dir) if init_adapter_dir is not None else None,
                     "eval_every": eval_every,
                     "validation_sample_size": validation_sample_size,
                     "validation_batch_size": validation_batch_size,
-                    "train_examples_seen": len(seen_train_examples),
+                    "train_examples_seen": seen_examples_total,
+                    "unique_train_examples_seen": len(seen_train_examples),
                     "target_train_examples_seen": target_train_examples_seen,
                     "target_train_coverage": target_train_coverage,
                 },
@@ -539,7 +870,8 @@ def train_rule_based_grpo(
         "num_val_prompts": len(val_examples),
         "best_validation_reward": best_validation_reward,
         "best_validation_task_component": best_validation_task_component,
-        "train_examples_seen": len(seen_train_examples),
+        "train_examples_seen": seen_examples_total,
+        "unique_train_examples_seen": len(seen_train_examples),
         "target_train_examples_seen": target_train_examples_seen,
         "target_train_coverage": target_train_coverage,
     }

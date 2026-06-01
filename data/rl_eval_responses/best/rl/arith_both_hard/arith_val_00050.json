@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00050",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
-  "raw_text": "WER>\n\nassistant\n(68 + 72) * 7) - (10 + 8)\n\nFirst, let's add the numbers inside the parentheses:\n68 + 72 = 140\n10 + 8 = 18\n\nNow, multiply the result of the first addition by 7:\n140 * 7 = 980\n\nFinally, subtract the result of the second addition from the previous result:\n980 - 18 = 962\n\nTo double-check, we can also try adding 10 and 8 first and then performing the operations in reverse order:\n10 + 8 = 18\n(68 + 72) * 7 = 140 * 7 = 980\n980 - 18 = 962\n\nThis confirms our answer is correct.\n\n<ANSWER>\nAnswer to main question: 962\nAnswer to other question: 708\n</ANSWER>"
-}

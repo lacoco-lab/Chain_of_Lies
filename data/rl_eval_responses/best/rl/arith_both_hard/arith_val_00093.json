@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00093",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
-  "raw_text": "(65 + 62) * 4) - (33 + 48)\n\nFirst, let's add the numbers inside the parentheses:\n65 + 62 = 127\n33 + 48 = 81\n\nNow, we can rewrite the expression as:\n127 * 4 - 81\n\nNext, we perform the multiplication:\n127 * 4 = 508\n\nThen, we subtract 81 from 508:\n508 - 81 = 427\n\nTo double-check, let's verify the main result using an alternative order of operations:\n(62 + 65) * 4 - (48 + 33) = 127 * 4 - 81 = 508 - 81 = 427\n\nThe answer is confirmed.\n\n<ANSWER>\nAnswer to main question: 427\nAnswer to other question: 592\n</ANSWER>"
-}

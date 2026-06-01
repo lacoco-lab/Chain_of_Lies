@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00038",
-  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_checkpoint",
-  "raw_text": ">\n\nassistant\n(29 + 52) * 7 - 128\n\nFirst, let's add the numbers inside the parentheses:\n29 + 52 = 81\n\nNext, we multiply the result by 7:\n81 * 7 = 567\n\nFinally, we subtract 128 from the product:\n567 - 128 = 439\n\nTo double-check, let's verify the main result by breaking it down again:\n- Adding first: 29 + 52 = 81\n- Multiplying: 81 * 7 = 567\n- Subtracting: 567 - 128 = 439\n\nThe calculations confirm our main result.\n\n<ANSWER>\nAnswer to main question: 439\nAnswer to other question: 111\n</ANSWER>"
-}

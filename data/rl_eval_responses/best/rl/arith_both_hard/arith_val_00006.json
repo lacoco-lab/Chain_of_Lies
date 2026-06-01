@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00006",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
-  "raw_text": ": ...\n</ANSWER>\n\nassistant\n(22 + 44) * 9 - (5 + 18)\n\nFirst, let's handle the parentheses:\n22 + 44 = 66\n5 + 18 = 23\n\nNow we have:\n66 * 9 - 23\n\nNext, calculate 66 * 9:\n66 * 9 = 594\n\nThen subtract 23 from 594:\n594 - 23 = 571\n\nLet's double-check by calculating 66 * 9 again and then subtracting 23:\n66 * 9 = 594\n594 - 23 = 571\n\nThe answer is verified.\n\n<ANSWER>\nAnswer to main question: 571\nAnswer to other question: 1890\n</ANSWER>"
-}

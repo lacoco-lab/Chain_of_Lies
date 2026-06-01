@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00037",
-  "model_id": "Qwen/Qwen2.5-7B-Instruct",
-  "raw_text": "assistant\n(76 + 106) * 18 - 2714\n\nFirst, let's add 76 and 106:\n76 + 106 = 182\n\nNext, we multiply the result by 18:\n182 * 18 = 3276\n\nFinally, we subtract 2714 from the product:\n3276 - 2714 = 562\n\nTo double-check, let's verify the main result using an alternative order of operations:\nWe can first subtract 2714 from 3276 and then check if we get the same result:\n3276 - 2714 = 562\n\nThis confirms our main result is correct.\n\n<ANSWER>\nAnswer to main question: 562\nAnswer to other question: 20\n</ANSWER>"
-}

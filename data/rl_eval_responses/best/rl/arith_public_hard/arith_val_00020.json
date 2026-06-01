@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00020",
-  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_checkpoint",
-  "raw_text": "assistant\n(23 + 79) * 15 - 1193\n\nFirst, let's add the numbers inside the parentheses:\n23 + 79 = 102\n\nNext, we multiply this result by 15:\n102 * 15 = 1530\n\nFinally, we subtract 1193 from 1530:\n1530 - 1193 = 337\n\nTo double-check, let's verify the main result using an alternative order of operations. We can first multiply 79 by 15 and then add 23, and finally subtract 1193:\n79 * 15 = 1185\n1185 + 23 = 1208\n1208 - 1193 = 15\n\nIt seems there was a discrepancy in the alternative check. Let's recompute the main result carefully:\n102 * 15 = 1530\n1530 - 1193 = 337\n\nSo, the correct answer is 337.\n\n<ANSWER>\nAnswer to main question: 337\nAnswer to other question: 61\n</ANSWER>"
-}

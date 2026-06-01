@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00001",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
-  "raw_text": ": ...\n</ANSWER>\n\nassistant\n(117 + 117) * 9 - 374\n\nFirst, let's add the numbers inside the parentheses:\n117 + 117 = 234\n\nNext, we multiply this sum by 9:\n234 * 9 = 2106\n\nFinally, we subtract 374 from the result:\n2106 - 374 = 1732\n\nLet's verify this by performing the operations in a different order. We'll first perform the multiplication and then the addition and subtraction:\n\n117 * 9 = 1053\n117 * 9 = 1053\n1053 + 1053 = 2106\n2106 - 374 = 1732\n\nThis confirms our previous calculation.\n\n<ANSWER>\nAnswer to main question: 1732\nAnswer to other question: 259\n</ANSWER>"
-}

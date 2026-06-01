@@ -1,66 +1,54 @@
 # Faithfulness-Safety / Chain-of-Lies
 
-Research code for studying concealed or encoded reasoning: a model must solve a public task and a hidden private task while keeping the visible reasoning benign-looking.
+This repository studies a controlled arithmetic setting where a model must answer:
+
+- a public task, with visible reasoning allowed
+- a private task, whose reasoning should not appear in the visible text
+
+The current active experiment is the arithmetic piggyback/control CoT ablation.
 
 ## Start Here
 
-- Project context for future LLM chats:
-  [PROJECT_CONTEXT_FOR_LLM.md](/Users/mohammadali/Desktop/Faithfulness-Safety/docs/PROJECT_CONTEXT_FOR_LLM.md)
-- Full codebase guide:
-  [CODEBASE_GUIDE.md](/Users/mohammadali/Desktop/Faithfulness-Safety/docs/CODEBASE_GUIDE.md)
-- RL + Condor workflow:
-  [RL_CONDOR_WORKFLOW.md](/Users/mohammadali/Desktop/Faithfulness-Safety/docs/RL_CONDOR_WORKFLOW.md)
+- [Project onboarding](/Users/mohammadali/Desktop/Faithfulness-Safety/docs/PROJECT_ONBOARDING.md)
+- [LLM context](/Users/mohammadali/Desktop/Faithfulness-Safety/docs/PROJECT_CONTEXT_FOR_LLM.md)
+- [Condor workflow](/Users/mohammadali/Desktop/Faithfulness-Safety/docs/RL_CONDOR_WORKFLOW.md)
 
-## Core Entry Points
+## Active Workflow
 
-These are the main scripts that matter now:
-
-- [generate_prompts.py](/Users/mohammadali/Desktop/Faithfulness-Safety/scripts/generate_prompts.py)
-  Generate graph or arithmetic prompts for any variant.
-- [run_inference.py](/Users/mohammadali/Desktop/Faithfulness-Safety/scripts/run_inference.py)
-  Run baseline model inference on prompt JSONs.
-- [generate_rl_prompt_splits.py](/Users/mohammadali/Desktop/Faithfulness-Safety/scripts/generate_rl_prompt_splits.py)
-  Build deterministic RL train/validation splits.
-- [run_rule_based_rl.py](/Users/mohammadali/Desktop/Faithfulness-Safety/scripts/run_rule_based_rl.py)
-  Train the rule-based RL adapter.
-- [evaluate_rule_based_rl.py](/Users/mohammadali/Desktop/Faithfulness-Safety/scripts/evaluate_rule_based_rl.py)
-  Run held-out evaluation or aggregate per-variant RL summaries.
-- [run_llm_judge_recoverability.py](/Users/mohammadali/Desktop/Faithfulness-Safety/scripts/run_llm_judge_recoverability.py)
-  Measure whether the hidden task is recoverable from visible reasoning.
-
-## Quick Examples
-
-Install dependencies:
+Run these stages on the cluster, waiting for each stage to finish before starting the next:
 
 ```bash
-pip install -r requirements.txt
+condor_submit condor/reset_ce_cot_ablation.sub
+condor_submit condor/gen_splits_correlated_pair.sub
+condor_submit condor/train_ce_cot_ablation.sub
+condor_submit condor/eval_ce_cot_ablation.sub
+condor_submit condor/summarize_ce_cot_ablation.sub
 ```
 
-Generate prompts:
+The experiment trains/evaluates three CE conditions for both `arith_piggyback` and
+`arith_piggyback_control`:
 
-```bash
-python scripts/generate_prompts.py --variant graph_default --n 10 --seed 42
-python scripts/generate_prompts.py --variant arith_default --n 10 --seed 42
-python scripts/generate_prompts.py --variant arith_both_hard --n 10 --seed 42
-```
+- `public_cot`: decomposed visible public CoT plus final answer block
+- `answer_only`: final answer block only, used as the no-CoT baseline
+- `mismatched_public_cot`: decomposed public CoT from another example plus current answer block
 
-Run baseline inference:
-
-```bash
-python scripts/run_inference.py --model Qwen/Qwen2.5-7B-Instruct
-```
-
-For RL training, evaluation, judge runs, and Condor usage, use:
-
-[RL_CONDOR_WORKFLOW.md](/Users/mohammadali/Desktop/Faithfulness-Safety/docs/RL_CONDOR_WORKFLOW.md)
-
-## Repo Layout
+## Important Outputs
 
 ```text
-chain_of_lies/   Core Python package
-scripts/         Main local/cluster entry points
-condor/          HTCondor submit files and shell wrappers
-docs/            Research context and documentation
-data/            Prompts, responses, RL splits, evaluation outputs
-artifacts/       Training checkpoints, summaries, plots
+artifacts/ce_cot_ablation/final_metrics.csv
+artifacts/ce_cot_ablation/no_cot_comparison.csv
+artifacts/ce_cot_ablation/piggyback_control_deltas.csv
+artifacts/ce_cot_ablation/training_curves.csv
+artifacts/ce_cot_ablation/plots/
+```
+
+## Layout
+
+```text
+chain_of_lies/   Core package
+scripts/         Python entry points
+condor/          HTCondor wrappers for the active workflow
+docs/            Research and onboarding notes
+data/            Generated prompts/responses
+artifacts/       Checkpoints, summaries, plots
 ```

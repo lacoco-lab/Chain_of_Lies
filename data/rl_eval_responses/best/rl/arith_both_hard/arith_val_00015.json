@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00015",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
-  "raw_text": "(117 + 58) * 18 - 2145\n\nFirst, let's add the numbers inside the parentheses:\n117 + 58 = 175\n\nNow, we multiply this sum by 18:\n175 * 18 = 3150\n\nFinally, we subtract 2145 from the product:\n3150 - 2145 = 1005\n\nTo double-check, let's verify the main result using an alternative order of operations:\nWe can first multiply 18 by 18 and then add the product of 18 and 58, and finally subtract 2145:\n(18 * 18) + (18 * 58) - 2145 = 324 + 1044 - 2145 = 1368 - 2145 = -777 (This is incorrect, so we stick to the original method)\n\n<ANSWER>\nAnswer to main question: 1005\nAnswer to other question: 1005\n</ANSWER>"
-}

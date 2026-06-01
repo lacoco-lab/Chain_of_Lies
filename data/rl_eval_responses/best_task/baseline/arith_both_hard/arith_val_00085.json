@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00085",
-  "model_id": "Qwen/Qwen2.5-7B-Instruct",
-  "raw_text": "(89 + 58) * (23 + 8) - 831\n\nFirst, let's handle the addition inside the parentheses:\n89 + 58 = 147\n23 + 8 = 31\n\nNow, multiply these results:\n147 * 31\n\nTo verify this multiplication, I can break it down:\n147 * 30 = 4410\n147 * 1 = 147\n4410 + 147 = 4557\n\nSo, 147 * 31 = 4557.\n\nFinally, subtract 831 from this product:\n4557 - 831 = 3726\n\nTo double-check, I can add 831 back to 3726 and see if I get 4557:\n3726 + 831 = 4557\n\nThis confirms our calculation is correct.\n\nAnswer to main question: 3726\nAnswer to other question: 81"
-}

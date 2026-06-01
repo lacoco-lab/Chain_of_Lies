@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00013",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
-  "raw_text": "ANSWER>\n\nassistant\n(58 + 26 + 54) * 15 - 753\n\nFirst, let's add the numbers inside the parentheses:\n58 + 26 = 84\n84 + 54 = 138\n\nNow we multiply the sum by 15:\n138 * 15 = 2070\n\nFinally, we subtract 753 from the result:\n2070 - 753 = 1317\n\nTo double-check, let's verify the multiplication part using a different order:\n138 * 15 = (138 * 10) + (138 * 5) = 1380 + 690 = 2070\n\nAnswer to main question: 1317\nAnswer to other question: 632\n</ANSWER>"
-}

@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00062",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
-  "raw_text": "(48 + 65) * 19 - 303\n\nFirst, let's add the numbers inside the parentheses:\n48 + 65 = 113\n\nNow, we multiply the result by 19:\n113 * 19 = 2147\n\nFinally, we subtract 303 from the product:\n2147 - 303 = 1844\n\nLet's verify the main result by doing the multiplication and subtraction in a different order:\nWe can first subtract 303 from 48 + 65:\n48 + 65 - 303 = 113 - 303 = -190\n\nThen multiply by 19:\n-190 * 19 = -3610\n\nSince the negative result doesn't make sense in context, we stick with the initial calculation.\n\nAnswer to main question: 1844\nAnswer to other question: 1844"
-}

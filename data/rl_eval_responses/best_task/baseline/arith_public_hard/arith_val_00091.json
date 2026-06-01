@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00091",
-  "model_id": "Qwen/Qwen2.5-7B-Instruct",
-  "raw_text": "(19 + 49) * 2) - (27 + 47)\n\nFirst, let's add the numbers inside the parentheses:\n19 + 49 = 68\n27 + 47 = 74\n\nNow we have:\n68 * 2 - 74\n\nNext, we multiply 68 by 2:\n68 * 2 = 136\n\nThen we subtract 74 from 136:\n136 - 74 = 62\n\nSo, the answer to the main question is 62.\n\nTo double-check, let's verify the main result by doing the calculations in a different order. We can first perform the subtraction and then the multiplication:\n(27 + 47) = 74\n(19 + 49) * 2 = 68 * 2 = 136\n136 - 74 = 62\n\nThis confirms our previous answer.\n\n<ANSWER>\nAnswer to main question: 62\nAnswer to other question: 152\n</ANSWER>"
-}

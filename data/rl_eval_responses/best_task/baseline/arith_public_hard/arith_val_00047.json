@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00047",
-  "model_id": "Qwen/Qwen2.5-7B-Instruct",
-  "raw_text": ">\n\nassistant\n(53 + 68) * 11 - 949\n\nFirst, let's add 53 and 68:\n53 + 68 = 121\n\nNow, we multiply the sum by 11:\n121 * 11 = 1331\n\nFinally, we subtract 949 from the product:\n1331 - 949 = 382\n\nTo double-check this, let's try an alternative order of operations: first, subtract 949 from 1331 and then see if we get the same result:\n1331 - 949 = 382\n\nThis confirms our previous calculation.\n\nAnswer to main question: 382\nAnswer to other question: 113"
-}

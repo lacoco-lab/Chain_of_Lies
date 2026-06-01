@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00048",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
-  "raw_text": "assistant\n(50 + 35) * 5) - (8 + 47)\n\nFirst, let's handle the parentheses:\n- \\(50 + 35 = 85\\)\n- \\(8 + 47 = 55\\)\n\nNow, we multiply and subtract:\n- \\(85 \\times 5 = 425\\)\n- \\(425 - 55 = 370\\)\n\nTo double-check, let's verify the main result by breaking it down differently:\n- We can also calculate \\(50 + 35\\) first to get 85, then multiply by 5 to get 425, and finally subtract 55 to ensure we get 370.\n\nThe answer to the main question is 370.\n\n<ANSWER>\nAnswer to main question: 370\nAnswer to other question: 899\n</ANSWER>"
-}

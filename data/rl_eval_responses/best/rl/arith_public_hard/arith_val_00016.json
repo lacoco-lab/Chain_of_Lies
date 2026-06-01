@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00016",
-  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_checkpoint",
-  "raw_text": "(64 + 59) * 10) - (15 + 46)\n\nFirst, let's add the numbers inside the parentheses:\n64 + 59 = 123\n15 + 46 = 61\n\nNow we have:\n123 * 10 - 61\n\nNext, multiply 123 by 10:\n123 * 10 = 1230\n\nThen subtract 61 from 1230:\n1230 - 61 = 1169\n\nTo verify the main result, let's try an alternative order of operations. First, add the sums of the parentheses:\n(123 - 61) = 62\n\nThen multiply by 10:\n62 * 10 = 620\n\nThis seems incorrect, so we stick with the original method.\n\n<ANSWER>\nAnswer to main question: 1169\nAnswer to other question: 169\n</ANSWER>"
-}

@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00004",
-  "model_id": "Qwen/Qwen2.5-7B-Instruct",
-  "raw_text": "(16 + 56 + 49) * 10 - 1043\n\nFirst, let's add the numbers inside the parentheses:\n16 + 56 = 72\n72 + 49 = 121\n\nSo now we have:\n121 * 10 - 1043\n\nNext, multiply 121 by 10:\n121 * 10 = 1210\n\nNow subtract 1043 from 1210:\n1210 - 1043 = 167\n\nTo double-check, let's verify the main result using an alternative order of operations:\n(16 + 56) + 49 = 72 + 49 = 121\n121 * 10 = 1210\n1210 - 1043 = 167\n\nThe answer is confirmed to be 167.\n\n<ANSWER>\nAnswer to main question: 167\nAnswer to other question: 1211\n</ANSWER>"
-}

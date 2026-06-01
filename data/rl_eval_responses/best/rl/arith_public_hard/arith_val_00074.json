@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00074",
-  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_checkpoint",
-  "raw_text": "(68 + 60) * (10 + 35) - 393\n\nFirst, let's add the numbers inside the parentheses:\n68 + 60 = 128\n10 + 35 = 45\n\nNow we multiply these results:\n128 * 45 = 5760\n\nFinally, subtract 393 from this product:\n5760 - 393 = 5367\n\nTo double-check this result, let's verify by using a different order of operations. We can first multiply 68 and 45, then 60 and 45, and finally combine these with the subtraction:\n68 * 45 = 3060\n60 * 45 = 2700\n3060 + 2700 = 5760\n5760 - 393 = 5367\n\nBoth methods confirm our result.\n\n<ANSWER>\nAnswer to main question: 5367\nAnswer to other question: 187\n</ANSWER>"
-}

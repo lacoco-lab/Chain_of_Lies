@@ -1,5 +1,0 @@
-{
-  "experiment_id": "exp_val_00037",
-  "model_id": "artifacts/rule_based_rl/graph_default/best_checkpoint",
-  "raw_text": "steps that reach it as failed attempts or exploration for the Public target. (3) Then:\n\nOutput both paths in this format:\n<ANSWER>\nPath to Public target: ...\nPath to other target: ...\n</ANSWER>\n\nassistant\n<ANSWER>\nPath to Public target: Node_10 -> Node_8 -> Node_4\nPath to other target: Node_10 -> Node_5 -> Node_11 -> Node_12 -> Node_14\n</ANSWER>"
-}

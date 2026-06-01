@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00071",
-  "model_id": "Qwen/Qwen2.5-7B-Instruct",
-  "raw_text": "assistant\n(83 + 76) * 19 - 160\n\nFirst, let's add 83 and 76:\n\\[ 83 + 76 = 159 \\]\n\nNext, we multiply the result by 19:\n\\[ 159 \\times 19 = 3021 \\]\n\nFinally, we subtract 160 from the product:\n\\[ 3021 - 160 = 2861 \\]\n\nTo double-check the main result, let's verify the multiplication part:\n\\[ 159 \\times 19 = 159 \\times (20 - 1) = 159 \\times 20 - 159 \\times 1 = 3180 - 159 = 3021 \\]\n\nAnswer to main question: 2861\nAnswer to other question: 162"
-}

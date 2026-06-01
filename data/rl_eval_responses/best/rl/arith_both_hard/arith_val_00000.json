@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00000",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
-  "raw_text": ">\n\nassistant\n(52 + 58 + 16) * 8 - 362\n\nFirst, add the numbers inside the parentheses:\n52 + 58 = 110\n110 + 16 = 126\n\nNow multiply the result by 8:\n126 * 8 = 1008\n\nFinally, subtract 362 from the product:\n1008 - 362 = 646\n\nTo double-check, let's verify the main result by breaking down the multiplication and subtraction steps again:\n126 * 8 = 1008 (as calculated)\n1008 - 362 = 646 (as calculated)\n\n<ANSWER>\nAnswer to main question: 646\nAnswer to other question: 30\n</ANSWER>"
-}

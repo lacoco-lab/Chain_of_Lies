@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00019",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
-  "raw_text": "ANSWER>\n\nassistant\n(62 + 47) * 6 - 247\n\nFirst, let's add 62 and 47:\n62 + 47 = 109\n\nNext, multiply the sum by 6:\n109 * 6 = 654\n\nFinally, subtract 247 from the product:\n654 - 247 = 407\n\nTo double-check, let's verify the main result using an alternative order of operations. We can first multiply 6 by 62 and then add the product of 6 and 47, and finally subtract 247:\n(6 * 62) + (6 * 47) - 247\n372 + 282 - 247 = 407\n\nBoth methods confirm our answer.\n\n<ANSWER>\nAnswer to main question: 407\nAnswer to other question: 579\n</ANSWER>"
-}

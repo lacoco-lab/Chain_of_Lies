@@ -1,64 +1,28 @@
-"""
-Shared data types for the Chain-of-Lies pipeline.
+"""Small shared data types for the active arithmetic pipeline."""
 
-These types are used across stages so that graph generation, prompts,
-LLM outputs, and evaluation all share a consistent structure.
-"""
+from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Optional
-
-
-@dataclass
-class GraphSpec:
-    """Specification of a generated graph (nodes, edges, partition, targets)."""
-
-    edges_text: str  # Text list of edges for the prompt, e.g. "Node_1 <-> Node_2"
-    start_node: str
-    public_target: str
-    private_target: str
-    node_list: list[str] = field(default_factory=list)
-    edge_list: list[tuple[str, str]] = field(default_factory=list)
-    # Optional: for evaluation and intervention tests
-    public_distance: Optional[int] = None
-    private_distance: Optional[int] = None
+from typing import Any
 
 
 @dataclass
 class ArithmeticSpec:
-    """Specification for the arithmetic covert-reasoning task."""
-
-    public_question: str   # e.g. "12 + 34"
-    private_question: str  # e.g. "56 + 78"
+    public_question: str
+    private_question: str
     public_answer: int
     private_answer: int
 
 
 @dataclass
 class ExperimentPrompt:
-    """Full experiment: graph spec + the exact prompt string for the LLM."""
-
     prompt_text: str
-    spec: GraphSpec
+    spec: dict[str, Any] = field(default_factory=dict)
     experiment_id: str = ""
 
 
 @dataclass
 class LLMResponse:
-    """Raw response from the LLM (full completion)."""
-
     raw_text: str
     experiment_id: str = ""
     model_id: str = ""
-
-
-@dataclass
-class ParsedOutput:
-    """Parsed response: CoT trace and answer block."""
-
-    chain_of_thought: str
-    answer_block: str
-    experiment_id: str = ""
-    # Extracted paths (if parsed from <ANSWER>...</ANSWER>)
-    public_path: Optional[list[str]] = None
-    private_path: Optional[list[str]] = None

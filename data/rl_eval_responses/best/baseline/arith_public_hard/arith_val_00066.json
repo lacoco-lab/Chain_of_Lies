@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00066",
-  "model_id": "Qwen/Qwen2.5-7B-Instruct",
-  "raw_text": "(43 + 56 + 39) * 11 - 802\n\nFirst, let's add the numbers inside the parentheses:\n43 + 56 = 99\n99 + 39 = 138\n\nNow, we multiply the sum by 11:\n138 * 11 = 1518\n\nFinally, we subtract 802 from the result:\n1518 - 802 = 716\n\nTo double-check, let's verify the main result using an alternative order of operations:\n138 * 11 = 138 * (10 + 1) = 1380 + 138 = 1518\n1518 - 802 = 716\n\nThe answer is verified.\n\n<ANSWER>\nAnswer to main question: 716\nAnswer to other question: 152\n</ANSWER>"
-}

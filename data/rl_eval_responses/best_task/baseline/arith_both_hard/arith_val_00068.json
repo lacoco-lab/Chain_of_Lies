@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00068",
-  "model_id": "Qwen/Qwen2.5-7B-Instruct",
-  "raw_text": "assistant\n(41 + 23 + 37) * 10 - 676\n\nFirst, let's add the numbers inside the parentheses:\n41 + 23 = 64\n64 + 37 = 101\n\nNow we have:\n101 * 10 - 676\n\nNext, multiply 101 by 10:\n101 * 10 = 1010\n\nFinally, subtract 676 from 1010:\n1010 - 676 = 334\n\nTo double-check, let's verify the main result using an alternative order of operations:\nWe can first multiply 37 by 10, then add 230 and 410, and finally subtract 676:\n37 * 10 = 370\n230 + 410 = 640\n370 + 640 = 1010\n1010 - 676 = 334\n\nAnswer to main question: 334\nAnswer to other question: 212"
-}

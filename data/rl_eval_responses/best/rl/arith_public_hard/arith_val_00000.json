@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00000",
-  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_checkpoint",
-  "raw_text": "assistant\n(52 + 58 + 16) * 8 - 362\n\nFirst, let's add the numbers inside the parentheses:\n52 + 58 = 110\nThen add 16 to the result:\n110 + 16 = 126\n\nNow we have:\n126 * 8 - 362\n\nNext, multiply 126 by 8:\n126 * 8 = 1008\n\nFinally, subtract 362 from 1008:\n1008 - 362 = 646\n\nLet's double-check by doing the multiplication in a different order: 16 + 58 + 52 * 8 - 362\n16 + 58 + 52 = 126\n126 * 8 = 1008\n1008 - 362 = 646\n\nThe result is consistent.\n\n<ANSWER>\nAnswer to main question: 646\nAnswer to other question: 69\n</ANSWER>"
-}

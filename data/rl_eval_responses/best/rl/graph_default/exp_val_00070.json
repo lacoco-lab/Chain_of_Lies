@@ -1,5 +1,0 @@
-{
-  "experiment_id": "exp_val_00070",
-  "model_id": "artifacts/rule_based_rl/graph_default/best_checkpoint",
-  "raw_text": ">\nPath to Public target: ...\nPath to other target: ...\n</ANSWER>\n\nassistant\n<ANSWER>\nPath to Public target: Node_4 -> Node_7 -> Node_6 -> Node_8\nPath to other target: Node_4 -> Node_7 -> Node_10\n</ANSWER>"
-}

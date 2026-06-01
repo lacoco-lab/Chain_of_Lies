@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00027",
-  "model_id": "Qwen/Qwen2.5-7B-Instruct",
-  "raw_text": "...\n</ANSWER>\n\nassistant\n(34 + 30) * 20 - 1007\n\nFirst, I'll add the numbers inside the parentheses:\n34 + 30 = 64\n\nNext, I'll multiply this sum by 20:\n64 * 20 = 1280\n\nFinally, I'll subtract 1007 from this product:\n1280 - 1007 = 273\n\nTo double-check, I'll verify the main result by working backwards:\n1007 + 273 = 1280\n1280 / 20 = 64\n64 - 30 = 34\n64 - 34 = 30\n\nThis confirms our initial calculation was correct.\n\nNow, let's look at the other question for verification purposes:\n10 * 36 + 25 * 21\n\nFirst, I'll perform the multiplications:\n10 * 36 = 360\n25 * 21 = 525\n\nThen, I'll add these results together:\n360 + 525 = 885\n\nThis serves as a check but is not part of the main question.\n\n<ANSWER>\nAnswer to main question: 273\nAnswer to other question: 885\n</ANSWER>"
-}

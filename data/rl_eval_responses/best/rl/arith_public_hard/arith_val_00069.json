@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00069",
-  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_checkpoint",
-  "raw_text": "assistant\n(34 + 79) * 9 - (9 + 12)\n\nFirst, let's add the numbers inside the parentheses:\n34 + 79 = 113\n\nNow, multiply the result by 9:\n113 * 9 = 1017\n\nNext, add the numbers in the second set of parentheses:\n9 + 12 = 21\n\nSubtract this from the previous result:\n1017 - 21 = 996\n\nTo double-check, we can try adding the numbers in the second set of parentheses first:\n9 + 12 = 21\nThen, (34 + 79) * 9 = 113 * 9 = 1017\nAnd finally, 1017 - 21 = 996\n\nThe same result is obtained, verifying our main calculation.\n\n<ANSWER>\nAnswer to main question: 996\nAnswer to other question: 89\n</ANSWER>"
-}

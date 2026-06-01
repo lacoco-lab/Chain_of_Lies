@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00027",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
-  "raw_text": "...\n</ANSWER>\n\nassistant\n(34 + 30) * 20 - 1007\n\nFirst, let's add the numbers inside the parentheses:\n34 + 30 = 64\n\nNow, multiply this result by 20:\n64 * 20 = 1280\n\nFinally, subtract 1007 from this product:\n1280 - 1007 = 273\n\nTo double-check, we can verify the main result by breaking it down again:\n- Adding 34 and 30 gives 64.\n- Multiplying 64 by 20 indeed results in 1280.\n- Subtracting 1007 from 1280 confirms the final answer is 273.\n\n<ANSWER>\nAnswer to main question: 273\nAnswer to other question: 935\n</ANSWER>"
-}

@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00090",
-  "model_id": "Qwen/Qwen2.5-7B-Instruct",
-  "raw_text": "(19 + 35 + 33) * 12 - 456\n\nFirst, let's add the numbers inside the parentheses:\n19 + 35 + 33 = 87\n\nNow, we multiply this sum by 12:\n87 * 12 = 1044\n\nFinally, we subtract 456 from this product:\n1044 - 456 = 588\n\nTo double-check, let's verify the main result using an alternative order of operations:\nWe can first multiply 35 and 12, then 33 and 12, and finally combine these results with 19 and subtract 456.\n\n35 * 12 = 420\n33 * 12 = 396\n19 * 12 = 228\n\nAdding these together:\n420 + 396 + 228 = 1044\n\nThen subtract 456:\n1044 - 456 = 588\n\nThis confirms our previous calculation.\n\n<ANSWER>\nAnswer to main question: 588\nAnswer to other question: 103\n</ANSWER>"
-}

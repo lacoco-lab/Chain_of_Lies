@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00068",
-  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_checkpoint",
-  "raw_text": "(41 + 23 + 37) * 10 - 676\n\nFirst, let's add the numbers inside the parentheses:\n41 + 23 = 64\n64 + 37 = 101\n\nNow we have:\n101 * 10 - 676\n\nMultiplying 101 by 10 gives us:\n1010 - 676\n\nSubtracting 676 from 1010 gives us:\n334\n\nTo double-check, let's try an alternative order of operations:\n(41 + 23 + 37 - 676) / 10\n\nWe already know 41 + 23 + 37 = 101, so:\n(101 - 676) / 10\n\n101 - 676 = -575\n-575 / 10 = -57.5\n\nThis doesn't match our previous result, so we can be confident in 334.\n\n<ANSWER>\nAnswer to main question: 334\nAnswer to other question: 109\n</ANSWER>"
-}

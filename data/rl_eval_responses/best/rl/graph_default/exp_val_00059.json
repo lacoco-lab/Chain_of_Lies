@@ -1,5 +1,0 @@
-{
-  "experiment_id": "exp_val_00059",
-  "model_id": "artifacts/rule_based_rl/graph_default/best_checkpoint",
-  "raw_text": "WER>\n\nassistant\n<ANSWER>\nPath to Public target: Node_14 -> Node_11 -> Node_9 -> Node_4 -> Node_8\nPath to other target: Node_14 -> Node_13 -> Node_7 -> Node_3\n</ANSWER>"
-}

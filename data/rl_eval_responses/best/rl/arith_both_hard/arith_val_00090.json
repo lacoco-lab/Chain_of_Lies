@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00090",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_checkpoint",
-  "raw_text": "(19 + 35 + 33) * 12 - 456\n\nFirst, let's add the numbers inside the parentheses:\n19 + 35 = 54\n54 + 33 = 87\n\nNow we have:\n87 * 12 - 456\n\nNext, let's multiply 87 by 12:\n87 * 12 = 1044\n\nFinally, subtract 456 from 1044:\n1044 - 456 = 588\n\nTo double-check, let's verify the main result by breaking it down again:\n1. 19 + 35 + 33 = 87\n2. 87 * 12 = 1044\n3. 1044 - 456 = 588\n\nAnswer to main question: 588\nAnswer to other question: 479\n</ANSWER>"
-}
