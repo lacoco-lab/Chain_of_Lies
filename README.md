@@ -7,12 +7,6 @@ This repository studies a controlled arithmetic setting where a model must answe
 
 The current active experiment is the arithmetic piggyback/control CoT ablation.
 
-## Start Here
-
-- [Project onboarding](/Users/mohammadali/Desktop/Faithfulness-Safety/docs/PROJECT_ONBOARDING.md)
-- [LLM context](/Users/mohammadali/Desktop/Faithfulness-Safety/docs/PROJECT_CONTEXT_FOR_LLM.md)
-- [Condor workflow](/Users/mohammadali/Desktop/Faithfulness-Safety/docs/RL_CONDOR_WORKFLOW.md)
-
 ## Active Workflow
 
 Run these stages on the cluster, waiting for each stage to finish before starting the next:
