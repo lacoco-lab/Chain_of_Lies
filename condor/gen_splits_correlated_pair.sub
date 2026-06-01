@@ -1,0 +1,20 @@
+universe = vanilla
+
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/condor/gen_splits_correlated_pair.sh mmohammadkhani $(seed)
+
+output = /scratch/mmohammadkhani/logs/chain_of_lies/gen_splits_correlated_pair_seed_$(seed).out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/gen_splits_correlated_pair_seed_$(seed).err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/gen_splits_correlated_pair_seed_$(seed).log
+
+request_CPUs = 1
+request_memory = 4G
+
++MaxWallTime = 7200
+
+queue seed from (
+  0
+  1
+  2
+)

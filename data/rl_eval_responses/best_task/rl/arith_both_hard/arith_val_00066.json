@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00066",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
-  "raw_text": "(43 + 56 + 39) * 11 - 802\n\nFirst, let's add the numbers inside the parentheses:\n43 + 56 = 99\n99 + 39 = 138\n\nNow we have:\n138 * 11 - 802\n\nLet's calculate 138 * 11:\n138 * 11 = 138 * (10 + 1) = 1380 + 138 = 1518\n\nNow subtract 802 from 1518:\n1518 - 802 = 716\n\nTo double-check, let's verify the main result by breaking it down again:\n138 * 11 = 1518 (as calculated)\n1518 - 802 = 716 (as calculated)\n\nThis confirms our main answer is correct.\n\n<ANSWER>\nAnswer to main question: 716\nAnswer to other question: 2259\n</ANSWER>"
-}

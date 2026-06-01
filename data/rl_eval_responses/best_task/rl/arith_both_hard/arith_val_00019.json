@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00019",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
-  "raw_text": "ANSWER>\n\nassistant\n(62 + 47) * 6 - 247\n\nFirst, let's add the numbers inside the parentheses:\n62 + 47 = 109\n\nNext, we multiply this sum by 6:\n109 * 6 = 654\n\nFinally, we subtract 247 from the result:\n654 - 247 = 407\n\nTo double-check, let's break down the multiplication step:\n109 * 6 = (100 * 6) + (9 * 6) = 600 + 54 = 654\n\nNow, let's verify the final subtraction:\n654 - 247 = (650 - 247) + (4 - 0) = 403 + 4 = 407\n\nAnswer to main question: 407\nAnswer to other question: 863"
-}

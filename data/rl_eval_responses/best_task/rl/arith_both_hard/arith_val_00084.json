@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00084",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
-  "raw_text": "assistant\n(25 + 73) * (18 + 30) - 3891\n\nFirst, let's add the numbers inside the parentheses:\n25 + 73 = 98\n18 + 30 = 48\n\nNow we have:\n98 * 48 - 3891\n\nNext, let's multiply 98 by 48:\n98 * 48 = 98 * (50 - 2) = 98 * 50 - 98 * 2 = 4900 - 196 = 4704\n\nSo now we have:\n4704 - 3891\n\nSubtract 3891 from 4704:\n4704 - 3891 = 813\n\nTo double-check, let's try an alternative order of operations:\nFirst, calculate 3891 / 98 ≈ 40 (since 98 * 40 = 3920), then:\n4704 - 3920 = 84, but this is not needed as the direct subtraction is clear.\n\nAnswer to main question: 813\nAnswer to other question: 1103"
-}

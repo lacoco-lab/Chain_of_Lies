@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00030",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
-  "raw_text": "(74 + 118) * 22 - 1286\n\nFirst, add the numbers inside the parentheses:\n74 + 118 = 192\n\nNext, multiply the result by 22:\n192 * 22 = 4224\n\nFinally, subtract 1286 from the product:\n4224 - 1286 = 2938\n\nNow, let's double-check by breaking down the multiplication step differently to ensure accuracy:\n192 * 22 can be seen as (200 - 8) * 22, which is:\n200 * 22 - 8 * 22 = 4400 - 176 = 4224\n\nThis confirms our previous calculation.\n\n<ANSWER>\nAnswer to main question: 2938\nAnswer to other question: 2275\n</ANSWER>"
-}

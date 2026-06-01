@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00045",
-  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_task_checkpoint",
-  "raw_text": "(24 + 74) * (19 + 20) - 3100\n\nFirst, let's handle the addition inside the parentheses:\n24 + 74 = 98\n19 + 20 = 39\n\nNow we multiply these results:\n98 * 39\n\nTo make the multiplication easier, let's break it down:\n98 * 39 = 98 * (40 - 1) = 98 * 40 - 98 * 1 = 3920 - 98 = 3822\n\nFinally, subtract 3100 from our result:\n3822 - 3100 = 722\n\nTo verify this, let's try another way of calculating the same expression:\n(24 + 74) = 98\n(19 + 20) = 39\nSo, 98 * 39 - 3100 should still give us the same result.\n\n<ANSWER>\nAnswer to main question: 722\nAnswer to other question: 75\n</ANSWER>"
-}

@@ -1,11 +1,10 @@
-# Chain-of-Lies pipeline
 # Python 3.10+
 
-# Stage 1: Graph generation
-networkx>=3.0
-
-# Stage 2: Qwen local inference (Hugging Face)
+# Training / inference
 torch>=2.0
 transformers>=4.40
 accelerate>=0.25
 peft>=0.11
+
+# Summaries / plots
+matplotlib>=3.8

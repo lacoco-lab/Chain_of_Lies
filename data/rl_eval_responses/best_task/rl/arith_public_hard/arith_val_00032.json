@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00032",
-  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_task_checkpoint",
-  "raw_text": "(51 + 44 + 37) * 14 - 327\n\nFirst, let's add the numbers inside the parentheses:\n51 + 44 = 95\n95 + 37 = 132\n\nSo, we have:\n132 * 14 - 327\n\nNow, let's multiply:\n132 * 14 = 1848\n\nThen, subtract 327 from the result:\n1848 - 327 = 1521\n\nTo double-check, let's try adding the numbers in a different order:\n37 + 44 = 81\n81 + 51 = 132\n\nAnd then multiplying and subtracting again to ensure consistency:\n132 * 14 = 1848\n1848 - 327 = 1521\n\nAnswer to main question: 1521\nAnswer to other question: 72"
-}

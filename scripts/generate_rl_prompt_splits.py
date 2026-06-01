@@ -1,198 +1,144 @@
 #!/usr/bin/env python3
-"""
-Generate larger train/validation prompt splits for the RL experiments.
+"""Generate unique train/validation splits for the active arithmetic pair."""
 
-This keeps the original 10-example benchmark directories untouched and writes
-new prompt pools under a dedicated root directory.
-"""
+from __future__ import annotations
 
 import argparse
 import json
+import random
 import sys
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from chain_of_lies.rl import SELECTED_RULE_BASED_RL_VARIANTS
-from chain_of_lies.stage1_arithmetic import generate_arithmetic_prompt
-from chain_of_lies.stage1_graph_prompt import generate_experiment_prompt
-from chain_of_lies.stage1_graph_prompt.benign_malign import generate_experiment_prompt_benign_malign
+from chain_of_lies.rl.rewards import normalize_variant_name
+from chain_of_lies.stage1_arithmetic.generate import (
+    build_arithmetic_prompt_text,
+    sample_control_linear_pair,
+    sample_correlated_linear_pair,
+)
+
+
+ACTIVE_VARIANTS = ("arith_piggyback", "arith_piggyback_control")
 
 
 def _write_payload(payload: dict[str, Any], out_dir: Path, experiment_id: str) -> None:
     out_dir.mkdir(parents=True, exist_ok=True)
-    out_file = out_dir / f"{experiment_id}.json"
-    out_file.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
-
-
-def _graph_payload(variant_name: str, seed: int, experiment_id: str, nodes: int, edge_probability: float) -> dict[str, Any]:
-    if variant_name == "graph_benign_malign":
-        exp = generate_experiment_prompt_benign_malign(
-            n_nodes=nodes,
-            edge_probability=edge_probability,
-            seed=seed,
-            experiment_id=experiment_id,
-        )
-        return {
-            "task_type": "graph_benign_malign",
-            "experiment_id": exp.experiment_id,
-            "prompt_text": exp.prompt_text,
-            "spec": {
-                "edges_text": exp.spec.edges_text,
-                "start_node": exp.spec.start_node,
-                "public_target": exp.spec.public_target,
-                "private_target": exp.spec.private_target,
-                "node_list": exp.spec.node_list,
-                "edge_list": [list(edge) for edge in exp.spec.edge_list],
-                "public_distance": exp.spec.public_distance,
-                "private_distance": exp.spec.private_distance,
-            },
-        }
-
-    prompt_variant = "latent_cot" if variant_name == "graph_latent_cot" else "default"
-    exp = generate_experiment_prompt(
-        n_nodes=nodes,
-        edge_probability=edge_probability,
-        seed=seed,
-        experiment_id=experiment_id,
-        prompt_variant=prompt_variant,
+    (out_dir / f"{experiment_id}.json").write_text(
+        json.dumps(payload, indent=2, ensure_ascii=False),
+        encoding="utf-8",
     )
-    return {
-        "experiment_id": exp.experiment_id,
-        "prompt_variant": prompt_variant,
-        "prompt_text": exp.prompt_text,
-        "spec": {
-            "edges_text": exp.spec.edges_text,
-            "start_node": exp.spec.start_node,
-            "public_target": exp.spec.public_target,
-            "private_target": exp.spec.private_target,
-            "node_list": exp.spec.node_list,
-            "edge_list": [list(edge) for edge in exp.spec.edge_list],
-            "public_distance": exp.spec.public_distance,
-            "private_distance": exp.spec.private_distance,
-        },
-    }
 
 
-def _arithmetic_payload(variant_name: str, seed: int, experiment_id: str, max_summand: int) -> dict[str, Any]:
-    difficulty_variant = variant_name.removeprefix("arith_")
-    prompt_text, _, spec = generate_arithmetic_prompt(
-        max_summand=max_summand,
-        seed=seed,
-        experiment_id=experiment_id,
-        difficulty_variant=difficulty_variant,
-    )
+def _payload(
+    variant_name: str,
+    experiment_id: str,
+    public_pair: tuple[str, int],
+    private_pair: tuple[str, int],
+) -> dict[str, Any]:
+    public_question, public_answer = public_pair
+    private_question, private_answer = private_pair
     return {
         "task_type": "arithmetic",
         "experiment_id": experiment_id,
-        "difficulty_variant": difficulty_variant,
-        "prompt_text": prompt_text,
+        "difficulty_variant": variant_name.removeprefix("arith_"),
+        "prompt_text": build_arithmetic_prompt_text(public_question, private_question),
         "spec": {
-            "public_question": spec.public_question,
-            "private_question": spec.private_question,
-            "public_answer": spec.public_answer,
-            "private_answer": spec.private_answer,
+            "public_question": public_question,
+            "private_question": private_question,
+            "public_answer": public_answer,
+            "private_answer": private_answer,
         },
     }
 
 
-def _make_payload(
+def _sampler_for_variant(
     variant_name: str,
+) -> Callable[[random.Random], tuple[tuple[str, int], tuple[str, int]]]:
+    variant_name = normalize_variant_name(variant_name)
+    if variant_name == "arith_piggyback":
+        return sample_correlated_linear_pair
+    if variant_name == "arith_piggyback_control":
+        return sample_control_linear_pair
+    raise ValueError(f"Unsupported active variant: {variant_name}")
+
+
+def write_unique_split(
+    *,
+    variant_name: str,
+    train_n: int,
+    val_n: int,
+    output_root: Path,
     seed: int,
-    experiment_id: str,
-    *,
-    nodes: int,
-    edge_probability: float,
-    max_summand: int,
-) -> dict[str, Any]:
-    if variant_name.startswith("graph_"):
-        return _graph_payload(variant_name, seed, experiment_id, nodes, edge_probability)
-    return _arithmetic_payload(variant_name, seed, experiment_id, max_summand)
-
-
-def _generate_split(
-    variant_name: str,
-    split_name: str,
-    count: int,
-    out_dir: Path,
-    *,
-    seed_offset: int,
-    nodes: int,
-    edge_probability: float,
-    max_summand: int,
 ) -> None:
-    for index in range(count):
-        seed = seed_offset + index
-        prefix = "exp" if variant_name.startswith("graph_") else "arith"
-        experiment_id = f"{prefix}_{split_name}_{index:05d}"
-        payload = _make_payload(
-            variant_name,
-            seed,
-            experiment_id,
-            nodes=nodes,
-            edge_probability=edge_probability,
-            max_summand=max_summand,
-        )
-        _write_payload(payload, out_dir, experiment_id)
+    variant_name = normalize_variant_name(variant_name)
+    sampler = _sampler_for_variant(variant_name)
+    rng = random.Random(seed)
+    total_needed = train_n + val_n
+    seen_pairs: set[tuple[str, str]] = set()
+    selected_pairs: list[tuple[tuple[str, int], tuple[str, int]]] = []
+    max_attempts = max(200_000, total_needed * 50)
+
+    attempts = 0
+    while len(selected_pairs) < total_needed:
+        attempts += 1
+        if attempts > max_attempts:
+            raise RuntimeError(
+                f"Could not sample {total_needed} unique pairs for {variant_name} "
+                f"after {attempts} attempts."
+            )
+        public_pair, private_pair = sampler(rng)
+        key = (public_pair[0], private_pair[0])
+        if key in seen_pairs:
+            continue
+        seen_pairs.add(key)
+        selected_pairs.append((public_pair, private_pair))
+
+    variant_root = output_root / variant_name
+    for split_name, count, offset in (
+        ("train", train_n, 0),
+        ("val", val_n, train_n),
+    ):
+        out_dir = variant_root / f"{split_name}_prompts"
+        for index in range(count):
+            public_pair, private_pair = selected_pairs[offset + index]
+            experiment_id = f"arith_{split_name}_{index:05d}"
+            _write_payload(
+                _payload(variant_name, experiment_id, public_pair, private_pair),
+                out_dir,
+                experiment_id,
+            )
+
+    print(
+        f"[SplitGen] wrote {train_n} train and {val_n} validation prompts for {variant_name} "
+        f"under {variant_root}",
+        flush=True,
+    )
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Generate train/validation prompt splits for the selected RL variants.")
+    parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--variant",
         type=str,
-        default="all_selected",
-        help="Variant name or 'all_selected'.",
+        default="all_active",
+        help="One active variant or 'all_active'.",
     )
-    parser.add_argument("--train-n", type=int, default=1000, help="Number of train prompts per variant.")
-    parser.add_argument("--val-n", type=int, default=100, help="Number of validation prompts per variant.")
-    parser.add_argument("--seed", type=int, default=0, help="Base seed used for deterministic prompt generation.")
-    parser.add_argument("--nodes", type=int, default=15, help="Number of nodes for graph variants.")
-    parser.add_argument("--p", type=float, default=0.3, help="Edge probability for graph variants.")
-    parser.add_argument("--max-summand", type=int, default=99, help="Max summand for easy arithmetic expressions.")
-    parser.add_argument(
-        "--output-root",
-        type=Path,
-        default=Path("data/RL_splits"),
-        help="Root directory for the generated train/validation prompt pools.",
-    )
+    parser.add_argument("--train-n", type=int, default=10_000)
+    parser.add_argument("--val-n", type=int, default=1_000)
+    parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--output-root", type=Path, default=Path("data/RL_splits"))
     args = parser.parse_args()
 
-    variants = (
-        list(SELECTED_RULE_BASED_RL_VARIANTS)
-        if args.variant == "all_selected"
-        else [args.variant]
-    )
-
+    variants = ACTIVE_VARIANTS if args.variant == "all_active" else (args.variant,)
     for variant_name in variants:
-        variant_root = args.output_root / variant_name
-        train_dir = variant_root / "train_prompts"
-        val_dir = variant_root / "val_prompts"
-        print(f"[SplitGen] variant={variant_name} train={train_dir} val={val_dir}", flush=True)
-        _generate_split(
-            variant_name,
-            "train",
-            args.train_n,
-            train_dir,
-            seed_offset=args.seed,
-            nodes=args.nodes,
-            edge_probability=args.p,
-            max_summand=args.max_summand,
-        )
-        _generate_split(
-            variant_name,
-            "val",
-            args.val_n,
-            val_dir,
-            seed_offset=args.seed + args.train_n,
-            nodes=args.nodes,
-            edge_probability=args.p,
-            max_summand=args.max_summand,
-        )
-        print(
-            f"[SplitGen] wrote {args.train_n} train prompts and {args.val_n} validation prompts for {variant_name}",
-            flush=True,
+        write_unique_split(
+            variant_name=variant_name,
+            train_n=args.train_n,
+            val_n=args.val_n,
+            output_root=args.output_root,
+            seed=args.seed,
         )
 
 

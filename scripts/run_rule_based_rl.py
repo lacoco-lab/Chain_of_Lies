@@ -5,7 +5,12 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from chain_of_lies.rl import SELECTED_RULE_BASED_RL_VARIANTS, VARIANT_TO_PROMPTS_DIR, train_rule_based_grpo
+from chain_of_lies.rl import (
+    SELECTED_RULE_BASED_RL_VARIANTS,
+    VARIANT_TO_PROMPTS_DIR,
+    normalize_variant_name,
+    train_rule_based_grpo,
+)
 
 
 def main() -> None:
@@ -13,8 +18,8 @@ def main() -> None:
     parser.add_argument(
         "--variant",
         type=str,
-        default="all_selected",
-        help="Variant name to train on, or 'all_selected' to run the current comprehensive RL sweep sequentially.",
+        default="all_active",
+        help="Variant name to train on, or 'all_active' for piggyback + control.",
     )
     parser.add_argument("--model", type=str, default="Qwen/Qwen2.5-7B-Instruct")
     parser.add_argument("--output-root", type=Path, default=Path("artifacts/rule_based_rl"))
@@ -26,7 +31,8 @@ def main() -> None:
     )
     parser.add_argument("--train-prompts-dir", type=Path, default=None, help="Optional explicit training prompt directory.")
     parser.add_argument("--val-prompts-dir", type=Path, default=None, help="Optional explicit validation prompt directory.")
-    parser.add_argument("--steps", type=int, default=100)
+    parser.add_argument("--steps", type=int, default=250, help="Fixed-step budget for historical small-data runs.")
+    parser.add_argument("--epochs", type=int, default=None, help="If set, use epoch-based training and ignore --steps.")
     parser.add_argument("--batch-size", type=int, default=4)
     parser.add_argument("--group-size", type=int, default=4)
     parser.add_argument("--learning-rate", type=float, default=1e-5)
@@ -39,12 +45,35 @@ def main() -> None:
     parser.add_argument("--validation-batch-size", type=int, default=8)
     parser.add_argument("--task-only-fraction", type=float, default=0.33)
     parser.add_argument("--exact-only-fraction", type=float, default=0.33)
+    parser.add_argument(
+        "--ce-weight",
+        type=float,
+        default=0.1,
+        help="Weight of the auxiliary cross-entropy loss on the gold answer-block tokens. "
+             "Set to 0 to disable. Default 0.1.",
+    )
+    parser.add_argument(
+        "--ce-decay-start-fraction",
+        type=float,
+        default=0.67,
+        help="Fraction of training after which ce_weight linearly decays to zero (default 0.67).",
+    )
+    parser.add_argument("--public-reward", type=float, default=1.0)
+    parser.add_argument("--private-reward", type=float, default=1.0)
+    parser.add_argument("--joint-task-bonus", type=float, default=0.25)
+    parser.add_argument(
+        "--init-adapter-dir",
+        type=Path,
+        default=None,
+        help="Optional LoRA adapter checkpoint to warm-start RL from (for example a CE-only ckpt_task).",
+    )
     parser.add_argument("--seed", type=int, default=0)
     args = parser.parse_args()
 
-    if args.variant == "all_selected":
+    if args.variant == "all_active":
         variants = list(SELECTED_RULE_BASED_RL_VARIANTS)
     else:
+        args.variant = normalize_variant_name(args.variant)
         if args.variant not in VARIANT_TO_PROMPTS_DIR:
             raise ValueError(f"Unknown variant '{args.variant}'. Known variants: {sorted(VARIANT_TO_PROMPTS_DIR)}")
         variants = [args.variant]
@@ -74,6 +103,7 @@ def main() -> None:
             val_prompts_dir=val_prompts_dir,
             model_id=args.model,
             steps=args.steps,
+            epochs=args.epochs,
             batch_size=args.batch_size,
             group_size=args.group_size,
             learning_rate=args.learning_rate,
@@ -87,6 +117,12 @@ def main() -> None:
             validation_batch_size=args.validation_batch_size,
             task_only_fraction=args.task_only_fraction,
             exact_only_fraction=args.exact_only_fraction,
+            ce_weight=args.ce_weight,
+            ce_decay_start_fraction=args.ce_decay_start_fraction,
+            public_reward=args.public_reward,
+            private_reward=args.private_reward,
+            joint_task_bonus=args.joint_task_bonus,
+            init_adapter_dir=args.init_adapter_dir,
         )
 
 

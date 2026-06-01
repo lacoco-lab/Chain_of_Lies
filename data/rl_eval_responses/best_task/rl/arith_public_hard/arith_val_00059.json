@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00059",
-  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_task_checkpoint",
-  "raw_text": "assistant\n(33 + 96) * 6 - 246\n\nFirst, let's add 33 and 96:\n33 + 96 = 129\n\nNext, we multiply the sum by 6:\n129 * 6 = 774\n\nFinally, we subtract 246 from the product:\n774 - 246 = 528\n\nTo double-check, let's verify the main result by breaking it down again:\n- Adding 33 and 96 gives 129.\n- Multiplying 129 by 6 gives 774.\n- Subtracting 246 from 774 gives 528.\n\nAnswer to main question: 528\nAnswer to other question: 76"
-}

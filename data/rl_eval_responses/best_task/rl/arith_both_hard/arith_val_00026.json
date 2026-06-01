@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00026",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
-  "raw_text": "assistant\n(80 + 54) * 15 - 1421\n\nFirst, let's add 80 and 54:\n80 + 54 = 134\n\nNext, we multiply the sum by 15:\n134 * 15 = 2010\n\nFinally, we subtract 1421 from the product:\n2010 - 1421 = 589\n\nTo double-check, let's verify the main result by breaking it down differently:\nFirst, calculate 15 * 134 directly:\n15 * 134 = 2010\nThen, perform the subtraction:\n2010 - 1421 = 589\n\nThe answer is verified.\n\n<ANSWER>\nAnswer to main question: 589\nAnswer to other question: 337\n</ANSWER>"
-}

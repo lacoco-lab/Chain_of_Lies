@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00045",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
-  "raw_text": "(24 + 74) * (19 + 20) - 3100\n\nFirst, let's handle the additions inside the parentheses:\n24 + 74 = 98\n19 + 20 = 39\n\nNow, multiply these results:\n98 * 39 = 98 * (40 - 1) = 98 * 40 - 98 = 3920 - 98 = 3822\n\nFinally, subtract 3100 from the result:\n3822 - 3100 = 722\n\n<ANSWER>\nAnswer to main question: 722\nAnswer to other question: 2016\n</ANSWER>"
-}

@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00077",
-  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_task_checkpoint",
-  "raw_text": "(26 + 48) * (15 + 16) - 1829\n\nFirst, let's add the numbers inside the parentheses:\n26 + 48 = 74\n15 + 16 = 31\n\nNow we multiply these results:\n74 * 31 = 74 * (30 + 1) = 74 * 30 + 74 * 1 = 2220 + 74 = 2294\n\nFinally, we subtract 1829 from this product:\n2294 - 1829 = 465\n\nTo double-check, let's verify the main result by performing the multiplication in a different order:\n2294 - 1829 = 2294 - 1800 - 29 = 494 - 29 = 465\n\nThe answer is confirmed.\n\n<ANSWER>\nAnswer to main question: 465\nAnswer to other question: 76\n</ANSWER>"
-}

@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00078",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
-  "raw_text": "ANSWER>\n\nassistant\n(36 + 76) * 15 - 1534\n\nFirst, let's add 36 and 76:\n36 + 76 = 112\n\nNext, multiply the sum by 15:\n112 * 15 = 1680\n\nFinally, subtract 1534 from the product:\n1680 - 1534 = 146\n\nTo double-check, we can also verify the main result by breaking it down differently:\n- First, calculate 36 * 15 and 76 * 15 separately:\n  36 * 15 = 540\n  76 * 15 = 1140\n\n- Then, add these two results together:\n  540 + 1140 = 1680\n\n- Finally, subtract 1534:\n  1680 - 1534 = 146\n\nThe answer to the main question is 146.\n\nAnswer to main question: 146\nAnswer to other question: 243\n</ANSWER>"
-}

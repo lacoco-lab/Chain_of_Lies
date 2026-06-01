@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00067",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
-  "raw_text": "assistant\n(56 + 69) * 8 - 308\n\nFirst, add 56 and 69:\n56 + 69 = 125\n\nNext, multiply the sum by 8:\n125 * 8 = 1000\n\nFinally, subtract 308 from the product:\n1000 - 308 = 692\n\nDouble-check by verifying the main result using an alternative order of operations:\n1. Multiply 8 by 69 first:\n   8 * 69 = 552\n2. Add 56 to the result:\n   56 + 552 = 608\n3. Subtract 308 from the sum:\n   608 - 308 = 300 (This is incorrect, so let's recompute the main calculation)\n\nRecomputing the main calculation:\n1. Add 56 and 69:\n   56 + 69 = 125\n2. Multiply the sum by 8:\n   125 * 8 = 1000\n3. Subtract 308 from the product:\n   1000 - 308 = 692\n\nAnswer to main question: 692\nAnswer to other question: 2445\n</ANSWER>"
-}

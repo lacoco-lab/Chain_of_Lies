@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00047",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
-  "raw_text": "assistant\n(53 + 68) * 11 - 949\n\nFirst, let's add 53 and 68:\n53 + 68 = 121\n\nNext, we multiply the sum by 11:\n121 * 11 = 1331\n\nFinally, we subtract 949 from the product:\n1331 - 949 = 382\n\nTo double-check, let's break down the multiplication part:\n121 * 11 = 121 * (10 + 1) = 1210 + 121 = 1331\n\nAnswer to main question: 382\nAnswer to other question: 475"
-}

@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00031",
-  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_task_checkpoint",
-  "raw_text": "(90 + 25) * (6 + 32) - 2573\n\nFirst, I'll solve the expressions inside the parentheses:\n90 + 25 = 115\n6 + 32 = 38\n\nNow, I'll multiply these results:\n115 * 38 = 4370\n\nFinally, I'll subtract 2573 from the product:\n4370 - 2573 = 1797\n\nTo double-check, I'll verify the main result by breaking it down again:\n- Adding 90 and 25 gives 115.\n- Adding 6 and 32 gives 38.\n- Multiplying 115 and 38 gives 4370.\n- Subtracting 2573 from 4370 gives 1797.\n\nAnswer to main question: 1797\nAnswer to other question: 47"
-}

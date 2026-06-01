@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00038",
-  "model_id": "artifacts/rule_based_rl/arith_public_hard/best_task_checkpoint",
-  "raw_text": ">\n\nassistant\n(29 + 52) * 7 - 128\n\nFirst, I'll add 29 and 52 together:\n29 + 52 = 81\n\nNext, I'll multiply the sum by 7:\n81 * 7 = 567\n\nFinally, I'll subtract 128 from the product:\n567 - 128 = 439\n\nTo double-check my result, I can also verify it by doing the multiplication in a different order:\n52 * 7 = 364\n29 * 7 = 203\nAdding these results:\n364 + 203 = 567\nAnd then subtracting 128:\n567 - 128 = 439\n\nThis confirms my initial calculation.\n\n<ANSWER>\nAnswer to main question: 439\nAnswer to other question: 111\n</ANSWER>"
-}

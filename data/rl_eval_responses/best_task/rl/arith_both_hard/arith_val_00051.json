@@ -1,5 +1,0 @@
-{
-  "experiment_id": "arith_val_00051",
-  "model_id": "artifacts/rule_based_rl/arith_both_hard/best_task_checkpoint",
-  "raw_text": "assistant\n(106 + 34) * 11 - 966\n\nFirst, I will add the numbers inside the parentheses:\n106 + 34 = 140\n\nNext, I will multiply the result by 11:\n140 * 11 = 1540\n\nFinally, I will subtract 966 from the result:\n1540 - 966 = 574\n\nTo double-check, let's break down the multiplication first:\n140 * 11 = 140 * (10 + 1) = (140 * 10) + (140 * 1) = 1400 + 140 = 1540\n\nNow, let's verify the subtraction:\n1540 - 966 = 574\n\nSo, the answer to the main question is 574.\n\n<ANSWER>\nAnswer to main question: 574\nAnswer to other question: 1663\n</ANSWER>"
-}
