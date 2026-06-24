@@ -6,9 +6,12 @@ import random
 ARITHMETIC_VARIANT_PIGGYBACK = "piggyback"
 ARITHMETIC_VARIANT_PIGGYBACK_CONTROL = "piggyback_control"
 
-# Active large-range family for the current CoT-ablation experiments.
-ACTIVE_PIGGYBACK_MULTIPLIERS = tuple(range(1000, 2001))
-ACTIVE_PIGGYBACK_FACTORS = tuple(range(1000, 2001))
+# Active intermediate-range family for the current verbose-CoT experiment.
+# This lower intermediate range is meant to test whether independent-control
+# private accuracy becomes learnable enough for verbose public CoT to help,
+# without becoming as easy as the earlier 100..500 run.
+ACTIVE_PIGGYBACK_MULTIPLIERS = tuple(range(500, 1001))
+ACTIVE_PIGGYBACK_FACTORS = tuple(range(500, 1001))
 ACTIVE_PIGGYBACK_OFFSETS = tuple(range(1, 11))
 ACTIVE_PIGGYBACK_SMALL_SHIFTS = (-40, -20, -10, -5, -2, -1, 1, 2, 5, 10, 20, 40)
 

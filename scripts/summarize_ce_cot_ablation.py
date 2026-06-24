@@ -21,7 +21,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 
-MODES = ("public_cot", "answer_only", "mismatched_public_cot")
+MODES = ("answer_only", "public_cot", "verbose_public_cot")
 VARIANTS = ("arith_piggyback", "arith_piggyback_control")
 METRICS = ("task_success_rate", "public_exact_rate", "private_exact_rate")
 FINAL_METRICS = (

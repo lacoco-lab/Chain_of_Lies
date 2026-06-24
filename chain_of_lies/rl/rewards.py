@@ -76,7 +76,10 @@ class RewardBreakdown:
 
 
 def load_prompt_record(path: Path) -> dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"Invalid prompt JSON in {path}: {exc}") from exc
 
 
 def infer_variant_name(prompt_record: dict[str, Any], prompt_path: Path | None = None) -> str:

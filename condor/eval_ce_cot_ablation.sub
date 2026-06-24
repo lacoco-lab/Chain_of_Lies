@@ -16,22 +16,22 @@ requirements = (GPUs_GlobalMemoryMb >= 16000)
 +MaxWallTime = 259200
 
 queue seed,mode,variant from (
-  0 public_cot arith_piggyback
-  0 public_cot arith_piggyback_control
   0 answer_only arith_piggyback
   0 answer_only arith_piggyback_control
-  0 mismatched_public_cot arith_piggyback
-  0 mismatched_public_cot arith_piggyback_control
-  1 public_cot arith_piggyback
-  1 public_cot arith_piggyback_control
+  0 public_cot arith_piggyback
+  0 public_cot arith_piggyback_control
+  0 verbose_public_cot arith_piggyback
+  0 verbose_public_cot arith_piggyback_control
   1 answer_only arith_piggyback
   1 answer_only arith_piggyback_control
-  1 mismatched_public_cot arith_piggyback
-  1 mismatched_public_cot arith_piggyback_control
-  2 public_cot arith_piggyback
-  2 public_cot arith_piggyback_control
+  1 public_cot arith_piggyback
+  1 public_cot arith_piggyback_control
+  1 verbose_public_cot arith_piggyback
+  1 verbose_public_cot arith_piggyback_control
   2 answer_only arith_piggyback
   2 answer_only arith_piggyback_control
-  2 mismatched_public_cot arith_piggyback
-  2 mismatched_public_cot arith_piggyback_control
+  2 public_cot arith_piggyback
+  2 public_cot arith_piggyback_control
+  2 verbose_public_cot arith_piggyback
+  2 verbose_public_cot arith_piggyback_control
 )

@@ -26,11 +26,18 @@ def main() -> None:
     parser.add_argument("--eval-every", type=int, default=250)
     parser.add_argument("--validation-sample-size", type=int, default=1000)
     parser.add_argument("--validation-batch-size", type=int, default=4)
+    parser.add_argument("--expected-train-prompts", type=int, default=None)
+    parser.add_argument("--expected-val-prompts", type=int, default=None)
     parser.add_argument(
         "--supervision-mode",
         type=str,
         default="public_cot",
-        choices=["public_cot", "answer_only", "mismatched_public_cot"],
+        choices=[
+            "public_cot",
+            "verbose_public_cot",
+            "answer_only",
+            "mismatched_public_cot",
+        ],
         help="Supervised suffix used during CE training.",
     )
     parser.add_argument("--seed", type=int, default=0)
@@ -55,9 +62,22 @@ def main() -> None:
             val_prompts_dir = args.val_prompts_dir
 
     output_dir = args.output_root / args.variant
+    train_count = len(list(train_prompts_dir.glob("*.json")))
+    val_count = len(list(val_prompts_dir.glob("*.json"))) if val_prompts_dir is not None else 0
+    if args.expected_train_prompts is not None and train_count != args.expected_train_prompts:
+        raise ValueError(
+            f"Expected {args.expected_train_prompts} train prompts in {train_prompts_dir}, "
+            f"found {train_count}. Regenerate splits before training."
+        )
+    if args.expected_val_prompts is not None and val_count != args.expected_val_prompts:
+        raise ValueError(
+            f"Expected {args.expected_val_prompts} validation prompts in {val_prompts_dir}, "
+            f"found {val_count}. Regenerate splits before training."
+        )
     print(
         f"[CE] training variant={args.variant} train={train_prompts_dir} "
-        f"val={val_prompts_dir} output={output_dir} supervision_mode={args.supervision_mode}",
+        f"val={val_prompts_dir} train_count={train_count} val_count={val_count} "
+        f"output={output_dir} supervision_mode={args.supervision_mode}",
         flush=True,
     )
     train_answer_ce_only(

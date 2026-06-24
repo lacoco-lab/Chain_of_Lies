@@ -1,0 +1,21 @@
+universe = vanilla
+
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/condor/eval_ce_cot_ablation.sh mmohammadkhani verbose_public_cot $(variant) 0
+
+output = /scratch/mmohammadkhani/logs/chain_of_lies/eval_ce_cot_ablation_verbose_public_cot_$(variant)_seed_0.out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/eval_ce_cot_ablation_verbose_public_cot_$(variant)_seed_0.err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/eval_ce_cot_ablation_verbose_public_cot_$(variant)_seed_0.log
+
+request_CPUs = 4
+request_memory = 24G
+request_GPUs = 1
+requirements = (GPUs_GlobalMemoryMb >= 16000)
+
++MaxWallTime = 259200
+
+queue variant from (
+  arith_piggyback
+  arith_piggyback_control
+)

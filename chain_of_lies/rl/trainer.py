@@ -231,6 +231,68 @@ def _place_value_parts(value: int) -> tuple[int, ...]:
     return tuple(parts)
 
 
+def _column_addition_lines(
+    *,
+    numbers: list[int],
+    expected_total: int,
+    title: str,
+) -> list[str]:
+    """Return an explicit digit-by-digit addition trace with carries."""
+    if not numbers:
+        return [f"{title}: there are no terms, so the total is 0."]
+
+    lines = [title]
+    number_text = " + ".join(str(number) for number in numbers)
+    lines.append(f"Add {number_text}.")
+
+    reversed_digits = [str(number)[::-1] for number in numbers]
+    max_len = max(len(text) for text in reversed_digits)
+    carry = 0
+    result_digits_reversed: list[str] = []
+    place_names = {
+        0: "ones",
+        1: "tens",
+        2: "hundreds",
+        3: "thousands",
+        4: "ten-thousands",
+        5: "hundred-thousands",
+        6: "millions",
+        7: "ten-millions",
+        8: "hundred-millions",
+    }
+
+    for column_index in range(max_len):
+        digits = [
+            int(text[column_index]) if column_index < len(text) else 0
+            for text in reversed_digits
+        ]
+        subtotal = sum(digits) + carry
+        write_digit = subtotal % 10
+        next_carry = subtotal // 10
+        place_name = place_names.get(column_index, f"10^{column_index} place")
+        digit_text = " + ".join(str(digit) for digit in digits)
+        lines.append(
+            f"{place_name}: {digit_text} plus carry {carry} gives {subtotal}; "
+            f"write {write_digit}, carry {next_carry}."
+        )
+        result_digits_reversed.append(str(write_digit))
+        carry = next_carry
+
+    carry_index = max_len
+    while carry:
+        write_digit = carry % 10
+        next_carry = carry // 10
+        place_name = place_names.get(carry_index, f"10^{carry_index} place")
+        lines.append(f"{place_name}: remaining carry writes {write_digit}, carry {next_carry}.")
+        result_digits_reversed.append(str(write_digit))
+        carry = next_carry
+        carry_index += 1
+
+    reconstructed = int("".join(reversed(result_digits_reversed)))
+    lines.append(f"The digits give {reconstructed}, so {number_text} = {expected_total}.")
+    return lines
+
+
 def _answer_block_suffix(prompt_record: dict[str, Any]) -> str | None:
     if prompt_record.get("task_type") != "arithmetic":
         return None
@@ -277,6 +339,60 @@ def _public_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
     return "\n".join(lines) + "\n"
 
 
+def _verbose_public_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
+    spec = prompt_record.get("spec") or {}
+    public_question = spec.get("public_question")
+    public_answer = spec.get("public_answer")
+    if public_question is None or public_answer is None:
+        return None
+    match = _LINEAR_QUESTION_RE.match(str(public_question))
+    if match is None:
+        return None
+
+    multiplier, factor, offset = (int(group) for group in match.groups())
+    product = multiplier * factor
+    multiplier_parts = _place_value_parts(multiplier)
+    factor_parts = _place_value_parts(factor)
+    multiplier_parts_text = " + ".join(str(part) for part in multiplier_parts)
+    factor_parts_text = " + ".join(str(part) for part in factor_parts)
+
+    lines = [
+        f"Main question: {public_question}",
+        f"Break {multiplier} into {multiplier_parts_text}.",
+        f"Break {factor} into {factor_parts_text}.",
+        "Compute the place-value grid row by row.",
+    ]
+    row_totals: list[int] = []
+    for multiplier_part in multiplier_parts:
+        row_products = [multiplier_part * factor_part for factor_part in factor_parts]
+        row_total = sum(row_products)
+        row_totals.append(row_total)
+        row_terms = " + ".join(
+            f"{multiplier_part} * {factor_part} = {row_product}"
+            for factor_part, row_product in zip(factor_parts, row_products)
+        )
+        row_products_text = " + ".join(str(row_product) for row_product in row_products)
+        lines.append(
+            f"Row {multiplier_part}: {row_terms}; row sum {row_products_text} = {row_total}."
+        )
+
+    lines.append("Now audit the final addition with digit-by-digit carrying.")
+    lines.extend(
+        _column_addition_lines(
+            numbers=[*row_totals, offset],
+            expected_total=public_answer,
+            title="Add all row totals and the offset digit by digit.",
+        )
+    )
+    lines.extend(
+        [
+            f"Check: the row totals without the offset sum to {product}, which is {multiplier} * {factor}.",
+            f"Final public answer after adding the offset is {public_answer}.",
+        ]
+    )
+    return "\n".join(lines) + "\n"
+
+
 def _canonical_public_cot_suffix(
     prompt_record: dict[str, Any],
     *,
@@ -287,6 +403,8 @@ def _canonical_public_cot_suffix(
 
     Modes:
     - public_cot: correct public worked solution plus current answer block.
+    - verbose_public_cot: more detailed place-value grid for the public
+      multiplication plus current answer block.
     - answer_only: current answer block only.
     - mismatched_public_cot: public worked solution from another prompt plus
       the current answer block.
@@ -298,12 +416,15 @@ def _canonical_public_cot_suffix(
         return answer_block
     if supervision_mode == "public_cot":
         cot_prefix = _public_cot_prefix(prompt_record)
+    elif supervision_mode == "verbose_public_cot":
+        cot_prefix = _verbose_public_cot_prefix(prompt_record)
     elif supervision_mode == "mismatched_public_cot":
         cot_prefix = _public_cot_prefix(cot_source_record or {})
     else:
         raise ValueError(
             f"Unknown supervision_mode={supervision_mode!r}. "
-            "Expected one of: public_cot, answer_only, mismatched_public_cot."
+            "Expected one of: public_cot, verbose_public_cot, answer_only, "
+            "mismatched_public_cot."
         )
     if cot_prefix is None:
         return None
@@ -352,10 +473,33 @@ def _save_training_artifacts(
     output_dir: Path,
     history: list[dict[str, Any]],
     metadata: dict[str, Any],
+    *,
+    save_model: bool = True,
+    save_tokenizer: bool = True,
 ) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
-    model.save_pretrained(output_dir)
-    tokenizer.save_pretrained(output_dir)
+    if save_model:
+        model.save_pretrained(output_dir)
+    else:
+        for filename in ("README.md", "adapter_config.json", "adapter_model.safetensors"):
+            path = output_dir / filename
+            if path.exists():
+                path.unlink()
+    if save_tokenizer:
+        tokenizer.save_pretrained(output_dir)
+    else:
+        for filename in (
+            "added_tokens.json",
+            "chat_template.jinja",
+            "merges.txt",
+            "special_tokens_map.json",
+            "tokenizer.json",
+            "tokenizer_config.json",
+            "vocab.json",
+        ):
+            path = output_dir / filename
+            if path.exists():
+                path.unlink()
     (output_dir / "train_history.json").write_text(json.dumps(history, indent=2), encoding="utf-8")
     (output_dir / "training_metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
 

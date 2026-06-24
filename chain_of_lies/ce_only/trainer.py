@@ -93,10 +93,33 @@ def _compute_batch_answer_ce_loss(
     for row_idx, prompt_len in enumerate(prompt_lens):
         labels[row_idx, : max(0, prompt_len - 1)] = -100
 
-    outputs = model(input_ids=inputs, attention_mask=attention_mask[:, :-1])
+    first_label_indices = []
+    for row_idx in range(labels.shape[0]):
+        supervised_positions = torch.nonzero(labels[row_idx] != -100, as_tuple=False)
+        if supervised_positions.numel() == 0:
+            continue
+        first_label_indices.append(int(supervised_positions[0].item()))
+    if not first_label_indices:
+        raise ValueError("No supervised CE tokens found in batch.")
+
+    # Qwen2 supports `logits_to_keep`, which avoids materializing full-vocab logits
+    # for prompt tokens that are masked out of the CE objective. This matters for
+    # long verbose-CoT targets on 32GB GPUs.
+    logits_to_keep = labels.shape[1] - min(first_label_indices)
+    try:
+        outputs = model(
+            input_ids=inputs,
+            attention_mask=attention_mask[:, :-1],
+            logits_to_keep=logits_to_keep,
+        )
+        loss_labels = labels[:, -logits_to_keep:]
+    except TypeError:
+        outputs = model(input_ids=inputs, attention_mask=attention_mask[:, :-1])
+        loss_labels = labels
+
     return torch.nn.functional.cross_entropy(
-        outputs.logits.reshape(-1, outputs.logits.shape[-1]),
-        labels.reshape(-1),
+        outputs.logits.contiguous().view(-1, outputs.logits.shape[-1]),
+        loss_labels.contiguous().view(-1),
         ignore_index=-100,
     )
 
@@ -134,10 +157,16 @@ def train_answer_ce_only(
     torch.manual_seed(seed)
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(seed)
-    if supervision_mode not in {"public_cot", "answer_only", "mismatched_public_cot"}:
+    if supervision_mode not in {
+        "public_cot",
+        "verbose_public_cot",
+        "answer_only",
+        "mismatched_public_cot",
+    }:
         raise ValueError(
             f"Unknown supervision_mode={supervision_mode!r}. "
-            "Expected one of: public_cot, answer_only, mismatched_public_cot."
+            "Expected one of: public_cot, verbose_public_cot, answer_only, "
+            "mismatched_public_cot."
         )
 
     train_examples = load_prompt_examples(train_prompts_dir)
@@ -267,6 +296,7 @@ def train_answer_ce_only(
                         "trainer_type": "ce_only",
                         "supervision_mode": supervision_mode,
                     },
+                    save_tokenizer=False,
                 )
 
         history.append(step_record)
@@ -314,6 +344,8 @@ def train_answer_ce_only(
                     "trainer_type": "ce_only",
                     "supervision_mode": supervision_mode,
                 },
+                save_model=False,
+                save_tokenizer=False,
             )
 
     return {
