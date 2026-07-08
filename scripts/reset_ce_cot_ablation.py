@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Remove data and artifacts for the CE CoT ablation experiment."""
+"""Remove generated data and artifacts for the CE CoT ablation experiment."""
 
 from __future__ import annotations
 
@@ -21,13 +21,13 @@ def _remove_path(path: Path) -> None:
 
 def main() -> None:
     targets = [
-        Path("data/RL_splits/arith_piggyback"),
-        Path("data/RL_splits/arith_piggyback_control"),
-        Path("data/RL_splits/seed_0"),
-        Path("data/RL_splits/seed_1"),
-        Path("data/RL_splits/seed_2"),
+        Path("generated_data/prompt_splits/arith_piggyback"),
+        Path("generated_data/prompt_splits/arith_piggyback_control"),
+        Path("generated_data/prompt_splits/seed_0"),
+        Path("generated_data/prompt_splits/seed_1"),
+        Path("generated_data/prompt_splits/seed_2"),
         Path("artifacts/ce_cot_ablation"),
-        Path("data/ce_cot_ablation_eval_responses"),
+        Path("generated_data/eval_responses/ce_cot_ablation"),
     ]
     for target in targets:
         _remove_path(target)

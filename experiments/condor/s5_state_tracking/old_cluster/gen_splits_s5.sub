@@ -1,0 +1,18 @@
+universe = vanilla
+
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/condor/s5_state_tracking/old_cluster/gen_splits_s5.sh mmohammadkhani $(seed)
+
+output = /scratch/mmohammadkhani/logs/chain_of_lies/gen_splits_s5_seed_$(seed).out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/gen_splits_s5_seed_$(seed).err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/gen_splits_s5_seed_$(seed).log
+
+request_CPUs = 1
+request_memory = 4G
+
++MaxWallTime = 7200
+
+queue seed from (
+  0
+)

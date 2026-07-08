@@ -6,8 +6,7 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from chain_of_lies.ce_only import train_answer_ce_only
-from chain_of_lies.rl import VARIANT_TO_PROMPTS_DIR, normalize_variant_name
+from chain_of_lies.evaluation import VARIANT_TO_PROMPTS_DIR, normalize_variant_name
 
 
 def main() -> None:
@@ -15,7 +14,7 @@ def main() -> None:
     parser.add_argument("--variant", type=str, required=True)
     parser.add_argument("--model", type=str, default="Qwen/Qwen2.5-7B-Instruct")
     parser.add_argument("--output-root", type=Path, default=Path("artifacts/ce_only"))
-    parser.add_argument("--split-root", type=Path, default=Path("data/RL_splits"))
+    parser.add_argument("--split-root", type=Path, default=Path("generated_data/prompt_splits"))
     parser.add_argument("--train-prompts-dir", type=Path, default=None)
     parser.add_argument("--val-prompts-dir", type=Path, default=None)
     parser.add_argument("--epochs", type=int, default=3)
@@ -80,6 +79,8 @@ def main() -> None:
         f"output={output_dir} supervision_mode={args.supervision_mode}",
         flush=True,
     )
+    from chain_of_lies.training.ce import train_answer_ce_only
+
     train_answer_ce_only(
         train_prompts_dir=train_prompts_dir,
         output_dir=output_dir,

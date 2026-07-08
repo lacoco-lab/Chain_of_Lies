@@ -1,0 +1,23 @@
+# One-time setup job: create venv and pip install (no GPU needed).
+# Login node kills heavy pip install; this runs on a worker with enough memory.
+# Submit from submit node: condor_submit experiments/condor/setup/setup_venv.sub
+# Replace mmohammadkhani with your username in the paths below.
+
+universe = vanilla
+
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+# Run via bash -l so profile is loaded and "module" is available on the worker
+executable = /bin/bash
+arguments = -l /nethome/mmohammadkhani/Faithfulness-Safety/experiments/condor/setup/setup_venv.sh mmohammadkhani
+
+output = /scratch/mmohammadkhani/logs/chain_of_lies/setup_venv.out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/setup_venv.err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/setup_venv.log
+
+request_CPUs = 2
+request_memory = 16G
+request_GPUs = 0
+
++MaxWallTime = 3600
+
+queue 1

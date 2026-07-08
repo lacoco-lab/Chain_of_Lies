@@ -1,0 +1,25 @@
+universe        = container
+container_image = /scratch/common/images/apptainer-builder.sif
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /home/momo00016/Faithfulness-Safety/experiments/condor/s5_state_tracking/sic_transfer/run_s5_transfer.sh
+arguments  = summarize
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+transfer_input_files = chain_of_lies,scripts,requirements.txt,pyproject.toml,artifacts
+transfer_output_files = artifacts
+stream_output = True
+stream_error = True
+
+output = /home/momo00016/logs/chain_of_lies/sic_transfer_summarize_ce_s5.out
+error  = /home/momo00016/logs/chain_of_lies/sic_transfer_summarize_ce_s5.err
+log    = /home/momo00016/logs/chain_of_lies/sic_transfer_summarize_ce_s5.log
+
+request_CPUs = 2
+request_memory = 16G
+request_GPUs = 0
+
++MaxWallTime = 259200
+
+queue
