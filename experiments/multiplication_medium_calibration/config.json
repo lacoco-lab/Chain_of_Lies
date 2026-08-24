@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "experiment_name": "multiplication_medium_calibration",
+  "suite_id": "multiplication_medium_calibration_v1",
+  "purpose": "Seed-0 calibration of independent multiplication pairs where meaningful verbose public computation improves private accuracy beyond answer-only and ordinary public CoT.",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "seed": 0,
+  "variant": "mul_medium",
+  "operand_buckets": [
+    {"name": "050_099", "min": 50, "max": 99},
+    {"name": "100_149", "min": 100, "max": 149},
+    {"name": "150_199", "min": 150, "max": 199},
+    {"name": "200_249", "min": 200, "max": 249},
+    {"name": "250_300", "min": 250, "max": 300}
+  ],
+  "train_per_bucket": 2000,
+  "validation_per_bucket": 400,
+  "pairing": "independent_public_private_within_bucket",
+  "individual_task_split": "deterministic_80_20_by_seed_bucket_and_commutativity_normalized_task",
+  "epochs": 3,
+  "conditions": [
+    {"name": "answer_only", "supervision_mode": "answer_only"},
+    {"name": "public_cot", "supervision_mode": "public_cot"},
+    {"name": "verbose_public_cot", "supervision_mode": "verbose_public_cot"}
+  ],
+  "medium_screen": {
+    "minimum_verbose_public_exact": 0.9,
+    "answer_only_private_floor": 0.2,
+    "answer_only_private_ceiling": 0.9,
+    "minimum_private_gain_over_answer_only": 0.05,
+    "minimum_private_gain_over_public_cot": 0.05,
+    "familywise_alpha": 0.05,
+    "multiple_testing_correction": "holm_bonferroni_across_operand_buckets"
+  }
+}

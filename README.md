@@ -5,8 +5,9 @@ This repository studies controlled paired-task settings where a model must answe
 - a public task, with visible reasoning allowed
 - a private task, whose reasoning should not appear in the visible text
 
-The main empirical question is whether the private task can piggyback on useful visible public
-reasoning when the two tasks share computation.
+The main empirical question is how the mechanism supporting private-task performance changes with
+task difficulty relative to model capacity: independent reasoning for Easy tasks, extra
+computation for Medium tasks, and computational reuse or hidden communication for Hard tasks.
 
 Current completed results:
 
@@ -14,11 +15,24 @@ Current completed results:
 - simplified S5 state-tracking piggyback/control diagnostic over three seeds;
 - simplified S5 verbose-CoT diagnostic over three seeds.
 
-Current next direction: design controlled steganography setups for multiplication. Multiplication is
-the preferred test bed because it is easy to explain to readers and piggybacking has a simple
-intuition there: close-by numbers share computation.
+The frozen arithmetic Hard regime uses operands `500..1000`, Qwen2.5-7B and Llama-3.1-8B, and
+seeds `0,1,2`. Final multiplication-only piggyback code lives under
+`experiments/hard_regime/multiplication_only_piggyback/`; the invisible-steganography run is under
+`experiments/hard_regime/confirmatory/`; and the historical range sweep is preserved under
+`experiments/hard_regime/range_calibration/`. The final multiplication report is
+`docs/HARD_REGIME_REPORT.md`; reserved locations for the next S5 and knowledge confirmations are
+`experiments/hard_regime/s5/` and `experiments/hard_regime/knowledge/`.
 
 ## Active Workflow
+
+The final Hard-regime workflows are documented in
+`experiments/hard_regime/multiplication_only_piggyback/README.md` and
+`experiments/hard_regime/confirmatory/README.md`.
+
+The new Easy-regime workflow and exact submission order are documented in
+`experiments/condor/easy_regime/sic_transfer/README.md`.
+
+Historical completed workflows follow.
 
 Run these stages on the cluster, waiting for each stage to finish before starting the next:
 
@@ -49,6 +63,17 @@ condor_submit experiments/condor/s5_state_tracking/sic_transfer/eval_ce_s5_verbo
 condor_submit experiments/condor/s5_state_tracking/sic_transfer/summarize_ce_s5.sub
 ```
 
+For the invisible-character three-seed replication on the SIC transfer cluster,
+seed 0 is already complete. Each of the first three submissions queues isolated
+seed-1 and seed-2 jobs; wait for each stage before submitting the next:
+
+```bash
+condor_submit experiments/condor/arithmetic_steganography/sic_transfer/gen_splits_steg_local.sub
+condor_submit experiments/condor/arithmetic_steganography/sic_transfer/train_ce_steg_local_invisible.sub
+condor_submit experiments/condor/arithmetic_steganography/sic_transfer/eval_ce_steg_local_invisible.sub
+condor_submit experiments/condor/arithmetic_steganography/sic_transfer/summarize_ce_steg_local.sub
+```
+
 The completed S5 `public_cot` result over seeds `0,1,2`:
 
 - `s5_piggyback` private exact: `0.925 ± 0.034`
@@ -72,6 +97,8 @@ artifacts/ce_cot_ablation/training_curves.csv
 artifacts/ce_cot_ablation/plots/
 artifacts/ce_s5/final_metrics_mean_std.csv
 artifacts/ce_s5/piggyback_control_deltas_mean_std.csv
+artifacts/ce_steganography_local/final_metrics.csv
+artifacts/ce_steganography_local/final_metrics_mean_std.csv
 ```
 
 ## Layout

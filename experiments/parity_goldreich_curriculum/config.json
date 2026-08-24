@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_curriculum_v1",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "seed": 0,
+  "graph_seed": 20260818,
+  "seed_bits": 16,
+  "max_mask_bits": 64,
+  "lengths": [8, 16, 32, 64],
+  "locality": 5,
+  "predicate": "a_xor_b_xor_c_xor_d_and_e",
+  "base_train_n": 2000,
+  "base_validation_n": 500,
+  "local_train_n": 2048,
+  "local_validation_n": 512,
+  "curriculum_train_n": 2000,
+  "batch_size": 1,
+  "learning_rate": 0.00002,
+  "lora_r": 32,
+  "lora_alpha": 64,
+  "lora_dropout": 0.05,
+  "max_new_tokens": 256,
+  "inference_batch_size": 4,
+  "update_stages": [
+    {"name": "local_update", "epochs": 2, "evaluation_task": "local_update"},
+    {"name": "supplied_8", "epochs": 2, "evaluation_task": "supplied_8"},
+    {"name": "supplied_16", "epochs": 2, "evaluation_task": "supplied_16"},
+    {"name": "supplied_32", "epochs": 3, "evaluation_task": "supplied_32"},
+    {"name": "supplied_64", "epochs": 4, "evaluation_task": "supplied_64"}
+  ],
+  "goldreich_stages": [
+    {"name": "predicate_local", "epochs": 2, "evaluation_task": "predicate_local"},
+    {"name": "mask_8", "epochs": 2, "evaluation_task": "mask_8"},
+    {"name": "mask_16", "epochs": 2, "evaluation_task": "mask_16"},
+    {"name": "mask_32", "epochs": 3, "evaluation_task": "mask_32"},
+    {"name": "mask_64", "epochs": 4, "evaluation_task": "mask_64"},
+    {"name": "joint_8", "epochs": 1, "evaluation_task": "joint_8"},
+    {"name": "joint_16", "epochs": 2, "evaluation_task": "joint_16"},
+    {"name": "joint_32", "epochs": 3, "evaluation_task": "joint_32"},
+    {"name": "joint_64", "epochs": 4, "evaluation_task": "joint_64"}
+  ],
+  "replay": {
+    "current_fraction": 0.6,
+    "mask_fraction": 0.2,
+    "supplied_fraction": 0.2
+  },
+  "success_gate": {
+    "minimum_local_exact": 0.99,
+    "minimum_final_parity_exact": 0.95,
+    "minimum_sequence_exact": 0.95,
+    "minimum_sequence_bit_accuracy": 0.99,
+    "minimum_twin_trace_match": 0.95
+  }
+}

@@ -13,6 +13,7 @@ def load_prompt_for_inference(path: Path) -> ExperimentPrompt:
     data = json.loads(path.read_text(encoding="utf-8"))
     return ExperimentPrompt(
         prompt_text=data["prompt_text"],
+        system_prompt=data.get("system_prompt"),
         spec=data.get("spec", {}),
         experiment_id=data["experiment_id"],
     )
@@ -126,6 +127,7 @@ def run_variant_inference(
                             "experiment_id": response.experiment_id,
                             "model_id": response.model_id,
                             "raw_text": response.raw_text,
+                            "generated_token_ids": response.generated_token_ids,
                         },
                         indent=2,
                         ensure_ascii=False,

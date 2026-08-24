@@ -32,6 +32,7 @@ FINAL_METRICS = (
     "format_rate",
     "avg_cot_words",
     "avg_reward",
+    "payload_decode_rate",
 )
 
 
@@ -276,6 +277,90 @@ def _aggregate_no_cot_rows(
     return rows
 
 
+def _reference_variant_rows(
+    final_rows: list[dict[str, Any]],
+    *,
+    modes: tuple[str, ...],
+    variants: tuple[str, ...],
+    reference_variant: str,
+) -> list[dict[str, Any]]:
+    lookup = {
+        (row["seed"], row["mode"], row["variant"]): row
+        for row in final_rows
+        if row.get("status") == "ok"
+    }
+    rows: list[dict[str, Any]] = []
+    seeds = sorted({row["seed"] for row in final_rows})
+    for seed in seeds:
+        for mode in modes:
+            reference = lookup.get((seed, mode, reference_variant))
+            for variant in variants:
+                if variant == reference_variant:
+                    continue
+                current = lookup.get((seed, mode, variant))
+                if not reference or not current:
+                    rows.append(
+                        {
+                            "seed": seed,
+                            "mode": mode,
+                            "variant": variant,
+                            "reference_variant": reference_variant,
+                            "status": "missing",
+                        }
+                    )
+                    continue
+                row: dict[str, Any] = {
+                    "seed": seed,
+                    "mode": mode,
+                    "variant": variant,
+                    "reference_variant": reference_variant,
+                    "status": "ok",
+                }
+                for metric in FINAL_METRICS:
+                    current_value = current.get(metric)
+                    reference_value = reference.get(metric)
+                    row[f"{metric}_variant"] = current_value
+                    row[f"{metric}_reference"] = reference_value
+                    if current_value is not None and reference_value is not None:
+                        row[f"{metric}_variant_minus_reference"] = current_value - reference_value
+                rows.append(row)
+    return rows
+
+
+def _aggregate_reference_variant_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    groups = sorted(
+        {
+            (row["mode"], row["variant"], row["reference_variant"])
+            for row in rows
+        }
+    )
+    aggregated: list[dict[str, Any]] = []
+    for mode, variant, reference_variant in groups:
+        subset = [
+            row
+            for row in rows
+            if row.get("status") == "ok"
+            and row["mode"] == mode
+            and row["variant"] == variant
+            and row["reference_variant"] == reference_variant
+        ]
+        result: dict[str, Any] = {
+            "mode": mode,
+            "variant": variant,
+            "reference_variant": reference_variant,
+            "status": "ok" if subset else "missing",
+        }
+        for metric in FINAL_METRICS:
+            for suffix in ("variant", "reference", "variant_minus_reference"):
+                key = f"{metric}_{suffix}"
+                mean, std, n = _mean_std(row.get(key) for row in subset)
+                result[f"{key}_mean"] = mean
+                result[f"{key}_std"] = std
+                result[f"{key}_n"] = n
+        aggregated.append(result)
+    return aggregated
+
+
 def _aggregate_curve_rows(curve_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     keys = sorted({(row["mode"], row["variant"], int(row["step"])) for row in curve_rows})
@@ -325,7 +410,7 @@ def _write_plots(
                 subset.sort(key=lambda row: (row.get("seed", ""), int(row["step"])))
                 if not subset:
                     continue
-                label = "piggyback" if variant == piggyback_variant else "control"
+                label = variant.removeprefix("arith_")
                 seeds = sorted({row["seed"] for row in subset})
                 for seed in seeds:
                     seed_rows = [row for row in subset if row["seed"] == seed]
@@ -366,6 +451,8 @@ def main() -> None:
     parser.add_argument("--variants", type=str, default=",".join(DEFAULT_VARIANTS))
     parser.add_argument("--piggyback-variant", type=str, default="arith_piggyback")
     parser.add_argument("--control-variant", type=str, default="arith_piggyback_control")
+    parser.add_argument("--skip-pair-deltas", action="store_true")
+    parser.add_argument("--reference-variant", type=str, default=None)
     args = parser.parse_args()
 
     modes = tuple(item.strip() for item in args.modes.split(",") if item.strip())
@@ -380,15 +467,30 @@ def main() -> None:
     final_agg_rows = _aggregate_final_rows(final_rows, modes=modes, variants=variants)
     no_cot_rows = _no_cot_comparison_rows(final_rows, modes=modes, variants=variants)
     no_cot_agg_rows = _aggregate_no_cot_rows(no_cot_rows, modes=modes, variants=variants)
-    piggyback_delta_rows = _piggyback_control_delta_rows(
-        final_rows,
-        modes=modes,
-        piggyback_variant=args.piggyback_variant,
-        control_variant=args.control_variant,
-    )
-    piggyback_delta_agg_rows = _aggregate_delta_rows(piggyback_delta_rows, modes=modes)
+    if args.skip_pair_deltas:
+        piggyback_delta_rows = []
+        piggyback_delta_agg_rows = []
+    else:
+        piggyback_delta_rows = _piggyback_control_delta_rows(
+            final_rows,
+            modes=modes,
+            piggyback_variant=args.piggyback_variant,
+            control_variant=args.control_variant,
+        )
+        piggyback_delta_agg_rows = _aggregate_delta_rows(piggyback_delta_rows, modes=modes)
     curve_rows = _collect_curve_rows(args.root, modes=modes, variants=variants)
     curve_agg_rows = _aggregate_curve_rows(curve_rows)
+    if args.reference_variant:
+        reference_rows = _reference_variant_rows(
+            final_rows,
+            modes=modes,
+            variants=variants,
+            reference_variant=args.reference_variant,
+        )
+        reference_agg_rows = _aggregate_reference_variant_rows(reference_rows)
+    else:
+        reference_rows = []
+        reference_agg_rows = []
 
     summary = {
         "modes": list(modes),
@@ -401,6 +503,8 @@ def main() -> None:
         "no_cot_comparison_mean_std_rows": no_cot_agg_rows,
         "piggyback_control_deltas": piggyback_delta_rows,
         "piggyback_control_delta_mean_std_rows": piggyback_delta_agg_rows,
+        "reference_variant_comparisons": reference_rows,
+        "reference_variant_comparison_mean_std_rows": reference_agg_rows,
         "num_curve_points": len(curve_rows),
         "num_curve_mean_std_points": len(curve_agg_rows),
     }
@@ -414,6 +518,8 @@ def main() -> None:
     _write_rows_csv(no_cot_agg_rows, args.root / "no_cot_comparison_mean_std.csv")
     _write_rows_csv(piggyback_delta_rows, args.root / "piggyback_control_deltas.csv")
     _write_rows_csv(piggyback_delta_agg_rows, args.root / "piggyback_control_deltas_mean_std.csv")
+    _write_rows_csv(reference_rows, args.root / "reference_variant_comparison.csv")
+    _write_rows_csv(reference_agg_rows, args.root / "reference_variant_comparison_mean_std.csv")
     _write_plots(
         curve_rows,
         curve_agg_rows,
@@ -433,6 +539,8 @@ def main() -> None:
         "no_cot_comparison_mean_std.csv",
         "piggyback_control_deltas.csv",
         "piggyback_control_deltas_mean_std.csv",
+        "reference_variant_comparison.csv",
+        "reference_variant_comparison_mean_std.csv",
     ):
         print(f"[ablation] wrote {args.root / path_name}", flush=True)
 

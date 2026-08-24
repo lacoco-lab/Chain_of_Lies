@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "diagnostic_name": "qwen_seed2_optimization",
+  "parent_config_sha256": "3a91edeea23df5538eb6df9a2fcb6eb2fccc3d8717f4d472dedce1855770df1e",
+  "model_key": "qwen",
+  "data_seed": 2,
+  "original_optimization_seed": 2,
+  "additional_optimization_seeds": [3, 4, 5],
+  "variant": "arith_piggyback",
+  "mode": "public_cot"
+}

@@ -218,8 +218,12 @@ Answer to other question: ...
 """
 
 
-def build_public_cot_prefix(public_sequence: tuple[tuple[int, int], ...]) -> str:
-    final_state, trajectory = replay_sequence(public_sequence)
+def build_public_cot_prefix(
+    public_sequence: tuple[tuple[int, int], ...],
+    *,
+    initial_state: str = S5_INITIAL_STATE,
+) -> str:
+    final_state, trajectory = replay_sequence(public_sequence, initial_state=initial_state)
     lines = [
         f"Main sequence: {format_sequence(public_sequence)}",
         f"Initial state: {trajectory[0]}",
@@ -232,8 +236,12 @@ def build_public_cot_prefix(public_sequence: tuple[tuple[int, int], ...]) -> str
     return "\n".join(lines) + "\n"
 
 
-def build_verbose_public_cot_prefix(public_sequence: tuple[tuple[int, int], ...]) -> str:
-    final_state, trajectory = replay_sequence(public_sequence)
+def build_verbose_public_cot_prefix(
+    public_sequence: tuple[tuple[int, int], ...],
+    *,
+    initial_state: str = S5_INITIAL_STATE,
+) -> str:
+    final_state, trajectory = replay_sequence(public_sequence, initial_state=initial_state)
     lines = [
         f"Main sequence: {format_sequence(public_sequence)}",
         f"Initial arrangement: {trajectory[0]}.",

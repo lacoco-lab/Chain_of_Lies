@@ -1,0 +1,36 @@
+universe = docker
+docker_image = pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/hard_regime/range_calibration/run.sh cell qwen $(family) $(range_id)
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+preserve_relative_paths = True
+environment = "HF_HUB_DISABLE_XET=1"
+transfer_input_files = chain_of_lies,scripts,requirements.txt,pyproject.toml,experiments/hard_regime/range_calibration
+transfer_output_files = generated_data/hard_regime_range_calibration/$(family)/$(range_id),generated_data/hard_regime_range_calibration_eval_responses/qwen/$(family)/$(range_id),artifacts/hard_regime_range_calibration/qwen/$(family)/$(range_id)
+
+output = /home/momo00016/logs/chain_of_lies/hard_range_qwen_cell_$(family)_$(range_id).out
+error  = /home/momo00016/logs/chain_of_lies/hard_range_qwen_cell_$(family)_$(range_id).err
+log    = /home/momo00016/logs/chain_of_lies/hard_range_qwen_cell_$(family)_$(range_id).log
+
+request_CPUs = 4
+request_memory = 48G
+request_GPUs = 1
+requirements = (GPUs_GlobalMemoryMb >= 40000)
++MaxWallTime = 604800
+
+queue family,range_id from (
+  piggyback r1000_2000
+  piggyback r700_1200
+  piggyback r500_1000
+  piggyback r300_700
+  piggyback r200_500
+  piggyback r100_300
+  steganography r500_1000
+  steganography r300_700
+  steganography r200_500
+  steganography r100_350
+)

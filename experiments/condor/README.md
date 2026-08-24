@@ -1,8 +1,16 @@
-# Active Condor Workflow
+# Condor Workflows
 
-These are the only Condor jobs needed for the current arithmetic CoT-ablation experiment.
-The default workflow now runs seeds `0`, `1`, and `2` for the intermediate `s,x = 500..1000`
-verbosity confirmation.
+## Active Easy-Regime Workflow
+
+The current jobs cover independent Easy multiplication (`2..50`, no offset), one-swap S5, and
+paper-style one-fact knowledge addition. They include pretrained-versus-fine-tuned evaluation.
+See `easy_regime/sic_transfer/README.md` for the sequential submission commands and handoff
+instructions.
+
+## Historical Arithmetic CoT Ablation
+
+The historical workflow below runs seeds `0`, `1`, and `2` for the earlier `s*x+y`,
+`s,x = 500..1000` verbosity confirmation. It is retained for exact result reproduction.
 
 Run them sequentially:
 
@@ -62,6 +70,14 @@ artifacts/ce_cot_ablation/plots/
 ```
 
 Use `setup_venv.sub` only when the cluster environment needs to be recreated.
+
+## Arithmetic Steganography SIC Transfer Workflow
+
+The active follow-up replicates only the successful invisible-character channel
+over three seeds. Seed 0 is complete; the current generation, training, and
+evaluation submit files each queue isolated seed-1 and seed-2 jobs. Training uses
+10,000 examples for one CE epoch. See
+`arithmetic_steganography/sic_transfer/README.md` for the commands.
 
 ## S5 Diagnostic Workflow
 

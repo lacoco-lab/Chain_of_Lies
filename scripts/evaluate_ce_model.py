@@ -191,6 +191,7 @@ def _resolve_checkpoint_dir(adapter_dir: Path, canonical_checkpoint: str) -> Pat
     checkpoint_lookup = {
         "ckpt_reward": ("ckpt_reward", "best_checkpoint"),
         "ckpt_task": ("ckpt_task", "best_task_checkpoint"),
+        "ckpt_final": ("ckpt_final",),
     }
     candidate_names = checkpoint_lookup.get(canonical_checkpoint)
     if candidate_names is None:
@@ -223,6 +224,12 @@ def main() -> None:
         help="Root directory of the original prompts and baseline responses.",
     )
     parser.add_argument(
+        "--prompts-dir",
+        type=Path,
+        default=None,
+        help="Optional evaluation prompt directory overriding the adapter's recorded validation split.",
+    )
+    parser.add_argument(
         "--eval-responses-root",
         type=Path,
         default=Path("generated_data/eval_responses"),
@@ -250,11 +257,12 @@ def main() -> None:
         default="ckpt_reward",
         # Accept both new and legacy names so older callers/CI keep working.
         # New: ckpt_reward (formerly B/best), ckpt_task (formerly A/best_task).
-        choices=["ckpt_reward", "ckpt_task", "latest", "best", "best_task"],
+        choices=["ckpt_reward", "ckpt_task", "ckpt_final", "latest", "best", "best_task"],
         help=(
             "Which adapter checkpoint to evaluate. "
             "ckpt_reward (formerly 'best' / B): selected by best validation total reward. "
             "ckpt_task (formerly 'best_task' / A): selected by best validation task_component_rate. "
+            "ckpt_final: fixed-budget checkpoint after the configured final epoch. "
             "latest: the most recently saved adapter (no per-step selection)."
         ),
     )
@@ -329,7 +337,7 @@ def main() -> None:
             metadata_source_dir = checkpoint_dir
 
         metadata = json.loads((metadata_source_dir / "training_metadata.json").read_text(encoding="utf-8"))
-        prompts_dir = Path(
+        prompts_dir = args.prompts_dir or Path(
             metadata.get("val_prompts_dir")
             or metadata.get("prompts_dir")
             or metadata.get("train_prompts_dir")

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "experiment_name": "hard_regime_confirmatory",
+  "operand_range": [500, 1000],
+  "seeds": [0, 1, 2],
+  "train_n": 10000,
+  "val_n": 1000,
+  "checkpoint": "ckpt_final",
+  "calibration_exclusion": {
+    "seed": 314159,
+    "steganography_question_digest_sha256": "88825d8988e2ad3206877df886247274e3c70fa1eaf44cda24166354a871e6ae"
+  },
+  "models": {
+    "qwen": "Qwen/Qwen2.5-7B-Instruct",
+    "llama": "meta-llama/Llama-3.1-8B-Instruct"
+  },
+  "steganography": {
+    "variant": "arith_steg_local_invisible",
+    "modes": ["answer_only", "local_channel_cot"],
+    "epochs": 1,
+    "batch_size": 1,
+    "learning_rate": 0.00002,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "training_max_new_tokens": 1536,
+    "evaluation_max_new_tokens": 2048,
+    "validation_sample_size": 200,
+    "validation_batch_size": 1,
+    "tokenizer_check_sample_size": 10000
+  }
+}

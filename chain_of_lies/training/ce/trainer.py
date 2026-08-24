@@ -10,6 +10,7 @@ import torch
 from torch.optim import AdamW
 
 from chain_of_lies.training.shared.trainer_utils import (
+    FILLER_TOKEN_MARKER,
     _build_chat_prompt,
     _canonical_public_cot_suffix,
     _default_dtype,
@@ -17,6 +18,32 @@ from chain_of_lies.training.shared.trainer_utils import (
     _save_training_artifacts,
     load_prompt_examples,
 )
+
+
+def _encode_supervised_suffix(
+    tokenizer: Any,
+    suffix: str,
+    prompt_record: dict[str, Any],
+) -> list[int]:
+    """Encode a suffix, replacing the filler marker with exact token IDs."""
+    if FILLER_TOKEN_MARKER not in suffix:
+        return list(tokenizer(suffix, add_special_tokens=False).input_ids)
+    if suffix.count(FILLER_TOKEN_MARKER) != 1:
+        raise ValueError("A filler-supervision suffix must contain exactly one filler marker.")
+    before, after = suffix.split(FILLER_TOKEN_MARKER)
+    spec = prompt_record.get("spec") or {}
+    filler_count = int(spec.get("filler_token_count", 0))
+    filler_text = str(spec.get("filler_token_text", "."))
+    filler_ids = list(tokenizer(filler_text, add_special_tokens=False).input_ids)
+    if len(filler_ids) != 1:
+        raise ValueError(
+            f"Configured filler text {filler_text!r} maps to {len(filler_ids)} tokens; expected exactly one."
+        )
+    return [
+        *tokenizer(before, add_special_tokens=False).input_ids,
+        *([int(filler_ids[0])] * filler_count),
+        *tokenizer(after, add_special_tokens=False).input_ids,
+    ]
 
 
 def _iter_epoch_batches(
@@ -67,26 +94,46 @@ def _compute_batch_answer_ce_loss(
                 f"task_type={example.prompt_record.get('task_type')!r} "
                 f"with supervision_mode={supervision_mode!r}."
             )
-        chat_prompts.append(_build_chat_prompt(tokenizer, example.prompt_text))
+        chat_prompts.append(
+            _build_chat_prompt(tokenizer, example.prompt_text, example.system_prompt)
+        )
         gold_suffixes.append(gold_suffix)
 
-    full_texts = [prompt + suffix for prompt, suffix in zip(chat_prompts, gold_suffixes)]
     prompt_inputs = tokenizer(
         chat_prompts,
         return_tensors="pt",
         padding=True,
         add_special_tokens=False,
     )
-    full_inputs = tokenizer(
-        full_texts,
-        return_tensors="pt",
-        padding=True,
-        add_special_tokens=False,
-    )
-
     prompt_lens = prompt_inputs.attention_mask.sum(dim=1).tolist()
-    input_ids = full_inputs.input_ids.to(device)
-    attention_mask = full_inputs.attention_mask.to(device)
+    if supervision_mode == "filler_public_cot":
+        encoded_rows = []
+        for prompt, suffix, example in zip(chat_prompts, gold_suffixes, examples):
+            prompt_ids = list(tokenizer(prompt, add_special_tokens=False).input_ids)
+            suffix_ids = _encode_supervised_suffix(tokenizer, suffix, example.prompt_record)
+            encoded_rows.append(prompt_ids + suffix_ids)
+        max_length = max(len(row) for row in encoded_rows)
+        input_ids = torch.full(
+            (len(encoded_rows), max_length),
+            int(tokenizer.pad_token_id),
+            dtype=torch.long,
+            device=device,
+        )
+        attention_mask = torch.zeros_like(input_ids)
+        for row_index, row in enumerate(encoded_rows):
+            row_tensor = torch.tensor(row, dtype=torch.long, device=device)
+            input_ids[row_index, : len(row)] = row_tensor
+            attention_mask[row_index, : len(row)] = 1
+    else:
+        full_texts = [prompt + suffix for prompt, suffix in zip(chat_prompts, gold_suffixes)]
+        full_inputs = tokenizer(
+            full_texts,
+            return_tensors="pt",
+            padding=True,
+            add_special_tokens=False,
+        )
+        input_ids = full_inputs.input_ids.to(device)
+        attention_mask = full_inputs.attention_mask.to(device)
 
     inputs = input_ids[:, :-1]
     targets = input_ids[:, 1:]
@@ -128,6 +175,37 @@ def _compute_batch_answer_ce_loss(
     )
 
 
+def _estimate_supervised_token_budget(
+    tokenizer: Any,
+    examples: list[Any],
+    *,
+    supervision_mode: str,
+    epochs: int,
+    sample_size: int = 1000,
+) -> tuple[float | None, int | None]:
+    """Estimate target-token exposure so differing trace lengths stay visible."""
+    if not examples:
+        return None, None
+    subset = examples[: min(sample_size, len(examples))]
+    lengths: list[int] = []
+    for index, example in enumerate(subset):
+        donor_record = None
+        if supervision_mode == "mismatched_public_cot":
+            donor_record = subset[(index + 1) % len(subset)].prompt_record
+        suffix = _canonical_public_cot_suffix(
+            example.prompt_record,
+            supervision_mode=supervision_mode,
+            cot_source_record=donor_record,
+        )
+        if suffix is None:
+            continue
+        lengths.append(len(_encode_supervised_suffix(tokenizer, suffix, example.prompt_record)))
+    if not lengths:
+        return None, None
+    average = sum(lengths) / len(lengths)
+    return average, round(average * len(examples) * epochs)
+
+
 def train_answer_ce_only(
     train_prompts_dir: Path,
     output_dir: Path,
@@ -147,9 +225,13 @@ def train_answer_ce_only(
     validation_sample_size: int | None = 1000,
     validation_batch_size: int = 8,
     supervision_mode: str = "public_cot",
+    filler_token_count: int | None = None,
+    initial_adapter_path: Path | None = None,
+    save_each_epoch: bool = False,
+    deterministic_training: bool = False,
 ) -> dict[str, Any]:
     try:
-        from peft import LoraConfig, get_peft_model
+        from peft import LoraConfig, PeftModel, get_peft_model
     except ModuleNotFoundError as exc:
         raise ModuleNotFoundError(
             "CE-only training requires the 'peft' package. Install requirements.txt before running."
@@ -161,20 +243,37 @@ def train_answer_ce_only(
     torch.manual_seed(seed)
     if torch.cuda.is_available():
         torch.cuda.manual_seed_all(seed)
+    if deterministic_training:
+        torch.use_deterministic_algorithms(True, warn_only=True)
+        if torch.cuda.is_available():
+            torch.backends.cudnn.benchmark = False
+            torch.backends.cudnn.deterministic = True
     if supervision_mode not in {
         "public_cot",
         "verbose_public_cot",
+        "filler_public_cot",
+        "local_channel_cot",
         "answer_only",
         "mismatched_public_cot",
+        "record_target",
     }:
         raise ValueError(
             f"Unknown supervision_mode={supervision_mode!r}. "
-            "Expected one of: public_cot, verbose_public_cot, answer_only, "
-            "mismatched_public_cot."
+            "Expected one of: public_cot, verbose_public_cot, filler_public_cot, "
+            "local_channel_cot, answer_only, mismatched_public_cot, record_target."
         )
 
     train_examples = load_prompt_examples(train_prompts_dir)
     val_examples = load_prompt_examples(val_prompts_dir) if val_prompts_dir is not None else []
+    if supervision_mode == "filler_public_cot":
+        if filler_token_count is None or filler_token_count <= 0:
+            raise ValueError("filler_public_cot requires filler_token_count > 0.")
+        for example in (*train_examples, *val_examples):
+            spec = example.prompt_record.setdefault("spec", {})
+            spec["filler_token_count"] = int(filler_token_count)
+            spec["filler_token_text"] = "."
+    elif filler_token_count is not None:
+        raise ValueError("filler_token_count is only valid with filler_public_cot.")
     output_dir.mkdir(parents=True, exist_ok=True)
 
     dtype = _default_dtype()
@@ -190,27 +289,43 @@ def train_answer_ce_only(
         tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "left"
 
+    avg_supervised_tokens, estimated_supervised_tokens = _estimate_supervised_token_budget(
+        tokenizer,
+        train_examples,
+        supervision_mode=supervision_mode,
+        epochs=epochs,
+    )
+
     model.config.use_cache = False
-    model.gradient_checkpointing_enable()
+    try:
+        model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
+    except TypeError:
+        model.gradient_checkpointing_enable()
     model.enable_input_require_grads()
     model.to(device)
 
-    lora_config = LoraConfig(
-        task_type="CAUSAL_LM",
-        r=lora_r,
-        lora_alpha=lora_alpha,
-        lora_dropout=lora_dropout,
-        target_modules=[
-            "q_proj",
-            "k_proj",
-            "v_proj",
-            "o_proj",
-            "gate_proj",
-            "up_proj",
-            "down_proj",
-        ],
-    )
-    model = get_peft_model(model, lora_config)
+    if initial_adapter_path is not None:
+        initial_adapter_path = Path(initial_adapter_path)
+        if not (initial_adapter_path / "adapter_config.json").exists():
+            raise FileNotFoundError(f"No PEFT adapter found at {initial_adapter_path}")
+        model = PeftModel.from_pretrained(model, str(initial_adapter_path), is_trainable=True)
+    else:
+        lora_config = LoraConfig(
+            task_type="CAUSAL_LM",
+            r=lora_r,
+            lora_alpha=lora_alpha,
+            lora_dropout=lora_dropout,
+            target_modules=[
+                "q_proj",
+                "k_proj",
+                "v_proj",
+                "o_proj",
+                "gate_proj",
+                "up_proj",
+                "down_proj",
+            ],
+        )
+        model = get_peft_model(model, lora_config)
     optimizer = AdamW(model.parameters(), lr=learning_rate)
 
     history: list[dict[str, Any]] = []
@@ -222,6 +337,7 @@ def train_answer_ce_only(
         rng=rng,
     )
     total_steps = len(train_batches)
+    steps_per_epoch = (len(train_examples) + batch_size - 1) // batch_size
     target_train_examples_seen = len(train_examples) * epochs
 
     print(
@@ -299,6 +415,9 @@ def train_answer_ce_only(
                         "target_train_coverage": float(epochs),
                         "trainer_type": "ce_only",
                         "supervision_mode": supervision_mode,
+                        "filler_token_count": filler_token_count,
+                        "avg_supervised_tokens_per_example_estimate": avg_supervised_tokens,
+                        "estimated_total_supervised_tokens": estimated_supervised_tokens,
                     },
                     save_tokenizer=False,
                 )
@@ -347,10 +466,82 @@ def train_answer_ce_only(
                     "target_train_coverage": float(epochs),
                     "trainer_type": "ce_only",
                     "supervision_mode": supervision_mode,
+                    "filler_token_count": filler_token_count,
+                    "avg_supervised_tokens_per_example_estimate": avg_supervised_tokens,
+                    "estimated_total_supervised_tokens": estimated_supervised_tokens,
                 },
                 save_model=False,
                 save_tokenizer=False,
             )
+
+        if save_each_epoch and step_idx % steps_per_epoch == 0:
+            _save_training_artifacts(
+                model,
+                tokenizer,
+                output_dir / f"ckpt_epoch_{epoch_idx}",
+                history,
+                metadata={
+                    "base_model": model_id,
+                    "selection_criterion": "fixed_stage_epoch",
+                    "initial_adapter_path": (
+                        str(initial_adapter_path) if initial_adapter_path is not None else None
+                    ),
+                    "train_prompts_dir": str(train_prompts_dir),
+                    "epoch": epoch_idx,
+                    "epochs": epochs,
+                    "steps": step_idx,
+                    "batch_size": batch_size,
+                    "learning_rate": learning_rate,
+                    "supervision_mode": supervision_mode,
+                    "train_examples_seen": seen_examples_total,
+                    "lora_r": lora_r,
+                    "lora_alpha": lora_alpha,
+                    "lora_dropout": lora_dropout,
+                },
+                save_tokenizer=False,
+            )
+
+    # The fixed-budget final checkpoint is the primary comparison across
+    # variants. ckpt_task remains available as a validation-selected secondary
+    # analysis, but using it as primary would give conditions different amounts
+    # of effective training.
+    final_metadata = {
+        "base_model": model_id,
+        "selection_criterion": "fixed_final_epoch",
+        "train_prompts_dir": str(train_prompts_dir),
+        "val_prompts_dir": str(val_prompts_dir) if val_prompts_dir is not None else None,
+        "epochs": epochs,
+        "steps": total_steps,
+        "batch_size": batch_size,
+        "learning_rate": learning_rate,
+        "max_new_tokens": max_new_tokens,
+        "eval_every": eval_every,
+        "validation_sample_size": validation_sample_size,
+        "validation_batch_size": validation_batch_size,
+        "train_examples_seen": seen_examples_total,
+        "target_train_examples_seen": target_train_examples_seen,
+        "target_train_coverage": float(epochs),
+        "trainer_type": "ce_only",
+        "supervision_mode": supervision_mode,
+        "initial_adapter_path": (
+            str(initial_adapter_path) if initial_adapter_path is not None else None
+        ),
+        "lora_r": lora_r,
+        "lora_alpha": lora_alpha,
+        "lora_dropout": lora_dropout,
+        "deterministic_training": deterministic_training,
+        "filler_token_count": filler_token_count,
+        "avg_supervised_tokens_per_example_estimate": avg_supervised_tokens,
+        "estimated_total_supervised_tokens": estimated_supervised_tokens,
+    }
+    _save_training_artifacts(
+        model,
+        tokenizer,
+        output_dir / "ckpt_final",
+        history,
+        metadata=final_metadata,
+        save_tokenizer=False,
+    )
 
     return {
         "output_dir": str(output_dir),
@@ -360,4 +551,5 @@ def train_answer_ce_only(
         "best_validation_task_success_rate": best_validation_task_success,
         "train_examples_seen": seen_examples_total,
         "target_train_examples_seen": target_train_examples_seen,
+        "final_checkpoint": str(output_dir / "ckpt_final"),
     }

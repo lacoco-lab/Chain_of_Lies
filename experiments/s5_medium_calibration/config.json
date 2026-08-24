@@ -1,0 +1,27 @@
+{
+  "experiment_name": "s5_medium_calibration",
+  "purpose": "Seed-0 calibration of an independent S5 regime where extra public computation may help the private task without piggybacking.",
+  "seed": 0,
+  "variant": "s5_control",
+  "lengths": [1, 2, 3, 4, 5, 6, 8, 10],
+  "train_per_length": 1250,
+  "validation_per_length": 250,
+  "initial_state_protocol": "uniform_random_permutation_shared_by_public_and_private",
+  "sequence_protocol": "independent_public_private_same_length",
+  "epochs": 3,
+  "conditions": [
+    {"name": "answer_only", "supervision_mode": "answer_only", "filler_token_count": 0},
+    {"name": "public_cot", "supervision_mode": "public_cot", "filler_token_count": 0},
+    {"name": "verbose_public_cot", "supervision_mode": "verbose_public_cot", "filler_token_count": 0},
+    {"name": "filler_64", "supervision_mode": "filler_public_cot", "filler_token_count": 64},
+    {"name": "filler_128", "supervision_mode": "filler_public_cot", "filler_token_count": 128},
+    {"name": "filler_256", "supervision_mode": "filler_public_cot", "filler_token_count": 256}
+  ],
+  "medium_criterion": {
+    "minimum_public_exact": 0.9,
+    "standard_private_floor": 0.2,
+    "standard_private_ceiling": 0.7,
+    "minimum_mechanism_private": 0.7,
+    "minimum_private_gain": 0.15
+  }
+}

@@ -1,0 +1,46 @@
+universe        = container
+container_image = /scratch/common/images/apptainer-builder.sif
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments  = experiments/condor/easy_regime/sic_transfer/run_easy_regime.sh train $(variant) $(mode) $(seed) 1
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+preserve_relative_paths = True
+transfer_input_files = chain_of_lies,scripts,experiments/configs,requirements.txt,pyproject.toml,generated_data/regime_splits/seed_$(seed)/$(variant),experiments/condor/easy_regime/sic_transfer/run_easy_regime.sh
+transfer_output_files = artifacts/ce_easy_regime/seed_$(seed)/$(mode)/$(variant)
+stream_output = True
+stream_error = True
+
+output = /home/momo00016/logs/chain_of_lies/easy_train_$(mode)_$(variant)_seed_$(seed).out
+error  = /home/momo00016/logs/chain_of_lies/easy_train_$(mode)_$(variant)_seed_$(seed).err
+log    = /home/momo00016/logs/chain_of_lies/easy_train_$(mode)_$(variant)_seed_$(seed).log
+
+request_CPUs = 4
+request_memory = 48G
+request_GPUs = 1
+requirements = (GPUs_GlobalMemoryMb >= 40000)
+
++MaxWallTime = 259200
+
+queue seed,mode,variant from (
+  0 answer_only mul_easy
+  0 public_cot mul_easy
+  0 answer_only s5_easy
+  0 public_cot s5_easy
+  0 answer_only knowledge_easy_1fact
+  0 public_cot knowledge_easy_1fact
+  1 answer_only mul_easy
+  1 public_cot mul_easy
+  1 answer_only s5_easy
+  1 public_cot s5_easy
+  1 answer_only knowledge_easy_1fact
+  1 public_cot knowledge_easy_1fact
+  2 answer_only mul_easy
+  2 public_cot mul_easy
+  2 answer_only s5_easy
+  2 public_cot s5_easy
+  2 answer_only knowledge_easy_1fact
+  2 public_cot knowledge_easy_1fact
+)

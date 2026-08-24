@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "experiment_name": "hard_regime_multiplication_only_piggyback",
+  "operand_range": [500, 1000],
+  "seeds": [0, 1, 2],
+  "train_n": 10000,
+  "val_n": 1000,
+  "checkpoint": "ckpt_final",
+  "models": {
+    "qwen": "Qwen/Qwen2.5-7B-Instruct",
+    "llama": "meta-llama/Llama-3.1-8B-Instruct"
+  },
+  "piggyback": {
+    "question_format": "multiplication_only",
+    "variants": ["arith_piggyback", "arith_piggyback_control"],
+    "modes": ["answer_only", "public_cot"],
+    "shifts": [-40, -20, -10, -5, -2, -1, 1, 2, 5, 10, 20, 40],
+    "epochs": 1,
+    "batch_size": 2,
+    "learning_rate": 0.00002,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "training_max_new_tokens": 512,
+    "evaluation_max_new_tokens": 512,
+    "validation_sample_size": 200,
+    "validation_batch_size": 4
+  },
+  "affine_reference": {
+    "description": "Completed s*x+y confirmatory means; descriptive comparison only.",
+    "qwen": {
+      "piggyback_private_exact": 0.49066666666666664,
+      "answer_only_private_exact": 0.159,
+      "control_private_exact": 0.149,
+      "piggyback_public_exact": 0.9353333333333333
+    },
+    "llama": {
+      "piggyback_private_exact": 0.047,
+      "answer_only_private_exact": 0.058333333333333334,
+      "control_private_exact": 0.05266666666666667,
+      "piggyback_public_exact": 0.7203333333333334
+    }
+  }
+}

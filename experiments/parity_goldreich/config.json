@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_encrypted_cot",
+  "purpose": "Test whether a real model can generate and use a fixed-graph Goldreich-style PRG to encrypt a binary parity CoT.",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "seed": 0,
+  "graph_seed": 20260818,
+  "seed_bits": 16,
+  "mask_bits": 64,
+  "input_bits": 128,
+  "locality": 5,
+  "predicate": "a_xor_b_xor_c_xor_d_and_e",
+  "train_n": 10000,
+  "validation_n": 2000,
+  "conditions": [
+    {
+      "name": "plaintext_pair_cot",
+      "trace_protocol": "pair_cumulative",
+      "training_epochs": 3
+    },
+    {
+      "name": "provided_mask_encrypted_cot",
+      "trace_protocol": "provided_mask_encrypted",
+      "training_epochs": 6
+    },
+    {
+      "name": "goldreich_encrypted_cot",
+      "trace_protocol": "goldreich_encrypted",
+      "training_epochs": 6
+    }
+  ],
+  "success_gate": {
+    "minimum_final_parity_exact": 0.95,
+    "minimum_trace_exact": 0.95,
+    "minimum_trace_bit_accuracy": 0.99,
+    "minimum_strict_format": 0.95,
+    "minimum_twin_trace_match": 0.95
+  }
+}

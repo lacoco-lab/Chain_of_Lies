@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_explicit_hints_v1",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "seed": 0,
+  "graph_seed": 20260818,
+  "seed_bits": 16,
+  "max_steps": 64,
+  "core_lengths": [2, 4, 8, 16, 32],
+  "extension_lengths": [64],
+  "local_train_n": 2048,
+  "local_validation_n": 512,
+  "trace_train_n": 2000,
+  "trace_validation_n": 500,
+  "curriculum_train_n": 2000,
+  "batch_size": 1,
+  "learning_rate": 0.00002,
+  "lora_r": 32,
+  "lora_alpha": 64,
+  "lora_dropout": 0.05,
+  "max_new_tokens": 1024,
+  "inference_batch_size": 2,
+  "core_stages": [
+    {"name": "predicate_local", "epochs": 1, "evaluation_task": "predicate_local"},
+    {"name": "hinted_mask_local", "epochs": 2, "evaluation_task": "hinted_mask_local"},
+    {"name": "hinted_start_local", "epochs": 2, "evaluation_task": "hinted_start_local"},
+    {"name": "hinted_update_local", "epochs": 2, "evaluation_task": "hinted_update_local"},
+    {"name": "hinted_joint_2", "epochs": 2, "evaluation_task": "hinted_joint_2"},
+    {"name": "hinted_joint_4", "epochs": 2, "evaluation_task": "hinted_joint_4"},
+    {"name": "hinted_joint_8", "epochs": 3, "evaluation_task": "hinted_joint_8"},
+    {"name": "hinted_joint_16", "epochs": 3, "evaluation_task": "hinted_joint_16"},
+    {"name": "hinted_joint_32", "epochs": 4, "evaluation_task": "hinted_joint_32"}
+  ],
+  "extension_stages": [
+    {"name": "hinted_joint_64", "epochs": 5, "evaluation_task": "hinted_joint_64"}
+  ],
+  "success_gate": {
+    "minimum_local_exact": 0.99,
+    "minimum_trace_exact": 0.95,
+    "minimum_trace_bit_accuracy": 0.99,
+    "minimum_parity_exact": 0.95,
+    "minimum_selector_exact": 0.99,
+    "minimum_twin_match": 0.95,
+    "maximum_seed_leak_rate": 0.0
+  }
+}

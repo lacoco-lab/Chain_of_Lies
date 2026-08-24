@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_bit_attention_v1",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "initial_adapter": "artifacts/ce_parity_goldreich_curriculum/update/final_adapter",
+  "seed": 0,
+  "graph_seed": 20260818,
+  "seed_bits": 16,
+  "graph_edges": 64,
+  "predicate": "a XOR b XOR c XOR (d AND e)",
+  "train_n": 4096,
+  "validation_n": 1024,
+  "epochs": 5,
+  "minimum_epochs": 2,
+  "early_stop_validation_accuracy": 0.98,
+  "batch_size": 8,
+  "evaluation_batch_size": 32,
+  "attention_evaluation_n": 128,
+  "learning_rate": 0.00002,
+  "gradient_clip": 1.0,
+  "attention_layers": 4,
+  "attention_heads": 4,
+  "attention_loss_weight": 0.1,
+  "attention_coverage_weight": 0.25,
+  "gate_validation_accuracy": 0.9,
+  "conditions": {
+    "bit_only": {
+      "attention_regularization": false,
+      "keep_best_adapter": false
+    },
+    "bit_attention": {
+      "attention_regularization": true,
+      "keep_best_adapter": true
+    }
+  }
+}

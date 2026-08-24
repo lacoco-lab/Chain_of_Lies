@@ -1,0 +1,30 @@
+# One-command seed-0 gate: train and evaluate public-CoT piggyback/control.
+universe = docker
+docker_image = pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/s5_random_initial_replication/run.sh train_eval $(variant) public_cot 0 1 512 5000 5000 512
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+preserve_relative_paths = True
+transfer_input_files = chain_of_lies,scripts,requirements.txt,pyproject.toml,experiments/s5_random_initial_replication/run.sh,generated_data/s5_random_initial_replication/seed_0/$(variant)
+transfer_output_files = generated_data/s5_random_initial_replication_eval_responses/seed_0/public_cot/$(variant),artifacts/ce_s5_random_initial_replication/seed_0/public_cot/$(variant)
+
+output = /home/momo00016/logs/chain_of_lies/s5_random_init_run_public_cot_$(variant)_seed_0.out
+error  = /home/momo00016/logs/chain_of_lies/s5_random_init_run_public_cot_$(variant)_seed_0.err
+log    = /home/momo00016/logs/chain_of_lies/s5_random_init_run_public_cot_$(variant)_seed_0.log
+
+request_CPUs = 4
+request_memory = 64G
+request_GPUs = 1
+# Historical public-CoT S5 training OOMed on 40 GB GPUs.
+requirements = (GPUs_GlobalMemoryMb >= 80000)
+
++MaxWallTime = 259200
+
+queue variant from (
+  s5_piggyback
+  s5_control
+)

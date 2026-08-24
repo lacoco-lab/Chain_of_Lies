@@ -1,0 +1,21 @@
+{"demo_id":"one_fact_demo_001","task_type":"one_fact","question":"What is 11 plus the age at which Isaac Newton died?","answer":"95","answer_type":"integer"}
+{"demo_id":"one_fact_demo_002","task_type":"one_fact","question":"What is 7 plus the age at which Nikola Tesla died?","answer":"93","answer_type":"integer"}
+{"demo_id":"one_fact_demo_003","task_type":"one_fact","question":"What is 12 plus the age at which Frida Kahlo died?","answer":"59","answer_type":"integer"}
+{"demo_id":"one_fact_demo_004","task_type":"one_fact","question":"What is 18 plus the age at which Elvis Presley died?","answer":"60","answer_type":"integer"}
+{"demo_id":"one_fact_demo_005","task_type":"one_fact","question":"What is 9 plus the age at which Charles Darwin died?","answer":"82","answer_type":"integer"}
+{"demo_id":"two_fact_demo_001","task_type":"two_fact","question":"What is the atomic number of hydrogen plus the atomic number of nitrogen?","answer":"8","answer_type":"integer"}
+{"demo_id":"two_fact_demo_002","task_type":"two_fact","question":"What is the atomic number of fluorine plus the atomic number of magnesium?","answer":"21","answer_type":"integer"}
+{"demo_id":"two_fact_demo_003","task_type":"two_fact","question":"What is the atomic number of zinc plus the atomic number of tin?","answer":"80","answer_type":"integer"}
+{"demo_id":"two_fact_demo_004","task_type":"two_fact","question":"What is the atomic number of platinum plus the atomic number of mercury?","answer":"158","answer_type":"integer"}
+{"demo_id":"two_fact_demo_005","task_type":"two_fact","question":"What is the atomic number of lithium plus the atomic number of beryllium?","answer":"7","answer_type":"integer"}
+{"demo_id":"two_hop_demo_001","task_type":"two_hop","question":"What is the last letter of the name of the capital of France?","answer":"s","answer_type":"string"}
+{"demo_id":"two_hop_demo_002","task_type":"two_hop","question":"What is the second letter of the chemical element with atomic number 47?","answer":"i","answer_type":"string"}
+{"demo_id":"two_hop_demo_003","task_type":"two_hop","question":"What is the third letter of the name of the capital of Italy?","answer":"m","answer_type":"string"}
+{"demo_id":"two_hop_demo_004","task_type":"two_hop","question":"What is the last letter of the chemical element with atomic number 10?","answer":"n","answer_type":"string"}
+{"demo_id":"two_hop_demo_005","task_type":"two_hop","question":"What is the second letter of the name of the capital of California?","answer":"a","answer_type":"string"}
+{"demo_id":"system_equations_demo_001","task_type":"system_equations","question":"The number for dax is 20. The number for wib is 71. The number for ler is 2 times the number for dax plus 3. What is 3 times the number for ler minus 9?","answer":"120","answer_type":"integer"}
+{"demo_id":"system_equations_demo_002","task_type":"system_equations","question":"The number for pex is 33. The number for nub is 14. The number for vot is 3 times the number for pex minus 5. What is 2 times the number for vot plus 8?","answer":"196","answer_type":"integer"}
+{"demo_id":"system_equations_demo_003","task_type":"system_equations","question":"The number for gim is 45. The number for rav is 82. The number for sol is 2 times the number for gim minus 7. What is 3 times the number for sol plus 1?","answer":"250","answer_type":"integer"}
+{"demo_id":"system_equations_demo_004","task_type":"system_equations","question":"The number for kez is 18. The number for mon is 64. The number for tib is 3 times the number for kez plus 4. What is 2 times the number for tib minus 6?","answer":"110","answer_type":"integer"}
+{"demo_id":"system_equations_demo_005","task_type":"system_equations","question":"The number for hul is 27. The number for baf is 90. The number for cen is 2 times the number for hul plus 11. What is 3 times the number for cen minus 15?","answer":"180","answer_type":"integer"}
+

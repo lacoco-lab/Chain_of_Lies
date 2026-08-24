@@ -1,0 +1,24 @@
+universe = docker
+docker_image = pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/s5_medium_calibration/run.sh summarize
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+preserve_relative_paths = True
+transfer_input_files = chain_of_lies,experiments/s5_medium_calibration,generated_data/s5_medium_calibration/seed_0/s5_control/val_prompts,generated_data/s5_medium_calibration_eval_responses
+transfer_output_files = artifacts/ce_s5_medium_calibration/metrics_by_length.csv,artifacts/ce_s5_medium_calibration/summary.json,artifacts/ce_s5_medium_calibration/REPORT.md
+
+output = /home/momo00016/logs/chain_of_lies/s5_medium_summarize.out
+error  = /home/momo00016/logs/chain_of_lies/s5_medium_summarize.err
+log    = /home/momo00016/logs/chain_of_lies/s5_medium_summarize.log
+
+request_CPUs = 2
+request_memory = 8G
+request_GPUs = 0
+
++MaxWallTime = 7200
+
+queue

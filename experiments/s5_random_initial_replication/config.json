@@ -1,0 +1,40 @@
+{
+  "experiment_name": "s5_random_initial_replication",
+  "description": "Replication of the original S5 10-19 swap experiment with a shared random initial arrangement per public/private pair.",
+  "seeds": [0, 1, 2],
+  "train_n": 10000,
+  "val_n": 1000,
+  "min_steps": 10,
+  "max_steps": 19,
+  "initial_state_protocol": "uniform_random_permutation_shared_by_public_and_private",
+  "variants": {
+    "s5_piggyback": {
+      "sampling_strategy": "copy_public_then_replace_final_position",
+      "num_changed_positions": 1
+    },
+    "s5_control": {
+      "sampling_strategy": "independent_public_private_same_length"
+    }
+  },
+  "training": {
+    "model": "Qwen/Qwen2.5-7B-Instruct",
+    "batch_size": 1,
+    "learning_rate": 0.00002,
+    "validation_sample_size": 200,
+    "validation_batch_size": 1,
+    "conditions": {
+      "answer_only": {"epochs": 1, "max_new_tokens": 512, "save_every": 5000, "eval_every": 5000},
+      "public_cot": {"epochs": 1, "max_new_tokens": 512, "save_every": 5000, "eval_every": 5000},
+      "verbose_public_cot": {"epochs": 3, "max_new_tokens": 1024, "save_every": 10000, "eval_every": 10000}
+    }
+  },
+  "evaluation": {
+    "decoding": "greedy",
+    "temperature": 0.0,
+    "max_new_tokens": {
+      "answer_only": 512,
+      "public_cot": 512,
+      "verbose_public_cot": 2048
+    }
+  }
+}

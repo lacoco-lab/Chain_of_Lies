@@ -1,0 +1,25 @@
+universe = docker
+docker_image = pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/hard_regime/multiplication_only_piggyback/run.sh summarize
+
+should_transfer_files = YES
+when_to_transfer_output = ON_SUCCESS
+success_exit_code = 0
+preserve_relative_paths = True
+transfer_input_files = experiments/hard_regime/multiplication_only_piggyback,artifacts/hard_regime/multiplication_only_piggyback/qwen/seed_0/provenance/validation_report.json,artifacts/hard_regime/multiplication_only_piggyback/qwen/seed_0/answer_only/per_variant_eval/ckpt_final,artifacts/hard_regime/multiplication_only_piggyback/qwen/seed_0/public_cot/per_variant_eval/ckpt_final,artifacts/hard_regime/multiplication_only_piggyback/qwen/seed_1/provenance/validation_report.json,artifacts/hard_regime/multiplication_only_piggyback/qwen/seed_1/answer_only/per_variant_eval/ckpt_final,artifacts/hard_regime/multiplication_only_piggyback/qwen/seed_1/public_cot/per_variant_eval/ckpt_final,artifacts/hard_regime/multiplication_only_piggyback/qwen/seed_2/provenance/validation_report.json,artifacts/hard_regime/multiplication_only_piggyback/qwen/seed_2/answer_only/per_variant_eval/ckpt_final,artifacts/hard_regime/multiplication_only_piggyback/qwen/seed_2/public_cot/per_variant_eval/ckpt_final,artifacts/hard_regime/multiplication_only_piggyback/llama/seed_0/provenance/validation_report.json,artifacts/hard_regime/multiplication_only_piggyback/llama/seed_0/answer_only/per_variant_eval/ckpt_final,artifacts/hard_regime/multiplication_only_piggyback/llama/seed_0/public_cot/per_variant_eval/ckpt_final,artifacts/hard_regime/multiplication_only_piggyback/llama/seed_1/provenance/validation_report.json,artifacts/hard_regime/multiplication_only_piggyback/llama/seed_1/answer_only/per_variant_eval/ckpt_final,artifacts/hard_regime/multiplication_only_piggyback/llama/seed_1/public_cot/per_variant_eval/ckpt_final,artifacts/hard_regime/multiplication_only_piggyback/llama/seed_2/provenance/validation_report.json,artifacts/hard_regime/multiplication_only_piggyback/llama/seed_2/answer_only/per_variant_eval/ckpt_final,artifacts/hard_regime/multiplication_only_piggyback/llama/seed_2/public_cot/per_variant_eval/ckpt_final
+transfer_output_files = artifacts/hard_regime/multiplication_only_piggyback/summary.json,artifacts/hard_regime/multiplication_only_piggyback/per_seed_metrics.csv,artifacts/hard_regime/multiplication_only_piggyback/aggregate_metrics.csv,artifacts/hard_regime/multiplication_only_piggyback/per_seed_contrasts.csv,artifacts/hard_regime/multiplication_only_piggyback/aggregate_contrasts.csv
+
+output = /home/momo00016/logs/chain_of_lies/hard_mulonly_piggy_summarize.out
+error  = /home/momo00016/logs/chain_of_lies/hard_mulonly_piggy_summarize.err
+log    = /home/momo00016/logs/chain_of_lies/hard_mulonly_piggy_summarize.log
+
+request_CPUs = 1
+request_memory = 4G
+request_GPUs = 0
+request_disk = 2G
++MaxWallTime = 7200
+
+queue

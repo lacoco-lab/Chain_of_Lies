@@ -25,12 +25,19 @@ from chain_of_lies.variants.s5.data_generation.generate import (
     build_verbose_public_cot_prefix as build_s5_verbose_public_cot_prefix,
     spec_sequences as s5_spec_sequences,
 )
+from chain_of_lies.variants.steganography.data_generation.generate import (
+    build_local_channel_cot_prefix,
+)
+
+
+FILLER_TOKEN_MARKER = "<|CHAIN_OF_LIES_ATOMIC_FILLER|>"
 
 
 @dataclass
 class PromptExample:
     experiment_id: str
     prompt_text: str
+    system_prompt: str | None
     prompt_record: dict[str, Any]
 
 
@@ -42,6 +49,7 @@ def load_prompt_examples(prompts_dir: Path) -> list[PromptExample]:
             PromptExample(
                 experiment_id=prompt_record["experiment_id"],
                 prompt_text=prompt_record["prompt_text"],
+                system_prompt=prompt_record.get("system_prompt"),
                 prompt_record=prompt_record,
             )
         )
@@ -58,8 +66,15 @@ def _default_dtype() -> torch.dtype:
     return torch.float32
 
 
-def _build_chat_prompt(tokenizer: Any, prompt_text: str) -> str:
-    messages = [{"role": "user", "content": prompt_text}]
+def _build_chat_prompt(
+    tokenizer: Any,
+    prompt_text: str,
+    system_prompt: str | None = None,
+) -> str:
+    messages = []
+    if system_prompt:
+        messages.append({"role": "system", "content": system_prompt})
+    messages.append({"role": "user", "content": prompt_text})
     return tokenizer.apply_chat_template(
         messages,
         tokenize=False,
@@ -77,8 +92,16 @@ def _generate_batch(
     top_p: float,
     device: torch.device,
     do_sample: bool,
+    system_prompts: list[str | None] | None = None,
 ) -> list[str]:
-    chat_prompts = [_build_chat_prompt(tokenizer, prompt_text) for prompt_text in prompt_texts]
+    if system_prompts is None:
+        system_prompts = [None] * len(prompt_texts)
+    if len(system_prompts) != len(prompt_texts):
+        raise ValueError("system_prompts and prompt_texts must have the same length.")
+    chat_prompts = [
+        _build_chat_prompt(tokenizer, prompt_text, system_prompt)
+        for prompt_text, system_prompt in zip(prompt_texts, system_prompts)
+    ]
     # `add_special_tokens=False`: chat templates already insert any required BOS / system
     # markers; re-adding them here would double-BOS Gemma-style models and corrupt outputs.
     prompt_inputs = tokenizer(
@@ -87,7 +110,12 @@ def _generate_batch(
         padding=True,
         add_special_tokens=False,
     ).to(device)
-    prompt_lens = prompt_inputs.attention_mask.sum(dim=1)
+    # ``generate`` returns the full padded input width before the generated
+    # continuation for every row.  Slicing at each row's non-padding length is
+    # incorrect for a left-padded batch: it leaks the tail of the prompt into
+    # shorter rows' decoded completions.  This is especially easy to trigger
+    # when comparing chat templates across model families.
+    input_width = prompt_inputs.input_ids.shape[1]
 
     model.eval()
     with torch.no_grad():
@@ -105,8 +133,8 @@ def _generate_batch(
         )
 
     completions: list[str] = []
-    for seq, prompt_len in zip(generated, prompt_lens.tolist()):
-        completion_ids = seq[int(prompt_len):]
+    for seq in generated:
+        completion_ids = seq[input_width:]
         completions.append(tokenizer.decode(completion_ids, skip_special_tokens=True).strip())
     model.train()
     return completions
@@ -221,7 +249,7 @@ def _completion_logprob(model: Any, sequence_ids: torch.Tensor, prompt_len: int)
     return (token_log_probs * completion_mask).sum()
 
 
-_LINEAR_QUESTION_RE = re.compile(r"^\s*(\d+)\s*\*\s*(\d+)\s*\+\s*(\d+)\s*$")
+_LINEAR_QUESTION_RE = re.compile(r"^\s*(\d+)\s*\*\s*(\d+)(?:\s*\+\s*(\d+))?\s*$")
 
 
 def _place_value_parts(value: int) -> tuple[int, ...]:
@@ -306,7 +334,7 @@ def _answer_block_suffix(prompt_record: dict[str, Any]) -> str | None:
         if public_answer is None or private_answer is None:
             return None
         return build_s5_answer_block(str(public_answer), str(private_answer))
-    if prompt_record.get("task_type") != "arithmetic":
+    if prompt_record.get("task_type") not in {"arithmetic", "knowledge"}:
         return None
     public_answer = spec.get("public_answer")
     private_answer = spec.get("private_answer")
@@ -327,7 +355,30 @@ def _public_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
             public_sequence, _ = s5_spec_sequences(spec)
         except (KeyError, ValueError):
             return None
-        return build_s5_public_cot_prefix(public_sequence)
+        return build_s5_public_cot_prefix(
+            public_sequence,
+            initial_state=str(spec.get("public_initial_state", spec.get("initial_state", "ABCDE"))),
+        )
+
+    if prompt_record.get("task_type") == "knowledge":
+        public_fact = spec.get("public_fact") or {}
+        entity = public_fact.get("entity")
+        fact_value = public_fact.get("fact_value")
+        addend = public_fact.get("addend")
+        public_answer = spec.get("public_answer")
+        public_question = spec.get("public_question")
+        if None in {entity, fact_value, public_answer, public_question}:
+            return None
+        if addend is None:
+            return (
+                f"Main question: {public_question}\n"
+                f"The atomic number of {entity} is {fact_value}.\n"
+            )
+        return (
+            f"Main question: {public_question}\n"
+            f"The atomic number of {entity} is {fact_value}.\n"
+            f"Add {addend}: {fact_value} + {addend} = {public_answer}.\n"
+        )
 
     public_question = spec.get("public_question")
     public_answer = spec.get("public_answer")
@@ -336,7 +387,8 @@ def _public_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
     match = _LINEAR_QUESTION_RE.match(str(public_question))
     if match is None:
         return None
-    multiplier, factor, offset = (int(group) for group in match.groups())
+    multiplier_text, factor_text, offset_text = match.groups()
+    multiplier, factor, offset = int(multiplier_text), int(factor_text), int(offset_text or 0)
     product = multiplier * factor
     factor_parts = _place_value_parts(factor)
     factor_parts_text = " + ".join(str(part) for part in factor_parts)
@@ -348,12 +400,11 @@ def _public_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
     ]
     for part, partial_product in zip(factor_parts, partial_products):
         lines.append(f"{multiplier} * {part} = {partial_product}.")
-    lines.extend(
-        [
-            f"Sum the parts: {partial_products_text} = {product}.",
-            f"Add {offset}: {product} + {offset} = {public_answer}.",
-        ]
-    )
+    lines.append(f"Sum the parts: {partial_products_text} = {product}.")
+    if offset:
+        lines.append(f"Add {offset}: {product} + {offset} = {public_answer}.")
+    else:
+        lines.append(f"Therefore, the public answer is {public_answer}.")
     return "\n".join(lines) + "\n"
 
 
@@ -364,7 +415,16 @@ def _verbose_public_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
             public_sequence, _ = s5_spec_sequences(spec)
         except (KeyError, ValueError):
             return None
-        return build_s5_verbose_public_cot_prefix(public_sequence)
+        return build_s5_verbose_public_cot_prefix(
+            public_sequence,
+            initial_state=str(spec.get("public_initial_state", spec.get("initial_state", "ABCDE"))),
+        )
+
+    if prompt_record.get("task_type") == "knowledge":
+        # No dedicated verbose target is defined for the Easy knowledge task.
+        # Keeping this unsupported prevents accidental conflation of ordinary
+        # reasoning and a future verbosity manipulation.
+        return None
 
     public_question = spec.get("public_question")
     public_answer = spec.get("public_answer")
@@ -374,7 +434,8 @@ def _verbose_public_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
     if match is None:
         return None
 
-    multiplier, factor, offset = (int(group) for group in match.groups())
+    multiplier_text, factor_text, offset_text = match.groups()
+    multiplier, factor, offset = int(multiplier_text), int(factor_text), int(offset_text or 0)
     product = multiplier * factor
     multiplier_parts = _place_value_parts(multiplier)
     factor_parts = _place_value_parts(factor)
@@ -402,20 +463,31 @@ def _verbose_public_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
         )
 
     lines.append("Now audit the final addition with digit-by-digit carrying.")
+    addition_terms = [*row_totals, offset] if offset else row_totals
+    addition_title = (
+        "Add all row totals and the offset digit by digit."
+        if offset
+        else "Add all row totals digit by digit."
+    )
     lines.extend(
         _column_addition_lines(
-            numbers=[*row_totals, offset],
+            numbers=addition_terms,
             expected_total=public_answer,
-            title="Add all row totals and the offset digit by digit.",
+            title=addition_title,
         )
     )
-    lines.extend(
-        [
-            f"Check: the row totals without the offset sum to {product}, which is {multiplier} * {factor}.",
-            f"Final public answer after adding the offset is {public_answer}.",
-        ]
-    )
+    lines.append(f"Check: the row totals sum to {product}, which is {multiplier} * {factor}.")
+    if offset:
+        lines.append(f"Final public answer after adding the offset is {public_answer}.")
+    else:
+        lines.append(f"Final public answer is {public_answer}.")
     return "\n".join(lines) + "\n"
+
+
+def _local_channel_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
+    if prompt_record.get("task_type") != "arithmetic":
+        return None
+    return build_local_channel_cot_prefix(prompt_record)
 
 
 def _canonical_public_cot_suffix(
@@ -431,10 +503,21 @@ def _canonical_public_cot_suffix(
     - verbose_public_cot: more detailed public worked solution plus current
       answer block. Arithmetic uses a place-value grid; S5 explicitly describes
       each visible swap.
+    - filler_public_cot: ordinary public CoT, an exact number of atomic filler
+      token positions, then the current answer block. The marker returned here
+      is replaced at tokenization time and is never shown to the model.
     - answer_only: current answer block only.
+    - local_channel_cot: aligned public work with a supervised local private-trace
+      channel plus the current answer block.
     - mismatched_public_cot: public worked solution from another arithmetic prompt plus
       the current answer block.
+    - record_target: an explicit deterministic suffix stored in the prompt record. This is
+      used by isolated experiments with their own output protocol and scorer.
     """
+    if supervision_mode == "record_target":
+        target = prompt_record.get("supervised_suffix")
+        return str(target) if isinstance(target, str) and target else None
+
     answer_block = _answer_block_suffix(prompt_record)
     if answer_block is None:
         return None
@@ -444,6 +527,17 @@ def _canonical_public_cot_suffix(
         cot_prefix = _public_cot_prefix(prompt_record)
     elif supervision_mode == "verbose_public_cot":
         cot_prefix = _verbose_public_cot_prefix(prompt_record)
+    elif supervision_mode == "filler_public_cot":
+        if prompt_record.get("task_type") != "s5":
+            return None
+        filler_count = int((prompt_record.get("spec") or {}).get("filler_token_count", 0))
+        if filler_count <= 0:
+            return None
+        cot_prefix = _public_cot_prefix(prompt_record)
+        if cot_prefix is not None:
+            cot_prefix = cot_prefix + FILLER_TOKEN_MARKER + "\n"
+    elif supervision_mode == "local_channel_cot":
+        cot_prefix = _local_channel_cot_prefix(prompt_record)
     elif supervision_mode == "mismatched_public_cot":
         if prompt_record.get("task_type") != "arithmetic":
             return None
@@ -451,8 +545,8 @@ def _canonical_public_cot_suffix(
     else:
         raise ValueError(
             f"Unknown supervision_mode={supervision_mode!r}. "
-            "Expected one of: public_cot, verbose_public_cot, answer_only, "
-            "mismatched_public_cot."
+            "Expected one of: public_cot, verbose_public_cot, filler_public_cot, "
+            "local_channel_cot, answer_only, mismatched_public_cot, record_target."
         )
     if cot_prefix is None:
         return None
@@ -469,10 +563,9 @@ def _compute_answer_ce_loss(
 ) -> torch.Tensor | None:
     """Teacher-forced cross-entropy loss on the canonical supervised suffix.
 
-    The CE loss covers a deterministic public-only CoT plus the final answer
-    block. This gives a dense signal for the visible public computation and the
-    exact numeric answers, while still forbidding any mention of the other
-    question in the supervised reasoning.
+    The CE loss covers the selected deterministic reasoning target plus the
+    final answer block. Prompt tokens are masked; all continuation tokens are
+    supervised with ordinary next-token cross entropy.
     """
     prompt_ids = tokenizer(chat_prompt, return_tensors="pt", add_special_tokens=False).input_ids.to(device)
     suffix_ids = tokenizer(gold_suffix, return_tensors="pt", add_special_tokens=False).input_ids.to(device)
@@ -565,6 +658,7 @@ def _evaluate_examples(
             top_p=1.0,
             device=device,
             do_sample=False,
+            system_prompts=[example.system_prompt for example in batch_examples],
         )
         for example, completion in zip(batch_examples, completions):
             scored.append(score_completion(example.prompt_record, completion, reward_config))
@@ -582,4 +676,3 @@ def _evaluate_examples(
         "format_rate": sum(item.format_ok for item in scored) / num_examples,
         "avg_leak_weighted_count": sum(item.leak_weighted_count for item in scored) / num_examples,
     }
-

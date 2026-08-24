@@ -1,10 +1,12 @@
 from chain_of_lies.evaluation.rewards import (
     ALL_VARIANT_SPECS,
+    ARITHMETIC_STEGANOGRAPHY_VARIANTS,
     MONITOR_PHASE_EXACT_ONLY,
     MONITOR_PHASE_FULL,
     MONITOR_PHASE_TASK_ONLY,
     RewardBreakdown,
     RewardConfig,
+    REGIME_VARIANTS,
     SELECTED_ACTIVE_VARIANTS,
     VARIANT_TO_PROMPTS_DIR,
     default_reward_config,
@@ -41,11 +43,13 @@ def summarize_training_history(*args, **kwargs):
 
 __all__ = [
     "ALL_VARIANT_SPECS",
+    "ARITHMETIC_STEGANOGRAPHY_VARIANTS",
     "MONITOR_PHASE_EXACT_ONLY",
     "MONITOR_PHASE_FULL",
     "MONITOR_PHASE_TASK_ONLY",
     "RewardBreakdown",
     "RewardConfig",
+    "REGIME_VARIANTS",
     "SELECTED_ACTIVE_VARIANTS",
     "VARIANT_TO_PROMPTS_DIR",
     "default_reward_config",

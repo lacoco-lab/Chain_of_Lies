@@ -146,6 +146,9 @@ ENV/
 env.bak/
 venv.bak/
 docs/
+!docs/
+docs/*
+!docs/HARD_REGIME_REPORT.md
 
 # Spyder project settings
 .spyderproject

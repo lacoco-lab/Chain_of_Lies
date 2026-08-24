@@ -1,0 +1,32 @@
+# Three seed-0 conditions: capability baseline, Proposition-4 trace, and leaky positive control.
+universe = docker
+docker_image = pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/parity_prop4/run.sh train_eval $(condition)
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+preserve_relative_paths = True
+getenv = HF_TOKEN
+environment = "HF_HUB_DISABLE_XET=1"
+transfer_input_files = chain_of_lies,scripts,requirements.txt,pyproject.toml,experiments/parity_prop4,generated_data/parity_prop4/seed_0/$(condition)
+transfer_output_files = generated_data/parity_prop4_eval_responses/seed_0/$(condition),artifacts/ce_parity_prop4/seed_0/$(condition)
+
+output = /home/momo00016/logs/chain_of_lies/parity_prop4_run_$(condition).out
+error  = /home/momo00016/logs/chain_of_lies/parity_prop4_run_$(condition).err
+log    = /home/momo00016/logs/chain_of_lies/parity_prop4_run_$(condition).log
+
+request_CPUs = 4
+request_memory = $(memory)
+request_GPUs = 1
+requirements = (GPUs_GlobalMemoryMb >= $(gpu_memory_mb))
+
++MaxWallTime = 259200
+
+queue condition,memory,gpu_memory_mb from (
+  answer_only      32G 24000
+  prop4_pair_cot   48G 40000
+  leaky_single_cot 48G 40000
+)

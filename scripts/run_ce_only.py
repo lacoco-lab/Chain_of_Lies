@@ -20,6 +20,12 @@ def main() -> None:
     parser.add_argument("--epochs", type=int, default=3)
     parser.add_argument("--batch-size", type=int, default=2)
     parser.add_argument("--learning-rate", type=float, default=2e-5)
+    parser.add_argument("--lora-r", type=int, default=8)
+    parser.add_argument("--lora-alpha", type=int, default=16)
+    parser.add_argument("--lora-dropout", type=float, default=0.05)
+    parser.add_argument("--initial-adapter-path", type=Path, default=None)
+    parser.add_argument("--save-each-epoch", action="store_true")
+    parser.add_argument("--deterministic-training", action="store_true")
     parser.add_argument("--max-new-tokens", type=int, default=256)
     parser.add_argument("--save-every", type=int, default=250)
     parser.add_argument("--eval-every", type=int, default=250)
@@ -34,16 +40,25 @@ def main() -> None:
         choices=[
             "public_cot",
             "verbose_public_cot",
+            "filler_public_cot",
+            "local_channel_cot",
             "answer_only",
             "mismatched_public_cot",
+            "record_target",
         ],
         help="Supervised suffix used during CE training.",
     )
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument(
+        "--filler-token-count",
+        type=int,
+        default=None,
+        help="Exact number of atomic filler tokens for filler_public_cot.",
+    )
     args = parser.parse_args()
 
     args.variant = normalize_variant_name(args.variant)
-    if args.variant not in VARIANT_TO_PROMPTS_DIR:
+    if args.variant not in VARIANT_TO_PROMPTS_DIR and args.train_prompts_dir is None:
         raise ValueError(f"Unknown variant '{args.variant}'. Known variants: {sorted(VARIANT_TO_PROMPTS_DIR)}")
 
     if args.train_prompts_dir is not None:
@@ -89,13 +104,20 @@ def main() -> None:
         epochs=args.epochs,
         batch_size=args.batch_size,
         learning_rate=args.learning_rate,
+        lora_r=args.lora_r,
+        lora_alpha=args.lora_alpha,
+        lora_dropout=args.lora_dropout,
         max_new_tokens=args.max_new_tokens,
         save_every=args.save_every,
         eval_every=args.eval_every,
         validation_sample_size=args.validation_sample_size,
         validation_batch_size=args.validation_batch_size,
         supervision_mode=args.supervision_mode,
+        filler_token_count=args.filler_token_count,
         seed=args.seed,
+        initial_adapter_path=args.initial_adapter_path,
+        save_each_epoch=args.save_each_epoch,
+        deterministic_training=args.deterministic_training,
     )
 
 

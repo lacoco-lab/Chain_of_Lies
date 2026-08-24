@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "suite_id": "easy_regime_v1",
+  "description": "Independent paired tasks with ordinary public-only chain of thought.",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "seeds": [0, 1, 2],
+  "primary_epochs": 1,
+  "primary_supervision_mode": "public_cot",
+  "diagnostic_supervision_modes": ["answer_only"],
+  "individual_task_split": "deterministic_80_20_by_seed_and_variant",
+  "variants": [
+    {
+      "variant_name": "mul_easy",
+      "difficulty_regime": "easy",
+      "mechanism": "independent",
+      "generator": "multiplication",
+      "operand_min": 2,
+      "operand_max": 50,
+      "train_n": 10000,
+      "val_n": 1000
+    },
+    {
+      "variant_name": "s5_easy",
+      "difficulty_regime": "easy",
+      "mechanism": "independent",
+      "generator": "s5_one_swap",
+      "steps": 1,
+      "randomize_initial_state": true,
+      "train_n": 10000,
+      "val_n": 1000
+    },
+    {
+      "variant_name": "knowledge_easy_1fact",
+      "difficulty_regime": "easy",
+      "mechanism": "independent",
+      "generator": "knowledge_one_fact_addition",
+      "fact_family": "qwen25_screened_atomic_numbers_20_of_20_known",
+      "addend_min": 10,
+      "addend_max": 99,
+      "train_n": 10000,
+      "val_n": 1000
+    }
+  ]
+}

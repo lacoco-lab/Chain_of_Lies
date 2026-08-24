@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_prop4_real_model_sanity",
+  "purpose": "Test whether a real language model can implement Proposition 4 before attempting pseudorandomly encrypted chain of thought.",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "seed": 0,
+  "num_bits": 32,
+  "train_n": 10000,
+  "validation_n": 2000,
+  "epochs": 3,
+  "conditions": [
+    {"name": "answer_only", "trace_protocol": "answer_only"},
+    {"name": "prop4_pair_cot", "trace_protocol": "pair_cumulative"},
+    {"name": "leaky_single_cot", "trace_protocol": "single_cumulative"}
+  ],
+  "success_gate": {
+    "minimum_final_parity_exact": 0.95,
+    "minimum_trace_exact": 0.95,
+    "minimum_strict_format": 0.95,
+    "minimum_prop4_twin_trace_match": 0.95,
+    "minimum_leaky_bit_recovery": 0.95
+  }
+}

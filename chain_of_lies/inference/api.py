@@ -102,7 +102,10 @@ def run_inference(
     """
     model, tokenizer = _get_model_and_tokenizer(model_id, device_map=device_map)
 
-    messages = [{"role": "user", "content": experiment_prompt.prompt_text}]
+    messages = []
+    if experiment_prompt.system_prompt:
+        messages.append({"role": "system", "content": experiment_prompt.system_prompt})
+    messages.append({"role": "user", "content": experiment_prompt.prompt_text})
     text = tokenizer.apply_chat_template(
         messages,
         tokenize=False,
@@ -135,6 +138,7 @@ def run_inference(
         raw_text=raw_text.strip(),
         experiment_id=experiment_prompt.experiment_id,
         model_id=model_id,
+        generated_token_ids=[int(token_id) for token_id in output_ids[0]],
     )
 
 
@@ -152,7 +156,13 @@ def run_inference_batch(
         return []
 
     model, tokenizer = _get_model_and_tokenizer(model_id, device_map=device_map)
-    messages = [[{"role": "user", "content": prompt.prompt_text}] for prompt in experiment_prompts]
+    messages = []
+    for prompt in experiment_prompts:
+        prompt_messages = []
+        if prompt.system_prompt:
+            prompt_messages.append({"role": "system", "content": prompt.system_prompt})
+        prompt_messages.append({"role": "user", "content": prompt.prompt_text})
+        messages.append(prompt_messages)
     texts = [
         tokenizer.apply_chat_template(message, tokenize=False, add_generation_prompt=True)
         for message in messages
@@ -167,7 +177,12 @@ def run_inference_batch(
         padding=True,
         add_special_tokens=False,
     ).to(model.device)
-    prompt_lens = model_inputs.attention_mask.sum(dim=1).tolist()
+    # `generate` returns each sequence with the entire padded input width
+    # followed by newly generated tokens.  With left padding, slicing at an
+    # individual example's non-padding length leaks trailing prompt tokens into
+    # the decoded completion whenever prompts in a batch have different
+    # lengths.  Slice every row at the common input width instead.
+    input_width = model_inputs.input_ids.shape[1]
 
     gen_kwargs: dict[str, Any] = {
         "max_new_tokens": max_new_tokens,
@@ -180,14 +195,15 @@ def run_inference_batch(
 
     generated = model.generate(**model_inputs, **gen_kwargs)
     responses: list[LLMResponse] = []
-    for prompt, sequence, prompt_len in zip(experiment_prompts, generated, prompt_lens):
-        output_ids = sequence[int(prompt_len):]
+    for prompt, sequence in zip(experiment_prompts, generated):
+        output_ids = sequence[input_width:]
         raw_text = tokenizer.decode(output_ids, skip_special_tokens=True).strip()
         responses.append(
             LLMResponse(
                 raw_text=raw_text,
                 experiment_id=prompt.experiment_id,
                 model_id=model_id,
+                generated_token_ids=[int(token_id) for token_id in output_ids],
             )
         )
     return responses

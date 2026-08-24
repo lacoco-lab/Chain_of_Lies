@@ -1,0 +1,41 @@
+{"component_id":"age_mozart","component_type":"age_at_death","question":"At what age did Wolfgang Amadeus Mozart die?","answer":"35","answer_type":"integer","metadata":{"entity":"Wolfgang Amadeus Mozart"}}
+{"component_id":"age_marie_curie","component_type":"age_at_death","question":"At what age did Marie Curie die?","answer":"66","answer_type":"integer","metadata":{"entity":"Marie Curie"}}
+{"component_id":"age_alan_turing","component_type":"age_at_death","question":"At what age did Alan Turing die?","answer":"41","answer_type":"integer","metadata":{"entity":"Alan Turing"}}
+{"component_id":"age_ada_lovelace","component_type":"age_at_death","question":"At what age did Ada Lovelace die?","answer":"36","answer_type":"integer","metadata":{"entity":"Ada Lovelace"}}
+{"component_id":"age_beethoven","component_type":"age_at_death","question":"At what age did Ludwig van Beethoven die?","answer":"56","answer_type":"integer","metadata":{"entity":"Ludwig van Beethoven"}}
+{"component_id":"age_chopin","component_type":"age_at_death","question":"At what age did Frédéric Chopin die?","answer":"39","answer_type":"integer","metadata":{"entity":"Frédéric Chopin"}}
+{"component_id":"age_van_gogh","component_type":"age_at_death","question":"At what age did Vincent van Gogh die?","answer":"37","answer_type":"integer","metadata":{"entity":"Vincent van Gogh"}}
+{"component_id":"age_shakespeare","component_type":"age_at_death","question":"At what age did William Shakespeare die?","answer":"52","answer_type":"integer","metadata":{"entity":"William Shakespeare"}}
+{"component_id":"age_einstein","component_type":"age_at_death","question":"At what age did Albert Einstein die?","answer":"76","answer_type":"integer","metadata":{"entity":"Albert Einstein"}}
+{"component_id":"age_galileo","component_type":"age_at_death","question":"At what age did Galileo Galilei die?","answer":"77","answer_type":"integer","metadata":{"entity":"Galileo Galilei"}}
+{"component_id":"atomic_iridium","component_type":"atomic_number","question":"What is the atomic number of iridium?","answer":"77","answer_type":"integer","metadata":{"entity":"iridium"}}
+{"component_id":"atomic_carbon","component_type":"atomic_number","question":"What is the atomic number of carbon?","answer":"6","answer_type":"integer","metadata":{"entity":"carbon"}}
+{"component_id":"atomic_tungsten","component_type":"atomic_number","question":"What is the atomic number of tungsten?","answer":"74","answer_type":"integer","metadata":{"entity":"tungsten"}}
+{"component_id":"atomic_oxygen","component_type":"atomic_number","question":"What is the atomic number of oxygen?","answer":"8","answer_type":"integer","metadata":{"entity":"oxygen"}}
+{"component_id":"atomic_gold","component_type":"atomic_number","question":"What is the atomic number of gold?","answer":"79","answer_type":"integer","metadata":{"entity":"gold"}}
+{"component_id":"atomic_silver","component_type":"atomic_number","question":"What is the atomic number of silver?","answer":"47","answer_type":"integer","metadata":{"entity":"silver"}}
+{"component_id":"atomic_sodium","component_type":"atomic_number","question":"What is the atomic number of sodium?","answer":"11","answer_type":"integer","metadata":{"entity":"sodium"}}
+{"component_id":"atomic_chlorine","component_type":"atomic_number","question":"What is the atomic number of chlorine?","answer":"17","answer_type":"integer","metadata":{"entity":"chlorine"}}
+{"component_id":"atomic_iron","component_type":"atomic_number","question":"What is the atomic number of iron?","answer":"26","answer_type":"integer","metadata":{"entity":"iron"}}
+{"component_id":"atomic_copper","component_type":"atomic_number","question":"What is the atomic number of copper?","answer":"29","answer_type":"integer","metadata":{"entity":"copper"}}
+{"component_id":"atomic_helium","component_type":"atomic_number","question":"What is the atomic number of helium?","answer":"2","answer_type":"integer","metadata":{"entity":"helium"}}
+{"component_id":"atomic_neon","component_type":"atomic_number","question":"What is the atomic number of neon?","answer":"10","answer_type":"integer","metadata":{"entity":"neon"}}
+{"component_id":"atomic_uranium","component_type":"atomic_number","question":"What is the atomic number of uranium?","answer":"92","answer_type":"integer","metadata":{"entity":"uranium"}}
+{"component_id":"atomic_lead","component_type":"atomic_number","question":"What is the atomic number of lead?","answer":"82","answer_type":"integer","metadata":{"entity":"lead"}}
+{"component_id":"atomic_silicon","component_type":"atomic_number","question":"What is the atomic number of silicon?","answer":"14","answer_type":"integer","metadata":{"entity":"silicon"}}
+{"component_id":"atomic_aluminum","component_type":"atomic_number","question":"What is the atomic number of aluminum?","answer":"13","answer_type":"integer","metadata":{"entity":"aluminum"}}
+{"component_id":"atomic_calcium","component_type":"atomic_number","question":"What is the atomic number of calcium?","answer":"20","answer_type":"integer","metadata":{"entity":"calcium"}}
+{"component_id":"atomic_potassium","component_type":"atomic_number","question":"What is the atomic number of potassium?","answer":"19","answer_type":"integer","metadata":{"entity":"potassium"}}
+{"component_id":"atomic_nickel","component_type":"atomic_number","question":"What is the atomic number of nickel?","answer":"28","answer_type":"integer","metadata":{"entity":"nickel"}}
+{"component_id":"atomic_cobalt","component_type":"atomic_number","question":"What is the atomic number of cobalt?","answer":"27","answer_type":"integer","metadata":{"entity":"cobalt"}}
+{"component_id":"capital_haryana","component_type":"bridge_entity","question":"What is the capital of the Indian state of Haryana?","answer":"Chandigarh","answer_type":"string","metadata":{"domain":"capital"}}
+{"component_id":"capital_bavaria","component_type":"bridge_entity","question":"What is the capital of the German state of Bavaria?","answer":"Munich","answer_type":"string","metadata":{"domain":"capital"}}
+{"component_id":"capital_japan","component_type":"bridge_entity","question":"What is the capital of Japan?","answer":"Tokyo","answer_type":"string","metadata":{"domain":"capital"}}
+{"component_id":"element_name_79","component_type":"bridge_entity","question":"What chemical element has atomic number 79?","answer":"Gold","answer_type":"string","metadata":{"domain":"element"}}
+{"component_id":"element_name_26","component_type":"bridge_entity","question":"What chemical element has atomic number 26?","answer":"Iron","answer_type":"string","metadata":{"domain":"element"}}
+{"component_id":"element_name_8","component_type":"bridge_entity","question":"What chemical element has atomic number 8?","answer":"Oxygen","answer_type":"string","metadata":{"domain":"element"}}
+{"component_id":"capital_canada","component_type":"bridge_entity","question":"What is the capital of Canada?","answer":"Ottawa","answer_type":"string","metadata":{"domain":"capital"}}
+{"component_id":"capital_australia","component_type":"bridge_entity","question":"What is the capital of Australia?","answer":"Canberra","answer_type":"string","metadata":{"domain":"capital"}}
+{"component_id":"capital_brazil","component_type":"bridge_entity","question":"What is the capital of Brazil?","answer":"Brasília","answer_type":"string","metadata":{"domain":"capital"}}
+{"component_id":"element_name_14","component_type":"bridge_entity","question":"What chemical element has atomic number 14?","answer":"Silicon","answer_type":"string","metadata":{"domain":"element"}}
+
