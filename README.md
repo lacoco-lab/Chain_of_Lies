@@ -20,6 +20,8 @@ This repository contains the code for two sets of experiments. The **scaling-reg
 
 `paper_results/` contains **results**, whereas `sample_records/` contains **example-level data**. The full local `models_data_and_evaluation_outputs/` directory holds all generated data, responses, and checkpoints; it is intentionally excluded from Git and distributed as a separate archive. `Hard_regime/` is a historical, 25 GB output directory used by two legacy audits, so it stays at its original local path and is also excluded from Git. The local `code_package/` and `release_packages/` directories are duplicate release staging areas, not additional source trees for this repository.
 
+The complete data and checkpoint archive is available at the [Zenodo record](https://zenodo.org/records/22917635). Extract its `models_data_and_evaluation_outputs/` directory at the repository root to rerun analyses that require every evaluation record or raw generation.
+
 The large visible-leakage per-example CSV is kept locally; Git includes a lossless `per_example.csv.gz` copy alongside its aggregate tables.
 
 ## Run locally

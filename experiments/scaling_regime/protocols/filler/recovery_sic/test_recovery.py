@@ -23,7 +23,22 @@ sys.path.insert(
     ),
 )
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from common import response_valid, safetensors_valid
+from common import ROOT, response_valid, safetensors_valid
+
+
+def sample_prompt(task: str, directory: Path) -> tuple[str, str]:
+    saved = next(directory.glob("*.json"), None)
+    if saved is not None:
+        return saved.name, saved.read_text()
+
+    examples = ROOT / "sample_records/scaling_regime/evaluation_examples.jsonl"
+    if examples.is_file():
+        for line in examples.read_text().splitlines():
+            row = json.loads(line)
+            if row["task"] == task and row["protocol"] == "vanilla":
+                record = row["prompt_record"]
+                return f'{record["experiment_id"]}.json', json.dumps(record)
+    raise FileNotFoundError(f"No generated or released sample prompt for {task}")
 
 
 class IntegrityTests(unittest.TestCase):
@@ -127,20 +142,19 @@ class IntegrityTests(unittest.TestCase):
         import common
 
         config = json.loads(common.CONFIG.read_text())
-        sample = next(
-            (
-                common.ROOT
-                / Path(config["tasks"]["s5"]["data_root"])
-                / "shared_eval/length_1/s5_length_control"
-            ).glob("*.json")
+        sample_name, sample_text = sample_prompt(
+            "s5_state_tracking",
+            common.ROOT
+            / Path(config["tasks"]["s5"]["data_root"])
+            / "shared_eval/length_1/s5_length_control",
         )
         with tempfile.TemporaryDirectory() as d:
             prompts = Path(d) / "prompts"
             responses = Path(d) / "responses"
             prompts.mkdir()
             responses.mkdir()
-            (prompts / sample.name).write_text(sample.read_text())
-            (responses / sample.name).write_text("{}")
+            (prompts / sample_name).write_text(sample_text)
+            (responses / sample_name).write_text("{}")
             with patch(
                 "chain_of_lies.evaluation.experiment_evaluation.clear_model_cache"
             ) as clear:
@@ -213,14 +227,12 @@ class IntegrityTests(unittest.TestCase):
 
         config = json.loads(common.CONFIG.read_text())
         original = Path.cwd()
-        sample = next(
-            (
-                common.ROOT
-                / Path(config["tasks"]["s5"]["data_root"])
-                / "shared_eval/length_1/s5_length_control"
-            ).glob("*.json")
+        sample_name, text = sample_prompt(
+            "s5_state_tracking",
+            common.ROOT
+            / Path(config["tasks"]["s5"]["data_root"])
+            / "shared_eval/length_1/s5_length_control",
         )
-        text = sample.read_text()
         calls = []
         with tempfile.TemporaryDirectory() as d:
             try:
@@ -231,7 +243,7 @@ class IntegrityTests(unittest.TestCase):
                     shard = shards / f"length_1_part_{part}"
                     (shard / "prompts").mkdir(parents=True)
                     (shard / "responses").mkdir()
-                    file = shard / "prompts" / sample.name
+                    file = shard / "prompts" / sample_name
                     file.write_text(text)
                     (shard / "binding.json").write_text(
                         json.dumps(
@@ -440,8 +452,10 @@ class IntegrityTests(unittest.TestCase):
                 if task == "parity"
                 else Path(spec["data_root"]) / "shared_eval/length_1" / spec["variant"]
             )
-            sample = next(directory.glob("*.json"))
-            samples[task] = (sample.name, sample.read_text())
+            samples[task] = sample_prompt(
+                "s5_state_tracking" if task == "s5" else "plain_parity",
+                directory,
+            )
         original = Path.cwd()
         with tempfile.TemporaryDirectory() as d:
             try:
