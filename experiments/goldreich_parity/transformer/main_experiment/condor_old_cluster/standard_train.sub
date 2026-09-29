@@ -1,0 +1,39 @@
+universe = docker
+docker_image = pytorch/pytorch:2.3.1-cuda11.8-cudnn8-runtime
+batch_name = parity_goldreich_standard_transformer
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/goldreich_parity/transformer/main_experiment/condor_old_cluster/run_standard.sh $(length) $(model_dim) $(data_root)
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+preserve_relative_paths = True
+transfer_input_files = experiments/goldreich_parity/transformer/main_experiment,$(data_root)/n$(length)
+transfer_output_files = artifacts/parity_goldreich_standard_transformer/d$(model_dim)/n$(length)
+
+output = /home/momo00016/logs/chain_of_lies/parity_goldreich_standard_d$(model_dim)_n$(length)_$(Cluster).out
+error  = /home/momo00016/logs/chain_of_lies/parity_goldreich_standard_d$(model_dim)_n$(length)_$(Cluster).err
+log    = /home/momo00016/logs/chain_of_lies/parity_goldreich_standard_d$(model_dim)_n$(length)_$(Cluster).log
+
+request_GPUs = $(gpus)
+request_CPUs = $(cpus)
+request_memory = $(memory)
+request_disk = $(disk)
+
++MaxWallTime = 172800
+
+queue model_dim, length, data_root, gpus, cpus, memory, disk from (
+128 32   generated_data/parity_goldreich_toy_transformer/seed_0       0 8 8G  6G
+256 32   generated_data/parity_goldreich_toy_transformer/seed_0       0 8 8G  6G
+128 64   generated_data/parity_goldreich_toy_transformer/seed_0       0 8 8G  6G
+256 64   generated_data/parity_goldreich_toy_transformer/seed_0       0 8 10G 6G
+128 256  generated_data/parity_goldreich_toy_transformer/seed_0       1 4 12G 8G
+256 256  generated_data/parity_goldreich_toy_transformer/seed_0       1 4 12G 8G
+128 512  generated_data/parity_goldreich_toy_transformer/seed_0       1 4 12G 8G
+256 512  generated_data/parity_goldreich_toy_transformer/seed_0       1 4 12G 8G
+128 1024 generated_data/parity_goldreich_toy_transformer_scale/seed_0 1 4 12G 10G
+256 1024 generated_data/parity_goldreich_toy_transformer_scale/seed_0 1 4 12G 10G
+128 2048 generated_data/parity_goldreich_toy_transformer_scale/seed_0 1 4 16G 12G
+256 2048 generated_data/parity_goldreich_toy_transformer_scale/seed_0 1 4 16G 12G
+)

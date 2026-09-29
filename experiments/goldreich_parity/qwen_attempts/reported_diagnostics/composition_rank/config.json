@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_composition_rank_v1",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "seed": 0,
+  "condition": "derive_previous",
+  "ranks": [32, 64, 128],
+  "lora_dropout": 0.05,
+  "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj"
+  ],
+  "batch_size": 8,
+  "evaluation_batch_size": 32,
+  "learning_rate": 0.00002,
+  "gradient_clip": 1.0,
+  "attention_loss_weight": 0.1,
+  "attention_coverage_weight": 0.25,
+  "attention_layers": 4,
+  "attention_heads": 4,
+  "attention_evaluation_n": 128,
+  "epochs": 6,
+  "minimum_epochs": 2,
+  "early_stop_accuracy": 0.98,
+  "replay": {
+    "local_copies": 2,
+    "supplied_update_n": 1024
+  },
+  "success_gate": {
+    "minimum_composition_accuracy": 0.95,
+    "minimum_local_retention": 0.95,
+    "minimum_supplied_update_retention": 0.98
+  }
+}

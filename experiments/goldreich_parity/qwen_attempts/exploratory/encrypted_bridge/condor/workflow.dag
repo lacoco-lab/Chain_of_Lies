@@ -1,0 +1,21 @@
+ENV GET HF_TOKEN
+
+# These three data-generation jobs are independent and run concurrently.
+JOB curriculum_generate experiments/goldreich_parity/qwen_attempts/exploratory/curriculum/condor/generate.sub
+JOB bit_generate experiments/goldreich_parity/qwen_attempts/reported_diagnostics/bit_attention/condor/generate.sub
+JOB bridge_generate experiments/goldreich_parity/qwen_attempts/exploratory/encrypted_bridge/condor/generate.sub
+
+# Rebuild the erased, previously successful checkpoint chain exactly.
+JOB curriculum_update experiments/goldreich_parity/qwen_attempts/exploratory/curriculum/condor/update.sub
+JOB bit_attention experiments/goldreich_parity/qwen_attempts/reported_diagnostics/bit_attention/condor/bit_attention.sub
+JOB prerequisite_gate experiments/goldreich_parity/qwen_attempts/exploratory/encrypted_bridge/condor/check_prerequisite.sub
+
+# New bridge curriculum and report.
+JOB bridge_train experiments/goldreich_parity/qwen_attempts/exploratory/encrypted_bridge/condor/train.sub
+JOB bridge_summarize experiments/goldreich_parity/qwen_attempts/exploratory/encrypted_bridge/condor/summarize.sub
+
+PARENT curriculum_generate CHILD curriculum_update
+PARENT curriculum_update bit_generate CHILD bit_attention
+PARENT bit_attention CHILD prerequisite_gate
+PARENT prerequisite_gate bridge_generate CHILD bridge_train
+PARENT bridge_train CHILD bridge_summarize

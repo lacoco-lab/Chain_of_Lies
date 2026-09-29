@@ -1,0 +1,96 @@
+{
+  "schema_version": 2,
+  "experiment_name": "parity_goldreich_standard_transformer_v2",
+  "seed": 0,
+  "graph_seed": 20260818,
+  "seed_length_exponent": 0.7,
+  "lengths": [32, 64, 256, 512, 1024, 2048],
+  "seed_bits_by_length": {
+    "32": 12,
+    "64": 19,
+    "256": 49,
+    "512": 79,
+    "1024": 128,
+    "2048": 208
+  },
+  "model_dims": [128, 256],
+  "heads": 16,
+  "token_embedding_dim": 16,
+  "ff_multiplier": 4,
+  "route_learning_rate": 0.003,
+  "route_pretraining_minimum_attention": 0.9995,
+  "representation_learning_rate": 0.001,
+  "representation_mse_gate": 0.002,
+  "representation_gate_interval": 500,
+  "representation_nuisance_loss_weight": 0.02,
+  "boolean_learning_rate": 0.001,
+  "boolean_batch_size": 512,
+  "boolean_evaluation_batch_size": 1024,
+  "boolean_evaluation_repeats": 8,
+  "boolean_feature_steps": 4000,
+  "boolean_output_max_steps": 24000,
+  "boolean_retention_weight": 0.0,
+  "boolean_lr_decay_steps": [8000, 16000],
+  "boolean_lr_decay_factor": 0.2,
+  "boolean_nuisance_noise_std": 0.1,
+  "boolean_restarts": 3,
+  "boolean_gate_interval": 250,
+  "integration_learning_rate": 0.0003,
+  "integration_public_replay_weight": 0.25,
+  "integration_gate_interval": 250,
+  "integration_minimum_joint_gate": 0.99,
+  "route_steps_by_length": {
+    "32": 800,
+    "64": 800,
+    "256": 1200,
+    "512": 1800,
+    "1024": 2800,
+    "2048": 4500
+  },
+  "representation_steps_by_length": {
+    "32": 3000,
+    "64": 3000,
+    "256": 4000,
+    "512": 5000,
+    "1024": 7000,
+    "2048": 15000
+  },
+  "integration_steps_by_length": {
+    "32": 3000,
+    "64": 3000,
+    "256": 4000,
+    "512": 5000,
+    "1024": 6000,
+    "2048": 8000
+  },
+  "integration_validation_n_by_length": {
+    "32": 8192,
+    "64": 8192,
+    "256": 512,
+    "512": 256,
+    "1024": 128,
+    "2048": 64
+  },
+  "batch_size_128_by_length": {
+    "32": 256,
+    "64": 256,
+    "256": 128,
+    "512": 64,
+    "1024": 32,
+    "2048": 16
+  },
+  "evaluation_batch_size_128_by_length": {
+    "32": 1024,
+    "64": 1024,
+    "256": 512,
+    "512": 256,
+    "1024": 128,
+    "2048": 64
+  },
+  "success_gate": {
+    "minimum_state_bit_accuracy": 0.999,
+    "minimum_trace_exact": 0.99,
+    "minimum_final_parity_accuracy": 0.999,
+    "minimum_joint_exact": 0.99
+  }
+}

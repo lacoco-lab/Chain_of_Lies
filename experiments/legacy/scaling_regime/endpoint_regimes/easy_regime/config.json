@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "experiment_name": "easy_regime_matched_v2",
+  "seeds": [0, 1, 2],
+  "train_n": 10000,
+  "val_n": 1000,
+  "checkpoint": "ckpt_final",
+  "models": {
+    "qwen": "Qwen/Qwen2.5-7B-Instruct",
+    "llama": "meta-llama/Llama-3.1-8B-Instruct"
+  },
+  "tasks": {
+    "multiplication": {"operand_range": [2, 50]},
+    "s5": {"sequence_length": 1},
+    "knowledge": {"addend_range": [10, 99]}
+  },
+  "conditions": {
+    "vanilla": {"family": "control", "variant": "{task}_easy_control", "supervision_mode": "answer_only"},
+    "public_only_cot": {"family": "control", "variant": "{task}_easy_control", "supervision_mode": "public_cot"},
+    "filler": {"family": "control", "variant": "{task}_easy_control", "supervision_mode": "filler_public_cot", "filler_token_count": 64},
+    "piggyback": {"family": "piggyback", "variant": "{task}_easy_piggyback", "supervision_mode": "public_cot"},
+    "steganography": {"family": "steganography", "variant": "{task}_easy_steg_local_invisible", "supervision_mode": "local_channel_cot"}
+  },
+  "training": {
+    "epochs": 1,
+    "batch_size": 1,
+    "learning_rate": 0.00002,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "training_max_new_tokens": 768,
+    "evaluation_max_new_tokens": 1024,
+    "validation_sample_size": 200,
+    "validation_batch_size": 2,
+    "tokenizer_check_sample_size": 1000
+  },
+  "result_overrides": {
+    "knowledge/qwen": {
+      "reason": "Use the final Qwen-screened 20-fact rerun; the original all-100-fact run was not a near-ceiling Easy knowledge calibration.",
+      "config": "experiments/legacy/scaling_regime/endpoint_regimes/easy_regime/config_qwen_screened_knowledge.json",
+      "data_root": "generated_data/easy_regime_qwen_screened_knowledge_v1",
+      "artifacts_root": "artifacts/easy_regime",
+      "responses_root": "generated_data/easy_regime_eval_responses"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+universe = vanilla
+
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/scaling_regime/tasks/iterated_addition/condor_nethome/run.sh mmohammadkhani $(model) $(seed) $(condition)
+
+# Expand the exported submit-shell token explicitly. The schedd did not honor
+# the earlier name-only getenv declaration reliably.
+environment = "HF_TOKEN=$ENV(HF_TOKEN)"
+output = /scratch/mmohammadkhani/logs/chain_of_lies/knowledge_all_but_one_v2_$(model)_seed_$(seed)_$(condition).out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/knowledge_all_but_one_v2_$(model)_seed_$(seed)_$(condition).err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/knowledge_all_but_one_v2_$(model)_seed_$(seed)_$(condition).log
+
+request_CPUs = 4
+request_memory = 64G
+request_GPUs = 1
+request_disk = 80G
+requirements = (GPUs_GlobalMemoryMb >= 40000)
++MaxWallTime = 604800
+
+queue model,seed,condition from (
+  qwen 0 vanilla
+  qwen 0 filler
+  qwen 0 public_only_cot
+  qwen 0 piggyback
+  qwen 0 steganography
+  qwen 1 vanilla
+  qwen 1 filler
+  qwen 1 public_only_cot
+  qwen 1 piggyback
+  qwen 1 steganography
+  qwen 2 vanilla
+  qwen 2 filler
+  qwen 2 public_only_cot
+  qwen 2 piggyback
+  qwen 2 steganography
+  llama 0 vanilla
+  llama 0 filler
+  llama 0 public_only_cot
+  llama 0 piggyback
+  llama 0 steganography
+  llama 1 vanilla
+  llama 1 filler
+  llama 1 public_only_cot
+  llama 1 piggyback
+  llama 1 steganography
+  llama 2 vanilla
+  llama 2 filler
+  llama 2 public_only_cot
+  llama 2 piggyback
+  llama 2 steganography
+)

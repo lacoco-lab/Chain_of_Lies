@@ -1,0 +1,29 @@
+# Generate and validate the two additional replication seeds independently.
+universe = docker
+docker_image = pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/scaling_regime/tasks/plain_parity/run.sh generate experiments/scaling_regime/tasks/plain_parity/config_seed_$(seed).json
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)
+preserve_relative_paths = True
+transfer_input_files = chain_of_lies,experiments/scaling_regime/tasks/plain_parity
+transfer_output_files = generated_data/parity_regime_calibration/seed_$(seed),generated_data/parity_regime_calibration/split_manifest_seed_$(seed).json
+
+output = /home/momo00016/logs/chain_of_lies/parity_regime_generate_seed_$(seed).out
+error  = /home/momo00016/logs/chain_of_lies/parity_regime_generate_seed_$(seed).err
+log    = /home/momo00016/logs/chain_of_lies/parity_regime_generate_seed_$(seed).log
+
+request_CPUs = 1
+request_memory = 8G
+request_GPUs = 0
+request_disk = 8G
++MaxWallTime = 7200
+
+queue seed from (
+  1
+  2
+)

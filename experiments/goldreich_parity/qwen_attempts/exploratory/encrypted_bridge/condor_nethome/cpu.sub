@@ -1,0 +1,20 @@
+universe = vanilla
+
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/goldreich_parity/qwen_attempts/exploratory/encrypted_bridge/condor_nethome/run.sh mmohammadkhani $(action)
+
+getenv = HF_TOKEN
+
+output = /scratch/mmohammadkhani/logs/chain_of_lies/parity_goldreich_bridge_$(action).out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/parity_goldreich_bridge_$(action).err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/parity_goldreich_bridge_$(action).log
+
+request_CPUs = 2
+request_memory = 16G
+request_GPUs = 0
+
++MaxWallTime = 14400
+
+queue 1
+

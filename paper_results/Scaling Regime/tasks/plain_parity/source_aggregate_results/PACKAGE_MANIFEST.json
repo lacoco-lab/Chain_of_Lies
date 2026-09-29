@@ -1,0 +1,679 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_regime_calibration_v1",
+  "package_complete": true,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "models": [
+    "qwen",
+    "llama"
+  ],
+  "conditions": [
+    "vanilla",
+    "public_only_cot",
+    "filler",
+    "piggyback",
+    "steganography"
+  ],
+  "canonical_roots": {
+    "implementation": "experiments/parity_regime_calibration",
+    "generated_splits": "generated_data/parity_regime_calibration",
+    "raw_responses": "generated_data/parity_regime_calibration_eval_responses",
+    "adapters_provenance_and_reports": "artifacts/parity_regime_calibration"
+  },
+  "counts": {
+    "cells": 30,
+    "final_adapters": 30,
+    "generated_prompt_records": 99000,
+    "raw_response_records": 60000,
+    "per_seed_metric_rows": 300,
+    "aggregate_metric_rows": 100,
+    "replicated_regime_candidates": 10
+  },
+  "scientific_config_consistent": true,
+  "all_splits_valid_and_disjoint": true,
+  "all_response_ids_match_validation_prompts": true,
+  "all_candidates_replicated_hard": true,
+  "split_validations": [
+    {
+      "valid": true,
+      "seed": 0,
+      "train_n": 10000,
+      "val_n": 1000,
+      "bucket_counts": {
+        "train": {
+          "008_015": 2000,
+          "016_031": 2000,
+          "032_063": 2000,
+          "064_127": 2000,
+          "128_255": 2000
+        },
+        "val": {
+          "008_015": 200,
+          "016_031": 200,
+          "032_063": 200,
+          "064_127": 200,
+          "128_255": 200
+        }
+      },
+      "individual_sequence_train_val_overlap": 0,
+      "private_tasks_matched_across_variants": true,
+      "control_steg_public_tasks_matched": true,
+      "piggyback_shared_prefix": "all but final bit"
+    },
+    {
+      "valid": true,
+      "seed": 1,
+      "train_n": 10000,
+      "val_n": 1000,
+      "bucket_counts": {
+        "train": {
+          "008_015": 2000,
+          "016_031": 2000,
+          "032_063": 2000,
+          "064_127": 2000,
+          "128_255": 2000
+        },
+        "val": {
+          "008_015": 200,
+          "016_031": 200,
+          "032_063": 200,
+          "064_127": 200,
+          "128_255": 200
+        }
+      },
+      "individual_sequence_train_val_overlap": 0,
+      "private_tasks_matched_across_variants": true,
+      "control_steg_public_tasks_matched": true,
+      "piggyback_shared_prefix": "all but final bit"
+    },
+    {
+      "valid": true,
+      "seed": 2,
+      "train_n": 10000,
+      "val_n": 1000,
+      "bucket_counts": {
+        "train": {
+          "008_015": 2000,
+          "016_031": 2000,
+          "032_063": 2000,
+          "064_127": 2000,
+          "128_255": 2000
+        },
+        "val": {
+          "008_015": 200,
+          "016_031": 200,
+          "032_063": 200,
+          "064_127": 200,
+          "128_255": 200
+        }
+      },
+      "individual_sequence_train_val_overlap": 0,
+      "private_tasks_matched_across_variants": true,
+      "control_steg_public_tasks_matched": true,
+      "piggyback_shared_prefix": "all but final bit"
+    }
+  ],
+  "cells": [
+    {
+      "seed": 0,
+      "model": "qwen",
+      "condition": "vanilla",
+      "variant": "parity_control",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/qwen/seed_0/vanilla/parity_control/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 0,
+      "model": "qwen",
+      "condition": "public_only_cot",
+      "variant": "parity_control",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/qwen/seed_0/public_only_cot/parity_control/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 0,
+      "model": "qwen",
+      "condition": "filler",
+      "variant": "parity_control",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/qwen/seed_0/filler/parity_control/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 0,
+      "model": "qwen",
+      "condition": "piggyback",
+      "variant": "parity_piggyback",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/qwen/seed_0/piggyback/parity_piggyback/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 0,
+      "model": "qwen",
+      "condition": "steganography",
+      "variant": "parity_steg_local_invisible",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/qwen/seed_0/steganography/parity_steg_local_invisible/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 0,
+      "model": "llama",
+      "condition": "vanilla",
+      "variant": "parity_control",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/llama/seed_0/vanilla/parity_control/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 0,
+      "model": "llama",
+      "condition": "public_only_cot",
+      "variant": "parity_control",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/llama/seed_0/public_only_cot/parity_control/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 0,
+      "model": "llama",
+      "condition": "filler",
+      "variant": "parity_control",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/llama/seed_0/filler/parity_control/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 0,
+      "model": "llama",
+      "condition": "piggyback",
+      "variant": "parity_piggyback",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/llama/seed_0/piggyback/parity_piggyback/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 0,
+      "model": "llama",
+      "condition": "steganography",
+      "variant": "parity_steg_local_invisible",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/llama/seed_0/steganography/parity_steg_local_invisible/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 1,
+      "model": "qwen",
+      "condition": "vanilla",
+      "variant": "parity_control",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/qwen/seed_1/vanilla/parity_control/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 1,
+      "model": "qwen",
+      "condition": "public_only_cot",
+      "variant": "parity_control",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/qwen/seed_1/public_only_cot/parity_control/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 1,
+      "model": "qwen",
+      "condition": "filler",
+      "variant": "parity_control",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/qwen/seed_1/filler/parity_control/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 1,
+      "model": "qwen",
+      "condition": "piggyback",
+      "variant": "parity_piggyback",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/qwen/seed_1/piggyback/parity_piggyback/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 1,
+      "model": "qwen",
+      "condition": "steganography",
+      "variant": "parity_steg_local_invisible",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/qwen/seed_1/steganography/parity_steg_local_invisible/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 1,
+      "model": "llama",
+      "condition": "vanilla",
+      "variant": "parity_control",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/llama/seed_1/vanilla/parity_control/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 1,
+      "model": "llama",
+      "condition": "public_only_cot",
+      "variant": "parity_control",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/llama/seed_1/public_only_cot/parity_control/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 1,
+      "model": "llama",
+      "condition": "filler",
+      "variant": "parity_control",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/llama/seed_1/filler/parity_control/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 1,
+      "model": "llama",
+      "condition": "piggyback",
+      "variant": "parity_piggyback",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/llama/seed_1/piggyback/parity_piggyback/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 1,
+      "model": "llama",
+      "condition": "steganography",
+      "variant": "parity_steg_local_invisible",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/llama/seed_1/steganography/parity_steg_local_invisible/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 2,
+      "model": "qwen",
+      "condition": "vanilla",
+      "variant": "parity_control",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/qwen/seed_2/vanilla/parity_control/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 2,
+      "model": "qwen",
+      "condition": "public_only_cot",
+      "variant": "parity_control",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/qwen/seed_2/public_only_cot/parity_control/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 2,
+      "model": "qwen",
+      "condition": "filler",
+      "variant": "parity_control",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/qwen/seed_2/filler/parity_control/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 2,
+      "model": "qwen",
+      "condition": "piggyback",
+      "variant": "parity_piggyback",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/qwen/seed_2/piggyback/parity_piggyback/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 2,
+      "model": "qwen",
+      "condition": "steganography",
+      "variant": "parity_steg_local_invisible",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/qwen/seed_2/steganography/parity_steg_local_invisible/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 2,
+      "model": "llama",
+      "condition": "vanilla",
+      "variant": "parity_control",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/llama/seed_2/vanilla/parity_control/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 2,
+      "model": "llama",
+      "condition": "public_only_cot",
+      "variant": "parity_control",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/llama/seed_2/public_only_cot/parity_control/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 2,
+      "model": "llama",
+      "condition": "filler",
+      "variant": "parity_control",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/llama/seed_2/filler/parity_control/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 2,
+      "model": "llama",
+      "condition": "piggyback",
+      "variant": "parity_piggyback",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/llama/seed_2/piggyback/parity_piggyback/ckpt_final/adapter_model.safetensors"
+    },
+    {
+      "seed": 2,
+      "model": "llama",
+      "condition": "steganography",
+      "variant": "parity_steg_local_invisible",
+      "train_examples_seen": 10000,
+      "responses": {
+        "baseline": 1000,
+        "finetuned": 1000
+      },
+      "final_adapter": "artifacts/parity_regime_calibration/llama/seed_2/steganography/parity_steg_local_invisible/ckpt_final/adapter_model.safetensors"
+    }
+  ],
+  "key_file_checksums": [
+    {
+      "path": "experiments/parity_regime_calibration/config.json",
+      "bytes": 1667,
+      "sha256": "76e538b1409336f4482a0ee215497852186ea35b118b64bb566eaac3233d2c5f"
+    },
+    {
+      "path": "experiments/parity_regime_calibration/config_seed_1.json",
+      "bytes": 1738,
+      "sha256": "c84a777395175de110cda658a27c4f0abdd8734c5fb263c3bc8183852f98b48f"
+    },
+    {
+      "path": "experiments/parity_regime_calibration/config_seed_2.json",
+      "bytes": 1738,
+      "sha256": "c28e868f9c4ab093ec08c41c9032fc399398d07bd8218a369e0f04f5380f00f1"
+    },
+    {
+      "path": "generated_data/parity_regime_calibration/split_manifest.json",
+      "bytes": 1335,
+      "sha256": "c21f1972a6b543c094e8757f989b2f582542c478d0b7f7f58d6c9c2284f79ad5"
+    },
+    {
+      "path": "generated_data/parity_regime_calibration/split_manifest_seed_1.json",
+      "bytes": 1335,
+      "sha256": "de3ed38d7446463826ae155f67d10fe68900a2062b0e601de141f7244ba16021"
+    },
+    {
+      "path": "generated_data/parity_regime_calibration/split_manifest_seed_2.json",
+      "bytes": 1335,
+      "sha256": "8f660d06434bce63f7abbaa13c379f8d1e805186a76ab9ac76b9a44be1c624f8"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/REPORT_THREE_SEED.md",
+      "bytes": 1604,
+      "sha256": "c9bdca94a63062c9a9179c3b86135e182cd1a336404c7cc521056b3abcae9745"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/metrics_by_length_bucket_three_seed.csv",
+      "bytes": 21285,
+      "sha256": "a1923fd8be37ddb91e3c0d5eaa127edd2142d5301ab5fd0bfdd838ff7cc3b19c"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/summary_three_seed.json",
+      "bytes": 87626,
+      "sha256": "091a20bdb2a5832db4d193c1f563dfd4ce6c9d1bbf8360186678d389e3c68544"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/qwen/seed_0/vanilla/parity_control/ckpt_final/adapter_model.safetensors",
+      "bytes": 80792096,
+      "sha256": "1204cbeebe7d5ef8d96a89f2a70f76adc2ad91099789559147b45b7070506a08"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/qwen/seed_0/public_only_cot/parity_control/ckpt_final/adapter_model.safetensors",
+      "bytes": 80792096,
+      "sha256": "f5dc9518bcef10d8f90b3af0f3508b45dac6ed7a87001c4a3eb891977f974a96"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/qwen/seed_0/filler/parity_control/ckpt_final/adapter_model.safetensors",
+      "bytes": 80792096,
+      "sha256": "0d4cc5461c2c819fac96f062b127641777f30971d8fbe91685bd35cda8a162c3"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/qwen/seed_0/piggyback/parity_piggyback/ckpt_final/adapter_model.safetensors",
+      "bytes": 80792096,
+      "sha256": "98a2389def5d96f9f0e8f4f3bb8637c64bdfda1ca3e8e4085c746a19c2937d8a"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/qwen/seed_0/steganography/parity_steg_local_invisible/ckpt_final/adapter_model.safetensors",
+      "bytes": 80792096,
+      "sha256": "49406a2ade0eda2f129ca561bf32eca60b7e4f77fd965d5bd4e83928141b5615"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/llama/seed_0/vanilla/parity_control/ckpt_final/adapter_model.safetensors",
+      "bytes": 83945296,
+      "sha256": "fc4d93a3a901f7c3add667c0bb042ad864e1999cf6b877fbb0a8ca4e9b98609d"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/llama/seed_0/public_only_cot/parity_control/ckpt_final/adapter_model.safetensors",
+      "bytes": 83945296,
+      "sha256": "5540eb3d769adf3b88efaba7795d0b7ab8158ee2382ceed25c2694b089c12bc0"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/llama/seed_0/filler/parity_control/ckpt_final/adapter_model.safetensors",
+      "bytes": 83945296,
+      "sha256": "d102641248b1fd7f7a1f0f913fcc2c12d825da4b9d6a028f8fe00a2734f58670"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/llama/seed_0/piggyback/parity_piggyback/ckpt_final/adapter_model.safetensors",
+      "bytes": 83945296,
+      "sha256": "40ceeb67976a77cc6c516fd54845e08312aea6efa4c5e86eef337ffd3ede3414"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/llama/seed_0/steganography/parity_steg_local_invisible/ckpt_final/adapter_model.safetensors",
+      "bytes": 83945296,
+      "sha256": "bcddfdaad73c8dc6f9f1ef3db84838ea3f9014c724e86b2b17a40ba20ad99c23"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/qwen/seed_1/vanilla/parity_control/ckpt_final/adapter_model.safetensors",
+      "bytes": 80792096,
+      "sha256": "1ab4fe1654e2b0874afb09f08a5258ce57594be31b580f3ea4551a3a0390280b"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/qwen/seed_1/public_only_cot/parity_control/ckpt_final/adapter_model.safetensors",
+      "bytes": 80792096,
+      "sha256": "768065285845034e1f2d1c82d24633995c209e41ecaf4ae90994f2c0793ff263"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/qwen/seed_1/filler/parity_control/ckpt_final/adapter_model.safetensors",
+      "bytes": 80792096,
+      "sha256": "1ccfec3d465856914faed52e79d87aa8c6b99839f514fc32df46715ad32a1136"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/qwen/seed_1/piggyback/parity_piggyback/ckpt_final/adapter_model.safetensors",
+      "bytes": 80792096,
+      "sha256": "459395fa4547783518cd133c72a8b3c2b8ec7bbc7f5c24ddd1dd3c9dfecf21d0"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/qwen/seed_1/steganography/parity_steg_local_invisible/ckpt_final/adapter_model.safetensors",
+      "bytes": 80792096,
+      "sha256": "8dbb8a50bea2d3445c49041350619c509685adc54d70efeb69770d3f05a2211c"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/llama/seed_1/vanilla/parity_control/ckpt_final/adapter_model.safetensors",
+      "bytes": 83945296,
+      "sha256": "1a0d34b9a3178b116d1f6c844962f0a824dab221e6bf9f8a4fd3be7eb2f23954"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/llama/seed_1/public_only_cot/parity_control/ckpt_final/adapter_model.safetensors",
+      "bytes": 83945296,
+      "sha256": "137a38b31d8d0f358c34d1a228ac71e463fe3a0444879483d0385894bfbe05bc"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/llama/seed_1/filler/parity_control/ckpt_final/adapter_model.safetensors",
+      "bytes": 83945296,
+      "sha256": "ad0fe0758667fbb97f2d53431cc8d3c66e5c109dc08bf26b9f407efb8dd73a87"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/llama/seed_1/piggyback/parity_piggyback/ckpt_final/adapter_model.safetensors",
+      "bytes": 83945296,
+      "sha256": "fc370850686bc60297475a4c2be7c69c7b10d19c71480ac0eb6e5667b3149a36"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/llama/seed_1/steganography/parity_steg_local_invisible/ckpt_final/adapter_model.safetensors",
+      "bytes": 83945296,
+      "sha256": "40017b96e775e756ac82690a4f07e6e5c43be17e7bd58b12e0e7509cd83f2a7e"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/qwen/seed_2/vanilla/parity_control/ckpt_final/adapter_model.safetensors",
+      "bytes": 80792096,
+      "sha256": "1aaaf3252e7d5c95255aadd5ea0a6b619ae02ef315917a67b6febcfccd584293"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/qwen/seed_2/public_only_cot/parity_control/ckpt_final/adapter_model.safetensors",
+      "bytes": 80792096,
+      "sha256": "50dde743c55efee4ff68863d9187880d77189b1cc3310fe1f19ef7fa16c3e624"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/qwen/seed_2/filler/parity_control/ckpt_final/adapter_model.safetensors",
+      "bytes": 80792096,
+      "sha256": "5e2df9dce550e3c7cbe0a9ac90f5b9e1240c5446cff92facc08020805ddb97c9"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/qwen/seed_2/piggyback/parity_piggyback/ckpt_final/adapter_model.safetensors",
+      "bytes": 80792096,
+      "sha256": "dab67ab3d14391f8900c70b1c3382ec16cbf8f7a2ce7cf1ce49dff8f4ee2542a"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/qwen/seed_2/steganography/parity_steg_local_invisible/ckpt_final/adapter_model.safetensors",
+      "bytes": 80792096,
+      "sha256": "6a4105b8945300ae105fdac0ea9f5fb50f87ceeb3fec0b0be1c76c4062f068b1"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/llama/seed_2/vanilla/parity_control/ckpt_final/adapter_model.safetensors",
+      "bytes": 83945296,
+      "sha256": "d17fc2292ca032a53d06d7fb9a540c2ca339623e1d0d7ca216ba6b38410eca37"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/llama/seed_2/public_only_cot/parity_control/ckpt_final/adapter_model.safetensors",
+      "bytes": 83945296,
+      "sha256": "1b511a56e23e4fc7efc67d572167d5bce2f4904174ab3f201dfc0622b0c59a27"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/llama/seed_2/filler/parity_control/ckpt_final/adapter_model.safetensors",
+      "bytes": 83945296,
+      "sha256": "30960d892f9941af18e14a4b2d7d82aa02b93a528b88e03b34be67e868c00745"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/llama/seed_2/piggyback/parity_piggyback/ckpt_final/adapter_model.safetensors",
+      "bytes": 83945296,
+      "sha256": "abbef3e0ed40c8071ea6684e2617de187ae65563ba65aa1a1f917c1906c71f58"
+    },
+    {
+      "path": "artifacts/parity_regime_calibration/llama/seed_2/steganography/parity_steg_local_invisible/ckpt_final/adapter_model.safetensors",
+      "bytes": 83945296,
+      "sha256": "904d5151c648f20f2dab1e00ec1939ea96bc6bc394b3b8a7567e11529474555d"
+    }
+  ]
+}

@@ -22,8 +22,16 @@ def load_prompt_for_inference(path: Path) -> ExperimentPrompt:
 def summarize_training_history(adapter_dir: Path) -> dict[str, Any]:
     history_path = adapter_dir / "train_history.json"
     metadata_path = adapter_dir / "training_metadata.json"
-    history = json.loads(history_path.read_text(encoding="utf-8")) if history_path.exists() else []
-    metadata = json.loads(metadata_path.read_text(encoding="utf-8")) if metadata_path.exists() else {}
+    history = (
+        json.loads(history_path.read_text(encoding="utf-8"))
+        if history_path.exists()
+        else []
+    )
+    metadata = (
+        json.loads(metadata_path.read_text(encoding="utf-8"))
+        if metadata_path.exists()
+        else {}
+    )
 
     if not history:
         return {
@@ -41,7 +49,9 @@ def summarize_training_history(adapter_dir: Path) -> dict[str, Any]:
                 "initial_loss": history[0].get("loss"),
                 "final_loss": final.get("loss"),
             }
-        best_by_reward = max(validation_records, key=lambda item: item["validation"]["avg_reward"])
+        best_by_reward = max(
+            validation_records, key=lambda item: item["validation"]["avg_reward"]
+        )
         final_validation = validation_records[-1]["validation"]
         return {
             "training_metadata": metadata,
@@ -83,10 +93,13 @@ def run_variant_inference(
     do_sample: bool | None = None,
     resume: bool = True,
     batch_size: int = 8,
+    reset_model_cache: bool = True,
+    keep_model_cache: bool = False,
 ) -> None:
-    ### Generate responses for one prompt directory using either a base model or an RL adapter.
+    """Generate responses for one prompt directory."""
     responses_dir.mkdir(parents=True, exist_ok=True)
-    clear_model_cache()
+    if reset_model_cache:
+        clear_model_cache()
 
     prompt_files = sorted(prompts_dir.glob("*.json"))
     if not prompt_files:
@@ -102,7 +115,7 @@ def run_variant_inference(
         pending.append(experiment)
 
     for batch_start in range(0, len(pending), batch_size):
-        batch = pending[batch_start: batch_start + batch_size]
+        batch = pending[batch_start : batch_start + batch_size]
         if not batch:
             continue
         first_idx = batch_start + 1
@@ -135,7 +148,8 @@ def run_variant_inference(
                     encoding="utf-8",
                 )
                 handle.write(f"{response.experiment_id}\n")
-    clear_model_cache()
+    if not keep_model_cache:
+        clear_model_cache()
 
 
 def compare_variant_results(
@@ -152,13 +166,21 @@ def compare_variant_results(
         "rl": rl,
         "delta": {
             "avg_reward": rl.get("avg_reward", 0.0) - baseline.get("avg_reward", 0.0),
-            "task_success_rate": rl.get("task_success_rate", 0.0) - baseline.get("task_success_rate", 0.0),
-            "task_subgoal_rate": rl.get("task_subgoal_rate", 0.0) - baseline.get("task_subgoal_rate", 0.0),
-            "task_component_rate": rl.get("task_component_rate", 0.0) - baseline.get("task_component_rate", 0.0),
-            "public_exact_rate": rl.get("public_exact_rate", 0.0) - baseline.get("public_exact_rate", 0.0),
-            "private_exact_rate": rl.get("private_exact_rate", 0.0) - baseline.get("private_exact_rate", 0.0),
-            "concealment_rate": rl.get("concealment_rate", 0.0) - baseline.get("concealment_rate", 0.0),
-            "format_rate": rl.get("format_rate", 0.0) - baseline.get("format_rate", 0.0),
-            "avg_cot_words": rl.get("avg_cot_words", 0.0) - baseline.get("avg_cot_words", 0.0),
+            "task_success_rate": rl.get("task_success_rate", 0.0)
+            - baseline.get("task_success_rate", 0.0),
+            "task_subgoal_rate": rl.get("task_subgoal_rate", 0.0)
+            - baseline.get("task_subgoal_rate", 0.0),
+            "task_component_rate": rl.get("task_component_rate", 0.0)
+            - baseline.get("task_component_rate", 0.0),
+            "public_exact_rate": rl.get("public_exact_rate", 0.0)
+            - baseline.get("public_exact_rate", 0.0),
+            "private_exact_rate": rl.get("private_exact_rate", 0.0)
+            - baseline.get("private_exact_rate", 0.0),
+            "concealment_rate": rl.get("concealment_rate", 0.0)
+            - baseline.get("concealment_rate", 0.0),
+            "format_rate": rl.get("format_rate", 0.0)
+            - baseline.get("format_rate", 0.0),
+            "avg_cot_words": rl.get("avg_cot_words", 0.0)
+            - baseline.get("avg_cot_words", 0.0),
         },
     }

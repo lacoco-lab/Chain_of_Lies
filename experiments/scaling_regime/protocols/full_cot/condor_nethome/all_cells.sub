@@ -1,0 +1,42 @@
+universe = vanilla
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/scaling_regime/protocols/full_cot/run_nethome.sh $(task) $(model) $(seed) cell
+environment = "HF_TOKEN=$ENV(HF_TOKEN)"
+output = /scratch/mmohammadkhani/logs/chain_of_lies/full_cot_$(task)_$(model)_seed_$(seed).out
+error = /scratch/mmohammadkhani/logs/chain_of_lies/full_cot_$(task)_$(model)_seed_$(seed).err
+log = /scratch/mmohammadkhani/logs/chain_of_lies/full_cot_$(task)_$(model)_seed_$(seed).log
+request_CPUs = 4
+request_memory = $(memory_gb)G
+request_GPUs = 1
+request_disk = 5G
+requirements = (GPUs_GlobalMemoryMb >= $(gpu_memory_mb))
++MaxWallTime = 604800
+on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)
+queue task,model,seed,memory_gb,gpu_memory_mb from (
+  knowledge qwen 0 48 40000
+  knowledge qwen 1 48 40000
+  knowledge qwen 2 48 40000
+  knowledge llama 0 48 40000
+  knowledge llama 1 48 40000
+  knowledge llama 2 48 40000
+  s5 qwen 0 64 40000
+  s5 qwen 1 64 40000
+  s5 qwen 2 64 40000
+  s5 llama 0 64 40000
+  s5 llama 1 64 40000
+  s5 llama 2 64 40000
+  multiplication qwen 0 48 40000
+  multiplication qwen 1 48 40000
+  multiplication qwen 2 48 40000
+  multiplication llama 0 48 40000
+  multiplication llama 1 48 40000
+  multiplication llama 2 48 40000
+  parity qwen 0 128 40000
+  parity qwen 1 32 80000
+  parity qwen 2 32 80000
+  parity llama 0 128 40000
+  parity llama 1 32 80000
+  parity llama 2 32 80000
+)
+

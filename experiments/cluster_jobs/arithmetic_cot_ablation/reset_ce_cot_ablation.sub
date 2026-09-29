@@ -1,0 +1,16 @@
+universe = vanilla
+
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/cluster_jobs/arithmetic_cot_ablation/reset_ce_cot_ablation.sh mmohammadkhani
+
+output = /scratch/mmohammadkhani/logs/chain_of_lies/reset_ce_cot_ablation.out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/reset_ce_cot_ablation.err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/reset_ce_cot_ablation.log
+
+request_CPUs = 1
+request_memory = 4G
+
++MaxWallTime = 259200
+
+queue

@@ -1,0 +1,29 @@
+universe = vanilla
+accounting_group = pausable
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/legacy/scaling_regime/endpoint_regimes/easy_regime/condor_nethome/run.sh mmohammadkhani qwen-screened-cell knowledge qwen $(seed) $(condition)
+getenv = HF_TOKEN
+output = /scratch/mmohammadkhani/logs/chain_of_lies/qwen_screened_knowledge_$(condition)_seed_$(seed).out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/qwen_screened_knowledge_$(condition)_seed_$(seed).err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/qwen_screened_knowledge_$(condition)_seed_$(seed).log
+request_CPUs = 4
+request_memory = 64G
+request_GPUs = 1
+request_disk = 100G
+requirements = (GPUs_GlobalMemoryMb >= 40000)
++MaxWallTime = 604800
+queue seed,condition from (
+  0 public_only_cot
+  1 public_only_cot
+  2 public_only_cot
+  0 filler
+  1 filler
+  2 filler
+  0 piggyback
+  1 piggyback
+  2 piggyback
+  0 steganography
+  1 steganography
+  2 steganography
+)

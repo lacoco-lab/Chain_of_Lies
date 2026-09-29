@@ -16,6 +16,7 @@ def clear_model_cache() -> None:
     _model_cache.clear()
     try:
         import torch
+
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
     except ModuleNotFoundError:
@@ -32,7 +33,11 @@ def _get_model_and_tokenizer(
     if model_id in _model_cache:
         return _model_cache[model_id]
     import sys
-    print(f"[Stage 2] Loading model {model_id} (first run: download + load to GPU, can take 5–15 min) ...", flush=True)
+
+    print(
+        f"[Stage 2] Loading model {model_id} (first run: download + load to GPU, can take 5–15 min) ...",
+        flush=True,
+    )
     sys.stdout.flush()
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -69,7 +74,10 @@ def _get_model_and_tokenizer(
         tokenizer.pad_token = tokenizer.eos_token
     tokenizer.padding_side = "left"
     _model_cache[model_id] = (model, tokenizer)
-    print(f"[Stage 2] Model loaded on {next(model.parameters()).device}. Running inference ...", flush=True)
+    print(
+        f"[Stage 2] Model loaded on {next(model.parameters()).device}. Running inference ...",
+        flush=True,
+    )
     return model, tokenizer
 
 
@@ -117,7 +125,9 @@ def run_inference(
     # interprets as a malformed sequence and either generates nothing or garbage.
     # Forcing `add_special_tokens=False` here makes the inference path safe across
     # Qwen / Llama / Mistral / Gemma chat templates.
-    model_inputs = tokenizer(text, return_tensors="pt", add_special_tokens=False).to(model.device)
+    model_inputs = tokenizer(text, return_tensors="pt", add_special_tokens=False).to(
+        model.device
+    )
 
     gen_kwargs: dict[str, Any] = {
         "max_new_tokens": max_new_tokens,
@@ -131,14 +141,14 @@ def run_inference(
     generated = model.generate(**model_inputs, **gen_kwargs)
     # Decode only the new tokens
     input_len = model_inputs.input_ids.shape[1]
-    output_ids = generated[:, input_len:]
+    output_ids = generated[:, input_len:].detach().cpu().tolist()
     raw_text = tokenizer.decode(output_ids[0], skip_special_tokens=True)
 
     return LLMResponse(
         raw_text=raw_text.strip(),
         experiment_id=experiment_prompt.experiment_id,
         model_id=model_id,
-        generated_token_ids=[int(token_id) for token_id in output_ids[0]],
+        generated_token_ids=output_ids[0],
     )
 
 
@@ -164,7 +174,9 @@ def run_inference_batch(
         prompt_messages.append({"role": "user", "content": prompt.prompt_text})
         messages.append(prompt_messages)
     texts = [
-        tokenizer.apply_chat_template(message, tokenize=False, add_generation_prompt=True)
+        tokenizer.apply_chat_template(
+            message, tokenize=False, add_generation_prompt=True
+        )
         for message in messages
     ]
     # See `run_inference` for rationale: `add_special_tokens=False` prevents a second BOS
@@ -194,16 +206,18 @@ def run_inference_batch(
         gen_kwargs["temperature"] = temperature
 
     generated = model.generate(**model_inputs, **gen_kwargs)
+    # Transfer once, rather than int(cuda_scalar) for every generated token.
+    # This preserves every generated token (including padding) and decoded text.
+    continuations = generated[:, input_width:].detach().cpu().tolist()
     responses: list[LLMResponse] = []
-    for prompt, sequence in zip(experiment_prompts, generated):
-        output_ids = sequence[input_width:]
+    for prompt, output_ids in zip(experiment_prompts, continuations):
         raw_text = tokenizer.decode(output_ids, skip_special_tokens=True).strip()
         responses.append(
             LLMResponse(
                 raw_text=raw_text,
                 experiment_id=prompt.experiment_id,
                 model_id=model_id,
-                generated_token_ids=[int(token_id) for token_id in output_ids],
+                generated_token_ids=output_ids,
             )
         )
     return responses

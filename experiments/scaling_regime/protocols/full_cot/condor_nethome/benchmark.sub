@@ -1,0 +1,19 @@
+universe = vanilla
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/scaling_regime/protocols/full_cot/run_efficiency_nethome.sh benchmark --task s5 --model $(model) --seed 0 --run-id s5_batch_benchmark_v1 --per-length 2
+environment = "HF_TOKEN=$ENV(HF_TOKEN)"
+output = /scratch/mmohammadkhani/logs/chain_of_lies/full_cot_batch_benchmark_$(model).out
+error = /scratch/mmohammadkhani/logs/chain_of_lies/full_cot_batch_benchmark_$(model).err
+log = /scratch/mmohammadkhani/logs/chain_of_lies/full_cot_batch_benchmark_$(model).log
+request_CPUs = 4
+request_memory = 32G
+request_GPUs = 1
+request_disk = 5G
+requirements = (GPUs_GlobalMemoryMb >= 40000)
++MaxWallTime = 604800
+on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)
+queue model from (
+qwen
+llama
+)

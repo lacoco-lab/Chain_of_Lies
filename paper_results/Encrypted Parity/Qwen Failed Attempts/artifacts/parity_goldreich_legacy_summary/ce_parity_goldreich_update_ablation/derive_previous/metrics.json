@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_update_ablation_v1",
+  "action": "derive_previous",
+  "seed": 0,
+  "initial_adapter": "artifacts/ce_parity_goldreich_update_ablation/base/best_adapter",
+  "baseline": {
+    "local": {
+      "n": 1024,
+      "greedy_accuracy": 0.970703125,
+      "binary_accuracy": 0.970703125,
+      "bit_ce": 0.14796501398086548
+    },
+    "supplied_update": {
+      "n": 512,
+      "greedy_accuracy": 1.0,
+      "binary_accuracy": 1.0,
+      "bit_ce": 2.072751522064209e-05
+    },
+    "derive_previous": {
+      "n": 1008,
+      "greedy_accuracy": 0.4861111111111111,
+      "binary_accuracy": 0.4861111111111111,
+      "bit_ce": 4.697916666666667
+    }
+  },
+  "best_epoch": 4,
+  "history": [
+    {
+      "epoch": 1,
+      "train": {
+        "loss": 0.5694845041554225,
+        "bit_ce": 0.5296992049797585,
+        "attention_aux": 0.3980700041118421
+      },
+      "current_validation": {
+        "n": 1008,
+        "greedy_accuracy": 0.5,
+        "binary_accuracy": 0.5,
+        "bit_ce": 0.6947544642857143
+      },
+      "local_retention": {
+        "n": 1024,
+        "greedy_accuracy": 0.9375,
+        "binary_accuracy": 0.9375,
+        "bit_ce": 0.28787827491760254
+      },
+      "supplied_update_retention": {
+        "n": 512,
+        "greedy_accuracy": 1.0,
+        "binary_accuracy": 1.0,
+        "bit_ce": 2.6222318410873413e-05
+      },
+      "validation_attention": {
+        "n": 128,
+        "attention_aux": 0.4267578125,
+        "selected_attention_mass": 0.994384765625,
+        "selected_seed_ratio": 0.996337890625
+      },
+      "retention_ok": false,
+      "selection_score": 0.834375,
+      "elapsed_seconds": 359.5107938682195
+    },
+    {
+      "epoch": 2,
+      "train": {
+        "loss": 0.5384733971600469,
+        "bit_ce": 0.5023424883226031,
+        "attention_aux": 0.3591411389802632
+      },
+      "current_validation": {
+        "n": 1008,
+        "greedy_accuracy": 0.503968253968254,
+        "binary_accuracy": 0.503968253968254,
+        "bit_ce": 0.6937003968253969
+      },
+      "local_retention": {
+        "n": 1024,
+        "greedy_accuracy": 0.951171875,
+        "binary_accuracy": 0.951171875,
+        "bit_ce": 0.2318260669708252
+      },
+      "supplied_update_retention": {
+        "n": 512,
+        "greedy_accuracy": 1.0,
+        "binary_accuracy": 1.0,
+        "bit_ce": 8.231401443481445e-05
+      },
+      "validation_attention": {
+        "n": 128,
+        "attention_aux": 0.4171142578125,
+        "selected_attention_mass": 0.99755859375,
+        "selected_seed_ratio": 0.9970703125
+      },
+      "retention_ok": true,
+      "selection_score": 10.841761222718254,
+      "elapsed_seconds": 688.4385251631029
+    },
+    {
+      "epoch": 3,
+      "train": {
+        "loss": 0.5281964533423122,
+        "bit_ce": 0.4920473825774695,
+        "attention_aux": 0.3584909539473684
+      },
+      "current_validation": {
+        "n": 1008,
+        "greedy_accuracy": 0.503968253968254,
+        "binary_accuracy": 0.503968253968254,
+        "bit_ce": 0.6919642857142857
+      },
+      "local_retention": {
+        "n": 1024,
+        "greedy_accuracy": 0.953125,
+        "binary_accuracy": 0.953125,
+        "bit_ce": 0.18505859375
+      },
+      "supplied_update_retention": {
+        "n": 512,
+        "greedy_accuracy": 1.0,
+        "binary_accuracy": 1.0,
+        "bit_ce": 0.00010417401790618896
+      },
+      "validation_attention": {
+        "n": 128,
+        "attention_aux": 0.4327392578125,
+        "selected_attention_mass": 0.998046875,
+        "selected_seed_ratio": 0.997802734375
+      },
+      "retention_ok": true,
+      "selection_score": 10.842249503968254,
+      "elapsed_seconds": 1016.9977317180019
+    },
+    {
+      "epoch": 4,
+      "train": {
+        "loss": 0.5198420095404512,
+        "bit_ce": 0.48301610858424715,
+        "attention_aux": 0.3664807771381579
+      },
+      "current_validation": {
+        "n": 1008,
+        "greedy_accuracy": 0.5277777777777778,
+        "binary_accuracy": 0.5277777777777778,
+        "bit_ce": 0.6938864087301587
+      },
+      "local_retention": {
+        "n": 1024,
+        "greedy_accuracy": 0.98046875,
+        "binary_accuracy": 0.98046875,
+        "bit_ce": 0.05074208974838257
+      },
+      "supplied_update_retention": {
+        "n": 512,
+        "greedy_accuracy": 1.0,
+        "binary_accuracy": 1.0,
+        "bit_ce": 1.584365963935852e-05
+      },
+      "validation_attention": {
+        "n": 128,
+        "attention_aux": 0.447998046875,
+        "selected_attention_mass": 0.998779296875,
+        "selected_seed_ratio": 0.999267578125
+      },
+      "retention_ok": true,
+      "selection_score": 10.872894965277778,
+      "elapsed_seconds": 1345.3064250741154
+    }
+  ],
+  "final_evaluations": {
+    "local": {
+      "n": 1024,
+      "greedy_accuracy": 0.98046875,
+      "binary_accuracy": 0.98046875,
+      "bit_ce": 0.05074208974838257
+    },
+    "supplied_update": {
+      "n": 512,
+      "greedy_accuracy": 1.0,
+      "binary_accuracy": 1.0,
+      "bit_ce": 1.584365963935852e-05
+    },
+    "derive_previous": {
+      "n": 1008,
+      "greedy_accuracy": 0.5277777777777778,
+      "binary_accuracy": 0.5277777777777778,
+      "bit_ce": 0.6938864087301587
+    },
+    "derive_current": {
+      "n": 1008,
+      "greedy_accuracy": 0.4712301587301587,
+      "binary_accuracy": 0.4712301587301587,
+      "bit_ce": 0.7041170634920635
+    }
+  },
+  "final_attention": {
+    "n": 128,
+    "attention_aux": 0.447998046875,
+    "selected_attention_mass": 0.998779296875,
+    "selected_seed_ratio": 0.999267578125
+  },
+  "elapsed_seconds": 1393.1593839910347,
+  "final_adapter": "artifacts/ce_parity_goldreich_update_ablation/derive_previous/best_adapter"
+}

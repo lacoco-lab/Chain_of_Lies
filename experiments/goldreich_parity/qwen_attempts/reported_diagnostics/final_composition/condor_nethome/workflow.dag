@@ -1,0 +1,12 @@
+ENV GET HF_TOKEN
+
+JOB positions experiments/goldreich_parity/qwen_attempts/reported_diagnostics/final_composition/condor_nethome/gpu.sub
+VARS positions action="positions"
+SCRIPT PRE positions /nethome/mmohammadkhani/Faithfulness-Safety/experiments/goldreich_parity/qwen_attempts/reported_diagnostics/final_composition/condor_nethome/run_local_step.sh mmohammadkhani prepare
+SCRIPT POST positions /nethome/mmohammadkhani/Faithfulness-Safety/experiments/goldreich_parity/qwen_attempts/reported_diagnostics/final_composition/condor_nethome/run_local_step.sh mmohammadkhani positions_gate
+
+JOB full experiments/goldreich_parity/qwen_attempts/reported_diagnostics/final_composition/condor_nethome/gpu.sub
+VARS full action="full"
+SCRIPT POST full /nethome/mmohammadkhani/Faithfulness-Safety/experiments/goldreich_parity/qwen_attempts/reported_diagnostics/final_composition/condor_nethome/run_local_step.sh mmohammadkhani summarize
+
+PARENT positions CHILD full

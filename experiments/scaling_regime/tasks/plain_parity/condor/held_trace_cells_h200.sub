@@ -1,0 +1,51 @@
+# Replacement for only the 16 seed-1/seed-2 trace-bearing cells that do not
+# fit 40 GB VRAM without CPU activation offload. The four vanilla cells are
+# intentionally absent and must not be resubmitted.
+universe = docker
+docker_image = pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/scaling_regime/tasks/plain_parity/run.sh cell $(model) $(condition) experiments/scaling_regime/tasks/plain_parity/config_seed_$(seed).json
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)
+preserve_relative_paths = True
+stream_output = True
+stream_error = True
+getenv = HF_TOKEN
+environment = "HF_HUB_DISABLE_XET=1"
+transfer_input_files = chain_of_lies,scripts,requirements.txt,pyproject.toml,experiments/shared/check_tokenizer.py,experiments/scaling_regime/tasks/plain_parity,generated_data/parity_regime_calibration/seed_$(seed),generated_data/parity_regime_calibration/split_manifest_seed_$(seed).json
+transfer_output_files = generated_data/parity_regime_calibration_eval_responses/$(model)/seed_$(seed)/$(condition),artifacts/parity_regime_calibration/$(model)/seed_$(seed)/$(condition)
+
+output = /home/momo00016/logs/chain_of_lies/parity_regime_h200_seed_$(seed)_$(model)_$(condition).out
+error  = /home/momo00016/logs/chain_of_lies/parity_regime_h200_seed_$(seed)_$(model)_$(condition).err
+log    = /home/momo00016/logs/chain_of_lies/parity_regime_h200_seed_$(seed)_$(model)_$(condition).log
+
+request_CPUs = 4
+request_memory = 32G
+request_GPUs = 1
+request_disk = 30G
+requirements = (GPUs_GlobalMemoryMb >= 80000)
+max_job_retirement_time = 28800
++MaxWallTime = 345600
+
+queue seed,model,condition from (
+  1 qwen  public_only_cot
+  1 qwen  filler
+  1 qwen  piggyback
+  1 qwen  steganography
+  1 llama public_only_cot
+  1 llama filler
+  1 llama piggyback
+  1 llama steganography
+  2 qwen  public_only_cot
+  2 qwen  filler
+  2 qwen  piggyback
+  2 qwen  steganography
+  2 llama public_only_cot
+  2 llama filler
+  2 llama piggyback
+  2 llama steganography
+)

@@ -1,0 +1,66 @@
+{
+  "experiment": "filler_only_scaling_v1",
+  "schema_version": 1,
+  "tasks": {
+    "parity": {
+      "capacity": {
+        "max_private_cot_tokens_by_model": {
+          "llama": {
+            "008_015": 101,
+            "016_031": 181,
+            "032_063": 341,
+            "064_127": 661,
+            "128_255": 1301
+          }
+        },
+        "verified_budgets": {
+          "008_015": {
+            "budget": 128,
+            "required_maximum": 101,
+            "slack": 27
+          },
+          "016_031": {
+            "budget": 256,
+            "required_maximum": 181,
+            "slack": 75
+          },
+          "032_063": {
+            "budget": 512,
+            "required_maximum": 341,
+            "slack": 171
+          },
+          "064_127": {
+            "budget": 1024,
+            "required_maximum": 661,
+            "slack": 363
+          },
+          "128_255": {
+            "budget": 1536,
+            "required_maximum": 1301,
+            "slack": 235
+          }
+        }
+      },
+      "cells": [
+        {
+          "eval_count": 1000,
+          "eval_dir": "generated_data/parity_regime_calibration/seed_1/parity_control/val_prompts",
+          "manifest": "generated_data/parity_regime_calibration/split_manifest_seed_1.json",
+          "seed": 1,
+          "source_config": "experiments/parity_regime_calibration/config_seed_1.json",
+          "train_count": 10000,
+          "train_dir": "generated_data/parity_regime_calibration/seed_1/parity_control/train_prompts"
+        }
+      ],
+      "records_by_difficulty": {
+        "008_015": 2200,
+        "016_031": 2200,
+        "032_063": 2200,
+        "064_127": 2200,
+        "128_255": 2200
+      },
+      "task": "parity",
+      "unique_records": 11000
+    }
+  }
+}

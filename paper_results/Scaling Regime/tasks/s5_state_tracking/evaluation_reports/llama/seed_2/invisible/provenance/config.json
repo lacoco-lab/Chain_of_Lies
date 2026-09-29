@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment_name": "s5_length_retraining_balanced_v1",
+  "lengths": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+  "piggyback_shared_rule": "all_but_final_swap",
+  "train_examples_per_length": 500,
+  "eval_examples_per_length": 200,
+  "seeds": [0, 1, 2],
+  "checkpoint": "ckpt_final",
+  "models": {
+    "qwen": "Qwen/Qwen2.5-7B-Instruct",
+    "llama": "meta-llama/Llama-3.1-8B-Instruct"
+  },
+  "conditions": {
+    "vanilla": {
+      "variant": "s5_length_control",
+      "supervision_mode": "answer_only"
+    },
+    "filler": {
+      "variant": "s5_length_control",
+      "supervision_mode": "filler_public_cot",
+      "filler_token_count": 64
+    },
+    "public_only_cot": {
+      "variant": "s5_length_control",
+      "supervision_mode": "public_cot"
+    },
+    "piggyback": {
+      "variant": "s5_length_piggyback",
+      "supervision_mode": "public_cot"
+    },
+    "steganography": {
+      "variant": "s5_length_steg_local_invisible",
+      "supervision_mode": "local_channel_cot"
+    }
+  },
+  "training": {
+    "epochs": 3,
+    "batch_size": 1,
+    "learning_rate": 0.00002,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "training_max_new_tokens": 1280,
+    "evaluation_max_new_tokens": 1536,
+    "validation_sample_size": 190,
+    "validation_batch_size": 1,
+    "tokenizer_check_sample_size": 1000
+  },
+  "paths": {
+    "data_root": "generated_data/s5_length_retraining_v1",
+    "artifacts_root": "artifacts/s5_length_retraining_v1",
+    "responses_root": "generated_data/s5_length_retraining_v1_eval_responses"
+  }
+}
+

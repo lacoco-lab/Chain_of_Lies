@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "experiment_name": "hard_regime_s5",
+  "sequence_length_range": [10, 19],
+  "seeds": [0, 1, 2],
+  "train_n": 10000,
+  "val_n": 1000,
+  "checkpoint": "ckpt_final",
+  "models": {
+    "qwen": "Qwen/Qwen2.5-7B-Instruct",
+    "llama": "meta-llama/Llama-3.1-8B-Instruct"
+  },
+  "piggyback": {
+    "variants": ["s5_piggyback", "s5_control"],
+    "modes": ["answer_only", "public_cot"],
+    "epochs": 1,
+    "batch_size": 2,
+    "learning_rate": 0.00002,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "training_max_new_tokens": 768,
+    "evaluation_max_new_tokens": 1024,
+    "validation_sample_size": 200,
+    "validation_batch_size": 2
+  },
+  "steganography": {
+    "variant": "s5_steg_local_invisible",
+    "modes": ["answer_only", "local_channel_cot"],
+    "epochs": 1,
+    "batch_size": 1,
+    "learning_rate": 0.00002,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "training_max_new_tokens": 1024,
+    "evaluation_max_new_tokens": 1280,
+    "validation_sample_size": 200,
+    "validation_batch_size": 1,
+    "tokenizer_check_sample_size": 10000
+  }
+}

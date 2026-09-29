@@ -1,0 +1,18 @@
+universe = vanilla
+
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/legacy/scaling_regime/calibration/hard_checkpoint_length_sweep/condor_nethome/generate_validate.sh mmohammadkhani
+
+output = /scratch/mmohammadkhani/logs/chain_of_lies/hard_length_generate.out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/hard_length_generate.err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/hard_length_generate.log
+
+request_CPUs = 4
+request_memory = 16G
+request_GPUs = 1
+request_disk = 10G
+accounting_group = pausable
++MaxWallTime = 86400
+
+queue 1

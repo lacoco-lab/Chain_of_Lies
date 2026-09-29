@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_trajectory_v1",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "seed": 0,
+  "passes_all_gates": false,
+  "metrics": [
+    {
+      "input_length": 32,
+      "n": 252,
+      "trace_bit_accuracy": 0.5374503968253969,
+      "trace_exact": 0.0,
+      "final_parity_accuracy": 0.5357142857142857,
+      "joint_exact": 0.0,
+      "strict_format": 1.0
+    }
+  ],
+  "prerequisite_retention": {
+    "full_update": {
+      "n": 1008,
+      "accuracy": 0.9751984126984127
+    },
+    "mask_delta": {
+      "n": 1008,
+      "accuracy": 0.9275793650793651
+    },
+    "derive_previous": {
+      "n": 1008,
+      "accuracy": 0.9970238095238095
+    },
+    "derive_current": {
+      "n": 1008,
+      "accuracy": 0.9950396825396826
+    },
+    "supplied_update": {
+      "n": 512,
+      "accuracy": 1.0
+    }
+  },
+  "transition_retention": {
+    "overall": {
+      "n": 960,
+      "accuracy": 0.9739583333333334
+    },
+    "by_position": {
+      "transition_step_1": {
+        "n": 64,
+        "accuracy": 0.984375
+      },
+      "transition_step_10": {
+        "n": 64,
+        "accuracy": 0.984375
+      },
+      "transition_step_11": {
+        "n": 64,
+        "accuracy": 1.0
+      },
+      "transition_step_12": {
+        "n": 64,
+        "accuracy": 0.96875
+      },
+      "transition_step_13": {
+        "n": 64,
+        "accuracy": 0.96875
+      },
+      "transition_step_14": {
+        "n": 64,
+        "accuracy": 0.96875
+      },
+      "transition_step_15": {
+        "n": 64,
+        "accuracy": 0.96875
+      },
+      "transition_step_2": {
+        "n": 64,
+        "accuracy": 0.96875
+      },
+      "transition_step_3": {
+        "n": 64,
+        "accuracy": 0.984375
+      },
+      "transition_step_4": {
+        "n": 64,
+        "accuracy": 0.984375
+      },
+      "transition_step_5": {
+        "n": 64,
+        "accuracy": 0.984375
+      },
+      "transition_step_6": {
+        "n": 64,
+        "accuracy": 1.0
+      },
+      "transition_step_7": {
+        "n": 64,
+        "accuracy": 0.96875
+      },
+      "transition_step_8": {
+        "n": 64,
+        "accuracy": 0.984375
+      },
+      "transition_step_9": {
+        "n": 64,
+        "accuracy": 0.890625
+      }
+    }
+  },
+  "elapsed_seconds": 11104.359713610262
+}

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_update_ablation_v1",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "seed": 0,
+  "base_supplied_update_accuracy": 1.0,
+  "base_local_accuracy": 0.970703125,
+  "checks": {
+    "derive_previous": false,
+    "derive_current": false
+  },
+  "diagnosis": "Neither one-derived-mask update works. The bottleneck is composing even one derived Goldreich mask with the encrypted-state update.",
+  "recommended_next_step": "Use a training-only intermediate mask target, then train the final XOR while keeping that intermediate computation supervised.",
+  "metrics": [
+    {
+      "condition": "derive_previous",
+      "n": 1008,
+      "accuracy": 0.5277777777777778,
+      "bit_ce": 0.6938864087301587,
+      "local_retention": 0.98046875,
+      "supplied_update_retention": 1.0,
+      "other_condition_accuracy": 0.4712301587301587,
+      "selected_attention_mass": 0.998779296875,
+      "selected_seed_ratio": 0.999267578125,
+      "passes": false
+    },
+    {
+      "condition": "derive_current",
+      "n": 1008,
+      "accuracy": 0.49702380952380953,
+      "bit_ce": 0.6957465277777778,
+      "local_retention": 0.974609375,
+      "supplied_update_retention": 1.0,
+      "other_condition_accuracy": 0.5079365079365079,
+      "selected_attention_mass": 0.999755859375,
+      "selected_seed_ratio": 0.998779296875,
+      "passes": false
+    }
+  ]
+}

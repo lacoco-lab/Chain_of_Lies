@@ -1,0 +1,26 @@
+{
+  "valid": true,
+  "seed": 2,
+  "train_n": 10000,
+  "val_n": 1000,
+  "bucket_counts": {
+    "train": {
+      "008_015": 2000,
+      "016_031": 2000,
+      "032_063": 2000,
+      "064_127": 2000,
+      "128_255": 2000
+    },
+    "val": {
+      "008_015": 200,
+      "016_031": 200,
+      "032_063": 200,
+      "064_127": 200,
+      "128_255": 200
+    }
+  },
+  "individual_sequence_train_val_overlap": 0,
+  "private_tasks_matched_across_variants": true,
+  "control_steg_public_tasks_matched": true,
+  "piggyback_shared_prefix": "all but final bit"
+}

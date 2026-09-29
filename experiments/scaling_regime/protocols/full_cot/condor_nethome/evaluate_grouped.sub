@@ -1,0 +1,21 @@
+# Evaluation only. Hold the corresponding original worker before submitting.
+task = s5
+model = llama
+seed = 1
+run_id = s5_grouped_b2_v1
+universe = vanilla
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/scaling_regime/protocols/full_cot/run_efficiency_nethome.sh evaluate --task $(task) --model $(model) --seed $(seed) --run-id $(run_id) --batch-size 2 --check-length-grouping
+environment = "HF_TOKEN=$ENV(HF_TOKEN)"
+output = /scratch/mmohammadkhani/logs/chain_of_lies/full_cot_$(run_id)_$(task)_$(model)_$(seed).out
+error = /scratch/mmohammadkhani/logs/chain_of_lies/full_cot_$(run_id)_$(task)_$(model)_$(seed).err
+log = /scratch/mmohammadkhani/logs/chain_of_lies/full_cot_$(run_id)_$(task)_$(model)_$(seed).log
+request_CPUs = 4
+request_memory = 32G
+request_GPUs = 1
+request_disk = 5G
+requirements = (GPUs_GlobalMemoryMb >= 40000)
++MaxWallTime = 604800
+on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)
+queue 1

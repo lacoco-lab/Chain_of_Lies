@@ -1,0 +1,23 @@
+universe = docker
+docker_image = pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/goldreich_parity/qwen_attempts/reported_diagnostics/final_composition/condor_old_cluster/run.sh positions_gate
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+preserve_relative_paths = True
+transfer_input_files = experiments/goldreich_parity/qwen_attempts/reported_diagnostics/final_composition,artifacts/ce_parity_goldreich_final/positions
+transfer_output_files = artifacts/ce_parity_goldreich_final/positions_gate.json
+
+output = /home/momo00016/logs/chain_of_lies/parity_goldreich_final_positions_gate.out
+error  = /home/momo00016/logs/chain_of_lies/parity_goldreich_final_positions_gate.err
+log    = /home/momo00016/logs/chain_of_lies/parity_goldreich_final_positions_gate.log
+
+request_CPUs = 1
+request_memory = 2G
+request_GPUs = 0
++MaxWallTime = 3600
+
+queue

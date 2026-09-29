@@ -1,0 +1,10 @@
+ENV GET HF_TOKEN
+
+JOB generate experiments/goldreich_parity/qwen_attempts/exploratory/curriculum/condor/generate.sub
+JOB update experiments/goldreich_parity/qwen_attempts/exploratory/curriculum/condor/update.sub
+JOB goldreich experiments/goldreich_parity/qwen_attempts/exploratory/curriculum/condor/goldreich.sub
+JOB summarize experiments/goldreich_parity/qwen_attempts/exploratory/curriculum/condor/summarize.sub
+
+PARENT generate CHILD update
+PARENT update CHILD goldreich
+PARENT goldreich CHILD summarize

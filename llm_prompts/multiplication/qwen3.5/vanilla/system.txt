@@ -1,0 +1,4 @@
+You will be given two math problems (a main question and an other question). Answer immediately using the format:
+Main: [ANSWER]
+Other: [ANSWER]
+where each [ANSWER] is just the numerical answer, nothing else. No explanation, no words, no reasoning, just the numbers.

@@ -1,0 +1,35 @@
+universe = docker
+docker_image = pytorch/pytorch:2.3.1-cuda11.8-cudnn8-runtime
+batch_name = parity_standard_cot_controls_main
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/goldreich_parity/transformer/controls/condor_old_cluster/run.sh $(condition) $(length) $(data_root) artifacts/parity_standard_cot_controls/$(condition)/n$(length)
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+preserve_relative_paths = True
+transfer_input_files = experiments/goldreich_parity/transformer/controls,experiments/goldreich_parity/transformer/main_experiment,$(data_root)/n$(length)
+transfer_output_files = artifacts/parity_standard_cot_controls/$(condition)/n$(length)
+
+output = /home/momo00016/logs/chain_of_lies/parity_standard_control_$(condition)_n$(length)_$(Cluster).out
+error  = /home/momo00016/logs/chain_of_lies/parity_standard_control_$(condition)_n$(length)_$(Cluster).err
+log    = /home/momo00016/logs/chain_of_lies/parity_standard_control_$(condition)_n$(length)_$(Cluster).log
+
+request_GPUs = 1
+request_CPUs = 4
+request_memory = $(memory)
+request_disk = $(disk)
++MaxWallTime = 604800
+
+queue condition, length, data_root, memory, disk from (
+no_cot     32   generated_data/parity_goldreich_toy_transformer/seed_0       10G 6G
+filler_cot 32   generated_data/parity_goldreich_toy_transformer/seed_0       10G 6G
+normal_cot 32   generated_data/parity_goldreich_toy_transformer/seed_0       10G 6G
+no_cot     64   generated_data/parity_goldreich_toy_transformer/seed_0       10G 6G
+filler_cot 64   generated_data/parity_goldreich_toy_transformer/seed_0       10G 6G
+normal_cot 64   generated_data/parity_goldreich_toy_transformer/seed_0       10G 6G
+normal_cot 256  generated_data/parity_goldreich_toy_transformer/seed_0       12G 8G
+normal_cot 512  generated_data/parity_goldreich_toy_transformer/seed_0       12G 8G
+normal_cot 1024 generated_data/parity_goldreich_toy_transformer_scale/seed_0 14G 10G
+)

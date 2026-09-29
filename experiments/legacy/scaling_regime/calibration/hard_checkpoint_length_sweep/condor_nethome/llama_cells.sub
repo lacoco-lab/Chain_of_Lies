@@ -1,0 +1,30 @@
+universe = vanilla
+
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/legacy/scaling_regime/calibration/hard_checkpoint_length_sweep/condor_nethome/run.sh mmohammadkhani $(task) llama $(seed)
+
+getenv = HF_TOKEN
+output = /scratch/mmohammadkhani/logs/chain_of_lies/hard_length_$(task)_llama_seed_$(seed).out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/hard_length_$(task)_llama_seed_$(seed).err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/hard_length_$(task)_llama_seed_$(seed).log
+
+request_CPUs = 4
+request_memory = 64G
+request_GPUs = 1
+request_disk = 40G
+requirements = (GPUs_GlobalMemoryMb >= 40000)
+accounting_group = pausable
++MaxWallTime = 604800
+
+queue task,seed from (
+  multiplication 0
+  multiplication 1
+  multiplication 2
+  s5 0
+  s5 1
+  s5 2
+  knowledge 0
+  knowledge 1
+  knowledge 2
+)

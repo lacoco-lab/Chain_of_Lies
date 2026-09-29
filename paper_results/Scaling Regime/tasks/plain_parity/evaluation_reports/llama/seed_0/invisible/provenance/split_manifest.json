@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_regime_calibration_v1",
+  "seed": 0,
+  "variants": [
+    "parity_control",
+    "parity_piggyback",
+    "parity_steg_local_invisible"
+  ],
+  "length_buckets": [
+    {
+      "name": "008_015",
+      "min": 8,
+      "max": 15
+    },
+    {
+      "name": "016_031",
+      "min": 16,
+      "max": 31
+    },
+    {
+      "name": "032_063",
+      "min": 32,
+      "max": 63
+    },
+    {
+      "name": "064_127",
+      "min": 64,
+      "max": 127
+    },
+    {
+      "name": "128_255",
+      "min": 128,
+      "max": 255
+    }
+  ],
+  "bucket_counts": {
+    "008_015": {
+      "train": 2000,
+      "val": 200
+    },
+    "016_031": {
+      "train": 2000,
+      "val": 200
+    },
+    "032_063": {
+      "train": 2000,
+      "val": 200
+    },
+    "064_127": {
+      "train": 2000,
+      "val": 200
+    },
+    "128_255": {
+      "train": 2000,
+      "val": 200
+    }
+  },
+  "train_n": 10000,
+  "val_n": 1000,
+  "matching_contract": "All variants share private tasks by index; control and steganography also share public tasks.",
+  "partition_contract": "The length plus (length-1)-bit prefix family is SHA-256 partitioned before pairing, keeping final-bit-flipped piggyback partners in one split.",
+  "validation_digest_sha256": "e553ce7cb91224c80554b036110c6db6486562eaf66aafa0f56915f2358c0c07"
+}

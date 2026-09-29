@@ -1,0 +1,23 @@
+universe        = container
+container_image = /scratch/common/images/apptainer-builder.sif
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments  = run_steg_local.sh summarize
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+transfer_input_files = chain_of_lies,scripts,requirements.txt,pyproject.toml,artifacts,experiments/cluster_jobs/arithmetic_steganography/sic_transfer/run_steg_local.sh
+transfer_output_files = artifacts
+stream_output = True
+stream_error = True
+
+output = /home/momo00016/logs/chain_of_lies/sic_transfer_summarize_steg_local.out
+error  = /home/momo00016/logs/chain_of_lies/sic_transfer_summarize_steg_local.err
+log    = /home/momo00016/logs/chain_of_lies/sic_transfer_summarize_steg_local.log
+
+request_CPUs = 2
+request_memory = 16G
++MaxWallTime = 86400
+
+queue 1

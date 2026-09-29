@@ -1,0 +1,2392 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_standard_cot_controls_staged_n32_n64_seed_0",
+  "condition": "filler_cot",
+  "length": 32,
+  "seed": 0,
+  "private_seed_given_to_model": false,
+  "public_zero_padding": 12,
+  "data_fields_loaded": [
+    "id",
+    "input_bits",
+    "answer"
+  ],
+  "architecture": {
+    "architecture": "one_layer_standard_causal_transformer_query_row",
+    "length": 32,
+    "seed_bits": 12,
+    "heads": 16,
+    "computationally_assigned_heads": 12,
+    "zero_padding_heads": 4,
+    "model_dim": 128,
+    "head_dim": 8,
+    "token_embedding_dim": 16,
+    "position_embedding_dim": 112,
+    "position_encoding": "learned absolute, concatenated with token embeddings",
+    "ff_dim": 512,
+    "attention": "standard scaled dot-product softmax at train and inference",
+    "layer_norm": false,
+    "nonlinear_blocks_after_attention": 1,
+    "training_only_canonical_bit_scale": 4.0,
+    "trainable_parameters": 207808,
+    "graph": [
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    ]
+  },
+  "training_regime": "staged",
+  "staged_recipe": {
+    "routing_supervision": true,
+    "representation_supervision": true,
+    "public_function_curriculum": true,
+    "integration_checkpoint_selection": "joint validation CoT and answer accuracy",
+    "directly_supervised_input_bits": 16,
+    "total_input_bits": 32,
+    "deviation_from_easy_recipe": "The fixed 16-head architecture directly supervises only the first 16 of 32 inputs during routing, representation, and public-function pretraining; final integration and evaluation use all inputs."
+  },
+  "train_examples": 131072,
+  "validation_examples": 8190,
+  "test_examples": 8192,
+  "split_audit": {
+    "train_test_overlap": 0,
+    "train_validation_overlap": 0,
+    "validation_test_collisions_removed": 1,
+    "validation_rows_before": 8192,
+    "validation_rows_after": 8190,
+    "label_balance": {
+      "train": {
+        "zero": 65536,
+        "one": 65536
+      },
+      "validation": {
+        "zero": 4095,
+        "one": 4095
+      },
+      "test": {
+        "zero": 4096,
+        "one": 4096
+      }
+    }
+  },
+  "routing_training": {
+    "enabled": true,
+    "steps": 400,
+    "final_batch": {
+      "routing_accuracy": 1.0,
+      "minimum_target_attention": 0.9996523857116699,
+      "mean_target_attention": 0.9999961256980896
+    },
+    "history": [
+      {
+        "step": 1,
+        "loss": 4.264473915100098,
+        "routing_accuracy": 0.01025390625,
+        "minimum_target_attention": 0.0046715885400772095,
+        "mean_target_attention": 0.014895615167915821
+      },
+      {
+        "step": 100,
+        "loss": 1.651521415624302e-05,
+        "routing_accuracy": 1.0,
+        "minimum_target_attention": 0.9980321526527405,
+        "mean_target_attention": 0.9999834895133972
+      },
+      {
+        "step": 200,
+        "loss": 7.290535904758144e-06,
+        "routing_accuracy": 1.0,
+        "minimum_target_attention": 0.9991625547409058,
+        "mean_target_attention": 0.9999927282333374
+      },
+      {
+        "step": 300,
+        "loss": 5.0676671889959835e-06,
+        "routing_accuracy": 1.0,
+        "minimum_target_attention": 0.9994862079620361,
+        "mean_target_attention": 0.9999948740005493
+      },
+      {
+        "step": 400,
+        "loss": 3.903904598701047e-06,
+        "routing_accuracy": 1.0,
+        "minimum_target_attention": 0.9996523857116699,
+        "mean_target_attention": 0.9999961256980896
+      }
+    ]
+  },
+  "representation_training": {
+    "enabled": true,
+    "steps": 500,
+    "best_accuracy": 1.0,
+    "best_mse": 1.5599659342058203e-09,
+    "history": [
+      {
+        "step": 1,
+        "routed_bit_accuracy": 0.435791015625,
+        "bit_mse": 18.698497772216797,
+        "loss": 18.700632095336914
+      },
+      {
+        "step": 250,
+        "routed_bit_accuracy": 1.0,
+        "bit_mse": 0.10581696033477783,
+        "loss": 0.10581837594509125
+      },
+      {
+        "step": 500,
+        "routed_bit_accuracy": 1.0,
+        "bit_mse": 1.5599659342058203e-09,
+        "loss": 2.349013428215585e-08
+      }
+    ]
+  },
+  "public_training": {
+    "enabled": true,
+    "steps": 24000,
+    "best_exhaustive_accuracy": 0.98614501953125,
+    "history": [
+      {
+        "step": 1,
+        "active_input_bits": 1,
+        "loss": 0.6179943680763245,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 250,
+        "active_input_bits": 1,
+        "loss": 0.00015903933672234416,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 500,
+        "active_input_bits": 1,
+        "loss": 5.126078031025827e-05,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 750,
+        "active_input_bits": 1,
+        "loss": 2.4800820028758608e-05,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 1000,
+        "active_input_bits": 1,
+        "loss": 1.4424214896280318e-05,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 1250,
+        "active_input_bits": 1,
+        "loss": 9.360444892081432e-06,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 1500,
+        "active_input_bits": 2,
+        "loss": 0.00048374064499512315,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 1750,
+        "active_input_bits": 2,
+        "loss": 0.00017249325173906982,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 2000,
+        "active_input_bits": 2,
+        "loss": 9.503075125394389e-05,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 2250,
+        "active_input_bits": 2,
+        "loss": 6.0997008404228836e-05,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 2500,
+        "active_input_bits": 2,
+        "loss": 4.135758354095742e-05,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 2750,
+        "active_input_bits": 3,
+        "loss": 0.01688460260629654,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 3000,
+        "active_input_bits": 3,
+        "loss": 0.000767728837672621,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 3250,
+        "active_input_bits": 3,
+        "loss": 0.0003173763689119369,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 3500,
+        "active_input_bits": 3,
+        "loss": 0.00019322572916280478,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 3750,
+        "active_input_bits": 3,
+        "loss": 0.00012814275396522135,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 4000,
+        "active_input_bits": 4,
+        "loss": 3.9427411556243896,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 4250,
+        "active_input_bits": 4,
+        "loss": 0.002632130403071642,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 4500,
+        "active_input_bits": 4,
+        "loss": 0.0007609991007484496,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 4750,
+        "active_input_bits": 4,
+        "loss": 0.00038535016938112676,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 5000,
+        "active_input_bits": 4,
+        "loss": 0.0002462961128912866,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 5250,
+        "active_input_bits": 4,
+        "loss": 0.0001613576605450362,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 5500,
+        "active_input_bits": 5,
+        "loss": 0.008675694465637207,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 5750,
+        "active_input_bits": 5,
+        "loss": 0.0020878922659903765,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 6000,
+        "active_input_bits": 5,
+        "loss": 0.0009740663226693869,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 6250,
+        "active_input_bits": 5,
+        "loss": 0.0006112490664236248,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 6500,
+        "active_input_bits": 5,
+        "loss": 0.00039182548061944544,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 6750,
+        "active_input_bits": 6,
+        "loss": 0.024936441332101822,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 7000,
+        "active_input_bits": 6,
+        "loss": 0.004057452082633972,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 7250,
+        "active_input_bits": 6,
+        "loss": 0.0018525907071307302,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 7500,
+        "active_input_bits": 6,
+        "loss": 0.001173301599919796,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 7750,
+        "active_input_bits": 6,
+        "loss": 0.0007802965701557696,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 8000,
+        "active_input_bits": 7,
+        "loss": 3.2899770736694336,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 8250,
+        "active_input_bits": 7,
+        "loss": 0.010919000953435898,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 8500,
+        "active_input_bits": 7,
+        "loss": 0.004043626133352518,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 8750,
+        "active_input_bits": 7,
+        "loss": 0.0022259834222495556,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 9000,
+        "active_input_bits": 7,
+        "loss": 0.0012020089197903872,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 9250,
+        "active_input_bits": 7,
+        "loss": 0.0008237354923039675,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 9500,
+        "active_input_bits": 8,
+        "loss": 0.04072443023324013,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 9750,
+        "active_input_bits": 8,
+        "loss": 0.00860245805233717,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 10000,
+        "active_input_bits": 8,
+        "loss": 0.003890392603352666,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 10250,
+        "active_input_bits": 8,
+        "loss": 0.0021520270965993404,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 10500,
+        "active_input_bits": 8,
+        "loss": 0.0014348614495247602,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 10750,
+        "active_input_bits": 9,
+        "loss": 0.10549448430538177,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 11000,
+        "active_input_bits": 9,
+        "loss": 0.01997760683298111,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 11250,
+        "active_input_bits": 9,
+        "loss": 0.00710917916148901,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 11500,
+        "active_input_bits": 9,
+        "loss": 0.004412712529301643,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 11750,
+        "active_input_bits": 9,
+        "loss": 0.0028110030107200146,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 12000,
+        "active_input_bits": 10,
+        "loss": 3.0509378910064697,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 12250,
+        "active_input_bits": 10,
+        "loss": 0.0442437045276165,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 12500,
+        "active_input_bits": 10,
+        "loss": 0.015077549032866955,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 12750,
+        "active_input_bits": 10,
+        "loss": 0.008254194632172585,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 13000,
+        "active_input_bits": 10,
+        "loss": 0.006167366169393063,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 13250,
+        "active_input_bits": 10,
+        "loss": 0.004401700105518103,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 13500,
+        "active_input_bits": 11,
+        "loss": 0.13245294988155365,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 13750,
+        "active_input_bits": 11,
+        "loss": 0.0631820410490036,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 14000,
+        "active_input_bits": 11,
+        "loss": 0.04542464017868042,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 14250,
+        "active_input_bits": 11,
+        "loss": 0.03145940601825714,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 14500,
+        "active_input_bits": 11,
+        "loss": 0.016855238005518913,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 14750,
+        "active_input_bits": 12,
+        "loss": 0.2248946577310562,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 15000,
+        "active_input_bits": 12,
+        "loss": 0.08696314692497253,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 15250,
+        "active_input_bits": 12,
+        "loss": 0.052746281027793884,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 15500,
+        "active_input_bits": 12,
+        "loss": 0.033185649663209915,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 15750,
+        "active_input_bits": 12,
+        "loss": 0.036219317466020584,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 16000,
+        "active_input_bits": 13,
+        "loss": 2.8241209983825684,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 16250,
+        "active_input_bits": 13,
+        "loss": 0.13479821383953094,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 16500,
+        "active_input_bits": 13,
+        "loss": 0.08228731155395508,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 16750,
+        "active_input_bits": 13,
+        "loss": 0.058113567531108856,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 17000,
+        "active_input_bits": 13,
+        "loss": 0.03015357442200184,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 17250,
+        "active_input_bits": 13,
+        "loss": 0.02404588833451271,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 17500,
+        "active_input_bits": 14,
+        "loss": 0.15774261951446533,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 17750,
+        "active_input_bits": 14,
+        "loss": 0.09142407029867172,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 18000,
+        "active_input_bits": 14,
+        "loss": 0.08381536602973938,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 18250,
+        "active_input_bits": 14,
+        "loss": 0.06924966722726822,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 18500,
+        "active_input_bits": 14,
+        "loss": 0.06165589764714241,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 18750,
+        "active_input_bits": 15,
+        "loss": 0.27580884099006653,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 19000,
+        "active_input_bits": 15,
+        "loss": 0.1713506132364273,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 19250,
+        "active_input_bits": 15,
+        "loss": 0.12568578124046326,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 19500,
+        "active_input_bits": 15,
+        "loss": 0.10547788441181183,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 19750,
+        "active_input_bits": 15,
+        "loss": 0.08523810654878616,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 20000,
+        "active_input_bits": 16,
+        "loss": 1.9748425483703613,
+        "exhaustive_accuracy": 0.6110076904296875
+      },
+      {
+        "step": 20250,
+        "active_input_bits": 16,
+        "loss": 0.20617297291755676,
+        "exhaustive_accuracy": 0.9361724853515625
+      },
+      {
+        "step": 20500,
+        "active_input_bits": 16,
+        "loss": 0.12107589095830917,
+        "exhaustive_accuracy": 0.9508056640625
+      },
+      {
+        "step": 20750,
+        "active_input_bits": 16,
+        "loss": 0.10114865005016327,
+        "exhaustive_accuracy": 0.9615936279296875
+      },
+      {
+        "step": 21000,
+        "active_input_bits": 16,
+        "loss": 0.08048194646835327,
+        "exhaustive_accuracy": 0.9693603515625
+      },
+      {
+        "step": 21250,
+        "active_input_bits": 16,
+        "loss": 0.08095048367977142,
+        "exhaustive_accuracy": 0.973907470703125
+      },
+      {
+        "step": 21500,
+        "active_input_bits": 16,
+        "loss": 0.07248826324939728,
+        "exhaustive_accuracy": 0.9738616943359375
+      },
+      {
+        "step": 21750,
+        "active_input_bits": 16,
+        "loss": 0.061348725110292435,
+        "exhaustive_accuracy": 0.9677734375
+      },
+      {
+        "step": 22000,
+        "active_input_bits": 16,
+        "loss": 0.05911659821867943,
+        "exhaustive_accuracy": 0.977447509765625
+      },
+      {
+        "step": 22250,
+        "active_input_bits": 16,
+        "loss": 0.07406716793775558,
+        "exhaustive_accuracy": 0.9776153564453125
+      },
+      {
+        "step": 22500,
+        "active_input_bits": 16,
+        "loss": 0.0512702539563179,
+        "exhaustive_accuracy": 0.979949951171875
+      },
+      {
+        "step": 22750,
+        "active_input_bits": 16,
+        "loss": 0.10291185230016708,
+        "exhaustive_accuracy": 0.975799560546875
+      },
+      {
+        "step": 23000,
+        "active_input_bits": 16,
+        "loss": 0.05158313363790512,
+        "exhaustive_accuracy": 0.979278564453125
+      },
+      {
+        "step": 23250,
+        "active_input_bits": 16,
+        "loss": 0.04578586667776108,
+        "exhaustive_accuracy": 0.9800872802734375
+      },
+      {
+        "step": 23500,
+        "active_input_bits": 16,
+        "loss": 0.04866999387741089,
+        "exhaustive_accuracy": 0.98614501953125
+      },
+      {
+        "step": 23750,
+        "active_input_bits": 16,
+        "loss": 0.04154961183667183,
+        "exhaustive_accuracy": 0.9859619140625
+      },
+      {
+        "step": 24000,
+        "active_input_bits": 16,
+        "loss": 0.054498810321092606,
+        "exhaustive_accuracy": 0.984710693359375
+      }
+    ]
+  },
+  "integration_training": {
+    "steps": 8000,
+    "best_validation_score": [
+      0.525390625,
+      1.525390625
+    ],
+    "history": [
+      {
+        "step": 1,
+        "loss": 2.485062599182129,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.486328125,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 250,
+        "loss": 0.484635591506958,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.513671875,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 500,
+        "loss": 0.44028782844543457,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.490234375,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 750,
+        "loss": 0.42411020398139954,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.5078125,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 1000,
+        "loss": 0.4091019332408905,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.509765625,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 1250,
+        "loss": 0.3474121391773224,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.525390625,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 1500,
+        "loss": 0.38903653621673584,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.494140625,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 1750,
+        "loss": 0.33482277393341064,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.486328125,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 2000,
+        "loss": 0.3589211702346802,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.505859375,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 2250,
+        "loss": 0.35876190662384033,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.47265625,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 2500,
+        "loss": 0.3526615500450134,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.4765625,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 2750,
+        "loss": 0.36583608388900757,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.47265625,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 3000,
+        "loss": 0.3564388155937195,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.482421875,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 3250,
+        "loss": 0.3486156463623047,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.501953125,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 3500,
+        "loss": 0.36267486214637756,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.5078125,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 3750,
+        "loss": 0.35743239521980286,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.501953125,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 4000,
+        "loss": 0.37032848596572876,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.49609375,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 4250,
+        "loss": 0.35044124722480774,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.451171875,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 4500,
+        "loss": 0.3774264454841614,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.484375,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 4750,
+        "loss": 0.35149163007736206,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.47265625,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 5000,
+        "loss": 0.3672139346599579,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.4765625,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 5250,
+        "loss": 0.35741105675697327,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.5,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 5500,
+        "loss": 0.3713584542274475,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.44921875,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 5750,
+        "loss": 0.3460392951965332,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.498046875,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 6000,
+        "loss": 0.3537188172340393,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.48828125,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 6250,
+        "loss": 0.3525063395500183,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.486328125,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 6500,
+        "loss": 0.34970027208328247,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.47265625,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 6750,
+        "loss": 0.3605961799621582,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.509765625,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 7000,
+        "loss": 0.35642209649086,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.451171875,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 7250,
+        "loss": 0.34953710436820984,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.45703125,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 7500,
+        "loss": 0.35221371054649353,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.4921875,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 7750,
+        "loss": 0.3542892038822174,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.4609375,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      },
+      {
+        "step": 8000,
+        "loss": 0.35819825530052185,
+        "validation": {
+          "n": 512,
+          "cot_length": 32,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 0.50390625,
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "00000000000000000000000000000000",
+              "predicted_cot": "00000000000000000000000000000000"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "validation_softmax_attention": {
+    "n": 8190,
+    "cot_length": 32,
+    "cot_bit_accuracy": 1.0,
+    "cot_exact": 1.0,
+    "final_parity_accuracy": 0.51001221001221,
+    "samples": [
+      {
+        "id": "toy_n32_validation_0000000",
+        "expected_answer": 0,
+        "predicted_answer": 0,
+        "expected_cot": "00000000000000000000000000000000",
+        "predicted_cot": "00000000000000000000000000000000"
+      },
+      {
+        "id": "toy_n32_validation_0000001",
+        "expected_answer": 1,
+        "predicted_answer": 1,
+        "expected_cot": "00000000000000000000000000000000",
+        "predicted_cot": "00000000000000000000000000000000"
+      },
+      {
+        "id": "toy_n32_validation_0000002",
+        "expected_answer": 0,
+        "predicted_answer": 1,
+        "expected_cot": "00000000000000000000000000000000",
+        "predicted_cot": "00000000000000000000000000000000"
+      },
+      {
+        "id": "toy_n32_validation_0000003",
+        "expected_answer": 1,
+        "predicted_answer": 1,
+        "expected_cot": "00000000000000000000000000000000",
+        "predicted_cot": "00000000000000000000000000000000"
+      }
+    ]
+  },
+  "test_softmax_attention": {
+    "n": 8192,
+    "cot_length": 32,
+    "cot_bit_accuracy": 1.0,
+    "cot_exact": 1.0,
+    "final_parity_accuracy": 0.502197265625,
+    "samples": [
+      {
+        "id": "toy_n32_test_0000000",
+        "expected_answer": 0,
+        "predicted_answer": 1,
+        "expected_cot": "00000000000000000000000000000000",
+        "predicted_cot": "00000000000000000000000000000000"
+      },
+      {
+        "id": "toy_n32_test_0000001",
+        "expected_answer": 1,
+        "predicted_answer": 1,
+        "expected_cot": "00000000000000000000000000000000",
+        "predicted_cot": "00000000000000000000000000000000"
+      },
+      {
+        "id": "toy_n32_test_0000002",
+        "expected_answer": 0,
+        "predicted_answer": 0,
+        "expected_cot": "00000000000000000000000000000000",
+        "predicted_cot": "00000000000000000000000000000000"
+      },
+      {
+        "id": "toy_n32_test_0000003",
+        "expected_answer": 1,
+        "predicted_answer": 1,
+        "expected_cot": "00000000000000000000000000000000",
+        "predicted_cot": "00000000000000000000000000000000"
+      }
+    ]
+  },
+  "matches_expected_pattern": true,
+  "elapsed_seconds": 240.70791082456708
+}

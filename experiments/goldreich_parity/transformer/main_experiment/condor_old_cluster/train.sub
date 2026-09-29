@@ -1,0 +1,24 @@
+universe = docker
+docker_image = pytorch/pytorch:2.8.0-cuda12.8-cudnn9-runtime
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/goldreich_parity/transformer/main_experiment/condor_old_cluster/run.sh $(length)
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+preserve_relative_paths = True
+transfer_input_files = experiments/goldreich_parity/transformer/main_experiment,generated_data/parity_goldreich_toy_transformer/seed_0/n$(length)
+transfer_output_files = artifacts/parity_goldreich_toy_transformer/n$(length)
+
+output = /home/momo00016/logs/chain_of_lies/parity_goldreich_toy_n$(length).out
+error  = /home/momo00016/logs/chain_of_lies/parity_goldreich_toy_n$(length).err
+log    = /home/momo00016/logs/chain_of_lies/parity_goldreich_toy_n$(length).log
+
+request_CPUs = 4
+request_memory = 8G
+request_disk = 4G
+
++MaxWallTime = 86400
+
+queue length in 32,64,256,512

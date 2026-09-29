@@ -1,0 +1,354 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_final_v1",
+  "action": "positions",
+  "seed": 0,
+  "rank": 32,
+  "rank32_calibration_verified": true,
+  "rank32_training_rng": "0:composition-rank",
+  "established_adapters_merged_and_frozen": [
+    "artifacts/ce_parity_goldreich_update_ablation/base/best_adapter"
+  ],
+  "trainable_parameters": 80740352,
+  "baseline": {
+    "derive_previous": {
+      "n": 1008,
+      "greedy_accuracy": 0.4880952380952381,
+      "binary_accuracy": 0.4880952380952381,
+      "bit_ce": 4.696428571428571
+    },
+    "local": {
+      "n": 1024,
+      "greedy_accuracy": 0.9677734375,
+      "binary_accuracy": 0.9677734375,
+      "bit_ce": 0.1421697735786438
+    },
+    "supplied_update": {
+      "n": 512,
+      "greedy_accuracy": 1.0,
+      "binary_accuracy": 1.0,
+      "bit_ce": 2.5220215320587158e-05
+    }
+  },
+  "stages": [
+    {
+      "stage": "derive_previous",
+      "best_epoch": 3,
+      "best_score": 11.329441809275794,
+      "best_evaluations": {
+        "derive_previous": {
+          "n": 1008,
+          "greedy_accuracy": 0.9811507936507936,
+          "binary_accuracy": 0.9811507936507936,
+          "bit_ce": 0.060093527748471216
+        },
+        "local": {
+          "n": 1024,
+          "greedy_accuracy": 0.9931640625,
+          "binary_accuracy": 0.9931640625,
+          "bit_ce": 0.05828367988578975
+        },
+        "supplied_update": {
+          "n": 512,
+          "greedy_accuracy": 1.0,
+          "binary_accuracy": 1.0,
+          "bit_ce": 3.8572587072849274e-05
+        }
+      },
+      "history": [
+        {
+          "stage": "derive_previous",
+          "epoch": 1,
+          "train": {
+            "loss": 0.4722912580951264,
+            "bit_ce": 0.4258070519095973,
+            "attention_aux": 0.46456363075657897
+          },
+          "evaluations": {
+            "derive_previous": {
+              "n": 1008,
+              "greedy_accuracy": 0.9484126984126984,
+              "binary_accuracy": 0.9484126984126984,
+              "bit_ce": 0.16547987196180555
+            },
+            "local": {
+              "n": 1024,
+              "greedy_accuracy": 0.986328125,
+              "binary_accuracy": 0.986328125,
+              "bit_ce": 0.07162830187007785
+            },
+            "supplied_update": {
+              "n": 512,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 0.00021954858675599098
+            }
+          },
+          "validation_attention": {
+            "n": 128,
+            "attention_aux": 0.51318359375,
+            "selected_attention_mass": 0.952880859375,
+            "selected_seed_ratio": 0.96484375
+          },
+          "retention_ok": true,
+          "selection_weights": {
+            "local": 0.25,
+            "supplied_update": 0.1
+          },
+          "selection_score": 11.294994729662697,
+          "elapsed_seconds": 590.5943398643285
+        },
+        {
+          "stage": "derive_previous",
+          "epoch": 2,
+          "train": {
+            "loss": 0.13341306626404587,
+            "bit_ce": 0.09431411198487408,
+            "attention_aux": 0.391259765625
+          },
+          "evaluations": {
+            "derive_previous": {
+              "n": 1008,
+              "greedy_accuracy": 0.9742063492063492,
+              "binary_accuracy": 0.9742063492063492,
+              "bit_ce": 0.13575980776832217
+            },
+            "local": {
+              "n": 1024,
+              "greedy_accuracy": 0.9814453125,
+              "binary_accuracy": 0.9814453125,
+              "bit_ce": 0.1398909748531878
+            },
+            "supplied_update": {
+              "n": 512,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 9.778887033462524e-05
+            }
+          },
+          "validation_attention": {
+            "n": 128,
+            "attention_aux": 0.4534912109375,
+            "selected_attention_mass": 0.987060546875,
+            "selected_seed_ratio": 0.989013671875
+          },
+          "retention_ok": true,
+          "selection_weights": {
+            "local": 0.25,
+            "supplied_update": 0.1
+          },
+          "selection_score": 11.31956767733135,
+          "elapsed_seconds": 1129.6035322342068
+        },
+        {
+          "stage": "derive_previous",
+          "epoch": 3,
+          "train": {
+            "loss": 0.09363032304926923,
+            "bit_ce": 0.056854045234228434,
+            "attention_aux": 0.3677477384868421
+          },
+          "evaluations": {
+            "derive_previous": {
+              "n": 1008,
+              "greedy_accuracy": 0.9811507936507936,
+              "binary_accuracy": 0.9811507936507936,
+              "bit_ce": 0.060093527748471216
+            },
+            "local": {
+              "n": 1024,
+              "greedy_accuracy": 0.9931640625,
+              "binary_accuracy": 0.9931640625,
+              "bit_ce": 0.05828367988578975
+            },
+            "supplied_update": {
+              "n": 512,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 3.8572587072849274e-05
+            }
+          },
+          "validation_attention": {
+            "n": 128,
+            "attention_aux": 0.4407958984375,
+            "selected_attention_mass": 0.992431640625,
+            "selected_seed_ratio": 0.992431640625
+          },
+          "retention_ok": true,
+          "selection_weights": {
+            "local": 0.25,
+            "supplied_update": 0.1
+          },
+          "selection_score": 11.329441809275794,
+          "elapsed_seconds": 1669.485093953088
+        }
+      ]
+    },
+    {
+      "stage": "derive_current",
+      "best_epoch": 2,
+      "best_score": 11.282350570436508,
+      "best_evaluations": {
+        "derive_current": {
+          "n": 1008,
+          "greedy_accuracy": 0.9841269841269841,
+          "binary_accuracy": 0.9841269841269841,
+          "bit_ce": 0.04630794033171639
+        },
+        "derive_previous": {
+          "n": 1008,
+          "greedy_accuracy": 0.9880952380952381,
+          "binary_accuracy": 0.9880952380952381,
+          "bit_ce": 0.07087758420005677
+        },
+        "local": {
+          "n": 1024,
+          "greedy_accuracy": 0.994140625,
+          "binary_accuracy": 0.994140625,
+          "bit_ce": 0.01613779680337757
+        },
+        "supplied_update": {
+          "n": 512,
+          "greedy_accuracy": 1.0,
+          "binary_accuracy": 1.0,
+          "bit_ce": 1.7927959561347961e-06
+        }
+      },
+      "history": [
+        {
+          "stage": "derive_current",
+          "epoch": 1,
+          "train": {
+            "loss": 0.12187112666901172,
+            "bit_ce": 0.083537696281404,
+            "attention_aux": 0.38322388656496065
+          },
+          "evaluations": {
+            "derive_current": {
+              "n": 1008,
+              "greedy_accuracy": 0.9811507936507936,
+              "binary_accuracy": 0.9811507936507936,
+              "bit_ce": 0.09184959199693468
+            },
+            "derive_previous": {
+              "n": 1008,
+              "greedy_accuracy": 0.9920634920634921,
+              "binary_accuracy": 0.9920634920634921,
+              "bit_ce": 0.0320543438669235
+            },
+            "local": {
+              "n": 1024,
+              "greedy_accuracy": 0.9853515625,
+              "binary_accuracy": 0.9853515625,
+              "bit_ce": 0.056684963405132294
+            },
+            "supplied_update": {
+              "n": 512,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 8.409842848777771e-07
+            }
+          },
+          "validation_attention": {
+            "n": 128,
+            "attention_aux": 0.4285888671875,
+            "selected_attention_mass": 0.992919921875,
+            "selected_seed_ratio": 0.993896484375
+          },
+          "retention_ok": true,
+          "selection_weights": {
+            "derive_previous": 0.1,
+            "local": 0.1,
+            "supplied_update": 0.1
+          },
+          "selection_score": 11.278892299107143,
+          "elapsed_seconds": 2443.193624701351
+        },
+        {
+          "stage": "derive_current",
+          "epoch": 2,
+          "train": {
+            "loss": 0.09980911896454067,
+            "bit_ce": 0.0620919528204625,
+            "attention_aux": 0.37696081446850394
+          },
+          "evaluations": {
+            "derive_current": {
+              "n": 1008,
+              "greedy_accuracy": 0.9841269841269841,
+              "binary_accuracy": 0.9841269841269841,
+              "bit_ce": 0.04630794033171639
+            },
+            "derive_previous": {
+              "n": 1008,
+              "greedy_accuracy": 0.9880952380952381,
+              "binary_accuracy": 0.9880952380952381,
+              "bit_ce": 0.07087758420005677
+            },
+            "local": {
+              "n": 1024,
+              "greedy_accuracy": 0.994140625,
+              "binary_accuracy": 0.994140625,
+              "bit_ce": 0.01613779680337757
+            },
+            "supplied_update": {
+              "n": 512,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 1.7927959561347961e-06
+            }
+          },
+          "validation_attention": {
+            "n": 128,
+            "attention_aux": 0.442626953125,
+            "selected_attention_mass": 0.99072265625,
+            "selected_seed_ratio": 0.9912109375
+          },
+          "retention_ok": true,
+          "selection_weights": {
+            "derive_previous": 0.1,
+            "local": 0.1,
+            "supplied_update": 0.1
+          },
+          "selection_score": 11.282350570436508,
+          "elapsed_seconds": 3188.879971837625
+        }
+      ]
+    }
+  ],
+  "final_evaluations": {
+    "derive_previous": {
+      "n": 1008,
+      "greedy_accuracy": 0.9880952380952381,
+      "binary_accuracy": 0.9880952380952381,
+      "bit_ce": 0.07087758420005677
+    },
+    "derive_current": {
+      "n": 1008,
+      "greedy_accuracy": 0.9841269841269841,
+      "binary_accuracy": 0.9841269841269841,
+      "bit_ce": 0.04630794033171639
+    },
+    "local": {
+      "n": 1024,
+      "greedy_accuracy": 0.994140625,
+      "binary_accuracy": 0.994140625,
+      "bit_ce": 0.01613779680337757
+    },
+    "supplied_update": {
+      "n": 512,
+      "greedy_accuracy": 1.0,
+      "binary_accuracy": 1.0,
+      "bit_ce": 1.7927959561347961e-06
+    }
+  },
+  "final_attention": {
+    "n": 128,
+    "attention_aux": 0.442626953125,
+    "selected_attention_mass": 0.99072265625,
+    "selected_seed_ratio": 0.9912109375
+  },
+  "passes_gate": true,
+  "elapsed_seconds": 3269.5877933781594,
+  "final_adapter": "artifacts/ce_parity_goldreich_final/positions/best_adapter"
+}

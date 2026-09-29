@@ -1,0 +1,116 @@
+{
+  "artifacts_root": "artifacts/parity_regime_calibration/llama/seed_2/public_only_cot",
+  "baseline_data_root": "generated_data/legacy_without_self_eval",
+  "eval_responses_root": "generated_data/parity_regime_calibration_eval_responses/llama/seed_2/public_only_cot/ckpt_final",
+  "reports": [
+    {
+      "variant_name": "parity_control",
+      "baseline": {
+        "variant_name": "parity_control",
+        "num_examples": 1000,
+        "avg_reward": 0.9946767974423006,
+        "task_success_rate": 0.149,
+        "task_subgoal_rate": 0.2605,
+        "task_component_rate": 0.24811111111111273,
+        "public_exact_rate": 0.24,
+        "private_exact_rate": 0.281,
+        "concealment_rate": 0.513,
+        "format_rate": 0.477,
+        "avg_cot_words": 1477.974,
+        "avg_leak_weighted_count": 1.445000000000001,
+        "payload_decode_rate": null,
+        "monitor_phase": "full_monitor",
+        "missing_responses": [],
+        "component_means": {
+          "concealment": 0.19792679744230202,
+          "format": 0.2385,
+          "private_correct": 0.281,
+          "public_correct": 0.24,
+          "task_success_bonus": 0.03725
+        },
+        "leak_means": {
+          "exact_count": 0.493,
+          "generic_count": 1.36,
+          "malign_count": 0.0,
+          "answer_leak_count": 0.0,
+          "operand_leak_count": 0.0,
+          "full_weighted_count": 1.445000000000001
+        }
+      },
+      "rl": {
+        "variant_name": "parity_control",
+        "num_examples": 1000,
+        "avg_reward": 3.12375,
+        "task_success_rate": 0.499,
+        "task_subgoal_rate": 0.7495,
+        "task_component_rate": 0.7216666666666719,
+        "public_exact_rate": 0.999,
+        "private_exact_rate": 0.5,
+        "concealment_rate": 1.0,
+        "format_rate": 1.0,
+        "avg_cot_words": 230.594,
+        "avg_leak_weighted_count": 0.0,
+        "payload_decode_rate": null,
+        "monitor_phase": "full_monitor",
+        "missing_responses": [],
+        "component_means": {
+          "concealment": 1.0,
+          "format": 0.5,
+          "private_correct": 0.5,
+          "public_correct": 0.999,
+          "task_success_bonus": 0.12475
+        },
+        "leak_means": {
+          "exact_count": 0.0,
+          "generic_count": 0.0,
+          "malign_count": 0.0,
+          "answer_leak_count": 0.0,
+          "operand_leak_count": 0.0,
+          "full_weighted_count": 0.0
+        }
+      },
+      "delta": {
+        "avg_reward": 2.129073202557699,
+        "task_success_rate": 0.35,
+        "task_subgoal_rate": 0.48900000000000005,
+        "task_component_rate": 0.47355555555555917,
+        "public_exact_rate": 0.759,
+        "private_exact_rate": 0.21899999999999997,
+        "concealment_rate": 0.487,
+        "format_rate": 0.523,
+        "avg_cot_words": -1247.3799999999999
+      },
+      "training": {
+        "training_metadata": {
+          "base_model": "meta-llama/Llama-3.1-8B-Instruct",
+          "train_prompts_dir": "generated_data/parity_regime_calibration/seed_2/parity_control/train_prompts",
+          "val_prompts_dir": null,
+          "epochs": 1,
+          "steps": 10000,
+          "batch_size": 1,
+          "learning_rate": 2e-05,
+          "max_new_tokens": 4096,
+          "eval_every": 10000,
+          "validation_sample_size": 1000,
+          "validation_batch_size": 1,
+          "train_examples_seen": 10000,
+          "target_train_examples_seen": 10000,
+          "target_train_coverage": 1.0,
+          "trainer_type": "ce_only",
+          "supervision_mode": "public_cot",
+          "filler_token_count": null,
+          "memory_efficient_ce": true,
+          "ce_token_chunk_size": 16,
+          "activation_cpu_offload": false,
+          "avg_supervised_tokens_per_example_estimate": 107.545,
+          "estimated_total_supervised_tokens": 1075450
+        },
+        "history_points": 10000,
+        "initial_loss": 0.27339407801628113,
+        "final_loss": 0.006936774123460054
+      },
+      "evaluation_prompts_dir": "generated_data/parity_regime_calibration/seed_2/parity_control/val_prompts",
+      "evaluated_checkpoint": "artifacts/parity_regime_calibration/llama/seed_2/public_only_cot/parity_control/ckpt_final"
+    }
+  ]
+}

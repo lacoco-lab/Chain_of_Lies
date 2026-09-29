@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_standard_supervision_ablations_seed_0",
+  "seed": 0,
+  "graph_seed": 20260818,
+  "seed_length_exponent": 0.7,
+  "lengths": [32, 64],
+  "seed_bits_by_length": {"32": 12, "64": 19},
+  "modes": ["no_route", "end_to_end"],
+  "model_dim": 128,
+  "heads": 16,
+  "token_embedding_dim": 16,
+  "ff_multiplier": 4,
+  "batch_size": 256,
+  "evaluation_batch_size": 1024,
+  "validation_subset_by_length": {"32": 512, "64": 256},
+  "learning_rate": 0.0003,
+  "intermediate_steps_by_length": {"32": 4000, "64": 5000},
+  "integration_steps_by_length": {"32": 12000, "64": 16000},
+  "evaluation_interval": 500,
+  "canonical_loss_weight": 0.1,
+  "value_loss_weight": 0.25,
+  "mask_loss_weight": 0.5,
+  "mask_delta_loss_weight": 0.5,
+  "success_gate": {
+    "minimum_state_bit_accuracy": 0.999,
+    "minimum_trace_exact": 0.99,
+    "minimum_final_parity_accuracy": 0.999,
+    "minimum_joint_exact": 0.99
+  }
+}

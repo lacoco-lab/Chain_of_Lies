@@ -1,0 +1,1205 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_standard_cot_controls_seed_0",
+  "condition": "no_cot",
+  "length": 8,
+  "seed": 0,
+  "private_seed_given_to_model": false,
+  "public_zero_padding": 5,
+  "data_fields_loaded": [
+    "id",
+    "input_bits",
+    "answer"
+  ],
+  "architecture": {
+    "architecture": "one_layer_standard_causal_transformer_query_row",
+    "length": 8,
+    "seed_bits": 5,
+    "heads": 16,
+    "computationally_assigned_heads": 12,
+    "zero_padding_heads": 4,
+    "model_dim": 128,
+    "head_dim": 8,
+    "token_embedding_dim": 16,
+    "position_embedding_dim": 112,
+    "position_encoding": "learned absolute, concatenated with token embeddings",
+    "ff_dim": 512,
+    "attention": "standard scaled dot-product softmax at train and inference",
+    "layer_norm": false,
+    "nonlinear_blocks_after_attention": 1,
+    "training_only_canonical_bit_scale": 4.0,
+    "trainable_parameters": 201648,
+    "graph": [
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    ]
+  },
+  "train_examples": 128,
+  "validation_examples": 64,
+  "test_examples": 64,
+  "split_audit": {
+    "train_test_overlap": 0,
+    "train_validation_overlap": 0,
+    "validation_test_collisions_removed": 0,
+    "validation_rows_before": 64,
+    "validation_rows_after": 64,
+    "label_balance": {
+      "train": {
+        "zero": 64,
+        "one": 64
+      },
+      "validation": {
+        "zero": 32,
+        "one": 32
+      },
+      "test": {
+        "zero": 32,
+        "one": 32
+      }
+    }
+  },
+  "routing_training": {
+    "enabled": true,
+    "steps": 100,
+    "final_batch": {
+      "routing_accuracy": 1.0,
+      "minimum_target_attention": 1.0,
+      "mean_target_attention": 1.0
+    },
+    "history": [
+      {
+        "step": 1,
+        "loss": 2.7692694664001465,
+        "routing_accuracy": 0.0,
+        "minimum_target_attention": 0.04072236642241478,
+        "mean_target_attention": 0.06439681351184845
+      },
+      {
+        "step": 100,
+        "loss": 0.0,
+        "routing_accuracy": 1.0,
+        "minimum_target_attention": 1.0,
+        "mean_target_attention": 1.0
+      }
+    ]
+  },
+  "representation_training": {
+    "enabled": true,
+    "steps": 250,
+    "best_accuracy": 1.0,
+    "best_mse": 0.00027194549329578876,
+    "history": [
+      {
+        "step": 1,
+        "routed_bit_accuracy": 0.377685546875,
+        "bit_mse": 18.788774490356445,
+        "loss": 18.791521072387695
+      },
+      {
+        "step": 250,
+        "routed_bit_accuracy": 1.0,
+        "bit_mse": 0.00027194549329578876,
+        "loss": 0.00027197395684197545
+      }
+    ]
+  },
+  "public_training": {
+    "enabled": true,
+    "steps": 5750,
+    "best_exhaustive_accuracy": 1.0,
+    "history": [
+      {
+        "step": 1,
+        "active_input_bits": 1,
+        "loss": 1.0006372928619385,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 250,
+        "active_input_bits": 1,
+        "loss": 0.00014424401160795242,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 500,
+        "active_input_bits": 1,
+        "loss": 4.967875429429114e-05,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 750,
+        "active_input_bits": 1,
+        "loss": 2.4377308363909833e-05,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 1000,
+        "active_input_bits": 2,
+        "loss": 0.0005751186981797218,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 1250,
+        "active_input_bits": 2,
+        "loss": 0.00021036912221461535,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 1500,
+        "active_input_bits": 2,
+        "loss": 0.00011467158037703484,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 1750,
+        "active_input_bits": 3,
+        "loss": 0.002188889542594552,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 2000,
+        "active_input_bits": 3,
+        "loss": 0.0005315406597219408,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 2250,
+        "active_input_bits": 3,
+        "loss": 0.00026277959113940597,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 2500,
+        "active_input_bits": 4,
+        "loss": 0.009723860770463943,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 2750,
+        "active_input_bits": 4,
+        "loss": 0.0016061875503510237,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 3000,
+        "active_input_bits": 4,
+        "loss": 0.0007371288957074285,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 3250,
+        "active_input_bits": 5,
+        "loss": 0.14849986135959625,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 3500,
+        "active_input_bits": 5,
+        "loss": 0.0026260591112077236,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 3750,
+        "active_input_bits": 5,
+        "loss": 0.0011790504213422537,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 4000,
+        "active_input_bits": 5,
+        "loss": 0.0005805666442029178,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 4250,
+        "active_input_bits": 6,
+        "loss": 0.009805099107325077,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 4500,
+        "active_input_bits": 6,
+        "loss": 0.0028948879335075617,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 4750,
+        "active_input_bits": 6,
+        "loss": 0.001431938842870295,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 5000,
+        "active_input_bits": 7,
+        "loss": 0.018248720094561577,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 5250,
+        "active_input_bits": 7,
+        "loss": 0.005909110885113478,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 5500,
+        "active_input_bits": 7,
+        "loss": 0.0024718393106013536,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 5750,
+        "active_input_bits": 8,
+        "loss": 0.052389852702617645,
+        "exhaustive_accuracy": 1.0
+      }
+    ]
+  },
+  "integration_training": {
+    "steps": 6000,
+    "best_validation_score": [
+      0.96875,
+      1.96875
+    ],
+    "history": [
+      {
+        "step": 1,
+        "loss": 0.03951752558350563,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.96875,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 250,
+        "loss": 0.003634033724665642,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.953125,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 500,
+        "loss": 0.0014520270051434636,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.9375,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 750,
+        "loss": 0.0006792605854570866,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.953125,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 1000,
+        "loss": 0.0004290136566851288,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.953125,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 1250,
+        "loss": 0.0002810222504194826,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.921875,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 1500,
+        "loss": 0.0001931100123329088,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.90625,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 1750,
+        "loss": 0.00011004726547980681,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.90625,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 2000,
+        "loss": 9.279129153583199e-05,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.890625,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 2250,
+        "loss": 7.292453665286303e-05,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.890625,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 2500,
+        "loss": 5.045997386332601e-05,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.890625,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 2750,
+        "loss": 4.286826151655987e-05,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.890625,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 3000,
+        "loss": 3.740024476428516e-05,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.890625,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 3250,
+        "loss": 3.175820893375203e-05,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.890625,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 3500,
+        "loss": 2.0719073290820234e-05,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.875,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 3750,
+        "loss": 1.5368843378382735e-05,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.875,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 4000,
+        "loss": 1.689988494035788e-05,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.875,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 4250,
+        "loss": 1.2928393516631331e-05,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.859375,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 4500,
+        "loss": 9.68795211520046e-06,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.875,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 4750,
+        "loss": 8.511728992743883e-06,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.875,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 5000,
+        "loss": 6.498711627500597e-06,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.859375,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 5250,
+        "loss": 7.4868353294732515e-06,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.859375,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 5500,
+        "loss": 5.416532985691447e-06,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.859375,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 5750,
+        "loss": 4.782775704370579e-06,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.859375,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 6000,
+        "loss": 4.04657384933671e-06,
+        "validation": {
+          "n": 64,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.859375,
+          "samples": [
+            {
+              "id": "standard_control_n8_validation_000000",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n8_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n8_validation_000003",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "validation_softmax_attention": {
+    "n": 64,
+    "cot_length": 0,
+    "cot_bit_accuracy": null,
+    "cot_exact": null,
+    "final_parity_accuracy": 0.96875,
+    "samples": [
+      {
+        "id": "standard_control_n8_validation_000000",
+        "expected_answer": 1,
+        "predicted_answer": 1
+      },
+      {
+        "id": "standard_control_n8_validation_000001",
+        "expected_answer": 1,
+        "predicted_answer": 1
+      },
+      {
+        "id": "standard_control_n8_validation_000002",
+        "expected_answer": 0,
+        "predicted_answer": 0
+      },
+      {
+        "id": "standard_control_n8_validation_000003",
+        "expected_answer": 1,
+        "predicted_answer": 1
+      }
+    ]
+  },
+  "test_softmax_attention": {
+    "n": 64,
+    "cot_length": 0,
+    "cot_bit_accuracy": null,
+    "cot_exact": null,
+    "final_parity_accuracy": 0.953125,
+    "samples": [
+      {
+        "id": "standard_control_n8_test_000000",
+        "expected_answer": 0,
+        "predicted_answer": 0
+      },
+      {
+        "id": "standard_control_n8_test_000001",
+        "expected_answer": 0,
+        "predicted_answer": 0
+      },
+      {
+        "id": "standard_control_n8_test_000002",
+        "expected_answer": 0,
+        "predicted_answer": 0
+      },
+      {
+        "id": "standard_control_n8_test_000003",
+        "expected_answer": 0,
+        "predicted_answer": 0
+      }
+    ]
+  },
+  "matches_expected_pattern": false,
+  "elapsed_seconds": 153.8700261078775
+}

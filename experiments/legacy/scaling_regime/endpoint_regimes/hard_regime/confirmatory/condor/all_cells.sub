@@ -1,0 +1,35 @@
+universe = docker
+docker_image = pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/legacy/scaling_regime/endpoint_regimes/hard_regime/confirmatory/run.sh cell $(model) $(seed)
+
+should_transfer_files = YES
+when_to_transfer_output = ON_SUCCESS
+success_exit_code = 0
+preserve_relative_paths = True
+getenv = HF_TOKEN
+environment = "HF_HUB_DISABLE_XET=1"
+transfer_input_files = chain_of_lies,scripts,requirements.txt,pyproject.toml,experiments/legacy/scaling_regime/endpoint_regimes/hard_regime,generated_data/hard_regime/confirmatory/split_manifest.json,generated_data/hard_regime/confirmatory/steganography/seed_$(seed)
+transfer_output_files = artifacts/hard_regime/confirmatory/$(model)/seed_$(seed),generated_data/hard_regime/confirmatory_eval_responses/$(model)/seed_$(seed)
+
+output = /home/momo00016/logs/chain_of_lies/hard_confirmatory_$(model)_seed_$(seed).out
+error  = /home/momo00016/logs/chain_of_lies/hard_confirmatory_$(model)_seed_$(seed).err
+log    = /home/momo00016/logs/chain_of_lies/hard_confirmatory_$(model)_seed_$(seed).log
+
+request_CPUs = 4
+request_memory = 48G
+request_GPUs = 1
+request_disk = 80G
+requirements = (GPUs_GlobalMemoryMb >= 40000)
++MaxWallTime = 604800
+
+queue model,seed from (
+  qwen 0
+  qwen 1
+  qwen 2
+  llama 0
+  llama 1
+  llama 2
+)

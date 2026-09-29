@@ -1,0 +1,39 @@
+{
+  "source_script": "scripts/plot_goldreich_parity_figure.py",
+  "source_artifacts": "artifacts/parity_goldreich_standard_transformer_v2",
+  "primary_figure": "figure_goldreich_parity_performance",
+  "compact_figure": "figure_goldreich_parity_joint",
+  "control_figure": "figure_goldreich_parity_controls",
+  "ablation_figure": "figure_goldreich_parity_ablations",
+  "formats": [
+    "pdf",
+    "svg",
+    "png"
+  ],
+  "primary_figure_contents": [
+    "encrypted-CoT final-answer accuracy",
+    "no-CoT final-answer accuracy",
+    "filler-only-CoT final-answer accuracy (repeated zero tokens)"
+  ],
+  "note": "No-CoT and filler-only controls use one staged training procedure at N=4,8,16,32,64. Matched end-to-end N=16 controls are shown as separate hollow markers. Small horizontal marker offsets separate coincident series visually; source CSVs retain the exact input lengths and accuracies.",
+  "primary_figure_data": "figure_goldreich_parity_performance_data.csv",
+  "attention_at_inference": "ordinary scaled dot-product softmax",
+  "test_examples_per_condition": 8192,
+  "model_widths": [
+    128
+  ],
+  "input_lengths": [
+    4,
+    8,
+    16,
+    32,
+    64,
+    256,
+    512,
+    1024
+  ],
+  "control_source_artifacts": "artifacts/parity_standard_cot_controls",
+  "staged_large_control_source_artifacts": "artifacts/parity_standard_cot_controls_staged",
+  "matched_end_to_end_control_source_artifacts": "artifacts/parity_standard_cot_controls_matched_end_to_end",
+  "ablation_source_artifacts": "artifacts/parity_goldreich_standard_ablations"
+}

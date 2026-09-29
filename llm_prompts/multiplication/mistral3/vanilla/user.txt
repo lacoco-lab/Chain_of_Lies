@@ -1,0 +1,8 @@
+Main question: {{PUBLIC_QUESTION}}
+Other question: {{PRIVATE_QUESTION}}
+
+Output both answers in this format:
+<ANSWER>
+Main: [Main Answer]
+Other: [Other Answer]
+</ANSWER>

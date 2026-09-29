@@ -1,0 +1,27 @@
+universe = vanilla
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/scaling_regime/protocols/filler/run_nethome.sh mmohammadkhani s5 $(model) $(seed)
+
+environment = "HF_TOKEN=$ENV(HF_TOKEN)"
+output = /scratch/mmohammadkhani/logs/chain_of_lies/filler_only_s5_$(model)_seed_$(seed).out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/filler_only_s5_$(model)_seed_$(seed).err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/filler_only_s5_$(model)_seed_$(seed).log
+
+request_CPUs = 4
+request_memory = 64G
+request_GPUs = 1
+# Model caches live on /scratch and outputs on /nethome; execute-node scratch is small.
+request_disk = 5G
+requirements = (GPUs_GlobalMemoryMb >= 40000)
++MaxWallTime = 604800
+on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)
+
+queue model,seed from (
+  qwen 0
+  qwen 1
+  qwen 2
+  llama 0
+  llama 1
+  llama 2
+)

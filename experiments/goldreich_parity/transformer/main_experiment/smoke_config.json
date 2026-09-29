@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "experiment_name": "parity_goldreich_toy_transformer_v2_one_bit_smoke",
+  "seed": 0,
+  "graph_seed": 20260818,
+  "seed_length_exponent": 0.7,
+  "seed_bits_by_length": {"8": 5},
+  "lengths": [8],
+  "train_seed_n": 24,
+  "validation_seed_n": 4,
+  "test_seed_n": 4,
+  "train_n_per_length": 4096,
+  "validation_n_per_length": 512,
+  "test_n_per_length": 512,
+  "heads": 12,
+  "key_dim_by_length": {"8": 16},
+  "gate_hidden_dim": 128,
+  "gate_learning_rate": 0.003,
+  "gate_max_epochs": 2000,
+  "routing_learning_rate": 0.003,
+  "routing_max_epochs": 3000,
+  "integration_learning_rate": 0.0003,
+  "integration_steps_by_length": {"8": 300},
+  "integration_batch_size": 256,
+  "selection_validation_n": 128,
+  "selection_interval": 100,
+  "soft_validation_n_by_length": {"8": 128},
+  "attention_loss_weight": 1.0,
+  "mask_loss_weight": 0.5,
+  "answer_loss_weight": 0.0,
+  "entropy_loss_weight": 0.01,
+  "supervision_modes": {
+    "mask_state": {
+      "attention_supervision": false,
+      "mask_loss_weight": 1.0,
+      "answer_loss_weight": 0.5
+    },
+    "cot_answer_only": {
+      "attention_supervision": false,
+      "mask_loss_weight": 0.0,
+      "answer_loss_weight": 1.0
+    }
+  },
+  "success_gate": {
+    "minimum_gate_accuracy": 1.0,
+    "minimum_routing_accuracy": 1.0,
+    "minimum_target_attention": 0.995,
+    "minimum_state_bit_accuracy": 0.999,
+    "minimum_trace_exact": 0.99,
+    "minimum_final_parity_accuracy": 0.999,
+    "minimum_joint_exact": 0.99
+  }
+}

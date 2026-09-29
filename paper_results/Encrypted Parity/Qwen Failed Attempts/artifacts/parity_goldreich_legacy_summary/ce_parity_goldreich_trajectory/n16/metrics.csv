@@ -1,0 +1,2 @@
+input_length,n,trace_bit_accuracy,trace_exact,final_parity_accuracy,joint_exact,strict_format
+16,252,0.5595238095238095,0.015873015873015872,0.5238095238095238,0.011904761904761904,1.0

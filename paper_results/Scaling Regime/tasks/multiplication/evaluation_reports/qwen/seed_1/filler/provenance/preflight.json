@@ -1,0 +1,52 @@
+{
+  "experiment": "filler_only_scaling_v1",
+  "schema_version": 1,
+  "tasks": {
+    "multiplication": {
+      "capacity": {
+        "max_private_cot_tokens_by_model": {
+          "qwen": {
+            "2": 80,
+            "3": 123,
+            "4": 176
+          }
+        },
+        "verified_budgets": {
+          "2": {
+            "budget": 128,
+            "required_maximum": 80,
+            "slack": 48
+          },
+          "3": {
+            "budget": 192,
+            "required_maximum": 123,
+            "slack": 69
+          },
+          "4": {
+            "budget": 256,
+            "required_maximum": 176,
+            "slack": 80
+          }
+        }
+      },
+      "cells": [
+        {
+          "eval_count": 600,
+          "eval_dir": "generated_data/multiplication_length_retraining_v1/shared_eval/arith_length_control",
+          "manifest": "generated_data/multiplication_length_retraining_v1/split_manifest.json",
+          "seed": 1,
+          "source_config": "experiments/multiplication_length_retraining/config.json",
+          "train_count": 3000,
+          "train_dir": "generated_data/multiplication_length_retraining_v1/seed_1/arith_length_control"
+        }
+      ],
+      "records_by_difficulty": {
+        "2": 1200,
+        "3": 1200,
+        "4": 1200
+      },
+      "task": "multiplication",
+      "unique_records": 3600
+    }
+  }
+}

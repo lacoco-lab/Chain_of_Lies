@@ -1,0 +1,23 @@
+universe = vanilla
+
+# The final training stages can use the cluster's preemptible queue. This usually
+# improves scheduling latency, but HTCondor may pause or preempt the job.
+accounting_group = pausable
+
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/goldreich_parity/qwen_attempts/reported_diagnostics/final_composition/condor_nethome/run.sh mmohammadkhani $(action)
+
+getenv = HF_TOKEN
+
+output = /scratch/mmohammadkhani/logs/chain_of_lies/parity_goldreich_final_$(action).out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/parity_goldreich_final_$(action).err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/parity_goldreich_final_$(action).log
+
+request_CPUs = 4
+request_memory = 64G
+request_GPUs = 1
+requirements = (GPUs_GlobalMemoryMb >= 40000)
++MaxWallTime = 259200
+
+queue 1

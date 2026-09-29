@@ -1,0 +1,59 @@
+{
+  "control_private_shared_fraction": 0.0,
+  "control_steg_public_questions_matched": true,
+  "lengths": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "piggyback_shared_count_by_length": {
+    "1": 0,
+    "2": 1,
+    "3": 2,
+    "4": 3,
+    "5": 4
+  },
+  "piggyback_shared_rule": "all_but_one",
+  "private_questions_matched_across_all_five_conditions": true,
+  "seed_reports": {
+    "2": {
+      "lengths": {
+        "1": {
+          "train_eval_overlap": 0,
+          "train_rows_per_variant": 1000
+        },
+        "2": {
+          "train_eval_overlap": 0,
+          "train_rows_per_variant": 1000
+        },
+        "3": {
+          "train_eval_overlap": 0,
+          "train_rows_per_variant": 1000
+        },
+        "4": {
+          "train_eval_overlap": 0,
+          "train_rows_per_variant": 1000
+        },
+        "5": {
+          "train_eval_overlap": 0,
+          "train_rows_per_variant": 1000
+        }
+      },
+      "valid": true
+    }
+  },
+  "train_eval_question_overlap": 0,
+  "uniqueness_unit_by_length": {
+    "1": "complete_public_private_prompt_pair",
+    "2": "complete_question",
+    "3": "complete_question",
+    "4": "complete_question",
+    "5": "complete_question"
+  },
+  "valid": true,
+  "validated_seeds": [
+    2
+  ]
+}

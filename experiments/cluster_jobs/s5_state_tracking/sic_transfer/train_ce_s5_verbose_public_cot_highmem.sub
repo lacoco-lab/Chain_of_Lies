@@ -1,0 +1,33 @@
+universe        = container
+container_image = /scratch/common/images/apptainer-builder.sif
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /home/momo00016/Faithfulness-Safety/experiments/cluster_jobs/s5_state_tracking/sic_transfer/run_s5_transfer.sh
+arguments  = train $(variant) verbose_public_cot $(seed) 3 10000 10000 artifacts/ce_s5 1024
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+transfer_input_files = chain_of_lies,scripts,requirements.txt,pyproject.toml,generated_data
+transfer_output_files = artifacts
+stream_output = True
+stream_error = True
+
+output = /home/momo00016/logs/chain_of_lies/sic_transfer_train_ce_s5_verbose_public_cot_$(variant)_seed_$(seed).out
+error  = /home/momo00016/logs/chain_of_lies/sic_transfer_train_ce_s5_verbose_public_cot_$(variant)_seed_$(seed).err
+log    = /home/momo00016/logs/chain_of_lies/sic_transfer_train_ce_s5_verbose_public_cot_$(variant)_seed_$(seed).log
+
+request_CPUs = 4
+request_memory = 64G
+request_GPUs = 1
+requirements = (GPUs_GlobalMemoryMb >= 80000)
+
++MaxWallTime = 259200
+
+queue seed,variant from (
+  0 s5_piggyback
+  0 s5_control
+  1 s5_piggyback
+  1 s5_control
+  2 s5_piggyback
+  2 s5_control
+)

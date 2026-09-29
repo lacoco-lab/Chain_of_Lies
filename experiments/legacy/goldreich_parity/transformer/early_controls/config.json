@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_cot_controls_seed_0",
+  "data_source": "exact input examples from the encrypted experiment; seed-related fields ignored",
+  "seed": 0,
+  "require_disjoint_inputs": true,
+  "lengths": [32, 64, 256, 512, 1024, 2048],
+  "heads": 12,
+  "public_zero_padding_by_length": {
+    "32": 12,
+    "64": 19,
+    "256": 49,
+    "512": 79,
+    "1024": 128,
+    "2048": 208
+  },
+  "key_dim_by_length": {
+    "32": 32,
+    "64": 32,
+    "256": 64,
+    "512": 64,
+    "1024": 64,
+    "2048": 64
+  },
+  "gate_hidden_dim": 128,
+  "gate_learning_rate": 0.003,
+  "gate_max_epochs": 2000,
+  "routing_learning_rate": 0.003,
+  "routing_max_epochs": 3000,
+  "integration_learning_rate": 0.0003,
+  "integration_steps_by_length": {
+    "32": 1000,
+    "64": 1000,
+    "256": 750,
+    "512": 750,
+    "1024": 500,
+    "2048": 500
+  },
+  "integration_batch_size": 512,
+  "attention_loss_weight": 1.0,
+  "soft_validation_n_by_length": {
+    "32": 512,
+    "64": 512,
+    "256": 128,
+    "512": 64,
+    "1024": 32,
+    "2048": 16
+  },
+  "success_gate": {
+    "minimum_target_attention": 0.995,
+    "minimum_cot_bit_accuracy": 0.999,
+    "minimum_cot_exact": 0.99,
+    "minimum_final_parity_accuracy": 0.999,
+    "chance_tolerance": 0.03
+  }
+}

@@ -1,0 +1,27 @@
+universe = docker
+docker_image = pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/legacy/scaling_regime/endpoint_regimes/hard_regime/multiplication_only_piggyback/diagnostics/qwen_seed2_optimization/run.sh cell $(optimization_seed)
+
+should_transfer_files = YES
+when_to_transfer_output = ON_SUCCESS
+success_exit_code = 0
+preserve_relative_paths = True
+environment = "HF_HUB_DISABLE_XET=1"
+transfer_input_files = chain_of_lies,scripts,requirements.txt,pyproject.toml,experiments/legacy/scaling_regime/endpoint_regimes/hard_regime,generated_data/hard_regime/multiplication_only_piggyback/split_manifest.json,generated_data/hard_regime/multiplication_only_piggyback/seed_2,generated_data/hard_regime/multiplication_only_piggyback_eval_responses/qwen/seed_2/public_cot/ckpt_final/baseline/arith_piggyback
+transfer_output_files = artifacts/hard_regime/multiplication_only_piggyback_diagnostics/qwen_seed2_optimization/opt_seed_$(optimization_seed),generated_data/hard_regime/multiplication_only_piggyback_diagnostics/qwen_seed2_optimization_eval_responses/opt_seed_$(optimization_seed)
+
+output = /home/momo00016/logs/chain_of_lies/hard_mulonly_qwen_seed2_opt_$(optimization_seed).out
+error  = /home/momo00016/logs/chain_of_lies/hard_mulonly_qwen_seed2_opt_$(optimization_seed).err
+log    = /home/momo00016/logs/chain_of_lies/hard_mulonly_qwen_seed2_opt_$(optimization_seed).log
+
+request_CPUs = 4
+request_memory = 48G
+request_GPUs = 1
+request_disk = 80G
+requirements = (GPUs_GlobalMemoryMb >= 40000)
++MaxWallTime = 604800
+
+queue optimization_seed in 3,4,5

@@ -1,0 +1,17 @@
+universe = vanilla
+
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/cluster_jobs/s5_state_tracking/old_cluster/summarize_ce_s5.sh mmohammadkhani
+
+output = /scratch/mmohammadkhani/logs/chain_of_lies/summarize_ce_s5.out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/summarize_ce_s5.err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/summarize_ce_s5.log
+
+request_CPUs = 2
+request_memory = 8G
+
++MaxWallTime = 259200
+
+queue
+

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_update_ablation_v1",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "seed": 0,
+  "graph_seed": 20260818,
+  "seed_bits": 16,
+  "graph_edges": 64,
+  "local_replay_n": 512,
+  "local_validation_n": 1024,
+  "supplied_update_train_n": 2048,
+  "supplied_update_validation_n": 512,
+  "condition_train_n": 4032,
+  "condition_validation_n": 1008,
+  "batch_size": 8,
+  "evaluation_batch_size": 32,
+  "learning_rate": 0.00002,
+  "gradient_clip": 1.0,
+  "attention_loss_weight": 0.1,
+  "attention_coverage_weight": 0.25,
+  "attention_layers": 4,
+  "attention_heads": 4,
+  "attention_evaluation_n": 128,
+  "base_epochs": 3,
+  "condition_epochs": 4,
+  "minimum_epochs": 2,
+  "early_stop_accuracy": 0.98,
+  "replay": {
+    "base_local_copies": 2,
+    "condition_local_copies": 2,
+    "condition_supplied_update_n": 1024
+  },
+  "success_gate": {
+    "minimum_supplied_update_accuracy": 0.98,
+    "minimum_condition_accuracy": 0.95,
+    "minimum_local_retention": 0.95
+  }
+}

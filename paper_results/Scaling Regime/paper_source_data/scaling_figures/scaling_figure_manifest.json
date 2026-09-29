@@ -1,0 +1,140 @@
+{
+  "status": "complete_primary_filler_only_with_legacy_appendix_ablation",
+  "accuracy": {
+    "panels": 8,
+    "conditions": [
+      "vanilla",
+      "filler_only",
+      "public_only_cot",
+      "piggyback",
+      "steganography",
+      "filler_public_cot"
+    ],
+    "metric": "private exact accuracy; mean \u00b1 sample SD over seeds 0,1,2",
+    "style": "Paper-matched gray/blue/red-orange colors and markers; muted appendix ablation",
+    "display_labels": "Special Tokens; Covert accuracy"
+  },
+  "chain": {
+    "layout": "2x2 at 3.45 inch width",
+    "metric": "mean generated chain tokens including invisible tokens; answer block excluded",
+    "marker_offsets": "visual only",
+    "display_label": "Special Tokens"
+  },
+  "outputs": [
+    {
+      "file": "figure_accuracy_by_length_appendix.pdf",
+      "bytes": 52333,
+      "sha256": "d2d58d2792134d0a9cce54b64fd2edc3d6a0b8c4e68e1f7c27fea7f1ea81ba6d"
+    },
+    {
+      "file": "figure_accuracy_by_length_appendix.png",
+      "bytes": 1131432,
+      "sha256": "887f7aba93b455fc1caf6e8fa39235540fcee967e4326c68eb91bf00bf30abd5"
+    },
+    {
+      "file": "figure_chain_length_by_input_length_main.pdf",
+      "bytes": 28153,
+      "sha256": "bfff14feacee34441c27e04934f4109164d692c3a5cf6b869bf9f2878e84caaa"
+    },
+    {
+      "file": "figure_chain_length_by_input_length_main.png",
+      "bytes": 307943,
+      "sha256": "9d1e02e2a56a46b0378edf80471c2522b89a689cacb116ce7b87480d74e958d2"
+    },
+    {
+      "file": "figure_chain_length_by_input_length_main.svg",
+      "bytes": 85244,
+      "sha256": "9bea2822ea4fce205f4d698b7536057179f2177641c06a965556bc7b32d81957"
+    },
+    {
+      "file": "figure_accuracy_plot_data.csv",
+      "bytes": 35375,
+      "sha256": "afb1f4325ed9b9b24abf6e5bb357fc00310deeb81a40dc5078e26af5d2860d60"
+    },
+    {
+      "file": "figure_chain_plot_data.csv",
+      "bytes": 8060,
+      "sha256": "f47f191ab0b1e846b123f0175a3c0138f3461f092a11362d16169ab2c0575d34"
+    },
+    {
+      "file": "accuracy_knowledge_llama.pdf",
+      "bytes": 23936,
+      "sha256": "44d3f074344089d053ab477d842201e78f24a207fad69dd151c8860720bdd9ed"
+    },
+    {
+      "file": "accuracy_knowledge_llama.png",
+      "bytes": 203480,
+      "sha256": "4ec884eab1c194bef3e0d48eb1bad11135eafa0d909640b64ba2c9e3a3ab7ffe"
+    },
+    {
+      "file": "accuracy_knowledge_qwen.pdf",
+      "bytes": 24206,
+      "sha256": "041e8d2f95ddaf27cd0211cf69ab2673061a14c66c85d24f8b6d45ffe09858cb"
+    },
+    {
+      "file": "accuracy_knowledge_qwen.png",
+      "bytes": 216170,
+      "sha256": "c4e287f6a552417f4619d02177c06348c4ad3f8534c1f21b3d4f6f2d0afb3e63"
+    },
+    {
+      "file": "accuracy_multiplication_llama.pdf",
+      "bytes": 23027,
+      "sha256": "bced36215606a6d5469d00ab7a4735fc26d4949d2079c488a24b8c69077b281b"
+    },
+    {
+      "file": "accuracy_multiplication_llama.png",
+      "bytes": 223987,
+      "sha256": "e3fd7cd92a5d119ee97e730cc81daa985671b1cbc1ef6a8c3561f2a7169e38c0"
+    },
+    {
+      "file": "accuracy_multiplication_qwen.pdf",
+      "bytes": 23557,
+      "sha256": "a9dea64c9a9433d384efe6b62364ae441f2b85c12a4c40776079b1a97a2e37be"
+    },
+    {
+      "file": "accuracy_multiplication_qwen.png",
+      "bytes": 249299,
+      "sha256": "6adf98dbaada46fd7375302386e382cd8b8eaf411ef124d642cca6ae420a1f58"
+    },
+    {
+      "file": "accuracy_parity_llama.pdf",
+      "bytes": 23131,
+      "sha256": "c159cb43d18e0d01bbb6af3c7131295d1712e45caf4e884232a3221efc5977e8"
+    },
+    {
+      "file": "accuracy_parity_llama.png",
+      "bytes": 147891,
+      "sha256": "d609f8214e426bba76558ab31f7fc8e26c3ff9d02c4a2e8cadc2a659b74ba439"
+    },
+    {
+      "file": "accuracy_parity_qwen.pdf",
+      "bytes": 23781,
+      "sha256": "71f0a394c09992fe82825fad7d358418d0a6069ab4715c037ef3c8575a44639e"
+    },
+    {
+      "file": "accuracy_parity_qwen.png",
+      "bytes": 165719,
+      "sha256": "4c4f7023ed3642ec4919128cd6758431665e384508c210cd35da04a0a39890ee"
+    },
+    {
+      "file": "accuracy_s5_llama.pdf",
+      "bytes": 26822,
+      "sha256": "f25cfd47ce1b7c9fa18ed0b3fdbc33b8446f6c990d271b21065ab00d5e2f588a"
+    },
+    {
+      "file": "accuracy_s5_llama.png",
+      "bytes": 241231,
+      "sha256": "6fdbaf79448a2c55c172f036a0a2f2c3f3b0be14bf22a3cf1f3e22a444ad67cc"
+    },
+    {
+      "file": "accuracy_s5_qwen.pdf",
+      "bytes": 26666,
+      "sha256": "0f3dcc5832e8b09e8ae1ddf32fef08790505df4e1e2c91ed2106a2d716fb77bd"
+    },
+    {
+      "file": "accuracy_s5_qwen.png",
+      "bytes": 217865,
+      "sha256": "fb596549650638c3cbc418c12fbd0b239cdffa90b6ae9242bdd9c0d1611ccfa2"
+    }
+  ]
+}

@@ -1,0 +1,3187 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_standard_supervision_ablations_seed_0",
+  "mode": "end_to_end",
+  "length": 32,
+  "seed": 0,
+  "parameter_initialization_seed": 128,
+  "architecture": {
+    "architecture": "one_layer_standard_causal_transformer_query_row",
+    "length": 32,
+    "seed_bits": 12,
+    "heads": 16,
+    "computationally_assigned_heads": 12,
+    "zero_padding_heads": 4,
+    "model_dim": 128,
+    "head_dim": 8,
+    "token_embedding_dim": 16,
+    "position_embedding_dim": 112,
+    "position_encoding": "learned absolute, concatenated with token embeddings",
+    "ff_dim": 512,
+    "attention": "standard scaled dot-product softmax at train and inference",
+    "layer_norm": false,
+    "nonlinear_blocks_after_attention": 1,
+    "training_only_canonical_bit_scale": 4.0,
+    "trainable_parameters": 207808,
+    "graph": [
+      [
+        5,
+        1,
+        9,
+        7,
+        3
+      ],
+      [
+        3,
+        9,
+        8,
+        4,
+        7
+      ],
+      [
+        11,
+        5,
+        9,
+        3,
+        4
+      ],
+      [
+        3,
+        9,
+        1,
+        0,
+        4
+      ],
+      [
+        7,
+        1,
+        10,
+        2,
+        6
+      ],
+      [
+        3,
+        9,
+        7,
+        11,
+        6
+      ],
+      [
+        7,
+        10,
+        0,
+        3,
+        8
+      ],
+      [
+        0,
+        3,
+        2,
+        6,
+        11
+      ],
+      [
+        5,
+        3,
+        7,
+        4,
+        0
+      ],
+      [
+        9,
+        11,
+        1,
+        3,
+        10
+      ],
+      [
+        7,
+        11,
+        3,
+        9,
+        6
+      ],
+      [
+        9,
+        0,
+        10,
+        5,
+        1
+      ],
+      [
+        1,
+        4,
+        8,
+        5,
+        7
+      ],
+      [
+        8,
+        6,
+        0,
+        1,
+        3
+      ],
+      [
+        5,
+        7,
+        9,
+        3,
+        0
+      ],
+      [
+        11,
+        1,
+        6,
+        2,
+        4
+      ],
+      [
+        3,
+        8,
+        6,
+        1,
+        4
+      ],
+      [
+        7,
+        4,
+        9,
+        8,
+        3
+      ],
+      [
+        11,
+        7,
+        10,
+        9,
+        8
+      ],
+      [
+        5,
+        2,
+        10,
+        9,
+        11
+      ],
+      [
+        11,
+        9,
+        5,
+        6,
+        1
+      ],
+      [
+        9,
+        2,
+        6,
+        3,
+        10
+      ],
+      [
+        5,
+        0,
+        6,
+        7,
+        8
+      ],
+      [
+        6,
+        11,
+        0,
+        4,
+        2
+      ],
+      [
+        3,
+        8,
+        1,
+        7,
+        4
+      ],
+      [
+        4,
+        11,
+        6,
+        5,
+        8
+      ],
+      [
+        3,
+        8,
+        2,
+        11,
+        1
+      ],
+      [
+        7,
+        6,
+        3,
+        9,
+        11
+      ],
+      [
+        1,
+        0,
+        7,
+        5,
+        2
+      ],
+      [
+        11,
+        4,
+        0,
+        10,
+        9
+      ],
+      [
+        9,
+        7,
+        3,
+        5,
+        8
+      ],
+      [
+        7,
+        3,
+        10,
+        9,
+        1
+      ]
+    ]
+  },
+  "architecture_matches_full_baseline": true,
+  "direct_route_position_loss_used": false,
+  "all_parameters_trainable": true,
+  "supervision": {
+    "next_token_and_answer": true,
+    "canonical_routed_bits": false,
+    "routed_value_bits": false,
+    "previous_and_current_masks": false,
+    "mask_delta": false,
+    "public_boolean_truth_table": false
+  },
+  "route_metrics_are_diagnostics_not_losses": true,
+  "public_stage": {
+    "completed": false,
+    "reason": "removed by end-to-end ablation"
+  },
+  "intermediate_training": {
+    "completed": false,
+    "reason": "all intermediate labels removed"
+  },
+  "integration_training": {
+    "steps": 12000,
+    "best_validation_score": [
+      0.0,
+      0.0,
+      0.50531005859375
+    ],
+    "history": [
+      {
+        "step": 1,
+        "loss": 0.7373200058937073,
+        "output_ce": 0.7373200058937073,
+        "routing_accuracy_diagnostic_only": 0.028076171875,
+        "minimum_target_attention_diagnostic_only": 0.0040015000849962234,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.4969482421875,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.032356031013257576,
+          "minimum_target_attention": 0.003567402483895421,
+          "per_step_accuracy": [
+            0.544921875,
+            0.482421875,
+            0.501953125,
+            0.47265625,
+            0.478515625,
+            0.474609375,
+            0.49609375,
+            0.4921875,
+            0.51171875,
+            0.48828125,
+            0.478515625,
+            0.525390625,
+            0.505859375,
+            0.45703125,
+            0.5078125,
+            0.478515625,
+            0.525390625,
+            0.4921875,
+            0.494140625,
+            0.466796875,
+            0.541015625,
+            0.53515625,
+            0.482421875,
+            0.5,
+            0.509765625,
+            0.5078125,
+            0.478515625,
+            0.490234375,
+            0.474609375,
+            0.490234375,
+            0.48828125,
+            0.529296875
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "11110110010011111110101011110111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "11110110010011111110101011110111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "11110110010011111110101011110111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "11110110010011111110101011110111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "11110010010011111110101011110111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "11110010010011111110101011110111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "11110110010011111110101011110111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "11110110010011111110101011110111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 500,
+        "loss": 0.6963440179824829,
+        "output_ce": 0.6963440179824829,
+        "routing_accuracy_diagnostic_only": 0.023681640625,
+        "minimum_target_attention_diagnostic_only": 0.004946910310536623,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.4996337890625,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.02463970762310606,
+          "minimum_target_attention": 0.004805779550224543,
+          "per_step_accuracy": [
+            0.544921875,
+            0.517578125,
+            0.501953125,
+            0.47265625,
+            0.478515625,
+            0.484375,
+            0.49609375,
+            0.4921875,
+            0.48828125,
+            0.509765625,
+            0.478515625,
+            0.525390625,
+            0.505859375,
+            0.54296875,
+            0.4921875,
+            0.521484375,
+            0.525390625,
+            0.4921875,
+            0.513671875,
+            0.466796875,
+            0.458984375,
+            0.46484375,
+            0.517578125,
+            0.5,
+            0.509765625,
+            0.4921875,
+            0.478515625,
+            0.509765625,
+            0.474609375,
+            0.490234375,
+            0.51171875,
+            0.529296875
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "10110110100010001100010010100101",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "10110110100010001100010010100101",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "10110110100010001100010010100101",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "10110110100010001100010010100101",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "10110110100010001100010010100101",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "10110110100010001100010010100101",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "10110110100010001100010010100101",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "10110110100010001100010010100101",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 1000,
+        "loss": 0.685599684715271,
+        "output_ce": 0.685599684715271,
+        "routing_accuracy_diagnostic_only": 0.017578125,
+        "minimum_target_attention_diagnostic_only": 0.005061802454292774,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.5010986328125,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.01810339725378788,
+          "minimum_target_attention": 0.0049707903526723385,
+          "per_step_accuracy": [
+            0.544921875,
+            0.482421875,
+            0.498046875,
+            0.529296875,
+            0.521484375,
+            0.515625,
+            0.49609375,
+            0.4921875,
+            0.51171875,
+            0.51171875,
+            0.478515625,
+            0.474609375,
+            0.494140625,
+            0.45703125,
+            0.4921875,
+            0.478515625,
+            0.525390625,
+            0.5078125,
+            0.486328125,
+            0.533203125,
+            0.541015625,
+            0.53515625,
+            0.517578125,
+            0.5,
+            0.509765625,
+            0.5078125,
+            0.478515625,
+            0.490234375,
+            0.474609375,
+            0.490234375,
+            0.48828125,
+            0.470703125
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "11001010000101011011100111110110",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "11001010000101011011100111110110",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "11001010000101011011100111110110",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "11001010000101011011100111110110",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "11001010000101011011100111110110",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "11001010000101011011100111110110",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "11001010000101011011100111110110",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "11001010000101011011100111110110",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 1500,
+        "loss": 0.6976264715194702,
+        "output_ce": 0.6976264715194702,
+        "routing_accuracy_diagnostic_only": 0.016845703125,
+        "minimum_target_attention_diagnostic_only": 0.005256027914583683,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.50140380859375,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.016257546164772728,
+          "minimum_target_attention": 0.005171401426196098,
+          "per_step_accuracy": [
+            0.544921875,
+            0.482421875,
+            0.498046875,
+            0.47265625,
+            0.521484375,
+            0.515625,
+            0.49609375,
+            0.4921875,
+            0.48828125,
+            0.48828125,
+            0.521484375,
+            0.474609375,
+            0.494140625,
+            0.45703125,
+            0.4921875,
+            0.478515625,
+            0.525390625,
+            0.5078125,
+            0.513671875,
+            0.466796875,
+            0.541015625,
+            0.53515625,
+            0.517578125,
+            0.5,
+            0.509765625,
+            0.5078125,
+            0.478515625,
+            0.490234375,
+            0.525390625,
+            0.490234375,
+            0.48828125,
+            0.529296875
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "11011010111101011000100011111111",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "11011010111101011000100011111111",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "11011010111101011000100011111111",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "11011010111101011000100011111111",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "11011010111101011000100011111111",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "11011010111101011000100011111111",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "11011010111101011000100011111111",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "11011010111101011000100011111111",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 2000,
+        "loss": 0.696031928062439,
+        "output_ce": 0.696031928062439,
+        "routing_accuracy_diagnostic_only": 0.015625,
+        "minimum_target_attention_diagnostic_only": 0.00519808242097497,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.49603271484375,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.015913529829545456,
+          "minimum_target_attention": 0.00520950835198164,
+          "per_step_accuracy": [
+            0.544921875,
+            0.482421875,
+            0.501953125,
+            0.52734375,
+            0.521484375,
+            0.515625,
+            0.49609375,
+            0.5078125,
+            0.51171875,
+            0.48828125,
+            0.521484375,
+            0.474609375,
+            0.505859375,
+            0.45703125,
+            0.4921875,
+            0.478515625,
+            0.474609375,
+            0.4921875,
+            0.486328125,
+            0.533203125,
+            0.458984375,
+            0.46484375,
+            0.482421875,
+            0.5,
+            0.509765625,
+            0.4921875,
+            0.478515625,
+            0.490234375,
+            0.474609375,
+            0.490234375,
+            0.48828125,
+            0.529296875
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "11101011011111010111011010110111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "11101011011111010111011010110111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "11101011011111010111011010110111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "11101011011111010111011010110111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "11101011011111010111011010110111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "11101011011111010111011010110111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "11101011011111010111011010110111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "11101011011111010111011010110111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 2500,
+        "loss": 0.6947094798088074,
+        "output_ce": 0.6947094798088074,
+        "routing_accuracy_diagnostic_only": 0.0185546875,
+        "minimum_target_attention_diagnostic_only": 0.00541430851444602,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.4993896484375,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.017100941051136364,
+          "minimum_target_attention": 0.0053487918339669704,
+          "per_step_accuracy": [
+            0.455078125,
+            0.482421875,
+            0.498046875,
+            0.52734375,
+            0.478515625,
+            0.5234375,
+            0.49609375,
+            0.5078125,
+            0.51171875,
+            0.51171875,
+            0.521484375,
+            0.474609375,
+            0.494140625,
+            0.54296875,
+            0.5078125,
+            0.478515625,
+            0.474609375,
+            0.4921875,
+            0.486328125,
+            0.533203125,
+            0.458984375,
+            0.53515625,
+            0.517578125,
+            0.5,
+            0.490234375,
+            0.5078125,
+            0.478515625,
+            0.5,
+            0.525390625,
+            0.509765625,
+            0.48828125,
+            0.470703125
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "01000111001110110111000101101010",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "01000111001110110111000101101010",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "01000011001110110111000101101010",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "01000011001110110111000101101010",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "01000111001110110111000101111010",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "01000111001110110111000101101010",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "01000111001110110111000101101010",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "01000111001110110111000101101010",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 3000,
+        "loss": 0.6940360069274902,
+        "output_ce": 0.6940360069274902,
+        "routing_accuracy_diagnostic_only": 0.020751953125,
+        "minimum_target_attention_diagnostic_only": 0.0053157866932451725,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.49884033203125,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.020004734848484848,
+          "minimum_target_attention": 0.005116725340485573,
+          "per_step_accuracy": [
+            0.544921875,
+            0.482421875,
+            0.498046875,
+            0.47265625,
+            0.478515625,
+            0.515625,
+            0.50390625,
+            0.4921875,
+            0.501953125,
+            0.51171875,
+            0.478515625,
+            0.533203125,
+            0.494140625,
+            0.54296875,
+            0.4921875,
+            0.521484375,
+            0.474609375,
+            0.4921875,
+            0.486328125,
+            0.466796875,
+            0.458984375,
+            0.53515625,
+            0.517578125,
+            0.5,
+            0.490234375,
+            0.5078125,
+            0.484375,
+            0.509765625,
+            0.525390625,
+            0.490234375,
+            0.48828125,
+            0.470703125
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "11010000100000000110000001101110",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "11010000100000000110000001101110",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "11010000100000000110000001101110",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "11010000100000000110000001101110",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "11010000000000000110000001001110",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "11010000100000000110000001101110",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "11010000100000000110000001101110",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "11010000100000000110000001101110",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 3500,
+        "loss": 0.6953403353691101,
+        "output_ce": 0.6953403353691101,
+        "routing_accuracy_diagnostic_only": 0.020751953125,
+        "minimum_target_attention_diagnostic_only": 0.005171649623662233,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.49981689453125,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.018950491240530304,
+          "minimum_target_attention": 0.004857979714870453,
+          "per_step_accuracy": [
+            0.45703125,
+            0.517578125,
+            0.498046875,
+            0.513671875,
+            0.48046875,
+            0.513671875,
+            0.5078125,
+            0.494140625,
+            0.513671875,
+            0.48828125,
+            0.4765625,
+            0.525390625,
+            0.45703125,
+            0.458984375,
+            0.494140625,
+            0.478515625,
+            0.474609375,
+            0.505859375,
+            0.513671875,
+            0.46875,
+            0.564453125,
+            0.53515625,
+            0.517578125,
+            0.501953125,
+            0.52734375,
+            0.5078125,
+            0.515625,
+            0.48046875,
+            0.474609375,
+            0.513671875,
+            0.48828125,
+            0.529296875
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "00000000010011010100100001010011",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "00000000010011010100100001010011",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "00000000010001010000100001000011",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "00000000010001010000100001000011",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "10010010010011010100100011110011",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "00010010010011010100100001010011",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "00000000010011010100100001010011",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "00000000010011010100100001010011",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 4000,
+        "loss": 0.6927322149276733,
+        "output_ce": 0.6927322149276733,
+        "routing_accuracy_diagnostic_only": 0.0166015625,
+        "minimum_target_attention_diagnostic_only": 0.00527177331969142,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.5003662109375,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.01909845525568182,
+          "minimum_target_attention": 0.005206753965467215,
+          "per_step_accuracy": [
+            0.544921875,
+            0.517578125,
+            0.498046875,
+            0.470703125,
+            0.478515625,
+            0.484375,
+            0.49609375,
+            0.5078125,
+            0.51171875,
+            0.48828125,
+            0.521484375,
+            0.525390625,
+            0.494140625,
+            0.45703125,
+            0.4921875,
+            0.478515625,
+            0.474609375,
+            0.5078125,
+            0.513671875,
+            0.533203125,
+            0.470703125,
+            0.53515625,
+            0.482421875,
+            0.505859375,
+            0.509765625,
+            0.4921875,
+            0.478515625,
+            0.509765625,
+            0.525390625,
+            0.490234375,
+            0.486328125,
+            0.529296875
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "10010111011001010001001010101111",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "10010111011001010001001010101111",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "10010111011001010001001010101111",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "10010111011001010001101010101111",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "10000111011001010001001010101111",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "10010111011001010001001010101111",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "10010111011001010001001010101111",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "10010111011001010001001010101111",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 4500,
+        "loss": 0.6906815767288208,
+        "output_ce": 0.6906815767288208,
+        "routing_accuracy_diagnostic_only": 0.01513671875,
+        "minimum_target_attention_diagnostic_only": 0.005158787593245506,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.502685546875,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.014297022964015152,
+          "minimum_target_attention": 0.004836633335798979,
+          "per_step_accuracy": [
+            0.544921875,
+            0.482421875,
+            0.501953125,
+            0.47265625,
+            0.478515625,
+            0.515625,
+            0.50390625,
+            0.4921875,
+            0.515625,
+            0.51171875,
+            0.478515625,
+            0.525390625,
+            0.494140625,
+            0.54296875,
+            0.4921875,
+            0.521484375,
+            0.474609375,
+            0.4921875,
+            0.484375,
+            0.533203125,
+            0.541015625,
+            0.53515625,
+            0.517578125,
+            0.5,
+            0.490234375,
+            0.4921875,
+            0.478515625,
+            0.509765625,
+            0.474609375,
+            0.490234375,
+            0.46875,
+            0.529296875
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "11010000000000000111100000100101",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "11010000000000000111100000100111",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "11010000000000000111100000100111",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "11010000000000000111100000100111",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "11010000000000000111100000100101",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "11010000000000000111100000100101",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "11010000000000000111100000100101",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "11010000000000000111100000100111",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 5000,
+        "loss": 0.6969286203384399,
+        "output_ce": 0.6969286203384399,
+        "routing_accuracy_diagnostic_only": 0.018310546875,
+        "minimum_target_attention_diagnostic_only": 0.004021802451461554,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.49591064453125,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.016845703125,
+          "minimum_target_attention": 0.0039383284747600555,
+          "per_step_accuracy": [
+            0.455078125,
+            0.517578125,
+            0.501953125,
+            0.47265625,
+            0.521484375,
+            0.484375,
+            0.50390625,
+            0.5078125,
+            0.51171875,
+            0.48828125,
+            0.521484375,
+            0.525390625,
+            0.494140625,
+            0.45703125,
+            0.4921875,
+            0.478515625,
+            0.474609375,
+            0.4921875,
+            0.513671875,
+            0.466796875,
+            0.458984375,
+            0.53515625,
+            0.482421875,
+            0.5,
+            0.490234375,
+            0.4921875,
+            0.521484375,
+            0.509765625,
+            0.525390625,
+            0.490234375,
+            0.51171875,
+            0.470703125
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "00111101011001010100001000001100",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "00111101011001010100001000001100",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "00111101011001010100001000001100",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "00111101011001010100001000001100",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "00111101011001010100001000001100",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "00111101011001010100001000001100",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "00111101011001010100001000001100",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "00111101011001010100001000001100",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 5500,
+        "loss": 0.691180408000946,
+        "output_ce": 0.691180408000946,
+        "routing_accuracy_diagnostic_only": 0.02099609375,
+        "minimum_target_attention_diagnostic_only": 0.004184366669505835,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.497314453125,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.020311760179924244,
+          "minimum_target_attention": 0.004053622018545866,
+          "per_step_accuracy": [
+            0.544921875,
+            0.482421875,
+            0.498046875,
+            0.47265625,
+            0.478515625,
+            0.515625,
+            0.50390625,
+            0.5078125,
+            0.48828125,
+            0.48828125,
+            0.521484375,
+            0.474609375,
+            0.48046875,
+            0.45703125,
+            0.4921875,
+            0.478515625,
+            0.474609375,
+            0.4921875,
+            0.486328125,
+            0.533203125,
+            0.541015625,
+            0.53515625,
+            0.517578125,
+            0.5,
+            0.490234375,
+            0.5078125,
+            0.478515625,
+            0.490234375,
+            0.474609375,
+            0.490234375,
+            0.48828125,
+            0.529296875
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "11010001111111010111100101110111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "11010001111111010111100101110111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "11010001111111010111100101110111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "11010001111111010111100101110111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "11010001111111010111100101110111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "11010001111111010111100101110111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "11010001111111010111100101110111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "11010001111111010111100101110111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 6000,
+        "loss": 0.6924211382865906,
+        "output_ce": 0.6924211382865906,
+        "routing_accuracy_diagnostic_only": 0.025390625,
+        "minimum_target_attention_diagnostic_only": 0.004590516444295645,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.499755859375,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.026674212831439392,
+          "minimum_target_attention": 0.004573393613100052,
+          "per_step_accuracy": [
+            0.455078125,
+            0.517578125,
+            0.498046875,
+            0.47265625,
+            0.482421875,
+            0.515625,
+            0.50390625,
+            0.5,
+            0.48828125,
+            0.48828125,
+            0.478515625,
+            0.525390625,
+            0.490234375,
+            0.54296875,
+            0.494140625,
+            0.521484375,
+            0.52734375,
+            0.5078125,
+            0.505859375,
+            0.46875,
+            0.458984375,
+            0.53125,
+            0.517578125,
+            0.5,
+            0.490234375,
+            0.4921875,
+            0.521484375,
+            0.490234375,
+            0.474609375,
+            0.490234375,
+            0.51171875,
+            0.529296875
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "00110001110010001000000000010101",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "00110001110010001000000000010101",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "00110001110010001000000000010101",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "00110001110010001000000000010101",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "00111001110010001010000000010101",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "00110001110010001000000000010101",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "00110001110010001000000000010101",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "00110001110010001000000000010101",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 6500,
+        "loss": 0.6879257559776306,
+        "output_ce": 0.6879257559776306,
+        "routing_accuracy_diagnostic_only": 0.023193359375,
+        "minimum_target_attention_diagnostic_only": 0.004955444019287825,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.49761962890625,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.023008404356060608,
+          "minimum_target_attention": 0.004771588370203972,
+          "per_step_accuracy": [
+            0.455078125,
+            0.517578125,
+            0.501953125,
+            0.47265625,
+            0.521484375,
+            0.515625,
+            0.49609375,
+            0.5078125,
+            0.48828125,
+            0.48828125,
+            0.478515625,
+            0.525390625,
+            0.48828125,
+            0.45703125,
+            0.4921875,
+            0.478515625,
+            0.474609375,
+            0.4921875,
+            0.486328125,
+            0.46875,
+            0.52734375,
+            0.53515625,
+            0.517578125,
+            0.5,
+            0.490234375,
+            0.501953125,
+            0.521484375,
+            0.490234375,
+            0.525390625,
+            0.490234375,
+            0.48828125,
+            0.529296875
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "00111011110011010110100100011111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "00111011110011010110000100011111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "00111011110011010110000100011111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "00111011110011010110000100011111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "00111011110011010110100101011111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "00111011110011010110100100011111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "00111011110011010110000100011111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "00111011110011010110000100011111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 7000,
+        "loss": 0.6950711607933044,
+        "output_ce": 0.6950711607933044,
+        "routing_accuracy_diagnostic_only": 0.017333984375,
+        "minimum_target_attention_diagnostic_only": 0.004350153263658285,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.50531005859375,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.016560872395833332,
+          "minimum_target_attention": 0.0041318065486848354,
+          "per_step_accuracy": [
+            0.544921875,
+            0.482421875,
+            0.501953125,
+            0.52734375,
+            0.521484375,
+            0.484375,
+            0.49609375,
+            0.5078125,
+            0.51171875,
+            0.48828125,
+            0.521484375,
+            0.474609375,
+            0.505859375,
+            0.45703125,
+            0.5078125,
+            0.521484375,
+            0.525390625,
+            0.4921875,
+            0.513671875,
+            0.533203125,
+            0.541015625,
+            0.5390625,
+            0.482421875,
+            0.5,
+            0.509765625,
+            0.5078125,
+            0.478515625,
+            0.490234375,
+            0.474609375,
+            0.509765625,
+            0.48828125,
+            0.529296875
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "11101111011111101101101011110011",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "11101111011111101101101011110011",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "11101111011111101101101011110011",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "11101111011111101101101011110011",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "11101111011111101101101011110011",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "11101111011111101101101011110011",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "11101111011111101101101011110011",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "11101111011111101101101011110011",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 7500,
+        "loss": 0.6953402757644653,
+        "output_ce": 0.6953402757644653,
+        "routing_accuracy_diagnostic_only": 0.017578125,
+        "minimum_target_attention_diagnostic_only": 0.004387414548546076,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.50531005859375,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.02005652225378788,
+          "minimum_target_attention": 0.004193140659481287,
+          "per_step_accuracy": [
+            0.544921875,
+            0.482421875,
+            0.498046875,
+            0.47265625,
+            0.521484375,
+            0.515625,
+            0.49609375,
+            0.4921875,
+            0.48828125,
+            0.51171875,
+            0.521484375,
+            0.525390625,
+            0.494140625,
+            0.45703125,
+            0.4921875,
+            0.478515625,
+            0.525390625,
+            0.4921875,
+            0.486328125,
+            0.533203125,
+            0.541015625,
+            0.53515625,
+            0.482421875,
+            0.5,
+            0.509765625,
+            0.5078125,
+            0.521484375,
+            0.509765625,
+            0.525390625,
+            0.490234375,
+            0.48828125,
+            0.529296875
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "11011010101001011111101111001111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "11011010101001011111101111001111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "11011010101001011111101111001111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "11011010101001011111101111001111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "11011010101001011111101111001111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "11011010101001011111101111001111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "11011010101001011111101111001111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "11011010101001011111101111001111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 8000,
+        "loss": 0.6930689215660095,
+        "output_ce": 0.6930689215660095,
+        "routing_accuracy_diagnostic_only": 0.021240234375,
+        "minimum_target_attention_diagnostic_only": 0.00388271058909595,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.4945068359375,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.021680427320075756,
+          "minimum_target_attention": 0.003815431846305728,
+          "per_step_accuracy": [
+            0.544921875,
+            0.482421875,
+            0.498046875,
+            0.47265625,
+            0.521484375,
+            0.515625,
+            0.482421875,
+            0.4921875,
+            0.51171875,
+            0.51171875,
+            0.478515625,
+            0.525390625,
+            0.505859375,
+            0.45703125,
+            0.50390625,
+            0.478515625,
+            0.474609375,
+            0.5078125,
+            0.513671875,
+            0.466796875,
+            0.458984375,
+            0.46484375,
+            0.482421875,
+            0.5,
+            0.509765625,
+            0.4921875,
+            0.478515625,
+            0.490234375,
+            0.474609375,
+            0.509765625,
+            0.48828125,
+            0.529296875
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "11011000000011110000011110110011",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "11011000000011110000011110110011",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "11011000000011110000011110110011",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "11011000000011110000011110110011",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "11010000000011010000011110110011",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "11011000000011110000011110110011",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "11011000000011110000011110110011",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "11011000000011110000011110110011",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 8500,
+        "loss": 0.6965014934539795,
+        "output_ce": 0.6965014934539795,
+        "routing_accuracy_diagnostic_only": 0.015869140625,
+        "minimum_target_attention_diagnostic_only": 0.004120514262467623,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.50140380859375,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.015351266571969696,
+          "minimum_target_attention": 0.0037679134402424097,
+          "per_step_accuracy": [
+            0.544921875,
+            0.482421875,
+            0.501953125,
+            0.47265625,
+            0.521484375,
+            0.484375,
+            0.49609375,
+            0.5078125,
+            0.48828125,
+            0.51171875,
+            0.521484375,
+            0.474609375,
+            0.494140625,
+            0.45703125,
+            0.51171875,
+            0.478515625,
+            0.474609375,
+            0.4921875,
+            0.513671875,
+            0.533203125,
+            0.541015625,
+            0.46484375,
+            0.482421875,
+            0.51171875,
+            0.509765625,
+            0.5078125,
+            0.521484375,
+            0.509765625,
+            0.525390625,
+            0.490234375,
+            0.48828125,
+            0.529296875
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "11111111101101110101111011001111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "11111111101101110101111011001111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "11111111101101110101111011001111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "11111111101101110101111011001111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "11111111101101110101111111001111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "11111111101101110101111011001111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "11111111101101110101111011001111",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "11111111101101110101111011001111",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 9000,
+        "loss": 0.698914110660553,
+        "output_ce": 0.698914110660553,
+        "routing_accuracy_diagnostic_only": 0.01220703125,
+        "minimum_target_attention_diagnostic_only": 0.005303212907165289,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.50164794921875,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.011504202178030304,
+          "minimum_target_attention": 0.004970087204128504,
+          "per_step_accuracy": [
+            0.455078125,
+            0.482421875,
+            0.501953125,
+            0.52734375,
+            0.544921875,
+            0.51171875,
+            0.50390625,
+            0.4921875,
+            0.51171875,
+            0.48828125,
+            0.478515625,
+            0.474609375,
+            0.505859375,
+            0.54296875,
+            0.5078125,
+            0.478515625,
+            0.525390625,
+            0.4921875,
+            0.486328125,
+            0.533203125,
+            0.541015625,
+            0.46484375,
+            0.517578125,
+            0.5,
+            0.490234375,
+            0.5078125,
+            0.521484375,
+            0.490234375,
+            0.525390625,
+            0.490234375,
+            0.48828125,
+            0.470703125
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "01101010010110111111110001011110",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "01101000010110111111110001011110",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "01101010010110111111110001011110",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "01101000010110111111110001011110",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "01101010010110111111110001011110",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "01101010010110111111110001011110",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "01101010010110111111110001011110",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "01101000010110111111110001011110",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 9500,
+        "loss": 0.6936676502227783,
+        "output_ce": 0.6936676502227783,
+        "routing_accuracy_diagnostic_only": 0.017578125,
+        "minimum_target_attention_diagnostic_only": 0.0030163859482854605,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.50146484375,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.017422762784090908,
+          "minimum_target_attention": 0.002621056977659464,
+          "per_step_accuracy": [
+            0.546875,
+            0.482421875,
+            0.501953125,
+            0.52734375,
+            0.521484375,
+            0.486328125,
+            0.50390625,
+            0.4921875,
+            0.51171875,
+            0.48828125,
+            0.478515625,
+            0.470703125,
+            0.4921875,
+            0.45703125,
+            0.4921875,
+            0.521484375,
+            0.525390625,
+            0.4921875,
+            0.486328125,
+            0.533203125,
+            0.541015625,
+            0.46484375,
+            0.517578125,
+            0.5,
+            0.509765625,
+            0.5078125,
+            0.478515625,
+            0.509765625,
+            0.474609375,
+            0.490234375,
+            0.51171875,
+            0.529296875
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "11101100010101001111110111100101",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "11101100010101001111110111100101",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "11101100010101001111110111100101",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "11101100010101001111110111100101",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "11101100010111001111110111100101",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "11101100010101001111110111100101",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "11101100010101001111110111100101",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "11101100010101001111110111100101",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 10000,
+        "loss": 0.695989727973938,
+        "output_ce": 0.695989727973938,
+        "routing_accuracy_diagnostic_only": 0.017578125,
+        "minimum_target_attention_diagnostic_only": 0.0019576470367610455,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.50115966796875,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.018440015388257576,
+          "minimum_target_attention": 0.0016598799265921116,
+          "per_step_accuracy": [
+            0.455078125,
+            0.517578125,
+            0.501953125,
+            0.47265625,
+            0.521484375,
+            0.484375,
+            0.49609375,
+            0.4921875,
+            0.48828125,
+            0.48828125,
+            0.521484375,
+            0.525390625,
+            0.494140625,
+            0.45703125,
+            0.5078125,
+            0.478515625,
+            0.525390625,
+            0.4921875,
+            0.486328125,
+            0.533203125,
+            0.541015625,
+            0.53515625,
+            0.482421875,
+            0.5,
+            0.490234375,
+            0.5078125,
+            0.478515625,
+            0.509765625,
+            0.525390625,
+            0.509765625,
+            0.48828125,
+            0.529296875
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "00111110111001111111101101101011",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "00111110111001111111101101101011",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "00111110111001111111101101101011",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "00111110111001111111101101101011",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "00111110111001111111101101101011",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "00111110111001111111101101101011",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "00111110111001111111101101101011",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "00111110111001111111101101101011",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 10500,
+        "loss": 0.6920562386512756,
+        "output_ce": 0.6920562386512756,
+        "routing_accuracy_diagnostic_only": 0.014892578125,
+        "minimum_target_attention_diagnostic_only": 0.003023832105100155,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.49969482421875,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.01621685606060606,
+          "minimum_target_attention": 0.002834747778251767,
+          "per_step_accuracy": [
+            0.455078125,
+            0.482421875,
+            0.498046875,
+            0.52734375,
+            0.478515625,
+            0.484375,
+            0.50390625,
+            0.4921875,
+            0.48828125,
+            0.48828125,
+            0.478515625,
+            0.474609375,
+            0.494140625,
+            0.54296875,
+            0.5078125,
+            0.478515625,
+            0.525390625,
+            0.5078125,
+            0.513671875,
+            0.466796875,
+            0.458984375,
+            0.53515625,
+            0.517578125,
+            0.5,
+            0.509765625,
+            0.4921875,
+            0.521484375,
+            0.490234375,
+            0.525390625,
+            0.509765625,
+            0.51171875,
+            0.529296875
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "01000100110100111000000010011001",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "01000100110100111000000010011001",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "01000100110100111000000010011001",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "01000100110100111000000010011001",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "01000100110100111000000010011001",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "01000100110100111000000010011001",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "01000100110100111000000010011001",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "01000100110100111000000010011001",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 11000,
+        "loss": 0.692648708820343,
+        "output_ce": 0.692648708820343,
+        "routing_accuracy_diagnostic_only": 0.015625,
+        "minimum_target_attention_diagnostic_only": 0.0033570164814591408,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.49810791015625,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.015994910037878788,
+          "minimum_target_attention": 0.003501588013023138,
+          "per_step_accuracy": [
+            0.455078125,
+            0.517578125,
+            0.501953125,
+            0.47265625,
+            0.478515625,
+            0.515625,
+            0.49609375,
+            0.4921875,
+            0.48828125,
+            0.48828125,
+            0.521484375,
+            0.525390625,
+            0.505859375,
+            0.45703125,
+            0.4921875,
+            0.521484375,
+            0.474609375,
+            0.5078125,
+            0.513671875,
+            0.533203125,
+            0.458984375,
+            0.53515625,
+            0.482421875,
+            0.5,
+            0.490234375,
+            0.5078125,
+            0.521484375,
+            0.490234375,
+            0.525390625,
+            0.509765625,
+            0.48828125,
+            0.470703125
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "00110010111011000001001101011010",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "00110010111011000001001101011010",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "00110010111011000001001101011010",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "00110010111011000001001101011010",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "00110010111011000001001101011010",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "00110010111011000001001101011010",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "00110010111011000001001101011010",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "00110010111011000001001101011010",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 11500,
+        "loss": 0.6962390542030334,
+        "output_ce": 0.6962390542030334,
+        "routing_accuracy_diagnostic_only": 0.017333984375,
+        "minimum_target_attention_diagnostic_only": 0.004250670317560434,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.50030517578125,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.01824396306818182,
+          "minimum_target_attention": 0.003930956590920687,
+          "per_step_accuracy": [
+            0.455078125,
+            0.517578125,
+            0.498046875,
+            0.47265625,
+            0.521484375,
+            0.484375,
+            0.49609375,
+            0.4921875,
+            0.48828125,
+            0.48828125,
+            0.521484375,
+            0.525390625,
+            0.505859375,
+            0.45703125,
+            0.4921875,
+            0.521484375,
+            0.525390625,
+            0.4921875,
+            0.513671875,
+            0.533203125,
+            0.541015625,
+            0.46484375,
+            0.482421875,
+            0.5,
+            0.490234375,
+            0.5078125,
+            0.478515625,
+            0.490234375,
+            0.525390625,
+            0.509765625,
+            0.48828125,
+            0.529296875
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "00011110111011001101111101111011",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "00011110111011001101111101111011",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "00011110111011001101111101111011",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "00011110111011001101111101111011",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "00011110111011001101111101111011",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "00011110111011001101111101111011",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "00011110111011001101111101111011",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "00011110111011001101111101111011",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 12000,
+        "loss": 0.6892945766448975,
+        "output_ce": 0.6892945766448975,
+        "routing_accuracy_diagnostic_only": 0.017578125,
+        "minimum_target_attention_diagnostic_only": 0.004378452431410551,
+        "validation": {
+          "n": 512,
+          "state_bit_accuracy": 0.50213623046875,
+          "trace_exact": 0.0,
+          "final_parity_accuracy": 0.5,
+          "joint_exact": 0.0,
+          "routing_accuracy": 0.017112038352272728,
+          "minimum_target_attention": 0.004178133327513933,
+          "per_step_accuracy": [
+            0.455078125,
+            0.517578125,
+            0.49609375,
+            0.52734375,
+            0.478515625,
+            0.515625,
+            0.50390625,
+            0.4921875,
+            0.51171875,
+            0.51171875,
+            0.478515625,
+            0.525390625,
+            0.494140625,
+            0.541015625,
+            0.4921875,
+            0.521484375,
+            0.474609375,
+            0.4921875,
+            0.513671875,
+            0.533203125,
+            0.458984375,
+            0.53515625,
+            0.517578125,
+            0.5,
+            0.490234375,
+            0.4921875,
+            0.521484375,
+            0.509765625,
+            0.474609375,
+            0.509765625,
+            0.51171875,
+            0.470703125
+          ],
+          "samples": [
+            {
+              "id": "toy_n32_validation_0000000",
+              "expected_states": "10110100101001011011010011111110",
+              "predicted_states": "00000000000000000101000100000000",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000001",
+              "expected_states": "01000000110001011000011010000101",
+              "predicted_states": "00000000000000000101000100000000",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000002",
+              "expected_states": "10010000110110111100010001100100",
+              "predicted_states": "00000000000000000101000100000000",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000003",
+              "expected_states": "10111100001010100111100101101110",
+              "predicted_states": "00000000000000000101000100000000",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000004",
+              "expected_states": "01010001011011001101101001110010",
+              "predicted_states": "00000000000000000101000100000000",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000005",
+              "expected_states": "10000100011110000101101100111100",
+              "predicted_states": "00000000000000000101000100000000",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000006",
+              "expected_states": "11111010011100010100011010011000",
+              "predicted_states": "00000000000000000101000100000000",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "toy_n32_validation_0000007",
+              "expected_states": "11010000101000100001111000010011",
+              "predicted_states": "00000000000000000101000100000000",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "validation_softmax_attention": {
+    "n": 8192,
+    "state_bit_accuracy": 0.5013771057128906,
+    "trace_exact": 0.0,
+    "final_parity_accuracy": 0.5,
+    "joint_exact": 0.0,
+    "routing_accuracy": 0.016805244214607006,
+    "minimum_target_attention": 0.004116647876799107,
+    "per_step_accuracy": [
+      0.5006103515625,
+      0.5050048828125,
+      0.49755859375,
+      0.509765625,
+      0.504150390625,
+      0.4930419921875,
+      0.5010986328125,
+      0.4998779296875,
+      0.498046875,
+      0.4986572265625,
+      0.50244140625,
+      0.503173828125,
+      0.493896484375,
+      0.496337890625,
+      0.5009765625,
+      0.505126953125,
+      0.500732421875,
+      0.496826171875,
+      0.5048828125,
+      0.501708984375,
+      0.502197265625,
+      0.4952392578125,
+      0.4962158203125,
+      0.493896484375,
+      0.5045166015625,
+      0.50634765625,
+      0.4925537109375,
+      0.4984130859375,
+      0.5028076171875,
+      0.5037841796875,
+      0.5048828125,
+      0.529296875
+    ],
+    "samples": [
+      {
+        "id": "toy_n32_validation_0000000",
+        "expected_states": "10110100101001011011010011111110",
+        "predicted_states": "11101111011111101101101011110011",
+        "expected_answer": 0,
+        "predicted_answer": 1
+      },
+      {
+        "id": "toy_n32_validation_0000001",
+        "expected_states": "01000000110001011000011010000101",
+        "predicted_states": "11101111011111101101101011110011",
+        "expected_answer": 1,
+        "predicted_answer": 1
+      },
+      {
+        "id": "toy_n32_validation_0000002",
+        "expected_states": "10010000110110111100010001100100",
+        "predicted_states": "11101111011111101101101011110011",
+        "expected_answer": 0,
+        "predicted_answer": 1
+      },
+      {
+        "id": "toy_n32_validation_0000003",
+        "expected_states": "10111100001010100111100101101110",
+        "predicted_states": "11101111011111101101101011110011",
+        "expected_answer": 1,
+        "predicted_answer": 1
+      },
+      {
+        "id": "toy_n32_validation_0000004",
+        "expected_states": "01010001011011001101101001110010",
+        "predicted_states": "11101111011111101101101011110011",
+        "expected_answer": 0,
+        "predicted_answer": 1
+      },
+      {
+        "id": "toy_n32_validation_0000005",
+        "expected_states": "10000100011110000101101100111100",
+        "predicted_states": "11101111011111101101101011110011",
+        "expected_answer": 1,
+        "predicted_answer": 1
+      },
+      {
+        "id": "toy_n32_validation_0000006",
+        "expected_states": "11111010011100010100011010011000",
+        "predicted_states": "11101111011111101101101011110011",
+        "expected_answer": 0,
+        "predicted_answer": 1
+      },
+      {
+        "id": "toy_n32_validation_0000007",
+        "expected_states": "11010000101000100001111000010011",
+        "predicted_states": "11101111011111101101101011110011",
+        "expected_answer": 1,
+        "predicted_answer": 1
+      }
+    ]
+  },
+  "test_softmax_attention": {
+    "n": 8192,
+    "state_bit_accuracy": 0.4991455078125,
+    "trace_exact": 0.0,
+    "final_parity_accuracy": 0.5,
+    "joint_exact": 0.0,
+    "routing_accuracy": 0.01691644841974432,
+    "minimum_target_attention": 0.004042410291731358,
+    "per_step_accuracy": [
+      0.5050048828125,
+      0.50146484375,
+      0.503662109375,
+      0.4974365234375,
+      0.49609375,
+      0.4979248046875,
+      0.5064697265625,
+      0.5045166015625,
+      0.5008544921875,
+      0.486083984375,
+      0.4959716796875,
+      0.49658203125,
+      0.4945068359375,
+      0.501953125,
+      0.5032958984375,
+      0.4951171875,
+      0.5057373046875,
+      0.4998779296875,
+      0.5067138671875,
+      0.5029296875,
+      0.492431640625,
+      0.5111083984375,
+      0.5113525390625,
+      0.4993896484375,
+      0.4859619140625,
+      0.5032958984375,
+      0.4979248046875,
+      0.491455078125,
+      0.4921875,
+      0.5067138671875,
+      0.5079345703125,
+      0.470703125
+    ],
+    "samples": [
+      {
+        "id": "toy_n32_test_0000000",
+        "expected_states": "01101110011101001111001101101100",
+        "predicted_states": "11101111011111101101101011110011",
+        "expected_answer": 0,
+        "predicted_answer": 1
+      },
+      {
+        "id": "toy_n32_test_0000001",
+        "expected_states": "01111011000101110100001001011111",
+        "predicted_states": "11101111011111101101101011110011",
+        "expected_answer": 1,
+        "predicted_answer": 1
+      },
+      {
+        "id": "toy_n32_test_0000002",
+        "expected_states": "00110110000111111001001010111010",
+        "predicted_states": "11101111011111101101101011110011",
+        "expected_answer": 0,
+        "predicted_answer": 1
+      },
+      {
+        "id": "toy_n32_test_0000003",
+        "expected_states": "11000000101110010010111000101100",
+        "predicted_states": "11101111011111101101101011110011",
+        "expected_answer": 1,
+        "predicted_answer": 1
+      },
+      {
+        "id": "toy_n32_test_0000004",
+        "expected_states": "11111000010000101110000100110100",
+        "predicted_states": "11101111011111101101101011110011",
+        "expected_answer": 0,
+        "predicted_answer": 1
+      },
+      {
+        "id": "toy_n32_test_0000005",
+        "expected_states": "00100010010010111100001101111101",
+        "predicted_states": "11101111011111101101101011110011",
+        "expected_answer": 1,
+        "predicted_answer": 1
+      },
+      {
+        "id": "toy_n32_test_0000006",
+        "expected_states": "00101011010000111000100000001110",
+        "predicted_states": "11101111011111101101101011110011",
+        "expected_answer": 0,
+        "predicted_answer": 1
+      },
+      {
+        "id": "toy_n32_test_0000007",
+        "expected_states": "11001001110000110001000100100010",
+        "predicted_states": "11101111011111101101101011110011",
+        "expected_answer": 1,
+        "predicted_answer": 1
+      }
+    ]
+  },
+  "passes_full_baseline_gate": false,
+  "elapsed_seconds": 260.84880057908595
+}

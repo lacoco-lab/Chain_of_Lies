@@ -1,0 +1,30 @@
+ENV GET HF_TOKEN
+
+# Data generation is independent and therefore runs in parallel.
+JOB curriculum_generate experiments/goldreich_parity/qwen_attempts/exploratory/encrypted_bridge/condor_nethome/cpu.sub
+VARS curriculum_generate action="curriculum_generate"
+JOB bit_generate experiments/goldreich_parity/qwen_attempts/exploratory/encrypted_bridge/condor_nethome/cpu.sub
+VARS bit_generate action="bit_generate"
+JOB bridge_generate experiments/goldreich_parity/qwen_attempts/exploratory/encrypted_bridge/condor_nethome/cpu.sub
+VARS bridge_generate action="bridge_generate"
+
+# Rebuild and verify the known-good prerequisite adapter chain.
+JOB curriculum_update experiments/goldreich_parity/qwen_attempts/exploratory/encrypted_bridge/condor_nethome/gpu.sub
+VARS curriculum_update action="curriculum_update"
+JOB bit_attention experiments/goldreich_parity/qwen_attempts/exploratory/encrypted_bridge/condor_nethome/gpu.sub
+VARS bit_attention action="bit_attention"
+JOB prerequisite_gate experiments/goldreich_parity/qwen_attempts/exploratory/encrypted_bridge/condor_nethome/cpu.sub
+VARS prerequisite_gate action="prerequisite_gate"
+
+# Train and summarize the new encrypted-start/encrypted-update bridge.
+JOB bridge_train experiments/goldreich_parity/qwen_attempts/exploratory/encrypted_bridge/condor_nethome/gpu.sub
+VARS bridge_train action="bridge_train"
+JOB bridge_summarize experiments/goldreich_parity/qwen_attempts/exploratory/encrypted_bridge/condor_nethome/cpu.sub
+VARS bridge_summarize action="bridge_summarize"
+
+PARENT curriculum_generate CHILD curriculum_update
+PARENT curriculum_update bit_generate CHILD bit_attention
+PARENT bit_attention CHILD prerequisite_gate
+PARENT prerequisite_gate bridge_generate CHILD bridge_train
+PARENT bridge_train CHILD bridge_summarize
+

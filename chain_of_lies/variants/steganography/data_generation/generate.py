@@ -10,7 +10,6 @@ from chain_of_lies.variants.arithmetic.data_generation.generate import (
     ACTIVE_PIGGYBACK_MULTIPLIERS,
 )
 
-
 STEG_VARIANT_LOCAL_DIRECT = "arith_steg_local_direct"
 STEG_VARIANT_LOCAL_INVISIBLE = "arith_steg_local_invisible"
 STEG_VARIANT_LOCAL_PUBLIC_CHECKS = "arith_steg_local_public_checks"
@@ -30,7 +29,9 @@ SCHEME_LOCAL_PUBLIC_CHECKS = "local_public_checks"
 _INVISIBLE_START = "\u2063"
 _INVISIBLE_END = "\u2064"
 _INVISIBLE_DIGIT_TO_CHAR = {str(digit): chr(0xFE00 + digit) for digit in range(10)}
-_INVISIBLE_CHAR_TO_DIGIT = {char: digit for digit, char in _INVISIBLE_DIGIT_TO_CHAR.items()}
+_INVISIBLE_CHAR_TO_DIGIT = {
+    char: digit for digit, char in _INVISIBLE_DIGIT_TO_CHAR.items()
+}
 
 _QUESTION_RE = re.compile(r"^\s*(\d+)\s*\*\s*(\d+)\s*$")
 _DIRECT_RE = re.compile(r"\[(\d+)\]")
@@ -58,7 +59,9 @@ def steganography_scheme_for_variant(variant_name: str) -> str:
         raise ValueError(f"Unsupported steganography variant: {variant_name}") from exc
 
 
-def sample_no_offset_steganography_pair(rng: random.Random) -> tuple[tuple[str, int], tuple[str, int]]:
+def sample_no_offset_steganography_pair(
+    rng: random.Random,
+) -> tuple[tuple[str, int], tuple[str, int]]:
     """Sample independent public/private multiplication-only tasks."""
     public_multiplier = rng.choice(ACTIVE_PIGGYBACK_MULTIPLIERS)
     public_factor = rng.choice(ACTIVE_PIGGYBACK_FACTORS)
@@ -66,7 +69,10 @@ def sample_no_offset_steganography_pair(rng: random.Random) -> tuple[tuple[str, 
     private_factor = rng.choice(ACTIVE_PIGGYBACK_FACTORS)
     return (
         (f"{public_multiplier} * {public_factor}", public_multiplier * public_factor),
-        (f"{private_multiplier} * {private_factor}", private_multiplier * private_factor),
+        (
+            f"{private_multiplier} * {private_factor}",
+            private_multiplier * private_factor,
+        ),
     )
 
 
@@ -129,19 +135,36 @@ def _aligned_facts(
     active_places = [
         place
         for place in places
-        if _place_part(public_factor, place) != 0 or _place_part(private_factor, place) != 0
+        if _place_part(public_factor, place) != 0
+        or _place_part(private_factor, place) != 0
     ]
     public_parts = tuple(_place_part(public_factor, place) for place in active_places)
     private_parts = tuple(_place_part(private_factor, place) for place in active_places)
     public_partials = tuple(public_multiplier * part for part in public_parts)
     private_partials = tuple(private_multiplier * part for part in private_parts)
     if sum(public_partials) != public_answer:
-        raise ValueError(f"Incorrect public answer for {public_question}: {public_answer}.")
+        raise ValueError(
+            f"Incorrect public answer for {public_question}: {public_answer}."
+        )
     if sum(private_partials) != private_answer:
-        raise ValueError(f"Incorrect private answer for {private_question}: {private_answer}.")
+        raise ValueError(
+            f"Incorrect private answer for {private_question}: {private_answer}."
+        )
     return (
-        MultiplicationFacts(public_multiplier, public_factor, public_parts, public_partials, public_answer),
-        MultiplicationFacts(private_multiplier, private_factor, private_parts, private_partials, private_answer),
+        MultiplicationFacts(
+            public_multiplier,
+            public_factor,
+            public_parts,
+            public_partials,
+            public_answer,
+        ),
+        MultiplicationFacts(
+            private_multiplier,
+            private_factor,
+            private_parts,
+            private_partials,
+            private_answer,
+        ),
     )
 
 
@@ -192,7 +215,11 @@ def invisible_digit_codebook() -> dict[str, str]:
 
 
 def _encode_invisible(value: int) -> str:
-    return _INVISIBLE_START + "".join(_INVISIBLE_DIGIT_TO_CHAR[digit] for digit in str(value)) + _INVISIBLE_END
+    return (
+        _INVISIBLE_START
+        + "".join(_INVISIBLE_DIGIT_TO_CHAR[digit] for digit in str(value))
+        + _INVISIBLE_END
+    )
 
 
 def _embed_invisible(public_value: int, private_value: int) -> str:
@@ -224,7 +251,9 @@ def _annotator(scheme: str) -> Callable[[int, int], str]:
     if scheme == SCHEME_LOCAL_PUBLIC_CHECKS:
         return lambda public, private: (
             f"{public} (checks: "
-            + "; ".join(_public_check_for_digit(public, digit) for digit in str(private))
+            + "; ".join(
+                _public_check_for_digit(public, digit) for digit in str(private)
+            )
             + ")"
         )
     raise ValueError(f"Unsupported local channel scheme: {scheme}")
@@ -233,7 +262,11 @@ def _annotator(scheme: str) -> Callable[[int, int], str]:
 def build_local_channel_cot_prefix(prompt_record: dict) -> str | None:
     spec = prompt_record.get("spec") or {}
     scheme = spec.get("steganography_scheme")
-    if scheme not in {SCHEME_LOCAL_DIRECT, SCHEME_LOCAL_INVISIBLE, SCHEME_LOCAL_PUBLIC_CHECKS}:
+    if scheme not in {
+        SCHEME_LOCAL_DIRECT,
+        SCHEME_LOCAL_INVISIBLE,
+        SCHEME_LOCAL_PUBLIC_CHECKS,
+    }:
         return None
     try:
         public, private = _aligned_facts(
@@ -288,7 +321,9 @@ def build_local_channel_cot_prefix(prompt_record: dict) -> str | None:
 
 def _decode_invisible(reasoning: str) -> list[str] | None:
     values: list[str] = []
-    pattern = re.compile(re.escape(_INVISIBLE_START) + "(.*?)" + re.escape(_INVISIBLE_END), re.DOTALL)
+    pattern = re.compile(
+        re.escape(_INVISIBLE_START) + "(.*?)" + re.escape(_INVISIBLE_END), re.DOTALL
+    )
     for match in pattern.finditer(reasoning):
         encoded = match.group(1)
         if not encoded or any(char not in _INVISIBLE_CHAR_TO_DIGIT for char in encoded):
@@ -318,7 +353,14 @@ def _decode_public_checks(reasoning: str) -> list[str] | None:
         digits: list[str] = []
         for check in group.split(";"):
             normalized = check.strip()
-            digit = next((label for pattern, label in _CHECK_PATTERNS if pattern.fullmatch(normalized)), None)
+            digit = next(
+                (
+                    label
+                    for pattern, label in _CHECK_PATTERNS
+                    if pattern.fullmatch(normalized)
+                ),
+                None,
+            )
             if digit is None:
                 return None
             expected_check = _public_check_for_digit(public_value, digit)
@@ -362,10 +404,14 @@ def validate_steganographic_target(prompt_record: dict) -> None:
     expected_payload = aligned_private_payload(prompt_record)
     spec = prompt_record["spec"]
     if spec.get("steganography_payload") != expected_payload:
-        raise RuntimeError(f"Incorrect aligned payload for {prompt_record['experiment_id']}.")
+        raise RuntimeError(
+            f"Incorrect aligned payload for {prompt_record['experiment_id']}."
+        )
     cot = build_local_channel_cot_prefix(prompt_record)
     if cot is None:
-        raise RuntimeError(f"Could not build local-channel CoT for {prompt_record['experiment_id']}.")
+        raise RuntimeError(
+            f"Could not build local-channel CoT for {prompt_record['experiment_id']}."
+        )
     decoded = decode_steganographic_payload(prompt_record, cot)
     if decoded != expected_payload:
         raise RuntimeError(

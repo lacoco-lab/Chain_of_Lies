@@ -1,0 +1,281 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_composition_rank_v1",
+  "seed": 0,
+  "condition": "derive_previous",
+  "rank": 128,
+  "lora_alpha": 256,
+  "mechanism_adapter": "artifacts/ce_parity_goldreich_update_ablation/base/best_adapter",
+  "mechanism_merged_and_frozen": true,
+  "trainable_parameters": 322961408,
+  "total_parameters": 7938577920,
+  "baseline": {
+    "composition": {
+      "n": 1008,
+      "greedy_accuracy": 0.4880952380952381,
+      "binary_accuracy": 0.4880952380952381,
+      "bit_ce": 4.696428571428571
+    },
+    "local": {
+      "n": 1024,
+      "greedy_accuracy": 0.9677734375,
+      "binary_accuracy": 0.9677734375,
+      "bit_ce": 0.1421697735786438
+    },
+    "supplied_update": {
+      "n": 512,
+      "greedy_accuracy": 1.0,
+      "binary_accuracy": 1.0,
+      "bit_ce": 2.5220215320587158e-05
+    }
+  },
+  "baseline_gate_passes": true,
+  "best_epoch": 1,
+  "history": [
+    {
+      "epoch": 1,
+      "train": {
+        "loss": 0.583364810696558,
+        "bit_ce": 0.5431349708257537,
+        "attention_aux": 0.4021432976973684
+      },
+      "composition_validation": {
+        "n": 1008,
+        "greedy_accuracy": 0.5128968253968254,
+        "binary_accuracy": 0.5128968253968254,
+        "bit_ce": 0.6927703373015873
+      },
+      "local_retention": {
+        "n": 1024,
+        "greedy_accuracy": 0.9677734375,
+        "binary_accuracy": 0.9677734375,
+        "bit_ce": 0.1593111753463745
+      },
+      "supplied_update_retention": {
+        "n": 512,
+        "greedy_accuracy": 1.0,
+        "binary_accuracy": 1.0,
+        "bit_ce": 2.4013221263885498e-05
+      },
+      "validation_attention": {
+        "n": 128,
+        "attention_aux": 0.430908203125,
+        "selected_attention_mass": 0.99853515625,
+        "selected_seed_ratio": 0.99853515625
+      },
+      "retention_ok": true,
+      "selection_score": 10.854840184771826,
+      "elapsed_seconds": 563.8251053001732
+    },
+    {
+      "epoch": 2,
+      "train": {
+        "loss": 0.5488412575698213,
+        "bit_ce": 0.512390041292498,
+        "attention_aux": 0.36475380345394737
+      },
+      "composition_validation": {
+        "n": 1008,
+        "greedy_accuracy": 0.5109126984126984,
+        "binary_accuracy": 0.5109126984126984,
+        "bit_ce": 0.6930803571428571
+      },
+      "local_retention": {
+        "n": 1024,
+        "greedy_accuracy": 0.958984375,
+        "binary_accuracy": 0.958984375,
+        "bit_ce": 0.14648008346557617
+      },
+      "supplied_update_retention": {
+        "n": 512,
+        "greedy_accuracy": 0.80078125,
+        "binary_accuracy": 0.80078125,
+        "bit_ce": 0.8438720703125
+      },
+      "validation_attention": {
+        "n": 128,
+        "attention_aux": 0.4306640625,
+        "selected_attention_mass": 0.99365234375,
+        "selected_seed_ratio": 0.995361328125
+      },
+      "retention_ok": false,
+      "selection_score": 0.8307369171626984,
+      "elapsed_seconds": 1081.292780769989
+    },
+    {
+      "epoch": 3,
+      "train": {
+        "loss": 0.5222803930310826,
+        "bit_ce": 0.4857230878582126,
+        "attention_aux": 0.36370528371710525
+      },
+      "composition_validation": {
+        "n": 1008,
+        "greedy_accuracy": 0.5009920634920635,
+        "binary_accuracy": 0.5009920634920635,
+        "bit_ce": 0.6947544642857143
+      },
+      "local_retention": {
+        "n": 1024,
+        "greedy_accuracy": 0.984375,
+        "binary_accuracy": 0.984375,
+        "bit_ce": 0.04326745867729187
+      },
+      "supplied_update_retention": {
+        "n": 512,
+        "greedy_accuracy": 1.0,
+        "binary_accuracy": 1.0,
+        "bit_ce": 1.878291368484497e-05
+      },
+      "validation_attention": {
+        "n": 128,
+        "attention_aux": 0.4178466796875,
+        "selected_attention_mass": 0.996826171875,
+        "selected_seed_ratio": 0.9970703125
+      },
+      "retention_ok": true,
+      "selection_score": 10.847085813492063,
+      "elapsed_seconds": 1597.7505825646222
+    },
+    {
+      "epoch": 4,
+      "train": {
+        "loss": 0.5263577410853223,
+        "bit_ce": 0.49010639655354776,
+        "attention_aux": 0.36017423930921055
+      },
+      "composition_validation": {
+        "n": 1008,
+        "greedy_accuracy": 0.5208333333333334,
+        "binary_accuracy": 0.5208333333333334,
+        "bit_ce": 0.6945684523809523
+      },
+      "local_retention": {
+        "n": 1024,
+        "greedy_accuracy": 0.9658203125,
+        "binary_accuracy": 0.9658203125,
+        "bit_ce": 0.13542592525482178
+      },
+      "supplied_update_retention": {
+        "n": 512,
+        "greedy_accuracy": 0.92578125,
+        "binary_accuracy": 0.92578125,
+        "bit_ce": 0.1251220703125
+      },
+      "validation_attention": {
+        "n": 128,
+        "attention_aux": 0.431884765625,
+        "selected_attention_mass": 0.993896484375,
+        "selected_seed_ratio": 0.995849609375
+      },
+      "retention_ok": false,
+      "selection_score": 0.8548665364583334,
+      "elapsed_seconds": 2114.4132515694946
+    },
+    {
+      "epoch": 5,
+      "train": {
+        "loss": 0.5236030080796856,
+        "bit_ce": 0.4868824804103688,
+        "attention_aux": 0.36725174753289475
+      },
+      "composition_validation": {
+        "n": 1008,
+        "greedy_accuracy": 0.5138888888888888,
+        "binary_accuracy": 0.5138888888888888,
+        "bit_ce": 0.6978546626984127
+      },
+      "local_retention": {
+        "n": 1024,
+        "greedy_accuracy": 0.9169921875,
+        "binary_accuracy": 0.9169921875,
+        "bit_ce": 0.48332972824573517
+      },
+      "supplied_update_retention": {
+        "n": 512,
+        "greedy_accuracy": 1.0,
+        "binary_accuracy": 1.0,
+        "bit_ce": 4.374422132968903e-06
+      },
+      "validation_attention": {
+        "n": 128,
+        "attention_aux": 0.447021484375,
+        "selected_attention_mass": 0.996337890625,
+        "selected_seed_ratio": 0.996337890625
+      },
+      "retention_ok": false,
+      "selection_score": 0.8431369357638888,
+      "elapsed_seconds": 2630.701535012573
+    },
+    {
+      "epoch": 6,
+      "train": {
+        "loss": 0.5263019532357391,
+        "bit_ce": 0.4892348761229139,
+        "attention_aux": 0.37057719983552634
+      },
+      "composition_validation": {
+        "n": 1008,
+        "greedy_accuracy": 0.5089285714285714,
+        "binary_accuracy": 0.5089285714285714,
+        "bit_ce": 0.6916542658730159
+      },
+      "local_retention": {
+        "n": 1024,
+        "greedy_accuracy": 0.951171875,
+        "binary_accuracy": 0.951171875,
+        "bit_ce": 0.19119030237197876
+      },
+      "supplied_update_retention": {
+        "n": 512,
+        "greedy_accuracy": 1.0,
+        "binary_accuracy": 1.0,
+        "bit_ce": 6.880611181259155e-06
+      },
+      "validation_attention": {
+        "n": 128,
+        "attention_aux": 0.4273681640625,
+        "selected_attention_mass": 0.996826171875,
+        "selected_seed_ratio": 0.99658203125
+      },
+      "retention_ok": true,
+      "selection_score": 10.84672154017857,
+      "elapsed_seconds": 3147.5866404920816
+    }
+  ],
+  "final_evaluations": {
+    "composition": {
+      "n": 1008,
+      "greedy_accuracy": 0.5128968253968254,
+      "binary_accuracy": 0.5128968253968254,
+      "bit_ce": 0.6927703373015873
+    },
+    "local": {
+      "n": 1024,
+      "greedy_accuracy": 0.9677734375,
+      "binary_accuracy": 0.9677734375,
+      "bit_ce": 0.1593111753463745
+    },
+    "supplied_update": {
+      "n": 512,
+      "greedy_accuracy": 1.0,
+      "binary_accuracy": 1.0,
+      "bit_ce": 2.4013221263885498e-05
+    },
+    "other_position": {
+      "n": 1008,
+      "greedy_accuracy": 0.48313492063492064,
+      "binary_accuracy": 0.48313492063492064,
+      "bit_ce": 0.6957465277777778
+    }
+  },
+  "final_attention": {
+    "n": 128,
+    "attention_aux": 0.430908203125,
+    "selected_attention_mass": 0.99853515625,
+    "selected_seed_ratio": 0.99853515625
+  },
+  "passes_gate": false,
+  "elapsed_seconds": 3222.6378427930176,
+  "final_adapter": "artifacts/ce_parity_goldreich_composition_rank/rank_128/best_adapter"
+}

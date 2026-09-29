@@ -1,0 +1,25 @@
+universe = vanilla
+
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/cluster_jobs/arithmetic_cot_ablation/eval_ce_cot_ablation.sh mmohammadkhani verbose_public_cot $(variant) $(seed) artifacts/ce_cot_ablation_verbose_long
+
+output = /scratch/mmohammadkhani/logs/chain_of_lies/eval_ce_cot_ablation_verbose_long_verbose_public_cot_$(variant)_seed_$(seed).out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/eval_ce_cot_ablation_verbose_long_verbose_public_cot_$(variant)_seed_$(seed).err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/eval_ce_cot_ablation_verbose_long_verbose_public_cot_$(variant)_seed_$(seed).log
+
+request_CPUs = 4
+request_memory = 24G
+request_GPUs = 1
+requirements = (GPUs_GlobalMemoryMb >= 16000)
+
++MaxWallTime = 259200
+
+queue seed,variant from (
+  0 arith_piggyback
+  0 arith_piggyback_control
+  1 arith_piggyback
+  1 arith_piggyback_control
+  2 arith_piggyback
+  2 arith_piggyback_control
+)

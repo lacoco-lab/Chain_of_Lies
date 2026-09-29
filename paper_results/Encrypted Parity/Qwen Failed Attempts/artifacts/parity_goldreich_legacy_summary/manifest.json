@@ -1,0 +1,769 @@
+{
+  "schema_version": 1,
+  "description": "Compact metrics/report archive; model adapters and checkpoints excluded",
+  "source_roots": [
+    "ce_parity_goldreich_bit_attention",
+    "ce_parity_goldreich_composition_rank",
+    "ce_parity_goldreich_curriculum",
+    "ce_parity_goldreich_encrypted_bridge",
+    "ce_parity_goldreich_final",
+    "ce_parity_goldreich_trajectory",
+    "ce_parity_goldreich_update_ablation"
+  ],
+  "file_count": 188,
+  "total_bytes": 15437022,
+  "files": [
+    {
+      "path": "ce_parity_goldreich_bit_attention/bit_attention/metrics.json",
+      "bytes": 4964
+    },
+    {
+      "path": "ce_parity_goldreich_bit_attention/bit_attention/best_adapter/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_bit_attention/bit_attention/best_adapter/training_metadata.json",
+      "bytes": 181
+    },
+    {
+      "path": "ce_parity_goldreich_bit_attention/bit_attention/best_adapter/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/summary.json",
+      "bytes": 1906
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/prerequisite_gate.json",
+      "bytes": 293
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/REPORT.md",
+      "bytes": 657
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/metrics.csv",
+      "bytes": 642
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/rank_32/metrics.json",
+      "bytes": 4994
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/rank_32/progress.json",
+      "bytes": 3108
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/rank_32/best_adapter/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/rank_32/best_adapter/training_metadata.json",
+      "bytes": 170
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/rank_32/best_adapter/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/rank_128/metrics.json",
+      "bytes": 8074
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/rank_128/progress.json",
+      "bytes": 6188
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/rank_128/best_adapter/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/rank_128/best_adapter/training_metadata.json",
+      "bytes": 171
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/rank_128/best_adapter/adapter_config.json",
+      "bytes": 938
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/rank_64/metrics.json",
+      "bytes": 8049
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/rank_64/progress.json",
+      "bytes": 6168
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/rank_64/best_adapter/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/rank_64/best_adapter/training_metadata.json",
+      "bytes": 170
+    },
+    {
+      "path": "ce_parity_goldreich_composition_rank/rank_64/best_adapter/adapter_config.json",
+      "bytes": 937
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/track_manifest.json",
+      "bytes": 6990
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/02_supplied_8/supplied_8/train_history.json",
+      "bytes": 502045
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/02_supplied_8/supplied_8/training_metadata.json",
+      "bytes": 667
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/02_supplied_8/supplied_8/ckpt_epoch_2/train_history.json",
+      "bytes": 502045
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/02_supplied_8/supplied_8/ckpt_epoch_2/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/02_supplied_8/supplied_8/ckpt_epoch_2/training_metadata.json",
+      "bytes": 542
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/02_supplied_8/supplied_8/ckpt_epoch_2/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/02_supplied_8/supplied_8/ckpt_final/train_history.json",
+      "bytes": 502045
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/02_supplied_8/supplied_8/ckpt_final/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/02_supplied_8/supplied_8/ckpt_final/training_metadata.json",
+      "bytes": 931
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/02_supplied_8/supplied_8/ckpt_final/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/02_supplied_8/supplied_8/ckpt_epoch_1/train_history.json",
+      "bytes": 241177
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/02_supplied_8/supplied_8/ckpt_epoch_1/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/02_supplied_8/supplied_8/ckpt_epoch_1/training_metadata.json",
+      "bytes": 542
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/02_supplied_8/supplied_8/ckpt_epoch_1/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/train_history.json",
+      "bytes": 1021223
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/training_metadata.json",
+      "bytes": 670
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_epoch_2/train_history.json",
+      "bytes": 473683
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_epoch_2/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_epoch_2/training_metadata.json",
+      "bytes": 541
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_epoch_2/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_epoch_3/train_history.json",
+      "bytes": 745777
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_epoch_3/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_epoch_3/training_metadata.json",
+      "bytes": 541
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_epoch_3/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_final/train_history.json",
+      "bytes": 1021223
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_final/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_final/training_metadata.json",
+      "bytes": 932
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_final/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_epoch_4/train_history.json",
+      "bytes": 1021223
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_epoch_4/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_epoch_4/training_metadata.json",
+      "bytes": 541
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_epoch_4/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_epoch_1/train_history.json",
+      "bytes": 235003
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_epoch_1/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_epoch_1/training_metadata.json",
+      "bytes": 541
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/05_supplied_64/supplied_64/ckpt_epoch_1/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/04_supplied_32/supplied_32/train_history.json",
+      "bytes": 744319
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/04_supplied_32/supplied_32/training_metadata.json",
+      "bytes": 668
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/04_supplied_32/supplied_32/ckpt_epoch_2/train_history.json",
+      "bytes": 495225
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/04_supplied_32/supplied_32/ckpt_epoch_2/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/04_supplied_32/supplied_32/ckpt_epoch_2/training_metadata.json",
+      "bytes": 541
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/04_supplied_32/supplied_32/ckpt_epoch_2/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/04_supplied_32/supplied_32/ckpt_epoch_3/train_history.json",
+      "bytes": 744319
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/04_supplied_32/supplied_32/ckpt_epoch_3/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/04_supplied_32/supplied_32/ckpt_epoch_3/training_metadata.json",
+      "bytes": 541
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/04_supplied_32/supplied_32/ckpt_epoch_3/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/04_supplied_32/supplied_32/ckpt_final/train_history.json",
+      "bytes": 744319
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/04_supplied_32/supplied_32/ckpt_final/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/04_supplied_32/supplied_32/ckpt_final/training_metadata.json",
+      "bytes": 930
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/04_supplied_32/supplied_32/ckpt_final/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/04_supplied_32/supplied_32/ckpt_epoch_1/train_history.json",
+      "bytes": 246409
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/04_supplied_32/supplied_32/ckpt_epoch_1/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/04_supplied_32/supplied_32/ckpt_epoch_1/training_metadata.json",
+      "bytes": 541
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/04_supplied_32/supplied_32/ckpt_epoch_1/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/01_local_update/local_update/train_history.json",
+      "bytes": 548793
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/01_local_update/local_update/training_metadata.json",
+      "bytes": 666
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/01_local_update/local_update/ckpt_epoch_2/train_history.json",
+      "bytes": 548793
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/01_local_update/local_update/ckpt_epoch_2/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/01_local_update/local_update/ckpt_epoch_2/training_metadata.json",
+      "bytes": 452
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/01_local_update/local_update/ckpt_epoch_2/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/01_local_update/local_update/ckpt_final/train_history.json",
+      "bytes": 548793
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/01_local_update/local_update/ckpt_final/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/01_local_update/local_update/ckpt_final/training_metadata.json",
+      "bytes": 838
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/01_local_update/local_update/ckpt_final/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/01_local_update/local_update/ckpt_epoch_1/train_history.json",
+      "bytes": 273727
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/01_local_update/local_update/ckpt_epoch_1/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/01_local_update/local_update/ckpt_epoch_1/training_metadata.json",
+      "bytes": 452
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/01_local_update/local_update/ckpt_epoch_1/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/03_supplied_16/supplied_16/train_history.json",
+      "bytes": 546353
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/03_supplied_16/supplied_16/training_metadata.json",
+      "bytes": 668
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/03_supplied_16/supplied_16/ckpt_epoch_2/train_history.json",
+      "bytes": 546353
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/03_supplied_16/supplied_16/ckpt_epoch_2/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/03_supplied_16/supplied_16/ckpt_epoch_2/training_metadata.json",
+      "bytes": 539
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/03_supplied_16/supplied_16/ckpt_epoch_2/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/03_supplied_16/supplied_16/ckpt_final/train_history.json",
+      "bytes": 546353
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/03_supplied_16/supplied_16/ckpt_final/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/03_supplied_16/supplied_16/ckpt_final/training_metadata.json",
+      "bytes": 928
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/03_supplied_16/supplied_16/ckpt_final/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/03_supplied_16/supplied_16/ckpt_epoch_1/train_history.json",
+      "bytes": 271763
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/03_supplied_16/supplied_16/ckpt_epoch_1/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/03_supplied_16/supplied_16/ckpt_epoch_1/training_metadata.json",
+      "bytes": 539
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/stages/03_supplied_16/supplied_16/ckpt_epoch_1/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/final_adapter/train_history.json",
+      "bytes": 1021223
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/final_adapter/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/final_adapter/training_metadata.json",
+      "bytes": 932
+    },
+    {
+      "path": "ce_parity_goldreich_curriculum/update/final_adapter/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_encrypted_bridge/summary.json",
+      "bytes": 1891
+    },
+    {
+      "path": "ce_parity_goldreich_encrypted_bridge/prerequisite_gate.json",
+      "bytes": 129
+    },
+    {
+      "path": "ce_parity_goldreich_encrypted_bridge/REPORT.md",
+      "bytes": 585
+    },
+    {
+      "path": "ce_parity_goldreich_encrypted_bridge/metrics.csv",
+      "bytes": 490
+    },
+    {
+      "path": "ce_parity_goldreich_encrypted_bridge/training/training_metrics.json",
+      "bytes": 15580
+    },
+    {
+      "path": "ce_parity_goldreich_encrypted_bridge/training/progress.json",
+      "bytes": 11573
+    },
+    {
+      "path": "ce_parity_goldreich_encrypted_bridge/training/final_adapter/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_encrypted_bridge/training/final_adapter/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_final/summary.json",
+      "bytes": 1554
+    },
+    {
+      "path": "ce_parity_goldreich_final/mechanism_gate.json",
+      "bytes": 207
+    },
+    {
+      "path": "ce_parity_goldreich_final/REPORT.md",
+      "bytes": 536
+    },
+    {
+      "path": "ce_parity_goldreich_final/positions_gate.json",
+      "bytes": 363
+    },
+    {
+      "path": "ce_parity_goldreich_final/metrics.csv",
+      "bytes": 363
+    },
+    {
+      "path": "ce_parity_goldreich_final/full/metrics.json",
+      "bytes": 37652
+    },
+    {
+      "path": "ce_parity_goldreich_final/full/progress.json",
+      "bytes": 24701
+    },
+    {
+      "path": "ce_parity_goldreich_final/full/best_adapter/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_final/full/best_adapter/training_metadata.json",
+      "bytes": 133
+    },
+    {
+      "path": "ce_parity_goldreich_final/full/best_adapter/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_final/positions/metrics.json",
+      "bytes": 10807
+    },
+    {
+      "path": "ce_parity_goldreich_final/positions/progress.json",
+      "bytes": 6469
+    },
+    {
+      "path": "ce_parity_goldreich_final/positions/best_adapter/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_final/positions/best_adapter/training_metadata.json",
+      "bytes": 115
+    },
+    {
+      "path": "ce_parity_goldreich_final/positions/best_adapter/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/REPORT.md",
+      "bytes": 1472
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/progress.json",
+      "bytes": 139569
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n8/metrics.json",
+      "bytes": 98060
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n8/summary.json",
+      "bytes": 2290
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n8/REPORT.md",
+      "bytes": 246
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n8/metrics.csv",
+      "bytes": 181
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n8/progress.json",
+      "bytes": 69723
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n8/best_adapter/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n8/best_adapter/training_metadata.json",
+      "bytes": 96
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n8/best_adapter/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n8/validated_start_adapter/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n8/validated_start_adapter/training_metadata.json",
+      "bytes": 125
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n8/validated_start_adapter/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n16/metrics.json",
+      "bytes": 135882
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n16/summary.json",
+      "bytes": 2292
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n16/REPORT.md",
+      "bytes": 247
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n16/metrics.csv",
+      "bytes": 187
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n16/progress.json",
+      "bytes": 98751
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n16/best_adapter/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n16/best_adapter/training_metadata.json",
+      "bytes": 96
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n16/best_adapter/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n16/validated_start_adapter/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n16/validated_start_adapter/training_metadata.json",
+      "bytes": 125
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n16/validated_start_adapter/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n32/metrics.json",
+      "bytes": 211565
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n32/summary.json",
+      "bytes": 2279
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n32/REPORT.md",
+      "bytes": 247
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n32/metrics.csv",
+      "bytes": 153
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n32/progress.json",
+      "bytes": 157043
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n32/best_adapter/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n32/best_adapter/training_metadata.json",
+      "bytes": 96
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n32/best_adapter/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n32/validated_start_adapter/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n32/validated_start_adapter/training_metadata.json",
+      "bytes": 125
+    },
+    {
+      "path": "ce_parity_goldreich_trajectory/n32/validated_start_adapter/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/summary.json",
+      "bytes": 1398
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/prerequisite_gate.json",
+      "bytes": 130
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/REPORT.md",
+      "bytes": 657
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/base_gate.json",
+      "bytes": 209
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/metrics.csv",
+      "bytes": 408
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/derive_current/metrics.json",
+      "bytes": 5803
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/derive_current/progress.json",
+      "bytes": 4129
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/derive_current/best_adapter/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/derive_current/best_adapter/training_metadata.json",
+      "bytes": 112
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/derive_current/best_adapter/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/base/metrics.json",
+      "bytes": 3056
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/base/progress.json",
+      "bytes": 1698
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/base/best_adapter/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/base/best_adapter/training_metadata.json",
+      "bytes": 102
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/base/best_adapter/adapter_config.json",
+      "bytes": 936
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/derive_previous/metrics.json",
+      "bytes": 5726
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/derive_previous/progress.json",
+      "bytes": 4056
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/derive_previous/best_adapter/README.md",
+      "bytes": 5202
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/derive_previous/best_adapter/training_metadata.json",
+      "bytes": 113
+    },
+    {
+      "path": "ce_parity_goldreich_update_ablation/derive_previous/best_adapter/adapter_config.json",
+      "bytes": 936
+    }
+  ]
+}

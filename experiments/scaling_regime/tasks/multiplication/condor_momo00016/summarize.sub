@@ -1,0 +1,23 @@
+universe = docker
+docker_image = pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/scaling_regime/tasks/multiplication/run.sh summarize
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+preserve_relative_paths = True
+transfer_input_files = chain_of_lies,experiments/scaling_regime/tasks/multiplication,generated_data/multiplication_length_retraining_v1,generated_data/multiplication_length_retraining_v1_eval_responses,artifacts/multiplication_length_retraining_v1
+transfer_output_files = artifacts/multiplication_length_retraining_v1/per_example.csv,artifacts/multiplication_length_retraining_v1/per_seed_length_metrics.csv,artifacts/multiplication_length_retraining_v1/aggregate_length_metrics.csv,artifacts/multiplication_length_retraining_v1/summary.json
+
+output = /home/momo00016/logs/chain_of_lies/multiplication_length_summarize.out
+error  = /home/momo00016/logs/chain_of_lies/multiplication_length_summarize.err
+log    = /home/momo00016/logs/chain_of_lies/multiplication_length_summarize.log
+
+request_CPUs = 2
+request_memory = 16G
+request_GPUs = 0
++MaxWallTime = 7200
+
+queue

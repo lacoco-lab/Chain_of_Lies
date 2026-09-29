@@ -1,0 +1,25 @@
+ENV GET HF_TOKEN
+
+JOB generate experiments/goldreich_parity/qwen_attempts/reported_diagnostics/update_ablation/condor_nethome/cpu.sub
+VARS generate action="generate"
+JOB prerequisite_gate experiments/goldreich_parity/qwen_attempts/reported_diagnostics/update_ablation/condor_nethome/cpu.sub
+VARS prerequisite_gate action="prerequisite_gate"
+
+JOB base experiments/goldreich_parity/qwen_attempts/reported_diagnostics/update_ablation/condor_nethome/gpu.sub
+VARS base action="base"
+JOB base_gate experiments/goldreich_parity/qwen_attempts/reported_diagnostics/update_ablation/condor_nethome/cpu.sub
+VARS base_gate action="base_gate"
+
+# These use separate adapters from the same base and can run in parallel.
+JOB derive_previous experiments/goldreich_parity/qwen_attempts/reported_diagnostics/update_ablation/condor_nethome/gpu.sub
+VARS derive_previous action="derive_previous"
+JOB derive_current experiments/goldreich_parity/qwen_attempts/reported_diagnostics/update_ablation/condor_nethome/gpu.sub
+VARS derive_current action="derive_current"
+
+JOB summarize experiments/goldreich_parity/qwen_attempts/reported_diagnostics/update_ablation/condor_nethome/cpu.sub
+VARS summarize action="summarize"
+
+PARENT generate prerequisite_gate CHILD base
+PARENT base CHILD base_gate
+PARENT base_gate CHILD derive_previous derive_current
+PARENT derive_previous derive_current CHILD summarize

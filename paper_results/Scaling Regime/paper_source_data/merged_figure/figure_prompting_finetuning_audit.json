@@ -1,0 +1,472 @@
+{
+  "prompting_source_rows": 329,
+  "prompting_models": [
+    "qwen35-27b",
+    "qwen35-397b-a17b",
+    "kimi-k3"
+  ],
+  "missing_prompting_curves": [
+    [
+      "qwen35-27b",
+      "steganography",
+      "multiplication"
+    ],
+    [
+      "qwen35-27b",
+      "steganography",
+      "parity"
+    ],
+    [
+      "qwen35-27b",
+      "steganography",
+      "s5"
+    ],
+    [
+      "qwen35-397b-a17b",
+      "steganography",
+      "multiplication"
+    ],
+    [
+      "qwen35-397b-a17b",
+      "steganography",
+      "parity"
+    ],
+    [
+      "qwen35-397b-a17b",
+      "steganography",
+      "s5"
+    ],
+    [
+      "kimi-k3",
+      "vanilla",
+      "parity"
+    ],
+    [
+      "kimi-k3",
+      "filler",
+      "parity"
+    ],
+    [
+      "kimi-k3",
+      "vanilla",
+      "s5"
+    ],
+    [
+      "kimi-k3",
+      "filler",
+      "s5"
+    ]
+  ],
+  "S5_audit": "114000 per-example rows; 570 complete seed/length cells; all private means and sample SDs match",
+  "prompting_filler_mapping": "vanilla + filler",
+  "prompting_full_cot_source": "docs/scaling_regime/tables/prompting_unrestricted_cot_accuracy.csv",
+  "prompting_full_cot_source_rows": 30,
+  "finetuning_filler_source": "filler_only_scaling_v1; audit complete for all 24 cells",
+  "full_cot_source": "docs/scaling_regime/tables/full_cot_baseline_by_length.csv",
+  "full_cot_rows": 64,
+  "reference_image_2_reconstruction": {
+    "multiplication": {
+      "mean_joint_accuracy_pct": 28.174934075675676,
+      "rounded_threshold_pct": 28,
+      "max_passing_points": [
+        {
+          "model": "deepseek-v4-flash-0731",
+          "family": "DeepSeek V4",
+          "params_b": 284.0,
+          "d_star": 4
+        },
+        {
+          "model": "deepseek-v4-pro-0813",
+          "family": "DeepSeek V4",
+          "params_b": 1600.0,
+          "d_star": 5
+        },
+        {
+          "model": "kimi-k3",
+          "family": "Kimi",
+          "params_b": 2800.0,
+          "d_star": 4
+        },
+        {
+          "model": "mistral-14b",
+          "family": "Mistral 3",
+          "params_b": 14.0,
+          "d_star": 2
+        },
+        {
+          "model": "mistral-24b",
+          "family": "Mistral 3",
+          "params_b": 24.0,
+          "d_star": 2
+        },
+        {
+          "model": "mistral-3b",
+          "family": "Mistral 3",
+          "params_b": 3.0,
+          "d_star": 2
+        },
+        {
+          "model": "mistral-8b",
+          "family": "Mistral 3",
+          "params_b": 8.0,
+          "d_star": 2
+        },
+        {
+          "model": "mistral-large-3",
+          "family": "Mistral 3",
+          "params_b": 675.0,
+          "d_star": 3
+        },
+        {
+          "model": "mistral-medium-3.5",
+          "family": "Mistral 3",
+          "params_b": 128.0,
+          "d_star": 2
+        },
+        {
+          "model": "mistral-small4",
+          "family": "Mistral 3",
+          "params_b": 119.0,
+          "d_star": 3
+        },
+        {
+          "model": "qwen35-0.8b",
+          "family": "Qwen 3.5",
+          "params_b": 0.8,
+          "d_star": 2
+        },
+        {
+          "model": "qwen35-122b-a10b",
+          "family": "Qwen 3.5",
+          "params_b": 122.0,
+          "d_star": 4
+        },
+        {
+          "model": "qwen35-27b",
+          "family": "Qwen 3.5",
+          "params_b": 27.0,
+          "d_star": 4
+        },
+        {
+          "model": "qwen35-2b",
+          "family": "Qwen 3.5",
+          "params_b": 2.0,
+          "d_star": 2
+        },
+        {
+          "model": "qwen35-35b-a3b",
+          "family": "Qwen 3.5",
+          "params_b": 35.0,
+          "d_star": 4
+        },
+        {
+          "model": "qwen35-397b-a17b",
+          "family": "Qwen 3.5",
+          "params_b": 397.0,
+          "d_star": 6
+        },
+        {
+          "model": "qwen35-4b",
+          "family": "Qwen 3.5",
+          "params_b": 4.0,
+          "d_star": 3
+        },
+        {
+          "model": "qwen35-9b",
+          "family": "Qwen 3.5",
+          "params_b": 9.0,
+          "d_star": 3
+        },
+        {
+          "model": "qwen3-14b",
+          "family": "Qwen 3",
+          "params_b": 14.8,
+          "d_star": 2
+        },
+        {
+          "model": "qwen3-235b-a22b",
+          "family": "Qwen 3",
+          "params_b": 235.0,
+          "d_star": 3
+        },
+        {
+          "model": "qwen3-32b",
+          "family": "Qwen 3",
+          "params_b": 32.8,
+          "d_star": 2
+        },
+        {
+          "model": "qwen3-8b",
+          "family": "Qwen 3",
+          "params_b": 8.19,
+          "d_star": 2
+        }
+      ]
+    },
+    "s5": {
+      "mean_joint_accuracy_pct": 1.9286514462809918,
+      "rounded_threshold_pct": 2,
+      "max_passing_points": [
+        {
+          "model": "deepseek-v4-flash-0731",
+          "family": "DeepSeek V4",
+          "params_b": 284.0,
+          "d_star": 1
+        },
+        {
+          "model": "deepseek-v4-pro-0813",
+          "family": "DeepSeek V4",
+          "params_b": 1600.0,
+          "d_star": 3
+        },
+        {
+          "model": "mistral-14b",
+          "family": "Mistral 3",
+          "params_b": 14.0,
+          "d_star": 1
+        },
+        {
+          "model": "mistral-24b",
+          "family": "Mistral 3",
+          "params_b": 24.0,
+          "d_star": 1
+        },
+        {
+          "model": "mistral-3b",
+          "family": "Mistral 3",
+          "params_b": 3.0,
+          "d_star": 0
+        },
+        {
+          "model": "mistral-8b",
+          "family": "Mistral 3",
+          "params_b": 8.0,
+          "d_star": 1
+        },
+        {
+          "model": "mistral-large-3",
+          "family": "Mistral 3",
+          "params_b": 675.0,
+          "d_star": 1
+        },
+        {
+          "model": "mistral-medium-3.5",
+          "family": "Mistral 3",
+          "params_b": 128.0,
+          "d_star": 1
+        },
+        {
+          "model": "mistral-small4",
+          "family": "Mistral 3",
+          "params_b": 119.0,
+          "d_star": 1
+        },
+        {
+          "model": "qwen35-0.8b",
+          "family": "Qwen 3.5",
+          "params_b": 0.8,
+          "d_star": 0
+        },
+        {
+          "model": "qwen35-122b-a10b",
+          "family": "Qwen 3.5",
+          "params_b": 122.0,
+          "d_star": 2
+        },
+        {
+          "model": "qwen35-27b",
+          "family": "Qwen 3.5",
+          "params_b": 27.0,
+          "d_star": 1
+        },
+        {
+          "model": "qwen35-2b",
+          "family": "Qwen 3.5",
+          "params_b": 2.0,
+          "d_star": 0
+        },
+        {
+          "model": "qwen35-35b-a3b",
+          "family": "Qwen 3.5",
+          "params_b": 35.0,
+          "d_star": 1
+        },
+        {
+          "model": "qwen35-397b-a17b",
+          "family": "Qwen 3.5",
+          "params_b": 397.0,
+          "d_star": 1
+        },
+        {
+          "model": "qwen35-4b",
+          "family": "Qwen 3.5",
+          "params_b": 4.0,
+          "d_star": 0
+        },
+        {
+          "model": "qwen35-9b",
+          "family": "Qwen 3.5",
+          "params_b": 9.0,
+          "d_star": 0
+        },
+        {
+          "model": "qwen3-14b",
+          "family": "Qwen 3",
+          "params_b": 14.8,
+          "d_star": 1
+        },
+        {
+          "model": "qwen3-235b-a22b",
+          "family": "Qwen 3",
+          "params_b": 235.0,
+          "d_star": 1
+        },
+        {
+          "model": "qwen3-32b",
+          "family": "Qwen 3",
+          "params_b": 32.8,
+          "d_star": 1
+        },
+        {
+          "model": "qwen3-8b",
+          "family": "Qwen 3",
+          "params_b": 8.19,
+          "d_star": 1
+        }
+      ]
+    },
+    "parity": {
+      "mean_joint_accuracy_pct": 64.8144605614679,
+      "rounded_threshold_pct": 65,
+      "max_passing_points": [
+        {
+          "model": "deepseek-v4-flash-0731",
+          "family": "DeepSeek V4",
+          "params_b": 284.0,
+          "d_star": 5
+        },
+        {
+          "model": "deepseek-v4-pro-0813",
+          "family": "DeepSeek V4",
+          "params_b": 1600.0,
+          "d_star": 5
+        },
+        {
+          "model": "mistral-14b",
+          "family": "Mistral 3",
+          "params_b": 14.0,
+          "d_star": 3
+        },
+        {
+          "model": "mistral-24b",
+          "family": "Mistral 3",
+          "params_b": 24.0,
+          "d_star": 4
+        },
+        {
+          "model": "mistral-3b",
+          "family": "Mistral 3",
+          "params_b": 3.0,
+          "d_star": 2
+        },
+        {
+          "model": "mistral-8b",
+          "family": "Mistral 3",
+          "params_b": 8.0,
+          "d_star": 3
+        },
+        {
+          "model": "mistral-large-3",
+          "family": "Mistral 3",
+          "params_b": 675.0,
+          "d_star": 8
+        },
+        {
+          "model": "mistral-medium-3.5",
+          "family": "Mistral 3",
+          "params_b": 128.0,
+          "d_star": 5
+        },
+        {
+          "model": "mistral-small4",
+          "family": "Mistral 3",
+          "params_b": 119.0,
+          "d_star": 3
+        },
+        {
+          "model": "qwen35-0.8b",
+          "family": "Qwen 3.5",
+          "params_b": 0.8,
+          "d_star": 1
+        },
+        {
+          "model": "qwen35-122b-a10b",
+          "family": "Qwen 3.5",
+          "params_b": 122.0,
+          "d_star": 6
+        },
+        {
+          "model": "qwen35-27b",
+          "family": "Qwen 3.5",
+          "params_b": 27.0,
+          "d_star": 5
+        },
+        {
+          "model": "qwen35-2b",
+          "family": "Qwen 3.5",
+          "params_b": 2.0,
+          "d_star": 0
+        },
+        {
+          "model": "qwen35-35b-a3b",
+          "family": "Qwen 3.5",
+          "params_b": 35.0,
+          "d_star": 4
+        },
+        {
+          "model": "qwen35-397b-a17b",
+          "family": "Qwen 3.5",
+          "params_b": 397.0,
+          "d_star": 6
+        },
+        {
+          "model": "qwen35-4b",
+          "family": "Qwen 3.5",
+          "params_b": 4.0,
+          "d_star": 3
+        },
+        {
+          "model": "qwen35-9b",
+          "family": "Qwen 3.5",
+          "params_b": 9.0,
+          "d_star": 1
+        },
+        {
+          "model": "qwen3-14b",
+          "family": "Qwen 3",
+          "params_b": 14.8,
+          "d_star": 4
+        },
+        {
+          "model": "qwen3-235b-a22b",
+          "family": "Qwen 3",
+          "params_b": 235.0,
+          "d_star": 5
+        },
+        {
+          "model": "qwen3-32b",
+          "family": "Qwen 3",
+          "params_b": 32.8,
+          "d_star": 4
+        },
+        {
+          "model": "qwen3-8b",
+          "family": "Qwen 3",
+          "params_b": 8.19,
+          "d_star": 1
+        }
+      ]
+    }
+  },
+  "notes": "The merged figure uses covert-answer accuracy from the refreshed prompting CSV, prompting unrestricted-CoT CSV, and audited finetuning summaries. The unrestricted-CoT input includes Qwen 3.5 27B on Multiplication, Parity, and S5. Full CoT finetuning parity bucket codes are decoded to their minimum bit lengths before plotting."
+}

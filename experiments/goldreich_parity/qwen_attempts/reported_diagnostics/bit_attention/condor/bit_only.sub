@@ -1,0 +1,26 @@
+universe = docker
+docker_image = pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/goldreich_parity/qwen_attempts/reported_diagnostics/bit_attention/run.sh bit_only
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+preserve_relative_paths = True
+getenv = HF_TOKEN
+environment = "HF_HUB_DISABLE_XET=1"
+transfer_input_files = experiments/goldreich_parity/qwen_attempts/reported_diagnostics/bit_attention,generated_data/parity_goldreich_bit_attention_seed_0.tar.gz,artifacts/ce_parity_goldreich_curriculum/update/final_adapter
+transfer_output_files = artifacts/ce_parity_goldreich_bit_attention/bit_only
+
+output = /home/momo00016/logs/chain_of_lies/parity_goldreich_bit_only.out
+error  = /home/momo00016/logs/chain_of_lies/parity_goldreich_bit_only.err
+log    = /home/momo00016/logs/chain_of_lies/parity_goldreich_bit_only.log
+
+request_CPUs = 4
+request_memory = 64G
+request_GPUs = 1
+requirements = (GPUs_GlobalMemoryMb >= 40000)
++MaxWallTime = 172800
+
+queue

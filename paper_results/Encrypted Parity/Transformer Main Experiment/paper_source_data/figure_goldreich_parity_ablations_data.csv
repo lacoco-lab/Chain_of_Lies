@@ -1,0 +1,7 @@
+supervision,N,state_bit_accuracy,joint_exact
+Full,32,1.0,1.0
+Full,64,1.0,1.0
+No route labels,32,0.9907035827636719,0.97998046875
+No route labels,64,0.5084571838378906,0.0
+End-to-end only,32,0.4991455078125,0.0
+End-to-end only,64,0.5014801025390625,0.0

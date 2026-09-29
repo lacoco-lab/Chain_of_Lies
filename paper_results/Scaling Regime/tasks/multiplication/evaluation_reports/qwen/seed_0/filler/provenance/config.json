@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "experiment_name": "filler_only_scaling_v1",
+  "models": {
+    "qwen": "Qwen/Qwen2.5-7B-Instruct",
+    "llama": "meta-llama/Llama-3.1-8B-Instruct"
+  },
+  "seeds": [0, 1, 2],
+  "supervision_mode": "filler_only",
+  "filler_token_text": ".",
+  "budget_rule": "A fixed ceiling per difficulty, verified to cover the longest canonical private CoT in the unchanged train and evaluation records for both model tokenizers.",
+  "tasks": {
+    "multiplication": {
+      "variant": "arith_length_control",
+      "difficulty_field": "evaluation_length",
+      "difficulty_values": [2, 3, 4],
+      "filler_token_counts": {"2": 128, "3": 192, "4": 256},
+      "train_examples_per_difficulty": 1000,
+      "eval_examples_per_difficulty": 200,
+      "data_root": "generated_data/multiplication_length_retraining_v1",
+      "source_manifest": "generated_data/multiplication_length_retraining_v1/split_manifest.json",
+      "source_config": "experiments/multiplication_length_retraining/config.json",
+      "artifacts_root": "artifacts/filler_only_scaling_v1/multiplication",
+      "responses_root": "generated_data/filler_only_scaling_v1_eval_responses/multiplication",
+      "evaluation_kind": "per_length",
+      "evaluation_script": "experiments/multiplication_length_retraining/evaluate_checkpoint.py",
+      "training": {
+        "epochs": 3, "batch_size": 1, "learning_rate": 0.00002,
+        "lora_r": 8, "lora_alpha": 16, "lora_dropout": 0.05,
+        "training_max_new_tokens": 2560, "evaluation_max_new_tokens": 2560,
+        "validation_sample_size": 198, "validation_batch_size": 1,
+        "memory_efficient_ce": true, "ce_token_chunk_size": 16,
+        "activation_cpu_offload": true, "run_training_validation": true
+      }
+    },
+    "knowledge": {
+      "variant": "knowledge_length_control",
+      "difficulty_field": "evaluation_length",
+      "difficulty_values": [1, 2, 3, 4, 5],
+      "filler_token_counts": {"1": 64, "2": 96, "3": 128, "4": 160, "5": 192},
+      "train_examples_per_difficulty": 1000,
+      "eval_examples_per_difficulty": 200,
+      "data_root": "generated_data/knowledge_length_retraining_all_but_one_v2",
+      "source_manifest": "generated_data/knowledge_length_retraining_all_but_one_v2/split_manifest.json",
+      "source_config": "experiments/knowledge_length_retraining/config.json",
+      "artifacts_root": "artifacts/filler_only_scaling_v1/knowledge",
+      "responses_root": "generated_data/filler_only_scaling_v1_eval_responses/knowledge",
+      "evaluation_kind": "per_length",
+      "evaluation_script": "experiments/knowledge_length_retraining/evaluate_checkpoint.py",
+      "training": {
+        "epochs": 3, "batch_size": 1, "learning_rate": 0.00002,
+        "lora_r": 8, "lora_alpha": 16, "lora_dropout": 0.05,
+        "training_max_new_tokens": 1536, "evaluation_max_new_tokens": 2048,
+        "validation_sample_size": 200, "validation_batch_size": 1,
+        "memory_efficient_ce": false, "ce_token_chunk_size": 16,
+        "activation_cpu_offload": false, "run_training_validation": true
+      }
+    },
+    "s5": {
+      "variant": "s5_length_control",
+      "difficulty_field": "evaluation_length",
+      "difficulty_values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+      "filler_token_counts": {
+        "1": 64, "2": 96, "3": 128, "4": 160, "5": 192,
+        "6": 224, "7": 256, "8": 288, "9": 320, "10": 352,
+        "11": 384, "12": 416, "13": 448, "14": 480, "15": 512,
+        "16": 544, "17": 576, "18": 608, "19": 640
+      },
+      "train_examples_per_difficulty": 500,
+      "eval_examples_per_difficulty": 200,
+      "data_root": "generated_data/s5_length_retraining_v1",
+      "source_manifest": "generated_data/s5_length_retraining_v1/split_manifest.json",
+      "source_config": "experiments/s5_length_retraining/config.json",
+      "artifacts_root": "artifacts/filler_only_scaling_v1/s5",
+      "responses_root": "generated_data/filler_only_scaling_v1_eval_responses/s5",
+      "evaluation_kind": "per_length",
+      "evaluation_script": "experiments/s5_length_retraining/evaluate_checkpoint.py",
+      "training": {
+        "epochs": 3, "batch_size": 1, "learning_rate": 0.00002,
+        "lora_r": 8, "lora_alpha": 16, "lora_dropout": 0.05,
+        "training_max_new_tokens": 1280, "evaluation_max_new_tokens": 1536,
+        "validation_sample_size": 190, "validation_batch_size": 1,
+        "memory_efficient_ce": false, "ce_token_chunk_size": 16,
+        "activation_cpu_offload": false, "run_training_validation": true
+      }
+    },
+    "parity": {
+      "variant": "parity_control",
+      "difficulty_field": "length_bucket",
+      "difficulty_values": ["008_015", "016_031", "032_063", "064_127", "128_255"],
+      "filler_token_counts": {
+        "008_015": 128, "016_031": 256, "032_063": 512,
+        "064_127": 1024, "128_255": 1536
+      },
+      "train_examples_per_difficulty": 2000,
+      "eval_examples_per_difficulty": 200,
+      "data_root": "generated_data/parity_regime_calibration",
+      "source_manifest_pattern": "generated_data/parity_regime_calibration/split_manifest_seed_{seed}.json",
+      "source_configs_by_seed": {
+        "0": "experiments/parity_regime_calibration/config.json",
+        "1": "experiments/parity_regime_calibration/config_seed_1.json",
+        "2": "experiments/parity_regime_calibration/config_seed_2.json"
+      },
+      "artifacts_root": "artifacts/filler_only_scaling_v1/parity",
+      "responses_root": "generated_data/filler_only_scaling_v1_eval_responses/parity",
+      "evaluation_kind": "parity_validation",
+      "training": {
+        "epochs": 1, "batch_size": 1, "learning_rate": 0.00002,
+        "lora_r": 8, "lora_alpha": 16, "lora_dropout": 0.05,
+        "training_max_new_tokens": 4096, "evaluation_max_new_tokens": 4096,
+        "validation_sample_size": 200, "validation_batch_size": 1,
+        "evaluation_batch_size": 8,
+        "memory_efficient_ce": true, "ce_token_chunk_size": 16,
+        "activation_cpu_offload": false, "run_training_validation": false
+      },
+      "seed_training_overrides": {
+        "0": {"activation_cpu_offload": true, "run_training_validation": true, "evaluation_batch_size": 1}
+      }
+    }
+  }
+}

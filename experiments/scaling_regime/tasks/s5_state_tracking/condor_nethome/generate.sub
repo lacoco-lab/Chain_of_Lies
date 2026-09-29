@@ -1,0 +1,21 @@
+universe = vanilla
+
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/scaling_regime/tasks/s5_state_tracking/condor_nethome/generate.sh mmohammadkhani
+
+output = /scratch/mmohammadkhani/logs/chain_of_lies/s5_length_balanced_v1_generate.out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/s5_length_balanced_v1_generate.err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/s5_length_balanced_v1_generate.log
+
+request_CPUs = 2
+request_memory = 16G
+request_GPUs = 1
+request_disk = 8G
+requirements = (GPUs_GlobalMemoryMb >= 10000)
++MaxWallTime = 86400
+
+on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)
+
+queue 1
+

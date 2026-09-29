@@ -1,0 +1,19 @@
+universe = vanilla
+
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/goldreich_parity/qwen_attempts/reported_diagnostics/composition_rank/condor_nethome/run.sh mmohammadkhani train $(rank)
+
+getenv = HF_TOKEN
+
+output = /scratch/mmohammadkhani/logs/chain_of_lies/parity_goldreich_composition_rank_$(rank).out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/parity_goldreich_composition_rank_$(rank).err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/parity_goldreich_composition_rank_$(rank).log
+
+request_CPUs = 4
+request_memory = 64G
+request_GPUs = 1
+requirements = (GPUs_GlobalMemoryMb >= $(gpu_memory_mb))
++MaxWallTime = 259200
+
+queue 1

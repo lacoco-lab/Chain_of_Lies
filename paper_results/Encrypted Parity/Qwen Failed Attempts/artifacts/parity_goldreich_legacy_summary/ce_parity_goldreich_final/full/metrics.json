@@ -1,0 +1,1183 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_final_v2_composition_curriculum",
+  "action": "full",
+  "seed": 0,
+  "rank": 32,
+  "rank32_calibration_verified": true,
+  "rank32_training_rng": "0:composition-rank",
+  "established_adapters_merged_and_frozen": [
+    "artifacts/ce_parity_goldreich_update_ablation/base/best_adapter",
+    "artifacts/ce_parity_goldreich_final/positions/best_adapter"
+  ],
+  "trainable_parameters": 80740352,
+  "baseline": {
+    "derive_previous": {
+      "n": 1008,
+      "greedy_accuracy": 0.9880952380952381,
+      "binary_accuracy": 0.9880952380952381,
+      "bit_ce": 0.07920757172599671
+    },
+    "derive_current": {
+      "n": 1008,
+      "greedy_accuracy": 0.9841269841269841,
+      "binary_accuracy": 0.9841269841269841,
+      "bit_ce": 0.04782703566172766
+    },
+    "local": {
+      "n": 1024,
+      "greedy_accuracy": 0.99609375,
+      "binary_accuracy": 0.99609375,
+      "bit_ce": 0.010468136402778327
+    },
+    "supplied_update": {
+      "n": 512,
+      "greedy_accuracy": 1.0,
+      "binary_accuracy": 1.0,
+      "bit_ce": 1.6470439732074738e-06
+    }
+  },
+  "stages": [
+    {
+      "stage": "mask_delta",
+      "best_epoch": 5,
+      "best_score": 11.18497101314484,
+      "best_evaluations": {
+        "mask_delta": {
+          "n": 1008,
+          "greedy_accuracy": 0.9851190476190477,
+          "binary_accuracy": 0.9851190476190477,
+          "bit_ce": 0.1328989603216686
+        },
+        "derive_previous": {
+          "n": 1008,
+          "greedy_accuracy": 0.9990079365079365,
+          "binary_accuracy": 0.9990079365079365,
+          "bit_ce": 0.0011069593685013907
+        },
+        "derive_current": {
+          "n": 1008,
+          "greedy_accuracy": 0.9990079365079365,
+          "binary_accuracy": 0.9990079365079365,
+          "bit_ce": 0.001570547620455424
+        },
+        "local": {
+          "n": 1024,
+          "greedy_accuracy": 0.9990234375,
+          "binary_accuracy": 0.9990234375,
+          "bit_ce": 0.001664588344283402
+        },
+        "supplied_update": {
+          "n": 512,
+          "greedy_accuracy": 1.0,
+          "binary_accuracy": 1.0,
+          "bit_ce": 1.3292301446199417e-06
+        }
+      },
+      "history": [
+        {
+          "stage": "mask_delta",
+          "epoch": 1,
+          "train": {
+            "loss": 0.5247907266020775,
+            "bit_ce": 0.5247907266020775,
+            "attention_aux": 0.0
+          },
+          "evaluations": {
+            "mask_delta": {
+              "n": 1008,
+              "greedy_accuracy": 0.683531746031746,
+              "binary_accuracy": 0.683531746031746,
+              "bit_ce": 0.6225818452380952
+            },
+            "derive_previous": {
+              "n": 1008,
+              "greedy_accuracy": 0.998015873015873,
+              "binary_accuracy": 0.998015873015873,
+              "bit_ce": 0.008174290732731895
+            },
+            "derive_current": {
+              "n": 1008,
+              "greedy_accuracy": 0.9950396825396826,
+              "binary_accuracy": 0.9950396825396826,
+              "bit_ce": 0.013759037804982019
+            },
+            "local": {
+              "n": 1024,
+              "greedy_accuracy": 0.99609375,
+              "binary_accuracy": 0.99609375,
+              "bit_ce": 0.015623688697814941
+            },
+            "supplied_update": {
+              "n": 512,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 5.990732461214066e-07
+            }
+          },
+          "validation_attention": {
+            "n": 128,
+            "attention_aux": 0.88427734375,
+            "selected_attention_mass": 0.740234375,
+            "selected_seed_ratio": 0.74951171875
+          },
+          "retention_ok": true,
+          "selection_weights": {
+            "derive_previous": 0.05,
+            "derive_current": 0.05,
+            "local": 0.05,
+            "supplied_update": 0.05
+          },
+          "selection_score": 10.882989211309525,
+          "attention_regularization_enabled": false,
+          "elapsed_seconds": 637.8598643746227
+        },
+        {
+          "stage": "mask_delta",
+          "epoch": 2,
+          "train": {
+            "loss": 0.30531610309293394,
+            "bit_ce": 0.30531610309293394,
+            "attention_aux": 0.0
+          },
+          "evaluations": {
+            "mask_delta": {
+              "n": 1008,
+              "greedy_accuracy": 0.8968253968253969,
+              "binary_accuracy": 0.8968253968253969,
+              "bit_ce": 0.33062841021825395
+            },
+            "derive_previous": {
+              "n": 1008,
+              "greedy_accuracy": 0.9990079365079365,
+              "binary_accuracy": 0.9990079365079365,
+              "bit_ce": 0.0044115762861948165
+            },
+            "derive_current": {
+              "n": 1008,
+              "greedy_accuracy": 0.998015873015873,
+              "binary_accuracy": 0.998015873015873,
+              "bit_ce": 0.006137158189501081
+            },
+            "local": {
+              "n": 1024,
+              "greedy_accuracy": 0.9990234375,
+              "binary_accuracy": 0.9990234375,
+              "bit_ce": 0.0031877183355391026
+            },
+            "supplied_update": {
+              "n": 512,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 1.8333084881305695e-06
+            }
+          },
+          "validation_attention": {
+            "n": 128,
+            "attention_aux": 0.89599609375,
+            "selected_attention_mass": 0.746337890625,
+            "selected_seed_ratio": 0.753662109375
+          },
+          "retention_ok": true,
+          "selection_weights": {
+            "derive_previous": 0.05,
+            "derive_current": 0.05,
+            "local": 0.05,
+            "supplied_update": 0.05
+          },
+          "selection_score": 11.096627759176588,
+          "attention_regularization_enabled": false,
+          "elapsed_seconds": 1200.4750255793333
+        },
+        {
+          "stage": "mask_delta",
+          "epoch": 3,
+          "train": {
+            "loss": 0.14409626788998905,
+            "bit_ce": 0.14409626788998905,
+            "attention_aux": 0.0
+          },
+          "evaluations": {
+            "mask_delta": {
+              "n": 1008,
+              "greedy_accuracy": 0.9781746031746031,
+              "binary_accuracy": 0.9781746031746031,
+              "bit_ce": 0.07006890433175224
+            },
+            "derive_previous": {
+              "n": 1008,
+              "greedy_accuracy": 0.9970238095238095,
+              "binary_accuracy": 0.9970238095238095,
+              "bit_ce": 0.00420490474927993
+            },
+            "derive_current": {
+              "n": 1008,
+              "greedy_accuracy": 0.9970238095238095,
+              "binary_accuracy": 0.9970238095238095,
+              "bit_ce": 0.0036840292196425183
+            },
+            "local": {
+              "n": 1024,
+              "greedy_accuracy": 0.994140625,
+              "binary_accuracy": 0.994140625,
+              "bit_ce": 0.021066957619041204
+            },
+            "supplied_update": {
+              "n": 512,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 7.920898497104645e-07
+            }
+          },
+          "validation_attention": {
+            "n": 128,
+            "attention_aux": 0.914794921875,
+            "selected_attention_mass": 0.723876953125,
+            "selected_seed_ratio": 0.732177734375
+          },
+          "retention_ok": true,
+          "selection_weights": {
+            "derive_previous": 0.05,
+            "derive_current": 0.05,
+            "local": 0.05,
+            "supplied_update": 0.05
+          },
+          "selection_score": 11.177584015376985,
+          "attention_regularization_enabled": false,
+          "elapsed_seconds": 1764.401815380901
+        },
+        {
+          "stage": "mask_delta",
+          "epoch": 4,
+          "train": {
+            "loss": 0.05300854611161508,
+            "bit_ce": 0.05300854611161508,
+            "attention_aux": 0.0
+          },
+          "evaluations": {
+            "mask_delta": {
+              "n": 1008,
+              "greedy_accuracy": 0.9543650793650794,
+              "binary_accuracy": 0.9543650793650794,
+              "bit_ce": 0.20859999883742558
+            },
+            "derive_previous": {
+              "n": 1008,
+              "greedy_accuracy": 0.9950396825396826,
+              "binary_accuracy": 0.9950396825396826,
+              "bit_ce": 0.006698319836268349
+            },
+            "derive_current": {
+              "n": 1008,
+              "greedy_accuracy": 0.9930555555555556,
+              "binary_accuracy": 0.9930555555555556,
+              "bit_ce": 0.026953506446073926
+            },
+            "local": {
+              "n": 1024,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 8.573406375944614e-06
+            },
+            "supplied_update": {
+              "n": 512,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 1.3015232980251312e-06
+            }
+          },
+          "validation_attention": {
+            "n": 128,
+            "attention_aux": 0.921142578125,
+            "selected_attention_mass": 0.731689453125,
+            "selected_seed_ratio": 0.73974609375
+          },
+          "retention_ok": true,
+          "selection_weights": {
+            "derive_previous": 0.05,
+            "derive_current": 0.05,
+            "local": 0.05,
+            "supplied_update": 0.05
+          },
+          "selection_score": 11.153769841269842,
+          "attention_regularization_enabled": false,
+          "elapsed_seconds": 2326.7138372436166
+        },
+        {
+          "stage": "mask_delta",
+          "epoch": 5,
+          "train": {
+            "loss": 0.03752617983049468,
+            "bit_ce": 0.03752617983049468,
+            "attention_aux": 0.0
+          },
+          "evaluations": {
+            "mask_delta": {
+              "n": 1008,
+              "greedy_accuracy": 0.9851190476190477,
+              "binary_accuracy": 0.9851190476190477,
+              "bit_ce": 0.1328989603216686
+            },
+            "derive_previous": {
+              "n": 1008,
+              "greedy_accuracy": 0.9990079365079365,
+              "binary_accuracy": 0.9990079365079365,
+              "bit_ce": 0.0011069593685013907
+            },
+            "derive_current": {
+              "n": 1008,
+              "greedy_accuracy": 0.9990079365079365,
+              "binary_accuracy": 0.9990079365079365,
+              "bit_ce": 0.001570547620455424
+            },
+            "local": {
+              "n": 1024,
+              "greedy_accuracy": 0.9990234375,
+              "binary_accuracy": 0.9990234375,
+              "bit_ce": 0.001664588344283402
+            },
+            "supplied_update": {
+              "n": 512,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 1.3292301446199417e-06
+            }
+          },
+          "validation_attention": {
+            "n": 128,
+            "attention_aux": 0.926025390625,
+            "selected_attention_mass": 0.723388671875,
+            "selected_seed_ratio": 0.731689453125
+          },
+          "retention_ok": true,
+          "selection_weights": {
+            "derive_previous": 0.05,
+            "derive_current": 0.05,
+            "local": 0.05,
+            "supplied_update": 0.05
+          },
+          "selection_score": 11.18497101314484,
+          "attention_regularization_enabled": false,
+          "elapsed_seconds": 2886.945799490437
+        }
+      ]
+    },
+    {
+      "stage": "full_zero",
+      "best_epoch": 2,
+      "best_score": 11.239037698412698,
+      "best_evaluations": {
+        "full_zero": {
+          "n": 1008,
+          "greedy_accuracy": 0.9910714285714286,
+          "binary_accuracy": 0.9910714285714286,
+          "bit_ce": 0.037183537369682676
+        },
+        "mask_delta": {
+          "n": 1008,
+          "greedy_accuracy": 0.9732142857142857,
+          "binary_accuracy": 0.9732142857142857,
+          "bit_ce": 0.15331048246413942
+        },
+        "derive_previous": {
+          "n": 1008,
+          "greedy_accuracy": 0.9920634920634921,
+          "binary_accuracy": 0.9920634920634921,
+          "bit_ce": 0.08258389042956489
+        },
+        "derive_current": {
+          "n": 1008,
+          "greedy_accuracy": 0.9940476190476191,
+          "binary_accuracy": 0.9940476190476191,
+          "bit_ce": 0.042266713957937935
+        },
+        "local": {
+          "n": 1024,
+          "greedy_accuracy": 1.0,
+          "binary_accuracy": 1.0,
+          "bit_ce": 7.36345537006855e-05
+        },
+        "supplied_update": {
+          "n": 512,
+          "greedy_accuracy": 1.0,
+          "binary_accuracy": 1.0,
+          "bit_ce": 2.7334317564964294e-07
+        }
+      },
+      "history": [
+        {
+          "stage": "full_zero",
+          "epoch": 1,
+          "train": {
+            "loss": 0.37485854104496874,
+            "bit_ce": 0.37485854104496874,
+            "attention_aux": 0.0
+          },
+          "evaluations": {
+            "full_zero": {
+              "n": 1008,
+              "greedy_accuracy": 0.9811507936507936,
+              "binary_accuracy": 0.9811507936507936,
+              "bit_ce": 0.0914700220501612
+            },
+            "mask_delta": {
+              "n": 1008,
+              "greedy_accuracy": 0.9325396825396826,
+              "binary_accuracy": 0.9325396825396826,
+              "bit_ce": 0.45425181918674046
+            },
+            "derive_previous": {
+              "n": 1008,
+              "greedy_accuracy": 0.9791666666666666,
+              "binary_accuracy": 0.9791666666666666,
+              "bit_ce": 0.1670493289591774
+            },
+            "derive_current": {
+              "n": 1008,
+              "greedy_accuracy": 0.9831349206349206,
+              "binary_accuracy": 0.9831349206349206,
+              "bit_ce": 0.11393812156858898
+            },
+            "local": {
+              "n": 1024,
+              "greedy_accuracy": 0.998046875,
+              "binary_accuracy": 0.998046875,
+              "bit_ce": 0.01184484118130058
+            },
+            "supplied_update": {
+              "n": 512,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 4.2980536818504333e-07
+            }
+          },
+          "validation_attention": {
+            "n": 128,
+            "attention_aux": 0.90185546875,
+            "selected_attention_mass": 0.742431640625,
+            "selected_seed_ratio": 0.7568359375
+          },
+          "retention_ok": false,
+          "selection_weights": {
+            "mask_delta": 0.05,
+            "derive_previous": 0.05,
+            "derive_current": 0.05,
+            "local": 0.05,
+            "supplied_update": 0.05
+          },
+          "selection_score": 1.2257952008928572,
+          "attention_regularization_enabled": false,
+          "elapsed_seconds": 3602.2265299465507
+        },
+        {
+          "stage": "full_zero",
+          "epoch": 2,
+          "train": {
+            "loss": 0.08538395835942514,
+            "bit_ce": 0.08538395835942514,
+            "attention_aux": 0.0
+          },
+          "evaluations": {
+            "full_zero": {
+              "n": 1008,
+              "greedy_accuracy": 0.9910714285714286,
+              "binary_accuracy": 0.9910714285714286,
+              "bit_ce": 0.037183537369682676
+            },
+            "mask_delta": {
+              "n": 1008,
+              "greedy_accuracy": 0.9732142857142857,
+              "binary_accuracy": 0.9732142857142857,
+              "bit_ce": 0.15331048246413942
+            },
+            "derive_previous": {
+              "n": 1008,
+              "greedy_accuracy": 0.9920634920634921,
+              "binary_accuracy": 0.9920634920634921,
+              "bit_ce": 0.08258389042956489
+            },
+            "derive_current": {
+              "n": 1008,
+              "greedy_accuracy": 0.9940476190476191,
+              "binary_accuracy": 0.9940476190476191,
+              "bit_ce": 0.042266713957937935
+            },
+            "local": {
+              "n": 1024,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 7.36345537006855e-05
+            },
+            "supplied_update": {
+              "n": 512,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 2.7334317564964294e-07
+            }
+          },
+          "validation_attention": {
+            "n": 128,
+            "attention_aux": 0.91064453125,
+            "selected_attention_mass": 0.740478515625,
+            "selected_seed_ratio": 0.755615234375
+          },
+          "retention_ok": true,
+          "selection_weights": {
+            "mask_delta": 0.05,
+            "derive_previous": 0.05,
+            "derive_current": 0.05,
+            "local": 0.05,
+            "supplied_update": 0.05
+          },
+          "selection_score": 11.239037698412698,
+          "attention_regularization_enabled": false,
+          "elapsed_seconds": 4318.35738896206
+        }
+      ]
+    },
+    {
+      "stage": "full_one",
+      "best_epoch": 2,
+      "best_score": 11.293402777777779,
+      "best_evaluations": {
+        "full_one": {
+          "n": 1008,
+          "greedy_accuracy": 0.9940476190476191,
+          "binary_accuracy": 0.9940476190476191,
+          "bit_ce": 0.03015541084229
+        },
+        "mask_delta": {
+          "n": 1008,
+          "greedy_accuracy": 0.9970238095238095,
+          "binary_accuracy": 0.9970238095238095,
+          "bit_ce": 0.014215414486234151
+        },
+        "full_zero": {
+          "n": 1008,
+          "greedy_accuracy": 0.9920634920634921,
+          "binary_accuracy": 0.9920634920634921,
+          "bit_ce": 0.030797606422787623
+        },
+        "derive_previous": {
+          "n": 1008,
+          "greedy_accuracy": 1.0,
+          "binary_accuracy": 1.0,
+          "bit_ce": 0.0003641195713527619
+        },
+        "derive_current": {
+          "n": 1008,
+          "greedy_accuracy": 0.998015873015873,
+          "binary_accuracy": 0.998015873015873,
+          "bit_ce": 0.011586007262979234
+        },
+        "local": {
+          "n": 1024,
+          "greedy_accuracy": 1.0,
+          "binary_accuracy": 1.0,
+          "bit_ce": 2.325430978089571e-05
+        },
+        "supplied_update": {
+          "n": 512,
+          "greedy_accuracy": 1.0,
+          "binary_accuracy": 1.0,
+          "bit_ce": 1.5506520867347717e-07
+        }
+      },
+      "history": [
+        {
+          "stage": "full_one",
+          "epoch": 1,
+          "train": {
+            "loss": 0.07440833688720944,
+            "bit_ce": 0.07440833688720944,
+            "attention_aux": 0.0
+          },
+          "evaluations": {
+            "full_one": {
+              "n": 1008,
+              "greedy_accuracy": 0.9930555555555556,
+              "binary_accuracy": 0.9930555555555556,
+              "bit_ce": 0.030360372293563115
+            },
+            "mask_delta": {
+              "n": 1008,
+              "greedy_accuracy": 0.9950396825396826,
+              "binary_accuracy": 0.9950396825396826,
+              "bit_ce": 0.03538538823052058
+            },
+            "full_zero": {
+              "n": 1008,
+              "greedy_accuracy": 0.9970238095238095,
+              "binary_accuracy": 0.9970238095238095,
+              "bit_ce": 0.01803228117170788
+            },
+            "derive_previous": {
+              "n": 1008,
+              "greedy_accuracy": 0.9910714285714286,
+              "binary_accuracy": 0.9910714285714286,
+              "bit_ce": 0.03540807039964767
+            },
+            "derive_current": {
+              "n": 1008,
+              "greedy_accuracy": 0.9970238095238095,
+              "binary_accuracy": 0.9970238095238095,
+              "bit_ce": 0.014558247630558317
+            },
+            "local": {
+              "n": 1024,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 2.997939009219408e-05
+            },
+            "supplied_update": {
+              "n": 512,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 3.2065436244010925e-06
+            }
+          },
+          "validation_attention": {
+            "n": 128,
+            "attention_aux": 0.940185546875,
+            "selected_attention_mass": 0.70654296875,
+            "selected_seed_ratio": 0.723388671875
+          },
+          "retention_ok": true,
+          "selection_weights": {
+            "mask_delta": 0.05,
+            "full_zero": 0.05,
+            "derive_previous": 0.05,
+            "derive_current": 0.05,
+            "local": 0.05,
+            "supplied_update": 0.05
+          },
+          "selection_score": 11.292063492063493,
+          "attention_regularization_enabled": false,
+          "elapsed_seconds": 5151.225760210305
+        },
+        {
+          "stage": "full_one",
+          "epoch": 2,
+          "train": {
+            "loss": 0.07800255274385448,
+            "bit_ce": 0.07800255274385448,
+            "attention_aux": 0.0
+          },
+          "evaluations": {
+            "full_one": {
+              "n": 1008,
+              "greedy_accuracy": 0.9940476190476191,
+              "binary_accuracy": 0.9940476190476191,
+              "bit_ce": 0.03015541084229
+            },
+            "mask_delta": {
+              "n": 1008,
+              "greedy_accuracy": 0.9970238095238095,
+              "binary_accuracy": 0.9970238095238095,
+              "bit_ce": 0.014215414486234151
+            },
+            "full_zero": {
+              "n": 1008,
+              "greedy_accuracy": 0.9920634920634921,
+              "binary_accuracy": 0.9920634920634921,
+              "bit_ce": 0.030797606422787623
+            },
+            "derive_previous": {
+              "n": 1008,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 0.0003641195713527619
+            },
+            "derive_current": {
+              "n": 1008,
+              "greedy_accuracy": 0.998015873015873,
+              "binary_accuracy": 0.998015873015873,
+              "bit_ce": 0.011586007262979234
+            },
+            "local": {
+              "n": 1024,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 2.325430978089571e-05
+            },
+            "supplied_update": {
+              "n": 512,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 1.5506520867347717e-07
+            }
+          },
+          "validation_attention": {
+            "n": 128,
+            "attention_aux": 0.962890625,
+            "selected_attention_mass": 0.70263671875,
+            "selected_seed_ratio": 0.71826171875
+          },
+          "retention_ok": true,
+          "selection_weights": {
+            "mask_delta": 0.05,
+            "full_zero": 0.05,
+            "derive_previous": 0.05,
+            "derive_current": 0.05,
+            "local": 0.05,
+            "supplied_update": 0.05
+          },
+          "selection_score": 11.293402777777779,
+          "attention_regularization_enabled": false,
+          "elapsed_seconds": 5985.142167998478
+        }
+      ]
+    },
+    {
+      "stage": "full_two",
+      "best_epoch": 2,
+      "best_score": 11.297569444444445,
+      "best_evaluations": {
+        "full_two": {
+          "n": 1008,
+          "greedy_accuracy": 0.998015873015873,
+          "binary_accuracy": 0.998015873015873,
+          "bit_ce": 0.005093937828427269
+        },
+        "mask_delta": {
+          "n": 1008,
+          "greedy_accuracy": 0.9950396825396826,
+          "binary_accuracy": 0.9950396825396826,
+          "bit_ce": 0.02326875262790256
+        },
+        "full_one": {
+          "n": 1008,
+          "greedy_accuracy": 0.998015873015873,
+          "binary_accuracy": 0.998015873015873,
+          "bit_ce": 0.004926689087398468
+        },
+        "derive_previous": {
+          "n": 1008,
+          "greedy_accuracy": 1.0,
+          "binary_accuracy": 1.0,
+          "bit_ce": 0.0012237372852507093
+        },
+        "derive_current": {
+          "n": 1008,
+          "greedy_accuracy": 0.998015873015873,
+          "binary_accuracy": 0.998015873015873,
+          "bit_ce": 0.006251671957591224
+        },
+        "local": {
+          "n": 1024,
+          "greedy_accuracy": 1.0,
+          "binary_accuracy": 1.0,
+          "bit_ce": 2.8206384740769863e-05
+        },
+        "supplied_update": {
+          "n": 512,
+          "greedy_accuracy": 1.0,
+          "binary_accuracy": 1.0,
+          "bit_ce": 1.2191012501716614e-06
+        }
+      },
+      "history": [
+        {
+          "stage": "full_two",
+          "epoch": 1,
+          "train": {
+            "loss": 0.061987679143707584,
+            "bit_ce": 0.061987679143707584,
+            "attention_aux": 0.0
+          },
+          "evaluations": {
+            "full_two": {
+              "n": 1008,
+              "greedy_accuracy": 0.9841269841269841,
+              "binary_accuracy": 0.9841269841269841,
+              "bit_ce": 0.06741036971410115
+            },
+            "mask_delta": {
+              "n": 1008,
+              "greedy_accuracy": 0.996031746031746,
+              "binary_accuracy": 0.996031746031746,
+              "bit_ce": 0.014419146946498327
+            },
+            "full_one": {
+              "n": 1008,
+              "greedy_accuracy": 0.9781746031746031,
+              "binary_accuracy": 0.9781746031746031,
+              "bit_ce": 0.09057595237853035
+            },
+            "derive_previous": {
+              "n": 1008,
+              "greedy_accuracy": 0.998015873015873,
+              "binary_accuracy": 0.998015873015873,
+              "bit_ce": 0.013940158107924082
+            },
+            "derive_current": {
+              "n": 1008,
+              "greedy_accuracy": 0.9990079365079365,
+              "binary_accuracy": 0.9990079365079365,
+              "bit_ce": 0.0035093542602327135
+            },
+            "local": {
+              "n": 1024,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 3.222865052521229e-05
+            },
+            "supplied_update": {
+              "n": 512,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 1.4808028936386108e-07
+            }
+          },
+          "validation_attention": {
+            "n": 128,
+            "attention_aux": 0.9580078125,
+            "selected_attention_mass": 0.69580078125,
+            "selected_seed_ratio": 0.71142578125
+          },
+          "retention_ok": true,
+          "selection_weights": {
+            "mask_delta": 0.05,
+            "full_one": 0.05,
+            "derive_previous": 0.05,
+            "derive_current": 0.05,
+            "local": 0.05,
+            "supplied_update": 0.05
+          },
+          "selection_score": 11.282688492063492,
+          "attention_regularization_enabled": false,
+          "elapsed_seconds": 6818.147079819813
+        },
+        {
+          "stage": "full_two",
+          "epoch": 2,
+          "train": {
+            "loss": 0.0416946036697138,
+            "bit_ce": 0.0416946036697138,
+            "attention_aux": 0.0
+          },
+          "evaluations": {
+            "full_two": {
+              "n": 1008,
+              "greedy_accuracy": 0.998015873015873,
+              "binary_accuracy": 0.998015873015873,
+              "bit_ce": 0.005093937828427269
+            },
+            "mask_delta": {
+              "n": 1008,
+              "greedy_accuracy": 0.9950396825396826,
+              "binary_accuracy": 0.9950396825396826,
+              "bit_ce": 0.02326875262790256
+            },
+            "full_one": {
+              "n": 1008,
+              "greedy_accuracy": 0.998015873015873,
+              "binary_accuracy": 0.998015873015873,
+              "bit_ce": 0.004926689087398468
+            },
+            "derive_previous": {
+              "n": 1008,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 0.0012237372852507093
+            },
+            "derive_current": {
+              "n": 1008,
+              "greedy_accuracy": 0.998015873015873,
+              "binary_accuracy": 0.998015873015873,
+              "bit_ce": 0.006251671957591224
+            },
+            "local": {
+              "n": 1024,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 2.8206384740769863e-05
+            },
+            "supplied_update": {
+              "n": 512,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 1.2191012501716614e-06
+            }
+          },
+          "validation_attention": {
+            "n": 128,
+            "attention_aux": 0.947021484375,
+            "selected_attention_mass": 0.701171875,
+            "selected_seed_ratio": 0.7158203125
+          },
+          "retention_ok": true,
+          "selection_weights": {
+            "mask_delta": 0.05,
+            "full_one": 0.05,
+            "derive_previous": 0.05,
+            "derive_current": 0.05,
+            "local": 0.05,
+            "supplied_update": 0.05
+          },
+          "selection_score": 11.297569444444445,
+          "attention_regularization_enabled": false,
+          "elapsed_seconds": 7652.006642680615
+        }
+      ]
+    },
+    {
+      "stage": "full_update",
+      "best_epoch": 1,
+      "best_score": 11.29623015873016,
+      "best_evaluations": {
+        "full_update": {
+          "n": 1008,
+          "greedy_accuracy": 0.9970238095238095,
+          "binary_accuracy": 0.9970238095238095,
+          "bit_ce": 0.018609803820413256
+        },
+        "mask_delta": {
+          "n": 1008,
+          "greedy_accuracy": 0.9950396825396826,
+          "binary_accuracy": 0.9950396825396826,
+          "bit_ce": 0.008948174733964224
+        },
+        "full_two": {
+          "n": 1008,
+          "greedy_accuracy": 0.9900793650793651,
+          "binary_accuracy": 0.9900793650793651,
+          "bit_ce": 0.07600596594432044
+        },
+        "derive_previous": {
+          "n": 1008,
+          "greedy_accuracy": 1.0,
+          "binary_accuracy": 1.0,
+          "bit_ce": 6.812337845090836e-05
+        },
+        "derive_current": {
+          "n": 1008,
+          "greedy_accuracy": 0.9990079365079365,
+          "binary_accuracy": 0.9990079365079365,
+          "bit_ce": 0.0049173907628135075
+        },
+        "local": {
+          "n": 1024,
+          "greedy_accuracy": 1.0,
+          "binary_accuracy": 1.0,
+          "bit_ce": 7.563736289739609e-06
+        },
+        "supplied_update": {
+          "n": 512,
+          "greedy_accuracy": 1.0,
+          "binary_accuracy": 1.0,
+          "bit_ce": 5.853362381458282e-07
+        }
+      },
+      "history": [
+        {
+          "stage": "full_update",
+          "epoch": 1,
+          "train": {
+            "loss": 0.0737408586139754,
+            "bit_ce": 0.0737408586139754,
+            "attention_aux": 0.0
+          },
+          "evaluations": {
+            "full_update": {
+              "n": 1008,
+              "greedy_accuracy": 0.9970238095238095,
+              "binary_accuracy": 0.9970238095238095,
+              "bit_ce": 0.018609803820413256
+            },
+            "mask_delta": {
+              "n": 1008,
+              "greedy_accuracy": 0.9950396825396826,
+              "binary_accuracy": 0.9950396825396826,
+              "bit_ce": 0.008948174733964224
+            },
+            "full_two": {
+              "n": 1008,
+              "greedy_accuracy": 0.9900793650793651,
+              "binary_accuracy": 0.9900793650793651,
+              "bit_ce": 0.07600596594432044
+            },
+            "derive_previous": {
+              "n": 1008,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 6.812337845090836e-05
+            },
+            "derive_current": {
+              "n": 1008,
+              "greedy_accuracy": 0.9990079365079365,
+              "binary_accuracy": 0.9990079365079365,
+              "bit_ce": 0.0049173907628135075
+            },
+            "local": {
+              "n": 1024,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 7.563736289739609e-06
+            },
+            "supplied_update": {
+              "n": 512,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 5.853362381458282e-07
+            }
+          },
+          "validation_attention": {
+            "n": 128,
+            "attention_aux": 0.975830078125,
+            "selected_attention_mass": 0.693359375,
+            "selected_seed_ratio": 0.7080078125
+          },
+          "retention_ok": true,
+          "selection_weights": {
+            "mask_delta": 0.05,
+            "full_two": 0.05,
+            "derive_previous": 0.05,
+            "derive_current": 0.05,
+            "local": 0.05,
+            "supplied_update": 0.05
+          },
+          "selection_score": 11.29623015873016,
+          "attention_regularization_enabled": false,
+          "elapsed_seconds": 8485.731257360429
+        },
+        {
+          "stage": "full_update",
+          "epoch": 2,
+          "train": {
+            "loss": 0.03181541290163525,
+            "bit_ce": 0.03181541290163525,
+            "attention_aux": 0.0
+          },
+          "evaluations": {
+            "full_update": {
+              "n": 1008,
+              "greedy_accuracy": 0.9821428571428571,
+              "binary_accuracy": 0.9821428571428571,
+              "bit_ce": 0.07980771670265803
+            },
+            "mask_delta": {
+              "n": 1008,
+              "greedy_accuracy": 0.9871031746031746,
+              "binary_accuracy": 0.9871031746031746,
+              "bit_ce": 0.045893108087872704
+            },
+            "full_two": {
+              "n": 1008,
+              "greedy_accuracy": 0.9831349206349206,
+              "binary_accuracy": 0.9831349206349206,
+              "bit_ce": 0.06756084731646947
+            },
+            "derive_previous": {
+              "n": 1008,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 0.000570900265186552
+            },
+            "derive_current": {
+              "n": 1008,
+              "greedy_accuracy": 0.998015873015873,
+              "binary_accuracy": 0.998015873015873,
+              "bit_ce": 0.005286831467870682
+            },
+            "local": {
+              "n": 1024,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 3.83937731385231e-07
+            },
+            "supplied_update": {
+              "n": 512,
+              "greedy_accuracy": 1.0,
+              "binary_accuracy": 1.0,
+              "bit_ce": 1.3508833944797516e-06
+            }
+          },
+          "validation_attention": {
+            "n": 128,
+            "attention_aux": 0.98291015625,
+            "selected_attention_mass": 0.68505859375,
+            "selected_seed_ratio": 0.70166015625
+          },
+          "retention_ok": true,
+          "selection_weights": {
+            "mask_delta": 0.05,
+            "full_two": 0.05,
+            "derive_previous": 0.05,
+            "derive_current": 0.05,
+            "local": 0.05,
+            "supplied_update": 0.05
+          },
+          "selection_score": 11.280555555555555,
+          "attention_regularization_enabled": false,
+          "elapsed_seconds": 9319.087535288185
+        }
+      ]
+    }
+  ],
+  "final_evaluations": {
+    "full_update": {
+      "n": 1008,
+      "greedy_accuracy": 0.9970238095238095,
+      "binary_accuracy": 0.9970238095238095,
+      "bit_ce": 0.018609803820413256
+    },
+    "mask_delta": {
+      "n": 1008,
+      "greedy_accuracy": 0.9950396825396826,
+      "binary_accuracy": 0.9950396825396826,
+      "bit_ce": 0.008948174733964224
+    },
+    "full_zero": {
+      "n": 1008,
+      "greedy_accuracy": 0.9781746031746031,
+      "binary_accuracy": 0.9781746031746031,
+      "bit_ce": 0.16211228143601192
+    },
+    "full_one": {
+      "n": 1008,
+      "greedy_accuracy": 0.9871031746031746,
+      "binary_accuracy": 0.9871031746031746,
+      "bit_ce": 0.09013384864443824
+    },
+    "full_two": {
+      "n": 1008,
+      "greedy_accuracy": 0.9900793650793651,
+      "binary_accuracy": 0.9900793650793651,
+      "bit_ce": 0.07600596594432044
+    },
+    "derive_previous": {
+      "n": 1008,
+      "greedy_accuracy": 1.0,
+      "binary_accuracy": 1.0,
+      "bit_ce": 6.812337845090836e-05
+    },
+    "derive_current": {
+      "n": 1008,
+      "greedy_accuracy": 0.9990079365079365,
+      "binary_accuracy": 0.9990079365079365,
+      "bit_ce": 0.0049173907628135075
+    },
+    "local": {
+      "n": 1024,
+      "greedy_accuracy": 1.0,
+      "binary_accuracy": 1.0,
+      "bit_ce": 7.563736289739609e-06
+    },
+    "supplied_update": {
+      "n": 512,
+      "greedy_accuracy": 1.0,
+      "binary_accuracy": 1.0,
+      "bit_ce": 5.853362381458282e-07
+    }
+  },
+  "final_attention": {
+    "n": 128,
+    "attention_aux": 0.975830078125,
+    "selected_attention_mass": 0.693359375,
+    "selected_seed_ratio": 0.7080078125
+  },
+  "passes_gate": true,
+  "elapsed_seconds": 9524.01281995885,
+  "final_adapter": "artifacts/ce_parity_goldreich_final/full/best_adapter"
+}

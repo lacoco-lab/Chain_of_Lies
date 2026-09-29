@@ -1,0 +1,19 @@
+universe = vanilla
+
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/goldreich_parity/qwen_attempts/reported_diagnostics/update_ablation/condor_nethome/run.sh mmohammadkhani $(action)
+
+getenv = HF_TOKEN
+
+output = /scratch/mmohammadkhani/logs/chain_of_lies/parity_goldreich_update_ablation_$(action).out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/parity_goldreich_update_ablation_$(action).err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/parity_goldreich_update_ablation_$(action).log
+
+request_CPUs = 4
+request_memory = 64G
+request_GPUs = 1
+requirements = (GPUs_GlobalMemoryMb >= 40000)
++MaxWallTime = 172800
+
+queue 1

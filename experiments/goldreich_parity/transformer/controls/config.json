@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_standard_cot_controls_seed_0",
+  "seed": 0,
+  "lengths": [4, 8, 16, 32, 64, 256, 512, 1024],
+  "direct_routing_lengths": [4, 8, 16],
+  "seed_padding_by_length": {
+    "4": 5,
+    "8": 5,
+    "16": 7,
+    "32": 12,
+    "64": 19,
+    "256": 49,
+    "512": 79,
+    "1024": 128
+  },
+  "model_dim": 128,
+  "heads": 16,
+  "token_embedding_dim": 16,
+  "ff_multiplier": 4,
+  "route_learning_rate": 0.003,
+  "route_steps_by_length": {
+    "4": 800, "8": 800, "16": 800, "32": 800,
+    "64": 800, "256": 1200, "512": 1800, "1024": 2800
+  },
+  "representation_learning_rate": 0.001,
+  "representation_steps_by_length": {
+    "4": 2000, "8": 2500, "16": 2500, "32": 3000,
+    "64": 3000, "256": 4000, "512": 5000, "1024": 7000
+  },
+  "public_learning_rate": 0.001,
+  "public_steps_by_length": {
+    "4": 4000, "8": 8000, "16": 24000, "32": 3000,
+    "64": 3000, "256": 3000, "512": 3000, "1024": 3000
+  },
+  "integration_learning_rate": 0.0003,
+  "integration_steps_by_length": {
+    "4": 5000, "8": 6000, "16": 8000, "32": 3000,
+    "64": 3000, "256": 4000, "512": 5000, "1024": 6000
+  },
+  "batch_size_by_length": {
+    "4": 256, "8": 256, "16": 256, "32": 256,
+    "64": 256, "256": 128, "512": 64, "1024": 32
+  },
+  "evaluation_batch_size_by_length": {
+    "4": 64, "8": 128, "16": 512, "32": 1024,
+    "64": 1024, "256": 512, "512": 256, "1024": 128
+  },
+  "validation_subset_by_length": {
+    "4": 4, "8": 64, "16": 512, "32": 1024,
+    "64": 1024, "256": 512, "512": 256, "1024": 128
+  },
+  "chance_tolerance": 0.03
+}

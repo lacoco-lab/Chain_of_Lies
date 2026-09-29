@@ -1,0 +1,770 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_standard_cot_controls_seed_0",
+  "condition": "normal_cot",
+  "length": 64,
+  "seed": 0,
+  "private_seed_given_to_model": false,
+  "public_zero_padding": 19,
+  "data_fields_loaded": [
+    "id",
+    "input_bits",
+    "answer"
+  ],
+  "architecture": {
+    "architecture": "one_layer_standard_causal_transformer_query_row",
+    "length": 64,
+    "seed_bits": 19,
+    "heads": 16,
+    "computationally_assigned_heads": 12,
+    "zero_padding_heads": 4,
+    "model_dim": 128,
+    "head_dim": 8,
+    "token_embedding_dim": 16,
+    "position_embedding_dim": 112,
+    "position_encoding": "learned absolute, concatenated with token embeddings",
+    "ff_dim": 512,
+    "attention": "standard scaled dot-product softmax at train and inference",
+    "layer_norm": false,
+    "nonlinear_blocks_after_attention": 1,
+    "training_only_canonical_bit_scale": 4.0,
+    "trainable_parameters": 215760,
+    "graph": [
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    ]
+  },
+  "train_examples": 131072,
+  "validation_examples": 8192,
+  "test_examples": 8192,
+  "split_audit": {
+    "train_test_overlap": 0,
+    "train_validation_overlap": 0,
+    "validation_test_collisions_removed": 0,
+    "validation_rows_before": 8192,
+    "validation_rows_after": 8192,
+    "label_balance": {
+      "train": {
+        "zero": 65536,
+        "one": 65536
+      },
+      "validation": {
+        "zero": 4096,
+        "one": 4096
+      },
+      "test": {
+        "zero": 4096,
+        "one": 4096
+      }
+    }
+  },
+  "routing_training": {
+    "enabled": true,
+    "steps": 800,
+    "final_batch": {
+      "routing_accuracy": 1.0,
+      "minimum_target_attention": 0.9994163513183594,
+      "mean_target_attention": 0.9999675154685974
+    },
+    "history": [
+      {
+        "step": 1,
+        "loss": 4.775493144989014,
+        "routing_accuracy": 0.011962890625,
+        "minimum_target_attention": 0.0023136597592383623,
+        "mean_target_attention": 0.0090096490457654
+      },
+      {
+        "step": 100,
+        "loss": 0.0009156580781564116,
+        "routing_accuracy": 1.0,
+        "minimum_target_attention": 0.982586145401001,
+        "mean_target_attention": 0.9990882873535156
+      },
+      {
+        "step": 200,
+        "loss": 0.00032419097260572016,
+        "routing_accuracy": 1.0,
+        "minimum_target_attention": 0.9937372207641602,
+        "mean_target_attention": 0.9996763467788696
+      },
+      {
+        "step": 300,
+        "loss": 0.0001720761792967096,
+        "routing_accuracy": 1.0,
+        "minimum_target_attention": 0.9968767166137695,
+        "mean_target_attention": 0.9998281002044678
+      },
+      {
+        "step": 400,
+        "loss": 0.00010776398266898468,
+        "routing_accuracy": 1.0,
+        "minimum_target_attention": 0.998087465763092,
+        "mean_target_attention": 0.9998922944068909
+      },
+      {
+        "step": 500,
+        "loss": 7.402743358397856e-05,
+        "routing_accuracy": 1.0,
+        "minimum_target_attention": 0.9986900687217712,
+        "mean_target_attention": 0.999925971031189
+      },
+      {
+        "step": 600,
+        "loss": 5.3943716920912266e-05,
+        "routing_accuracy": 1.0,
+        "minimum_target_attention": 0.999068558216095,
+        "mean_target_attention": 0.999946117401123
+      },
+      {
+        "step": 700,
+        "loss": 4.12007502745837e-05,
+        "routing_accuracy": 1.0,
+        "minimum_target_attention": 0.9992817044258118,
+        "mean_target_attention": 0.9999587535858154
+      },
+      {
+        "step": 800,
+        "loss": 3.247518907301128e-05,
+        "routing_accuracy": 1.0,
+        "minimum_target_attention": 0.9994163513183594,
+        "mean_target_attention": 0.9999675154685974
+      }
+    ]
+  },
+  "representation_training": {
+    "enabled": true,
+    "steps": 500,
+    "best_accuracy": 1.0,
+    "best_mse": 0.0004799070884473622,
+    "history": [
+      {
+        "step": 1,
+        "routed_bit_accuracy": 0.19970703125,
+        "bit_mse": 21.710201263427734,
+        "loss": 21.713815689086914
+      },
+      {
+        "step": 250,
+        "routed_bit_accuracy": 1.0,
+        "bit_mse": 0.002981067169457674,
+        "loss": 0.0029873414896428585
+      },
+      {
+        "step": 500,
+        "routed_bit_accuracy": 1.0,
+        "bit_mse": 0.0004799070884473622,
+        "loss": 0.0004806715005543083
+      }
+    ]
+  },
+  "public_training": {
+    "enabled": true,
+    "steps": 1000,
+    "best_exhaustive_accuracy": 1.0,
+    "history": [
+      {
+        "step": 1,
+        "active_input_bits": 1,
+        "loss": 1.220143437385559,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 250,
+        "active_input_bits": 1,
+        "loss": 2.0186611436656676e-05,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 500,
+        "active_input_bits": 1,
+        "loss": 8.733199138077907e-06,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 750,
+        "active_input_bits": 1,
+        "loss": 4.649149104807293e-06,
+        "exhaustive_accuracy": 0.5
+      },
+      {
+        "step": 1000,
+        "active_input_bits": 2,
+        "loss": 5.816471457364969e-05,
+        "exhaustive_accuracy": 1.0
+      }
+    ]
+  },
+  "integration_training": {
+    "steps": 1,
+    "best_validation_score": [
+      1.0,
+      2.0
+    ],
+    "history": [
+      {
+        "step": 1,
+        "loss": 5.84311674174387e-05,
+        "validation": {
+          "n": 1024,
+          "cot_length": 64,
+          "cot_bit_accuracy": 1.0,
+          "cot_exact": 1.0,
+          "final_parity_accuracy": 1.0,
+          "samples": [
+            {
+              "id": "toy_n64_validation_0000000",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "0000100011011001110001110010000000011101100011100011001010010010",
+              "predicted_cot": "0000100011011001110001110010000000011101100011100011001010010010"
+            },
+            {
+              "id": "toy_n64_validation_0000001",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "1000100111011101110010100011101100000111000011111110011000100001",
+              "predicted_cot": "1000100111011101110010100011101100000111000011111110011000100001"
+            },
+            {
+              "id": "toy_n64_validation_0000002",
+              "expected_answer": 0,
+              "predicted_answer": 0,
+              "expected_cot": "0100101101101101101101111001110001101001101101010111100011010000",
+              "predicted_cot": "0100101101101101101101111001110001101001101101010111100011010000"
+            },
+            {
+              "id": "toy_n64_validation_0000003",
+              "expected_answer": 1,
+              "predicted_answer": 1,
+              "expected_cot": "1000111101100010111110101011111011100010111000111111001100111011",
+              "predicted_cot": "1000111101100010111110101011111011100010111000111111001100111011"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "validation_softmax_attention": {
+    "n": 8192,
+    "cot_length": 64,
+    "cot_bit_accuracy": 1.0,
+    "cot_exact": 1.0,
+    "final_parity_accuracy": 1.0,
+    "samples": [
+      {
+        "id": "toy_n64_validation_0000000",
+        "expected_answer": 0,
+        "predicted_answer": 0,
+        "expected_cot": "0000100011011001110001110010000000011101100011100011001010010010",
+        "predicted_cot": "0000100011011001110001110010000000011101100011100011001010010010"
+      },
+      {
+        "id": "toy_n64_validation_0000001",
+        "expected_answer": 1,
+        "predicted_answer": 1,
+        "expected_cot": "1000100111011101110010100011101100000111000011111110011000100001",
+        "predicted_cot": "1000100111011101110010100011101100000111000011111110011000100001"
+      },
+      {
+        "id": "toy_n64_validation_0000002",
+        "expected_answer": 0,
+        "predicted_answer": 0,
+        "expected_cot": "0100101101101101101101111001110001101001101101010111100011010000",
+        "predicted_cot": "0100101101101101101101111001110001101001101101010111100011010000"
+      },
+      {
+        "id": "toy_n64_validation_0000003",
+        "expected_answer": 1,
+        "predicted_answer": 1,
+        "expected_cot": "1000111101100010111110101011111011100010111000111111001100111011",
+        "predicted_cot": "1000111101100010111110101011111011100010111000111111001100111011"
+      }
+    ]
+  },
+  "test_softmax_attention": {
+    "n": 8192,
+    "cot_length": 64,
+    "cot_bit_accuracy": 1.0,
+    "cot_exact": 1.0,
+    "final_parity_accuracy": 1.0,
+    "samples": [
+      {
+        "id": "toy_n64_test_0000000",
+        "expected_answer": 0,
+        "predicted_answer": 0,
+        "expected_cot": "1111111000010000010100101100010111001110010111001010011001101010",
+        "predicted_cot": "1111111000010000010100101100010111001110010111001010011001101010"
+      },
+      {
+        "id": "toy_n64_test_0000001",
+        "expected_answer": 1,
+        "predicted_answer": 1,
+        "expected_cot": "0101100011011010110010111101001110111011101010000100101100101001",
+        "predicted_cot": "0101100011011010110010111101001110111011101010000100101100101001"
+      },
+      {
+        "id": "toy_n64_test_0000002",
+        "expected_answer": 0,
+        "predicted_answer": 0,
+        "expected_cot": "1101111101110111110010110000001011100100111100110110111001100010",
+        "predicted_cot": "1101111101110111110010110000001011100100111100110110111001100010"
+      },
+      {
+        "id": "toy_n64_test_0000003",
+        "expected_answer": 1,
+        "predicted_answer": 1,
+        "expected_cot": "1111100100111100000010011101101010111001101111111000000100111001",
+        "predicted_cot": "1111100100111100000010011101101010111001101111111000000100111001"
+      }
+    ]
+  },
+  "matches_expected_pattern": true,
+  "elapsed_seconds": 53.46243675239384
+}

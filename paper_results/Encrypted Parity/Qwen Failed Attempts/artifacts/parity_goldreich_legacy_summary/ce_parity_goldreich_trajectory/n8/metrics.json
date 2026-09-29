@@ -1,0 +1,2110 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_trajectory_v1",
+  "seed": 0,
+  "architecture": "frozen mechanism/positions stack + independent rank-32 trajectory adapter",
+  "fixed_length": 8,
+  "established_adapters": [
+    "artifacts/ce_parity_goldreich_update_ablation/base/best_adapter",
+    "artifacts/ce_parity_goldreich_final/positions/best_adapter",
+    "artifacts/ce_parity_goldreich_final/full/best_adapter"
+  ],
+  "baseline_prerequisites": {
+    "full_update": {
+      "n": 1008,
+      "accuracy": 0.998015873015873
+    },
+    "mask_delta": {
+      "n": 1008,
+      "accuracy": 0.9950396825396826
+    },
+    "derive_previous": {
+      "n": 1008,
+      "accuracy": 1.0
+    },
+    "derive_current": {
+      "n": 1008,
+      "accuracy": 0.9990079365079365
+    },
+    "supplied_update": {
+      "n": 512,
+      "accuracy": 1.0
+    }
+  },
+  "baseline_transitions": {
+    "overall": {
+      "n": 960,
+      "accuracy": 0.99375
+    },
+    "by_position": {
+      "transition_step_1": {
+        "n": 64,
+        "accuracy": 1.0
+      },
+      "transition_step_10": {
+        "n": 64,
+        "accuracy": 1.0
+      },
+      "transition_step_11": {
+        "n": 64,
+        "accuracy": 0.984375
+      },
+      "transition_step_12": {
+        "n": 64,
+        "accuracy": 1.0
+      },
+      "transition_step_13": {
+        "n": 64,
+        "accuracy": 0.984375
+      },
+      "transition_step_14": {
+        "n": 64,
+        "accuracy": 0.984375
+      },
+      "transition_step_15": {
+        "n": 64,
+        "accuracy": 1.0
+      },
+      "transition_step_2": {
+        "n": 64,
+        "accuracy": 1.0
+      },
+      "transition_step_3": {
+        "n": 64,
+        "accuracy": 0.984375
+      },
+      "transition_step_4": {
+        "n": 64,
+        "accuracy": 1.0
+      },
+      "transition_step_5": {
+        "n": 64,
+        "accuracy": 0.984375
+      },
+      "transition_step_6": {
+        "n": 64,
+        "accuracy": 0.984375
+      },
+      "transition_step_7": {
+        "n": 64,
+        "accuracy": 1.0
+      },
+      "transition_step_8": {
+        "n": 64,
+        "accuracy": 1.0
+      },
+      "transition_step_9": {
+        "n": 64,
+        "accuracy": 1.0
+      }
+    }
+  },
+  "stages": [
+    {
+      "length": 8,
+      "best_epoch": 1,
+      "best_score": 0.314484126984127,
+      "best_current": {
+        "n": 252,
+        "trace_bit_accuracy": 0.625,
+        "trace_exact": 0.12698412698412698,
+        "final_parity_accuracy": 0.5,
+        "joint_exact": 0.12698412698412698,
+        "strict_format": 1.0,
+        "output_exact": 0.12698412698412698,
+        "samples": [
+          {
+            "id": "trajectory_n8_validation_00144",
+            "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0",
+            "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+          },
+          {
+            "id": "trajectory_n8_validation_00212",
+            "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+            "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+          },
+          {
+            "id": "trajectory_n8_validation_00087",
+            "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+            "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+          },
+          {
+            "id": "trajectory_n8_validation_00133",
+            "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+            "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+          },
+          {
+            "id": "trajectory_n8_validation_00083",
+            "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+            "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+          },
+          {
+            "id": "trajectory_n8_validation_00021",
+            "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1",
+            "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+          },
+          {
+            "id": "trajectory_n8_validation_00227",
+            "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+            "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+          },
+          {
+            "id": "trajectory_n8_validation_00156",
+            "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+            "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+          }
+        ]
+      },
+      "best_previous": null,
+      "best_prerequisites": {
+        "full_update": {
+          "n": 256,
+          "accuracy": 0.99609375
+        },
+        "mask_delta": {
+          "n": 256,
+          "accuracy": 1.0
+        },
+        "derive_previous": {
+          "n": 256,
+          "accuracy": 1.0
+        },
+        "derive_current": {
+          "n": 256,
+          "accuracy": 1.0
+        },
+        "supplied_update": {
+          "n": 256,
+          "accuracy": 1.0
+        }
+      },
+      "best_transitions": {
+        "overall": {
+          "n": 960,
+          "accuracy": 0.99375
+        },
+        "by_position": {
+          "transition_step_1": {
+            "n": 64,
+            "accuracy": 1.0
+          },
+          "transition_step_10": {
+            "n": 64,
+            "accuracy": 1.0
+          },
+          "transition_step_11": {
+            "n": 64,
+            "accuracy": 0.96875
+          },
+          "transition_step_12": {
+            "n": 64,
+            "accuracy": 1.0
+          },
+          "transition_step_13": {
+            "n": 64,
+            "accuracy": 0.984375
+          },
+          "transition_step_14": {
+            "n": 64,
+            "accuracy": 0.984375
+          },
+          "transition_step_15": {
+            "n": 64,
+            "accuracy": 1.0
+          },
+          "transition_step_2": {
+            "n": 64,
+            "accuracy": 1.0
+          },
+          "transition_step_3": {
+            "n": 64,
+            "accuracy": 1.0
+          },
+          "transition_step_4": {
+            "n": 64,
+            "accuracy": 0.984375
+          },
+          "transition_step_5": {
+            "n": 64,
+            "accuracy": 1.0
+          },
+          "transition_step_6": {
+            "n": 64,
+            "accuracy": 0.984375
+          },
+          "transition_step_7": {
+            "n": 64,
+            "accuracy": 1.0
+          },
+          "transition_step_8": {
+            "n": 64,
+            "accuracy": 1.0
+          },
+          "transition_step_9": {
+            "n": 64,
+            "accuracy": 1.0
+          }
+        }
+      },
+      "retention_ok": false,
+      "history": [
+        {
+          "length": 8,
+          "phase": "main",
+          "epoch": 1,
+          "learning_rate": 2e-05,
+          "prerequisite_replay_n": 128,
+          "train": {
+            "loss": 0.2586742908990023
+          },
+          "current": {
+            "n": 252,
+            "trace_bit_accuracy": 0.625,
+            "trace_exact": 0.12698412698412698,
+            "final_parity_accuracy": 0.5,
+            "joint_exact": 0.12698412698412698,
+            "strict_format": 1.0,
+            "output_exact": 0.12698412698412698,
+            "samples": [
+              {
+                "id": "trajectory_n8_validation_00144",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00212",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00087",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00133",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00083",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00021",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00227",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00156",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              }
+            ]
+          },
+          "previous_length": null,
+          "previous": null,
+          "prerequisites": {
+            "full_update": {
+              "n": 256,
+              "accuracy": 0.99609375
+            },
+            "mask_delta": {
+              "n": 256,
+              "accuracy": 1.0
+            },
+            "derive_previous": {
+              "n": 256,
+              "accuracy": 1.0
+            },
+            "derive_current": {
+              "n": 256,
+              "accuracy": 1.0
+            },
+            "supplied_update": {
+              "n": 256,
+              "accuracy": 1.0
+            }
+          },
+          "transitions": {
+            "overall": {
+              "n": 960,
+              "accuracy": 0.99375
+            },
+            "by_position": {
+              "transition_step_1": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_10": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_11": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_12": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_13": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_14": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_15": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_2": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_3": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_4": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_5": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_6": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_7": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_8": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_9": {
+                "n": 64,
+                "accuracy": 1.0
+              }
+            }
+          },
+          "retention_ok": false,
+          "selection_score": 0.314484126984127,
+          "elapsed_seconds": 473.5401203078218
+        },
+        {
+          "length": 8,
+          "phase": "main",
+          "epoch": 2,
+          "learning_rate": 2e-05,
+          "prerequisite_replay_n": 128,
+          "train": {
+            "loss": 0.17788496586954117
+          },
+          "current": {
+            "n": 252,
+            "trace_bit_accuracy": 0.6299603174603174,
+            "trace_exact": 0.11904761904761904,
+            "final_parity_accuracy": 0.49206349206349204,
+            "joint_exact": 0.11507936507936507,
+            "strict_format": 1.0,
+            "output_exact": 0.11507936507936507,
+            "samples": [
+              {
+                "id": "trajectory_n8_validation_00144",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00212",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00087",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00133",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00083",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00021",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00227",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00156",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              }
+            ]
+          },
+          "previous_length": null,
+          "previous": null,
+          "prerequisites": {
+            "full_update": {
+              "n": 256,
+              "accuracy": 0.984375
+            },
+            "mask_delta": {
+              "n": 256,
+              "accuracy": 1.0
+            },
+            "derive_previous": {
+              "n": 256,
+              "accuracy": 1.0
+            },
+            "derive_current": {
+              "n": 256,
+              "accuracy": 1.0
+            },
+            "supplied_update": {
+              "n": 256,
+              "accuracy": 1.0
+            }
+          },
+          "transitions": {
+            "overall": {
+              "n": 960,
+              "accuracy": 0.9916666666666667
+            },
+            "by_position": {
+              "transition_step_1": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_10": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_11": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_12": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_13": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_14": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_15": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_2": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_3": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_4": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_5": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_6": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_7": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_8": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_9": {
+                "n": 64,
+                "accuracy": 1.0
+              }
+            }
+          },
+          "retention_ok": false,
+          "selection_score": 0.3050595238095238,
+          "elapsed_seconds": 918.6102879620157
+        },
+        {
+          "length": 8,
+          "phase": "main",
+          "epoch": 3,
+          "learning_rate": 2e-05,
+          "prerequisite_replay_n": 128,
+          "train": {
+            "loss": 0.21625102455915685
+          },
+          "current": {
+            "n": 252,
+            "trace_bit_accuracy": 0.6279761904761905,
+            "trace_exact": 0.12301587301587301,
+            "final_parity_accuracy": 0.49206349206349204,
+            "joint_exact": 0.12301587301587301,
+            "strict_format": 1.0,
+            "output_exact": 0.12301587301587301,
+            "samples": [
+              {
+                "id": "trajectory_n8_validation_00144",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00212",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00087",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00133",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00083",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00021",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00227",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00156",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              }
+            ]
+          },
+          "previous_length": null,
+          "previous": null,
+          "prerequisites": {
+            "full_update": {
+              "n": 256,
+              "accuracy": 0.9609375
+            },
+            "mask_delta": {
+              "n": 256,
+              "accuracy": 0.99609375
+            },
+            "derive_previous": {
+              "n": 256,
+              "accuracy": 1.0
+            },
+            "derive_current": {
+              "n": 256,
+              "accuracy": 1.0
+            },
+            "supplied_update": {
+              "n": 256,
+              "accuracy": 1.0
+            }
+          },
+          "transitions": {
+            "overall": {
+              "n": 960,
+              "accuracy": 0.95
+            },
+            "by_position": {
+              "transition_step_1": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_10": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_11": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_12": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_13": {
+                "n": 64,
+                "accuracy": 0.875
+              },
+              "transition_step_14": {
+                "n": 64,
+                "accuracy": 0.875
+              },
+              "transition_step_15": {
+                "n": 64,
+                "accuracy": 0.921875
+              },
+              "transition_step_2": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_3": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_4": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_5": {
+                "n": 64,
+                "accuracy": 0.890625
+              },
+              "transition_step_6": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_7": {
+                "n": 64,
+                "accuracy": 0.875
+              },
+              "transition_step_8": {
+                "n": 64,
+                "accuracy": 0.953125
+              },
+              "transition_step_9": {
+                "n": 64,
+                "accuracy": 0.875
+              }
+            }
+          },
+          "retention_ok": false,
+          "selection_score": 0.3088293650793651,
+          "elapsed_seconds": 1363.571496124845
+        },
+        {
+          "length": 8,
+          "phase": "main",
+          "epoch": 4,
+          "learning_rate": 2e-05,
+          "prerequisite_replay_n": 128,
+          "train": {
+            "loss": 0.2185380400013993
+          },
+          "current": {
+            "n": 252,
+            "trace_bit_accuracy": 0.6190476190476191,
+            "trace_exact": 0.11507936507936507,
+            "final_parity_accuracy": 0.503968253968254,
+            "joint_exact": 0.11507936507936507,
+            "strict_format": 1.0,
+            "output_exact": 0.11507936507936507,
+            "samples": [
+              {
+                "id": "trajectory_n8_validation_00144",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00212",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00087",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00133",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00083",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00021",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00227",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00156",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1"
+              }
+            ]
+          },
+          "previous_length": null,
+          "previous": null,
+          "prerequisites": {
+            "full_update": {
+              "n": 256,
+              "accuracy": 0.9921875
+            },
+            "mask_delta": {
+              "n": 256,
+              "accuracy": 0.98046875
+            },
+            "derive_previous": {
+              "n": 256,
+              "accuracy": 0.96875
+            },
+            "derive_current": {
+              "n": 256,
+              "accuracy": 0.9921875
+            },
+            "supplied_update": {
+              "n": 256,
+              "accuracy": 1.0
+            }
+          },
+          "transitions": {
+            "overall": {
+              "n": 960,
+              "accuracy": 0.9895833333333334
+            },
+            "by_position": {
+              "transition_step_1": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_10": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_11": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_12": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_13": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_14": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_15": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_2": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_3": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_4": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_5": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_6": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_7": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_8": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_9": {
+                "n": 64,
+                "accuracy": 1.0
+              }
+            }
+          },
+          "retention_ok": false,
+          "selection_score": 0.30297619047619045,
+          "elapsed_seconds": 1808.3220992642455
+        }
+      ]
+    },
+    {
+      "length": 8,
+      "best_epoch": 2,
+      "best_score": 0.3222222222222222,
+      "best_current": {
+        "n": 252,
+        "trace_bit_accuracy": 0.6130952380952381,
+        "trace_exact": 0.1349206349206349,
+        "final_parity_accuracy": 0.503968253968254,
+        "joint_exact": 0.1349206349206349,
+        "strict_format": 1.0,
+        "output_exact": 0.1349206349206349,
+        "samples": [
+          {
+            "id": "trajectory_n8_validation_00144",
+            "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0",
+            "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+          },
+          {
+            "id": "trajectory_n8_validation_00212",
+            "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+            "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1"
+          },
+          {
+            "id": "trajectory_n8_validation_00087",
+            "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+            "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+          },
+          {
+            "id": "trajectory_n8_validation_00133",
+            "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+            "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+          },
+          {
+            "id": "trajectory_n8_validation_00083",
+            "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+            "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+          },
+          {
+            "id": "trajectory_n8_validation_00021",
+            "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1",
+            "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1"
+          },
+          {
+            "id": "trajectory_n8_validation_00227",
+            "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+            "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+          },
+          {
+            "id": "trajectory_n8_validation_00156",
+            "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+            "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1"
+          }
+        ]
+      },
+      "best_previous": null,
+      "best_prerequisites": {
+        "full_update": {
+          "n": 256,
+          "accuracy": 0.95703125
+        },
+        "mask_delta": {
+          "n": 256,
+          "accuracy": 0.96875
+        },
+        "derive_previous": {
+          "n": 256,
+          "accuracy": 0.96875
+        },
+        "derive_current": {
+          "n": 256,
+          "accuracy": 0.98046875
+        },
+        "supplied_update": {
+          "n": 256,
+          "accuracy": 1.0
+        }
+      },
+      "best_transitions": {
+        "overall": {
+          "n": 960,
+          "accuracy": 0.96875
+        },
+        "by_position": {
+          "transition_step_1": {
+            "n": 64,
+            "accuracy": 0.984375
+          },
+          "transition_step_10": {
+            "n": 64,
+            "accuracy": 0.9375
+          },
+          "transition_step_11": {
+            "n": 64,
+            "accuracy": 0.96875
+          },
+          "transition_step_12": {
+            "n": 64,
+            "accuracy": 0.984375
+          },
+          "transition_step_13": {
+            "n": 64,
+            "accuracy": 0.9375
+          },
+          "transition_step_14": {
+            "n": 64,
+            "accuracy": 0.9375
+          },
+          "transition_step_15": {
+            "n": 64,
+            "accuracy": 0.984375
+          },
+          "transition_step_2": {
+            "n": 64,
+            "accuracy": 0.984375
+          },
+          "transition_step_3": {
+            "n": 64,
+            "accuracy": 0.96875
+          },
+          "transition_step_4": {
+            "n": 64,
+            "accuracy": 0.9375
+          },
+          "transition_step_5": {
+            "n": 64,
+            "accuracy": 0.984375
+          },
+          "transition_step_6": {
+            "n": 64,
+            "accuracy": 1.0
+          },
+          "transition_step_7": {
+            "n": 64,
+            "accuracy": 0.953125
+          },
+          "transition_step_8": {
+            "n": 64,
+            "accuracy": 0.96875
+          },
+          "transition_step_9": {
+            "n": 64,
+            "accuracy": 1.0
+          }
+        }
+      },
+      "retention_ok": false,
+      "history": [
+        {
+          "length": 8,
+          "phase": "rescue",
+          "epoch": 1,
+          "learning_rate": 2e-05,
+          "prerequisite_replay_n": 128,
+          "train": {
+            "loss": 0.21968082812213038
+          },
+          "current": {
+            "n": 252,
+            "trace_bit_accuracy": 0.6111111111111112,
+            "trace_exact": 0.0873015873015873,
+            "final_parity_accuracy": 0.5079365079365079,
+            "joint_exact": 0.08333333333333333,
+            "strict_format": 1.0,
+            "output_exact": 0.08333333333333333,
+            "samples": [
+              {
+                "id": "trajectory_n8_validation_00144",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00212",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00087",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00133",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00083",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00021",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00227",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00156",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              }
+            ]
+          },
+          "previous_length": null,
+          "previous": null,
+          "prerequisites": {
+            "full_update": {
+              "n": 256,
+              "accuracy": 1.0
+            },
+            "mask_delta": {
+              "n": 256,
+              "accuracy": 0.98828125
+            },
+            "derive_previous": {
+              "n": 256,
+              "accuracy": 0.96484375
+            },
+            "derive_current": {
+              "n": 256,
+              "accuracy": 0.9921875
+            },
+            "supplied_update": {
+              "n": 256,
+              "accuracy": 1.0
+            }
+          },
+          "transitions": {
+            "overall": {
+              "n": 960,
+              "accuracy": 0.9979166666666667
+            },
+            "by_position": {
+              "transition_step_1": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_10": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_11": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_12": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_13": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_14": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_15": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_2": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_3": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_4": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_5": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_6": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_7": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_8": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_9": {
+                "n": 64,
+                "accuracy": 1.0
+              }
+            }
+          },
+          "retention_ok": false,
+          "selection_score": 0.2753968253968254,
+          "elapsed_seconds": 2253.2021559621207
+        },
+        {
+          "length": 8,
+          "phase": "rescue",
+          "epoch": 2,
+          "learning_rate": 2e-05,
+          "prerequisite_replay_n": 128,
+          "train": {
+            "loss": 0.21350152115106732
+          },
+          "current": {
+            "n": 252,
+            "trace_bit_accuracy": 0.6130952380952381,
+            "trace_exact": 0.1349206349206349,
+            "final_parity_accuracy": 0.503968253968254,
+            "joint_exact": 0.1349206349206349,
+            "strict_format": 1.0,
+            "output_exact": 0.1349206349206349,
+            "samples": [
+              {
+                "id": "trajectory_n8_validation_00144",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00212",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00087",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00133",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00083",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00021",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00227",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00156",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1"
+              }
+            ]
+          },
+          "previous_length": null,
+          "previous": null,
+          "prerequisites": {
+            "full_update": {
+              "n": 256,
+              "accuracy": 0.95703125
+            },
+            "mask_delta": {
+              "n": 256,
+              "accuracy": 0.96875
+            },
+            "derive_previous": {
+              "n": 256,
+              "accuracy": 0.96875
+            },
+            "derive_current": {
+              "n": 256,
+              "accuracy": 0.98046875
+            },
+            "supplied_update": {
+              "n": 256,
+              "accuracy": 1.0
+            }
+          },
+          "transitions": {
+            "overall": {
+              "n": 960,
+              "accuracy": 0.96875
+            },
+            "by_position": {
+              "transition_step_1": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_10": {
+                "n": 64,
+                "accuracy": 0.9375
+              },
+              "transition_step_11": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_12": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_13": {
+                "n": 64,
+                "accuracy": 0.9375
+              },
+              "transition_step_14": {
+                "n": 64,
+                "accuracy": 0.9375
+              },
+              "transition_step_15": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_2": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_3": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_4": {
+                "n": 64,
+                "accuracy": 0.9375
+              },
+              "transition_step_5": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_6": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_7": {
+                "n": 64,
+                "accuracy": 0.953125
+              },
+              "transition_step_8": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_9": {
+                "n": 64,
+                "accuracy": 1.0
+              }
+            }
+          },
+          "retention_ok": false,
+          "selection_score": 0.3222222222222222,
+          "elapsed_seconds": 2697.995210485067
+        },
+        {
+          "length": 8,
+          "phase": "rescue",
+          "epoch": 3,
+          "learning_rate": 2e-05,
+          "prerequisite_replay_n": 128,
+          "train": {
+            "loss": 0.19939380466361342
+          },
+          "current": {
+            "n": 252,
+            "trace_bit_accuracy": 0.6170634920634921,
+            "trace_exact": 0.12698412698412698,
+            "final_parity_accuracy": 0.4801587301587302,
+            "joint_exact": 0.12698412698412698,
+            "strict_format": 1.0,
+            "output_exact": 0.12698412698412698,
+            "samples": [
+              {
+                "id": "trajectory_n8_validation_00144",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00212",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00087",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00133",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00083",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00021",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00227",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00156",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              }
+            ]
+          },
+          "previous_length": null,
+          "previous": null,
+          "prerequisites": {
+            "full_update": {
+              "n": 256,
+              "accuracy": 0.9609375
+            },
+            "mask_delta": {
+              "n": 256,
+              "accuracy": 0.98828125
+            },
+            "derive_previous": {
+              "n": 256,
+              "accuracy": 1.0
+            },
+            "derive_current": {
+              "n": 256,
+              "accuracy": 1.0
+            },
+            "supplied_update": {
+              "n": 256,
+              "accuracy": 1.0
+            }
+          },
+          "transitions": {
+            "overall": {
+              "n": 960,
+              "accuracy": 0.9822916666666667
+            },
+            "by_position": {
+              "transition_step_1": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_10": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_11": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_12": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_13": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_14": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_15": {
+                "n": 64,
+                "accuracy": 0.9375
+              },
+              "transition_step_2": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_3": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_4": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_5": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_6": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_7": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_8": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_9": {
+                "n": 64,
+                "accuracy": 1.0
+              }
+            }
+          },
+          "retention_ok": false,
+          "selection_score": 0.30873015873015874,
+          "elapsed_seconds": 3143.248230722267
+        },
+        {
+          "length": 8,
+          "phase": "rescue",
+          "epoch": 4,
+          "learning_rate": 2e-05,
+          "prerequisite_replay_n": 128,
+          "train": {
+            "loss": 0.21673679054184172
+          },
+          "current": {
+            "n": 252,
+            "trace_bit_accuracy": 0.6130952380952381,
+            "trace_exact": 0.11904761904761904,
+            "final_parity_accuracy": 0.49206349206349204,
+            "joint_exact": 0.11904761904761904,
+            "strict_format": 1.0,
+            "output_exact": 0.11904761904761904,
+            "samples": [
+              {
+                "id": "trajectory_n8_validation_00144",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00212",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00087",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00133",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00083",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00021",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00227",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00156",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              }
+            ]
+          },
+          "previous_length": null,
+          "previous": null,
+          "prerequisites": {
+            "full_update": {
+              "n": 256,
+              "accuracy": 0.98046875
+            },
+            "mask_delta": {
+              "n": 256,
+              "accuracy": 0.9921875
+            },
+            "derive_previous": {
+              "n": 256,
+              "accuracy": 0.99609375
+            },
+            "derive_current": {
+              "n": 256,
+              "accuracy": 1.0
+            },
+            "supplied_update": {
+              "n": 256,
+              "accuracy": 1.0
+            }
+          },
+          "transitions": {
+            "overall": {
+              "n": 960,
+              "accuracy": 0.978125
+            },
+            "by_position": {
+              "transition_step_1": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_10": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_11": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_12": {
+                "n": 64,
+                "accuracy": 0.953125
+              },
+              "transition_step_13": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_14": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_15": {
+                "n": 64,
+                "accuracy": 0.953125
+              },
+              "transition_step_2": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_3": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_4": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_5": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_6": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_7": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_8": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_9": {
+                "n": 64,
+                "accuracy": 0.953125
+              }
+            }
+          },
+          "retention_ok": false,
+          "selection_score": 0.30337301587301585,
+          "elapsed_seconds": 3589.6017978601158
+        },
+        {
+          "length": 8,
+          "phase": "rescue",
+          "epoch": 5,
+          "learning_rate": 2e-05,
+          "prerequisite_replay_n": 128,
+          "train": {
+            "loss": 0.23470096655350361
+          },
+          "current": {
+            "n": 252,
+            "trace_bit_accuracy": 0.6091269841269841,
+            "trace_exact": 0.0992063492063492,
+            "final_parity_accuracy": 0.4801587301587302,
+            "joint_exact": 0.0992063492063492,
+            "strict_format": 1.0,
+            "output_exact": 0.0992063492063492,
+            "samples": [
+              {
+                "id": "trajectory_n8_validation_00144",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00212",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00087",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00133",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00083",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00021",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00227",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00156",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0"
+              }
+            ]
+          },
+          "previous_length": null,
+          "previous": null,
+          "prerequisites": {
+            "full_update": {
+              "n": 256,
+              "accuracy": 0.9921875
+            },
+            "mask_delta": {
+              "n": 256,
+              "accuracy": 0.98046875
+            },
+            "derive_previous": {
+              "n": 256,
+              "accuracy": 1.0
+            },
+            "derive_current": {
+              "n": 256,
+              "accuracy": 1.0
+            },
+            "supplied_update": {
+              "n": 256,
+              "accuracy": 1.0
+            }
+          },
+          "transitions": {
+            "overall": {
+              "n": 960,
+              "accuracy": 0.996875
+            },
+            "by_position": {
+              "transition_step_1": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_10": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_11": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_12": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_13": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_14": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_15": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_2": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_3": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_4": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_5": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_6": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_7": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_8": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_9": {
+                "n": 64,
+                "accuracy": 0.984375
+              }
+            }
+          },
+          "retention_ok": false,
+          "selection_score": 0.28015873015873016,
+          "elapsed_seconds": 4035.4505152022466
+        },
+        {
+          "length": 8,
+          "phase": "rescue",
+          "epoch": 6,
+          "learning_rate": 2e-05,
+          "prerequisite_replay_n": 128,
+          "train": {
+            "loss": 0.20977824051428853
+          },
+          "current": {
+            "n": 252,
+            "trace_bit_accuracy": 0.6180555555555556,
+            "trace_exact": 0.13095238095238096,
+            "final_parity_accuracy": 0.503968253968254,
+            "joint_exact": 0.13095238095238096,
+            "strict_format": 1.0,
+            "output_exact": 0.13095238095238096,
+            "samples": [
+              {
+                "id": "trajectory_n8_validation_00144",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00212",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00087",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00133",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00083",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00021",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1"
+              },
+              {
+                "id": "trajectory_n8_validation_00227",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+              },
+              {
+                "id": "trajectory_n8_validation_00156",
+                "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+                "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1"
+              }
+            ]
+          },
+          "previous_length": null,
+          "previous": null,
+          "prerequisites": {
+            "full_update": {
+              "n": 256,
+              "accuracy": 0.95703125
+            },
+            "mask_delta": {
+              "n": 256,
+              "accuracy": 0.97265625
+            },
+            "derive_previous": {
+              "n": 256,
+              "accuracy": 0.98828125
+            },
+            "derive_current": {
+              "n": 256,
+              "accuracy": 0.9921875
+            },
+            "supplied_update": {
+              "n": 256,
+              "accuracy": 1.0
+            }
+          },
+          "transitions": {
+            "overall": {
+              "n": 960,
+              "accuracy": 0.9666666666666667
+            },
+            "by_position": {
+              "transition_step_1": {
+                "n": 64,
+                "accuracy": 0.953125
+              },
+              "transition_step_10": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_11": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_12": {
+                "n": 64,
+                "accuracy": 1.0
+              },
+              "transition_step_13": {
+                "n": 64,
+                "accuracy": 0.953125
+              },
+              "transition_step_14": {
+                "n": 64,
+                "accuracy": 0.953125
+              },
+              "transition_step_15": {
+                "n": 64,
+                "accuracy": 0.953125
+              },
+              "transition_step_2": {
+                "n": 64,
+                "accuracy": 0.953125
+              },
+              "transition_step_3": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_4": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_5": {
+                "n": 64,
+                "accuracy": 0.953125
+              },
+              "transition_step_6": {
+                "n": 64,
+                "accuracy": 0.984375
+              },
+              "transition_step_7": {
+                "n": 64,
+                "accuracy": 0.953125
+              },
+              "transition_step_8": {
+                "n": 64,
+                "accuracy": 0.96875
+              },
+              "transition_step_9": {
+                "n": 64,
+                "accuracy": 0.984375
+              }
+            }
+          },
+          "retention_ok": false,
+          "selection_score": 0.31875,
+          "elapsed_seconds": 4480.710283359978
+        }
+      ]
+    }
+  ],
+  "final_by_length": {
+    "8": {
+      "n": 252,
+      "trace_bit_accuracy": 0.6130952380952381,
+      "trace_exact": 0.1349206349206349,
+      "final_parity_accuracy": 0.503968253968254,
+      "joint_exact": 0.1349206349206349,
+      "strict_format": 1.0,
+      "output_exact": 0.1349206349206349,
+      "samples": [
+        {
+          "id": "trajectory_n8_validation_00144",
+          "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0",
+          "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+        },
+        {
+          "id": "trajectory_n8_validation_00212",
+          "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+          "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1"
+        },
+        {
+          "id": "trajectory_n8_validation_00087",
+          "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+          "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=0\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+        },
+        {
+          "id": "trajectory_n8_validation_00133",
+          "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+          "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+        },
+        {
+          "id": "trajectory_n8_validation_00083",
+          "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+          "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+        },
+        {
+          "id": "trajectory_n8_validation_00021",
+          "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1",
+          "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1"
+        },
+        {
+          "id": "trajectory_n8_validation_00227",
+          "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=1",
+          "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=1\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=0"
+        },
+        {
+          "id": "trajectory_n8_validation_00156",
+          "expected": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=1\n(use Input: xG xH; use Seed: H I E D J) C=1\nANSWER=0",
+          "generated": "COT:\n(use Input: xA xB; use Seed: K B J H D) C=1\n(use Input: xC xD; use Seed: G J I K E) C=0\n(use Input: xE xF; use Seed: P N L M F) C=0\n(use Input: xG xH; use Seed: H I E D J) C=0\nANSWER=1"
+        }
+      ]
+    }
+  },
+  "final_prerequisites": {
+    "full_update": {
+      "n": 1008,
+      "accuracy": 0.9682539682539683
+    },
+    "mask_delta": {
+      "n": 1008,
+      "accuracy": 0.9494047619047619
+    },
+    "derive_previous": {
+      "n": 1008,
+      "accuracy": 0.9672619047619048
+    },
+    "derive_current": {
+      "n": 1008,
+      "accuracy": 0.9851190476190477
+    },
+    "supplied_update": {
+      "n": 512,
+      "accuracy": 1.0
+    }
+  },
+  "final_transitions": {
+    "overall": {
+      "n": 960,
+      "accuracy": 0.96875
+    },
+    "by_position": {
+      "transition_step_1": {
+        "n": 64,
+        "accuracy": 0.984375
+      },
+      "transition_step_10": {
+        "n": 64,
+        "accuracy": 0.9375
+      },
+      "transition_step_11": {
+        "n": 64,
+        "accuracy": 0.96875
+      },
+      "transition_step_12": {
+        "n": 64,
+        "accuracy": 0.984375
+      },
+      "transition_step_13": {
+        "n": 64,
+        "accuracy": 0.9375
+      },
+      "transition_step_14": {
+        "n": 64,
+        "accuracy": 0.9375
+      },
+      "transition_step_15": {
+        "n": 64,
+        "accuracy": 0.984375
+      },
+      "transition_step_2": {
+        "n": 64,
+        "accuracy": 0.984375
+      },
+      "transition_step_3": {
+        "n": 64,
+        "accuracy": 0.96875
+      },
+      "transition_step_4": {
+        "n": 64,
+        "accuracy": 0.9375
+      },
+      "transition_step_5": {
+        "n": 64,
+        "accuracy": 0.984375
+      },
+      "transition_step_6": {
+        "n": 64,
+        "accuracy": 1.0
+      },
+      "transition_step_7": {
+        "n": 64,
+        "accuracy": 0.953125
+      },
+      "transition_step_8": {
+        "n": 64,
+        "accuracy": 0.96875
+      },
+      "transition_step_9": {
+        "n": 64,
+        "accuracy": 1.0
+      }
+    }
+  },
+  "passes_gate": false,
+  "elapsed_seconds": 4695.659899762832,
+  "final_adapter": "artifacts/ce_parity_goldreich_trajectory/n8/best_adapter"
+}

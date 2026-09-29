@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_cot_controls_smoke",
+  "seed": 0,
+  "require_disjoint_inputs": false,
+  "lengths": [8],
+  "heads": 12,
+  "public_zero_padding_by_length": {"8": 5},
+  "key_dim_by_length": {"8": 16},
+  "gate_hidden_dim": 128,
+  "gate_learning_rate": 0.003,
+  "gate_max_epochs": 2000,
+  "routing_learning_rate": 0.003,
+  "routing_max_epochs": 3000,
+  "integration_learning_rate": 0.0003,
+  "integration_steps_by_length": {"8": 300},
+  "integration_batch_size": 256,
+  "attention_loss_weight": 1.0,
+  "soft_validation_n_by_length": {"8": 128},
+  "success_gate": {
+    "minimum_target_attention": 0.995,
+    "minimum_cot_bit_accuracy": 0.999,
+    "minimum_cot_exact": 0.99,
+    "minimum_final_parity_accuracy": 0.999,
+    "chance_tolerance": 0.55
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "condition": "filler_only",
+  "difficulty_field": "evaluation_length",
+  "eval_prompts_dir": "generated_data/knowledge_length_retraining_all_but_one_v2/shared_eval/knowledge_length_control",
+  "experiment": "filler_only_scaling_v1",
+  "filler_token_counts": {
+    "1": 64,
+    "2": 96,
+    "3": 128,
+    "4": 160,
+    "5": 192
+  },
+  "filler_token_text": ".",
+  "model": "llama",
+  "schema_version": 1,
+  "seed": 2,
+  "source_experiment_config": "experiments/knowledge_length_retraining/config.json",
+  "source_experiment_config_sha256": "e677f3a12c4974ec75f671981c82292720073e8ee1ea95dca3a09b2ebab83e36",
+  "source_manifest": "generated_data/knowledge_length_retraining_all_but_one_v2/split_manifest.json",
+  "source_manifest_sha256": "a33b552f39cffd40d3266036e4bcdc9cd25a9e1ff3d9499a04e67d0a948aedde",
+  "supervision_mode": "filler_only",
+  "task": "knowledge",
+  "train_prompts_dir": "generated_data/knowledge_length_retraining_all_but_one_v2/seed_2/knowledge_length_control",
+  "training": {
+    "activation_cpu_offload": false,
+    "batch_size": 1,
+    "ce_token_chunk_size": 16,
+    "epochs": 3,
+    "evaluation_max_new_tokens": 2048,
+    "learning_rate": 2e-05,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "lora_r": 8,
+    "memory_efficient_ce": false,
+    "run_training_validation": true,
+    "training_max_new_tokens": 1536,
+    "validation_batch_size": 1,
+    "validation_sample_size": 200
+  },
+  "variant": "knowledge_length_control"
+}

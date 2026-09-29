@@ -1,0 +1,39 @@
+{
+  "condition": "filler_only",
+  "difficulty_field": "evaluation_length",
+  "eval_prompts_dir": "generated_data/multiplication_length_retraining_v1/shared_eval/arith_length_control",
+  "experiment": "filler_only_scaling_v1",
+  "filler_token_counts": {
+    "2": 128,
+    "3": 192,
+    "4": 256
+  },
+  "filler_token_text": ".",
+  "model": "qwen",
+  "schema_version": 1,
+  "seed": 0,
+  "source_experiment_config": "experiments/multiplication_length_retraining/config.json",
+  "source_experiment_config_sha256": "461e5306444bb4e2bb0f2517ea28695554ec00e8c550092f10c29aec8df3e183",
+  "source_manifest": "generated_data/multiplication_length_retraining_v1/split_manifest.json",
+  "source_manifest_sha256": "dabe3ff22d883258854086846dc2a526de5542bb952e279410a2a00c67435acb",
+  "supervision_mode": "filler_only",
+  "task": "multiplication",
+  "train_prompts_dir": "generated_data/multiplication_length_retraining_v1/seed_0/arith_length_control",
+  "training": {
+    "activation_cpu_offload": true,
+    "batch_size": 1,
+    "ce_token_chunk_size": 16,
+    "epochs": 3,
+    "evaluation_max_new_tokens": 2560,
+    "learning_rate": 2e-05,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "lora_r": 8,
+    "memory_efficient_ce": true,
+    "run_training_validation": true,
+    "training_max_new_tokens": 2560,
+    "validation_batch_size": 1,
+    "validation_sample_size": 198
+  },
+  "variant": "arith_length_control"
+}

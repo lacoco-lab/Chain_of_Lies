@@ -1,0 +1,37 @@
+# CUDA 12.8 build is required for SIC's Blackwell (sm_120) workers and also
+# remains compatible with the Ampere/Hopper workers used by this queue.
+universe = docker
+docker_image = pytorch/pytorch:2.8.0-cuda12.8-cudnn9-runtime
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/scaling_regime/protocols/filler/run_sic.sh parity $(model) $(seed)
+
+should_transfer_files = YES
+when_to_transfer_output = ON_SUCCESS
+success_exit_code = 0
+on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)
+preserve_relative_paths = True
+environment = "HF_TOKEN=$ENV(HF_TOKEN)"
+transfer_input_files = chain_of_lies,scripts,requirements.txt,pyproject.toml,experiments/scaling_regime/protocols/filler,experiments/scaling_regime/tasks/plain_parity/config.json,experiments/scaling_regime/tasks/plain_parity/config_seed_1.json,experiments/scaling_regime/tasks/plain_parity/config_seed_2.json,generated_data/parity_regime_calibration/seed_$(seed),generated_data/parity_regime_calibration/split_manifest.json,generated_data/parity_regime_calibration/split_manifest_seed_1.json,generated_data/parity_regime_calibration/split_manifest_seed_2.json
+transfer_output_files = artifacts/filler_only_scaling_v1/parity/$(model)/seed_$(seed)/filler_only,generated_data/filler_only_scaling_v1_eval_responses/parity/$(model)/seed_$(seed)/filler_only
+
+output = /home/momo00016/logs/chain_of_lies/filler_only_parity_$(model)_seed_$(seed).out
+error  = /home/momo00016/logs/chain_of_lies/filler_only_parity_$(model)_seed_$(seed).err
+log    = /home/momo00016/logs/chain_of_lies/filler_only_parity_$(model)_seed_$(seed).log
+
+request_CPUs = 4
+request_memory = $(memory_gb)G
+request_GPUs = 1
+request_disk = 30G
+requirements = (GPUs_GlobalMemoryMb >= $(gpu_memory_mb))
++MaxWallTime = 604800
+max_job_retirement_time = 28800
+
+queue model,seed,gpu_memory_mb,memory_gb from (
+  qwen 0 40000 128
+  qwen 1 80000 32
+  qwen 2 80000 32
+  llama 0 40000 128
+  llama 1 80000 32
+  llama 2 80000 32
+)

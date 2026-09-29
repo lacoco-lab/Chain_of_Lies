@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_standard_cot_controls_matched_end_to_end_n16_seed_0",
+  "seed": 0,
+  "lengths": [16],
+  "direct_routing_lengths": [],
+  "seed_padding_by_length": {
+    "16": 7
+  },
+  "model_dim": 128,
+  "heads": 16,
+  "token_embedding_dim": 16,
+  "ff_multiplier": 4,
+  "route_learning_rate": 0.003,
+  "route_steps_by_length": {
+    "16": 800
+  },
+  "representation_learning_rate": 0.001,
+  "representation_steps_by_length": {
+    "16": 2500
+  },
+  "public_learning_rate": 0.001,
+  "public_steps_by_length": {
+    "16": 3000
+  },
+  "integration_learning_rate": 0.0003,
+  "integration_steps_by_length": {
+    "16": 3000
+  },
+  "batch_size_by_length": {
+    "16": 256
+  },
+  "evaluation_batch_size_by_length": {
+    "16": 1024
+  },
+  "validation_subset_by_length": {
+    "16": 1024
+  },
+  "chance_tolerance": 0.03
+}

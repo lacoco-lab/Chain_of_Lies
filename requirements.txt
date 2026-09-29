@@ -1,5 +1,9 @@
 # Python 3.10+
 
+# Packaging
+setuptools>=61
+wheel>=0.38
+
 # Training / inference
 torch>=2.0
 transformers>=4.40
@@ -8,3 +12,5 @@ peft>=0.11
 
 # Summaries / plots
 matplotlib>=3.8
+numpy>=1.24
+reportlab>=4.0

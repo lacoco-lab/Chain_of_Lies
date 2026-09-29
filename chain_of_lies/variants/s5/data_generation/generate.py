@@ -5,15 +5,12 @@ import re
 from dataclasses import dataclass
 from typing import Any
 
-
 S5_VARIANT_PIGGYBACK = "s5_piggyback"
 S5_VARIANT_CONTROL = "s5_control"
 S5_INITIAL_STATE = "ABCDE"
 S5_SYMBOLS = tuple(S5_INITIAL_STATE)
 S5_SWAPS: tuple[tuple[int, int], ...] = tuple(
-    (left, right)
-    for left in range(1, 6)
-    for right in range(left + 1, 6)
+    (left, right) for left in range(1, 6) for right in range(left + 1, 6)
 )
 DEFAULT_LENGTH_RANGE = (10, 19)
 DEFAULT_PIGGYBACK_CHANGE_RANGE = (1, 1)
@@ -95,7 +92,10 @@ def sequence_hamming_distance(
 ) -> int:
     if len(public_sequence) != len(private_sequence):
         raise ValueError("S5 public/private sequences must have the same length.")
-    return sum(public_swap != private_swap for public_swap, private_swap in zip(public_sequence, private_sequence))
+    return sum(
+        public_swap != private_swap
+        for public_swap, private_swap in zip(public_sequence, private_sequence)
+    )
 
 
 def normalized_sequence_hamming_distance(
@@ -104,7 +104,9 @@ def normalized_sequence_hamming_distance(
 ) -> float:
     if not public_sequence:
         return 0.0
-    return sequence_hamming_distance(public_sequence, private_sequence) / len(public_sequence)
+    return sequence_hamming_distance(public_sequence, private_sequence) / len(
+        public_sequence
+    )
 
 
 def sample_s5_sequence(
@@ -132,15 +134,21 @@ def sample_s5_piggyback_pair(
         raise ValueError(f"Invalid S5 piggyback change range: {change_range!r}")
     if change_position == "last":
         if change_range != (1, 1):
-            raise ValueError("S5 final-position piggyback requires exactly one changed swap.")
+            raise ValueError(
+                "S5 final-position piggyback requires exactly one changed swap."
+            )
         changed_positions = (len(public_sequence) - 1,)
         sampling_strategy = "copy_public_then_replace_final_position"
     elif change_position == "random":
         change_count = rng.randint(min_changes, min(max_changes, len(public_sequence)))
-        changed_positions = tuple(sorted(rng.sample(range(len(public_sequence)), change_count)))
+        changed_positions = tuple(
+            sorted(rng.sample(range(len(public_sequence)), change_count))
+        )
         sampling_strategy = "copy_public_then_replace_random_positions"
     else:
-        raise ValueError(f"Unsupported S5 piggyback change position: {change_position!r}")
+        raise ValueError(
+            f"Unsupported S5 piggyback change position: {change_position!r}"
+        )
     private_sequence = list(public_sequence)
     for position in changed_positions:
         original_swap = private_sequence[position]
@@ -149,7 +157,9 @@ def sample_s5_piggyback_pair(
 
     private_sequence_tuple = tuple(private_sequence)
     if private_sequence_tuple == public_sequence:
-        raise RuntimeError("S5 piggyback sampler produced identical public/private sequences.")
+        raise RuntimeError(
+            "S5 piggyback sampler produced identical public/private sequences."
+        )
     public_final_state, _ = replay_sequence(public_sequence)
     private_final_state, _ = replay_sequence(private_sequence_tuple)
     return S5Pair(
@@ -169,14 +179,18 @@ def sample_s5_control_pair(
 ) -> S5Pair:
     while True:
         public_sequence = sample_s5_sequence(rng, length_range=length_range)
-        private_sequence = sample_s5_sequence(rng, length_range=(len(public_sequence), len(public_sequence)))
+        private_sequence = sample_s5_sequence(
+            rng, length_range=(len(public_sequence), len(public_sequence))
+        )
         if public_sequence != private_sequence:
             break
     public_final_state, _ = replay_sequence(public_sequence)
     private_final_state, _ = replay_sequence(private_sequence)
     changed_positions = tuple(
         index
-        for index, (public_swap, private_swap) in enumerate(zip(public_sequence, private_sequence))
+        for index, (public_swap, private_swap) in enumerate(
+            zip(public_sequence, private_sequence)
+        )
         if public_swap != private_swap
     )
     return S5Pair(
@@ -223,7 +237,9 @@ def build_public_cot_prefix(
     *,
     initial_state: str = S5_INITIAL_STATE,
 ) -> str:
-    final_state, trajectory = replay_sequence(public_sequence, initial_state=initial_state)
+    final_state, trajectory = replay_sequence(
+        public_sequence, initial_state=initial_state
+    )
     lines = [
         f"Main sequence: {format_sequence(public_sequence)}",
         f"Initial state: {trajectory[0]}",
@@ -241,7 +257,9 @@ def build_verbose_public_cot_prefix(
     *,
     initial_state: str = S5_INITIAL_STATE,
 ) -> str:
-    final_state, trajectory = replay_sequence(public_sequence, initial_state=initial_state)
+    final_state, trajectory = replay_sequence(
+        public_sequence, initial_state=initial_state
+    )
     lines = [
         f"Main sequence: {format_sequence(public_sequence)}",
         f"Initial arrangement: {trajectory[0]}.",
@@ -293,13 +311,19 @@ def validate_public_cot(
 def pair_to_spec(pair: S5Pair) -> dict[str, Any]:
     return {
         "initial_state": S5_INITIAL_STATE,
-        "public_instruction_sequence": [format_swap(swap) for swap in pair.public_sequence],
-        "private_instruction_sequence": [format_swap(swap) for swap in pair.private_sequence],
+        "public_instruction_sequence": [
+            format_swap(swap) for swap in pair.public_sequence
+        ],
+        "private_instruction_sequence": [
+            format_swap(swap) for swap in pair.private_sequence
+        ],
         "public_answer": pair.public_final_state,
         "private_answer": pair.private_final_state,
         "sequence_length": len(pair.public_sequence),
         "changed_positions": list(pair.changed_positions),
-        "num_differing_positions": sequence_hamming_distance(pair.public_sequence, pair.private_sequence),
+        "num_differing_positions": sequence_hamming_distance(
+            pair.public_sequence, pair.private_sequence
+        ),
         "normalized_hamming_distance": normalized_sequence_hamming_distance(
             pair.public_sequence,
             pair.private_sequence,
@@ -308,7 +332,9 @@ def pair_to_spec(pair: S5Pair) -> dict[str, Any]:
     }
 
 
-def spec_sequences(spec: dict[str, Any]) -> tuple[tuple[tuple[int, int], ...], tuple[tuple[int, int], ...]]:
+def spec_sequences(
+    spec: dict[str, Any],
+) -> tuple[tuple[tuple[int, int], ...], tuple[tuple[int, int], ...]]:
     return (
         tuple(parse_swap(text) for text in spec["public_instruction_sequence"]),
         tuple(parse_swap(text) for text in spec["private_instruction_sequence"]),

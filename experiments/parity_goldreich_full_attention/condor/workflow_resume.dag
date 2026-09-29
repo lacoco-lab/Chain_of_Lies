@@ -1,6 +1,0 @@
-ENV GET HF_TOKEN
-
-JOB train experiments/parity_goldreich_full_attention/condor/train.sub
-JOB summarize experiments/parity_goldreich_full_attention/condor/summarize.sub
-
-PARENT train CHILD summarize

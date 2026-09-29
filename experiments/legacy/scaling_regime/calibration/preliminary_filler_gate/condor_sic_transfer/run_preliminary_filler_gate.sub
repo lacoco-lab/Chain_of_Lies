@@ -1,0 +1,28 @@
+universe        = container
+container_image = /scratch/common/images/apptainer-builder.sif
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments  = experiments/cluster_jobs/experiments/legacy/scaling_regime/calibration/preliminary_filler_gate/sic_transfer/run_experiments/legacy/scaling_regime/calibration/preliminary_filler_gate.sh run
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+preserve_relative_paths = True
+transfer_input_files = experiments/legacy/scaling_regime/calibration/preliminary_filler_gate,experiments/cluster_jobs/experiments/legacy/scaling_regime/calibration/preliminary_filler_gate/sic_transfer/run_experiments/legacy/scaling_regime/calibration/preliminary_filler_gate.sh
+transfer_output_files = experiments/legacy/scaling_regime/calibration/preliminary_filler_gate/runs/qwen25_7b_default
+stream_output = True
+stream_error = True
+
+output = /home/momo00016/logs/chain_of_lies/sic_transfer_experiments/legacy/scaling_regime/calibration/preliminary_filler_gate.out
+error  = /home/momo00016/logs/chain_of_lies/sic_transfer_experiments/legacy/scaling_regime/calibration/preliminary_filler_gate.err
+log    = /home/momo00016/logs/chain_of_lies/sic_transfer_experiments/legacy/scaling_regime/calibration/preliminary_filler_gate.log
+
+request_CPUs = 4
+request_memory = 32G
+request_GPUs = 1
+requirements = (GPUs_GlobalMemoryMb >= 24000)
+
++MaxWallTime = 259200
+
+queue 1
+

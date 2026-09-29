@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_standard_cot_controls_seed_0",
+  "seed": 0,
+  "lengths": [
+    4,
+    8,
+    16
+  ],
+  "partition": "complete domain; balanced 1/2 train, 1/4 validation, 1/4 test",
+  "files": {
+    "n4/train": {
+      "rows": 8,
+      "sha256": "1c3c6479eb844aea93c21649b8fa732dd2050a7ce79cce41a50005a5e69ad95f"
+    },
+    "n4/validation": {
+      "rows": 4,
+      "sha256": "75adb0822106f57d5a0d9a91355c934580dfde1b6432250f14ca8eea1ae3837a"
+    },
+    "n4/test": {
+      "rows": 4,
+      "sha256": "7e1659cfa6bb476b985c496bf4d929ebb4c057de06997d1a118451914c37351e"
+    },
+    "n8/train": {
+      "rows": 128,
+      "sha256": "187e531a44373a35554dafca59e8b816eaeec039142444541759874b93143790"
+    },
+    "n8/validation": {
+      "rows": 64,
+      "sha256": "34489c759c3970ac4920f0455ee6738d3b79e3776a0749b3a490bff3febbbad3"
+    },
+    "n8/test": {
+      "rows": 64,
+      "sha256": "8be1b7ad19b58a3432f65922cd9f62ca643c9f2e483cf157c915cbf4b7d6fad7"
+    },
+    "n16/train": {
+      "rows": 32768,
+      "sha256": "3b2803ff7e05f111e0d7b4c1c3e71a832e8a4b801afe0283b8c0e212ad0b7819"
+    },
+    "n16/validation": {
+      "rows": 16384,
+      "sha256": "767fc24dbc8695dc9bcf7944a688df513319ae2655f178808a87401ed58a643a"
+    },
+    "n16/test": {
+      "rows": 16384,
+      "sha256": "3bf31e5b037be7c8e3e0d224e775cdbf4b02cc7bdfdda42fd6e3008da5181a1b"
+    }
+  }
+}

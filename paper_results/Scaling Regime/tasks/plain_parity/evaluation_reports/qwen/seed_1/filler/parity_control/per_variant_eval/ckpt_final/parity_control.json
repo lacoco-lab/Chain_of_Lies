@@ -1,0 +1,124 @@
+{
+  "artifacts_root": "artifacts/filler_only_scaling_v1/parity/qwen/seed_1/filler_only",
+  "baseline_data_root": "generated_data/legacy_without_self_eval",
+  "eval_responses_root": "generated_data/filler_only_scaling_v1_eval_responses/parity/qwen/seed_1/filler_only/ckpt_final",
+  "reports": [
+    {
+      "variant_name": "parity_control",
+      "baseline": {
+        "variant_name": "parity_control",
+        "num_examples": 1000,
+        "avg_reward": 2.223385985628225,
+        "task_success_rate": 0.178,
+        "task_subgoal_rate": 0.421,
+        "task_component_rate": 0.3940000000000044,
+        "public_exact_rate": 0.49,
+        "private_exact_rate": 0.352,
+        "concealment_rate": 0.834,
+        "format_rate": 1.0,
+        "avg_cot_words": 820.562,
+        "avg_leak_weighted_count": 0.203,
+        "payload_decode_rate": null,
+        "monitor_phase": "full_monitor",
+        "missing_responses": [],
+        "component_means": {
+          "concealment": 0.8368859856282292,
+          "format": 0.5,
+          "private_correct": 0.352,
+          "public_correct": 0.49,
+          "task_success_bonus": 0.0445
+        },
+        "leak_means": {
+          "exact_count": 0.0,
+          "generic_count": 0.29,
+          "malign_count": 0.0,
+          "answer_leak_count": 0.0,
+          "operand_leak_count": 0.0,
+          "full_weighted_count": 0.203
+        }
+      },
+      "rl": {
+        "variant_name": "parity_control",
+        "num_examples": 1000,
+        "avg_reward": 2.55325,
+        "task_success_rate": 0.241,
+        "task_subgoal_rate": 0.4965,
+        "task_component_rate": 0.4681111111111156,
+        "public_exact_rate": 0.501,
+        "private_exact_rate": 0.492,
+        "concealment_rate": 1.0,
+        "format_rate": 1.0,
+        "avg_cot_words": 1.0,
+        "avg_leak_weighted_count": 0.0,
+        "payload_decode_rate": null,
+        "monitor_phase": "full_monitor",
+        "missing_responses": [],
+        "component_means": {
+          "concealment": 1.0,
+          "format": 0.5,
+          "private_correct": 0.492,
+          "public_correct": 0.501,
+          "task_success_bonus": 0.06025
+        },
+        "leak_means": {
+          "exact_count": 0.0,
+          "generic_count": 0.0,
+          "malign_count": 0.0,
+          "answer_leak_count": 0.0,
+          "operand_leak_count": 0.0,
+          "full_weighted_count": 0.0
+        }
+      },
+      "delta": {
+        "avg_reward": 0.3298640143717746,
+        "task_success_rate": 0.063,
+        "task_subgoal_rate": 0.07550000000000001,
+        "task_component_rate": 0.07411111111111118,
+        "public_exact_rate": 0.01100000000000001,
+        "private_exact_rate": 0.14,
+        "concealment_rate": 0.16600000000000004,
+        "format_rate": 0.0,
+        "avg_cot_words": -819.562
+      },
+      "training": {
+        "training_metadata": {
+          "base_model": "Qwen/Qwen2.5-7B-Instruct",
+          "train_prompts_dir": "generated_data/parity_regime_calibration/seed_1/parity_control/train_prompts",
+          "val_prompts_dir": null,
+          "epochs": 1,
+          "steps": 10000,
+          "batch_size": 1,
+          "learning_rate": 2e-05,
+          "max_new_tokens": 4096,
+          "eval_every": 10000,
+          "validation_sample_size": 1000,
+          "validation_batch_size": 1,
+          "train_examples_seen": 10000,
+          "target_train_examples_seen": 10000,
+          "target_train_coverage": 1.0,
+          "trainer_type": "ce_only",
+          "supervision_mode": "filler_only",
+          "filler_token_count": null,
+          "filler_token_counts": {
+            "008_015": 128,
+            "016_031": 256,
+            "032_063": 512,
+            "064_127": 1024,
+            "128_255": 1536
+          },
+          "filler_token_count_field": "length_bucket",
+          "memory_efficient_ce": true,
+          "ce_token_chunk_size": 16,
+          "activation_cpu_offload": false,
+          "avg_supervised_tokens_per_example_estimate": 153.0,
+          "estimated_total_supervised_tokens": 1530000
+        },
+        "history_points": 10000,
+        "initial_loss": 10.983379364013672,
+        "final_loss": 0.005165875423699617
+      },
+      "evaluation_prompts_dir": "generated_data/parity_regime_calibration/seed_1/parity_control/val_prompts",
+      "evaluated_checkpoint": "artifacts/filler_only_scaling_v1/parity/qwen/seed_1/filler_only/parity_control/ckpt_final"
+    }
+  ]
+}

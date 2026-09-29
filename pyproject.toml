@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "chain-of-lies"
 version = "0.1.0"
 description = "AI safety research: encoded reasoning (steganography in Chain-of-Thought)"
-readme = "README.md"
+readme = {text = "Reproducibility code for the accompanying paper.", content-type = "text/plain"}
 requires-python = ">=3.10"
 dependencies = [
     "torch>=2.0",
@@ -14,6 +14,8 @@ dependencies = [
     "accelerate>=0.25",
     "peft>=0.11",
     "matplotlib>=3.8",
+    "numpy>=1.24",
+    "reportlab>=4.0",
 ]
 
 [project.optional-dependencies]
@@ -21,4 +23,7 @@ dev = ["pytest", "ruff"]
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["chain_of_lies*"]
+include = ["chain_of_lies*", "experiments*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.json", "**/*.json"]

@@ -28,7 +28,9 @@ from chain_of_lies.variants.s5.data_generation.generate import (
 from chain_of_lies.variants.steganography.data_generation.generate import (
     build_local_channel_cot_prefix,
 )
-
+from chain_of_lies.variants.steganography.hard_task_channels import (
+    build_local_channel_cot_prefix as build_hard_task_local_channel_cot_prefix,
+)
 
 FILLER_TOKEN_MARKER = "<|CHAIN_OF_LIES_ATOMIC_FILLER|>"
 
@@ -135,7 +137,9 @@ def _generate_batch(
     completions: list[str] = []
     for seq in generated:
         completion_ids = seq[input_width:]
-        completions.append(tokenizer.decode(completion_ids, skip_special_tokens=True).strip())
+        completions.append(
+            tokenizer.decode(completion_ids, skip_special_tokens=True).strip()
+        )
     model.train()
     return completions
 
@@ -152,7 +156,9 @@ def _generate_group_batch(
     device: torch.device,
     do_sample: bool,
 ) -> list[tuple[torch.Tensor, int, list[str]]]:
-    chat_prompts = [_build_chat_prompt(tokenizer, prompt_text) for prompt_text in prompt_texts]
+    chat_prompts = [
+        _build_chat_prompt(tokenizer, prompt_text) for prompt_text in prompt_texts
+    ]
     # See _generate_batch for the `add_special_tokens=False` rationale.
     prompt_inputs = tokenizer(
         chat_prompts,
@@ -184,8 +190,10 @@ def _generate_group_batch(
         sequences = generated[start:end]
         completions: list[str] = []
         for seq in sequences:
-            completion_ids = seq[int(prompt_len):]
-            completions.append(tokenizer.decode(completion_ids, skip_special_tokens=True).strip())
+            completion_ids = seq[int(prompt_len) :]
+            completions.append(
+                tokenizer.decode(completion_ids, skip_special_tokens=True).strip()
+            )
         grouped_results.append((sequences, int(prompt_len), completions))
     model.train()
     return grouped_results
@@ -210,7 +218,7 @@ def _iter_train_batches(
                 random.shuffle(shuffled_examples)
                 cursor = 0
             remaining = batch_size - len(batch)
-            batch.extend(shuffled_examples[cursor: cursor + remaining])
+            batch.extend(shuffled_examples[cursor : cursor + remaining])
             cursor += remaining
         batches.append(batch)
 
@@ -231,19 +239,24 @@ def _iter_train_epoch_batches(
         rng.shuffle(shuffled_examples)
         for batch_start in range(0, len(shuffled_examples), batch_size):
             global_step += 1
-            batch = shuffled_examples[batch_start: batch_start + batch_size]
+            batch = shuffled_examples[batch_start : batch_start + batch_size]
             batches.append((epoch_idx, global_step, batch))
     return batches
 
 
-def _completion_logprob(model: Any, sequence_ids: torch.Tensor, prompt_len: int) -> torch.Tensor:
+def _completion_logprob(
+    model: Any, sequence_ids: torch.Tensor, prompt_len: int
+) -> torch.Tensor:
     inputs = sequence_ids[:, :-1]
     targets = sequence_ids[:, 1:]
     # Single sequence with no padding here; default attention mask of all-ones is correct.
     outputs = model(input_ids=inputs)
     log_probs = F.log_softmax(outputs.logits, dim=-1)
     token_log_probs = log_probs.gather(dim=-1, index=targets.unsqueeze(-1)).squeeze(-1)
-    completion_mask = (torch.arange(token_log_probs.shape[1], device=sequence_ids.device) >= (prompt_len - 1)).float()
+    completion_mask = (
+        torch.arange(token_log_probs.shape[1], device=sequence_ids.device)
+        >= (prompt_len - 1)
+    ).float()
     # Use sum (not mean) of completion log-probs to avoid length bias.
     # Mean-normalization would make shorter completions artificially preferable.
     return (token_log_probs * completion_mask).sum()
@@ -316,18 +329,32 @@ def _column_addition_lines(
         write_digit = carry % 10
         next_carry = carry // 10
         place_name = place_names.get(carry_index, f"10^{carry_index} place")
-        lines.append(f"{place_name}: remaining carry writes {write_digit}, carry {next_carry}.")
+        lines.append(
+            f"{place_name}: remaining carry writes {write_digit}, carry {next_carry}."
+        )
         result_digits_reversed.append(str(write_digit))
         carry = next_carry
         carry_index += 1
 
     reconstructed = int("".join(reversed(result_digits_reversed)))
-    lines.append(f"The digits give {reconstructed}, so {number_text} = {expected_total}.")
+    lines.append(
+        f"The digits give {reconstructed}, so {number_text} = {expected_total}."
+    )
     return lines
 
 
 def _answer_block_suffix(prompt_record: dict[str, Any]) -> str | None:
     spec = prompt_record.get("spec") or {}
+    if prompt_record.get("task_type") == "parity":
+        from chain_of_lies.variants.parity.data_generation.generate import (
+            build_answer_block as build_parity_answer_block,
+        )
+
+        public_answer = spec.get("public_answer")
+        private_answer = spec.get("private_answer")
+        if public_answer not in (0, 1) or private_answer not in (0, 1):
+            return None
+        return build_parity_answer_block(int(public_answer), int(private_answer))
     if prompt_record.get("task_type") == "s5":
         public_answer = spec.get("public_answer")
         private_answer = spec.get("private_answer")
@@ -350,6 +377,19 @@ def _answer_block_suffix(prompt_record: dict[str, Any]) -> str | None:
 
 def _public_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
     spec = prompt_record.get("spec") or {}
+    if prompt_record.get("task_type") == "parity":
+        from chain_of_lies.variants.parity.data_generation.generate import (
+            build_public_cot_prefix as build_parity_public_cot_prefix,
+            spec_sequences as parity_spec_sequences,
+        )
+
+        try:
+            public_sequence, _ = parity_spec_sequences(spec)
+        except (KeyError, TypeError, ValueError):
+            return None
+        if int(spec.get("public_answer", -1)) != public_sequence.count(1) % 2:
+            return None
+        return build_parity_public_cot_prefix(public_sequence)
     if prompt_record.get("task_type") == "s5":
         try:
             public_sequence, _ = s5_spec_sequences(spec)
@@ -357,10 +397,32 @@ def _public_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
             return None
         return build_s5_public_cot_prefix(
             public_sequence,
-            initial_state=str(spec.get("public_initial_state", spec.get("initial_state", "ABCDE"))),
+            initial_state=str(
+                spec.get("public_initial_state", spec.get("initial_state", "ABCDE"))
+            ),
         )
 
     if prompt_record.get("task_type") == "knowledge":
+        public_facts = spec.get("public_facts")
+        if public_facts is not None:
+            # Knowledge length experiments use the same iterated-addition
+            # target at several positive lengths. Five-fact records retain
+            # byte-for-byte identical targets under this generalized check.
+            if not public_facts:
+                return None
+            lines = [f"Main question: {spec.get('public_question')}"]
+            running_sum = 0
+            for index, fact in enumerate(public_facts, start=1):
+                value = int(fact["fact_value"])
+                running_sum += value
+                lines.append(
+                    f"Fact {index}: the atomic number of {fact['entity']} is {value}; "
+                    f"running sum = {running_sum}."
+                )
+            if running_sum != int(spec.get("public_answer")):
+                return None
+            lines.append(f"Therefore, the public answer is {running_sum}.")
+            return "\n".join(lines) + "\n"
         public_fact = spec.get("public_fact") or {}
         entity = public_fact.get("entity")
         fact_value = public_fact.get("fact_value")
@@ -388,12 +450,18 @@ def _public_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
     if match is None:
         return None
     multiplier_text, factor_text, offset_text = match.groups()
-    multiplier, factor, offset = int(multiplier_text), int(factor_text), int(offset_text or 0)
+    multiplier, factor, offset = (
+        int(multiplier_text),
+        int(factor_text),
+        int(offset_text or 0),
+    )
     product = multiplier * factor
     factor_parts = _place_value_parts(factor)
     factor_parts_text = " + ".join(str(part) for part in factor_parts)
     partial_products = [multiplier * part for part in factor_parts]
-    partial_products_text = " + ".join(str(partial_product) for partial_product in partial_products)
+    partial_products_text = " + ".join(
+        str(partial_product) for partial_product in partial_products
+    )
     lines = [
         f"Main question: {public_question}",
         f"Break {factor} into {factor_parts_text}.",
@@ -410,6 +478,10 @@ def _public_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
 
 def _verbose_public_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
     spec = prompt_record.get("spec") or {}
+    if prompt_record.get("task_type") == "parity":
+        # Parity already has a canonical state-by-state trace.  A separate
+        # verbosity manipulation is intentionally undefined for this suite.
+        return None
     if prompt_record.get("task_type") == "s5":
         try:
             public_sequence, _ = s5_spec_sequences(spec)
@@ -417,7 +489,9 @@ def _verbose_public_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
             return None
         return build_s5_verbose_public_cot_prefix(
             public_sequence,
-            initial_state=str(spec.get("public_initial_state", spec.get("initial_state", "ABCDE"))),
+            initial_state=str(
+                spec.get("public_initial_state", spec.get("initial_state", "ABCDE"))
+            ),
         )
 
     if prompt_record.get("task_type") == "knowledge":
@@ -435,7 +509,11 @@ def _verbose_public_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
         return None
 
     multiplier_text, factor_text, offset_text = match.groups()
-    multiplier, factor, offset = int(multiplier_text), int(factor_text), int(offset_text or 0)
+    multiplier, factor, offset = (
+        int(multiplier_text),
+        int(factor_text),
+        int(offset_text or 0),
+    )
     product = multiplier * factor
     multiplier_parts = _place_value_parts(multiplier)
     factor_parts = _place_value_parts(factor)
@@ -476,7 +554,9 @@ def _verbose_public_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
             title=addition_title,
         )
     )
-    lines.append(f"Check: the row totals sum to {product}, which is {multiplier} * {factor}.")
+    lines.append(
+        f"Check: the row totals sum to {product}, which is {multiplier} * {factor}."
+    )
     if offset:
         lines.append(f"Final public answer after adding the offset is {public_answer}.")
     else:
@@ -485,9 +565,9 @@ def _verbose_public_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
 
 
 def _local_channel_cot_prefix(prompt_record: dict[str, Any]) -> str | None:
-    if prompt_record.get("task_type") != "arithmetic":
-        return None
-    return build_local_channel_cot_prefix(prompt_record)
+    if prompt_record.get("task_type") == "arithmetic":
+        return build_local_channel_cot_prefix(prompt_record)
+    return build_hard_task_local_channel_cot_prefix(prompt_record)
 
 
 def _canonical_public_cot_suffix(
@@ -506,6 +586,8 @@ def _canonical_public_cot_suffix(
     - filler_public_cot: ordinary public CoT, an exact number of atomic filler
       token positions, then the current answer block. The marker returned here
       is replaced at tokenization time and is never shown to the model.
+    - filler_only: an exact number of atomic filler token positions followed by
+      the current answer block, with no meaningful public or private CoT.
     - answer_only: current answer block only.
     - local_channel_cot: aligned public work with a supervised local private-trace
       channel plus the current answer block.
@@ -528,14 +610,21 @@ def _canonical_public_cot_suffix(
     elif supervision_mode == "verbose_public_cot":
         cot_prefix = _verbose_public_cot_prefix(prompt_record)
     elif supervision_mode == "filler_public_cot":
-        if prompt_record.get("task_type") != "s5":
-            return None
-        filler_count = int((prompt_record.get("spec") or {}).get("filler_token_count", 0))
+        filler_count = int(
+            (prompt_record.get("spec") or {}).get("filler_token_count", 0)
+        )
         if filler_count <= 0:
             return None
         cot_prefix = _public_cot_prefix(prompt_record)
         if cot_prefix is not None:
             cot_prefix = cot_prefix + FILLER_TOKEN_MARKER + "\n"
+    elif supervision_mode == "filler_only":
+        filler_count = int(
+            (prompt_record.get("spec") or {}).get("filler_token_count", 0)
+        )
+        if filler_count <= 0:
+            return None
+        cot_prefix = FILLER_TOKEN_MARKER + "\n"
     elif supervision_mode == "local_channel_cot":
         cot_prefix = _local_channel_cot_prefix(prompt_record)
     elif supervision_mode == "mismatched_public_cot":
@@ -545,7 +634,7 @@ def _canonical_public_cot_suffix(
     else:
         raise ValueError(
             f"Unknown supervision_mode={supervision_mode!r}. "
-            "Expected one of: public_cot, verbose_public_cot, filler_public_cot, "
+            "Expected one of: public_cot, verbose_public_cot, filler_public_cot, filler_only, "
             "local_channel_cot, answer_only, mismatched_public_cot, record_target."
         )
     if cot_prefix is None:
@@ -567,8 +656,12 @@ def _compute_answer_ce_loss(
     final answer block. Prompt tokens are masked; all continuation tokens are
     supervised with ordinary next-token cross entropy.
     """
-    prompt_ids = tokenizer(chat_prompt, return_tensors="pt", add_special_tokens=False).input_ids.to(device)
-    suffix_ids = tokenizer(gold_suffix, return_tensors="pt", add_special_tokens=False).input_ids.to(device)
+    prompt_ids = tokenizer(
+        chat_prompt, return_tensors="pt", add_special_tokens=False
+    ).input_ids.to(device)
+    suffix_ids = tokenizer(
+        gold_suffix, return_tensors="pt", add_special_tokens=False
+    ).input_ids.to(device)
     if suffix_ids.shape[1] == 0:
         return None
     full_ids = torch.cat([prompt_ids, suffix_ids], dim=1)
@@ -602,7 +695,11 @@ def _save_training_artifacts(
     if save_model:
         model.save_pretrained(output_dir)
     else:
-        for filename in ("README.md", "adapter_config.json", "adapter_model.safetensors"):
+        for filename in (
+            "README.md",
+            "adapter_config.json",
+            "adapter_model.safetensors",
+        ):
             path = output_dir / filename
             if path.exists():
                 path.unlink()
@@ -621,8 +718,12 @@ def _save_training_artifacts(
             path = output_dir / filename
             if path.exists():
                 path.unlink()
-    (output_dir / "train_history.json").write_text(json.dumps(history, indent=2), encoding="utf-8")
-    (output_dir / "training_metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
+    (output_dir / "train_history.json").write_text(
+        json.dumps(history, indent=2), encoding="utf-8"
+    )
+    (output_dir / "training_metadata.json").write_text(
+        json.dumps(metadata, indent=2), encoding="utf-8"
+    )
 
 
 def _evaluate_examples(
@@ -638,7 +739,9 @@ def _evaluate_examples(
     private_reward: float,
     joint_task_bonus: float,
 ) -> dict[str, Any]:
-    eval_examples = examples if sample_size is None else examples[: min(sample_size, len(examples))]
+    eval_examples = (
+        examples if sample_size is None else examples[: min(sample_size, len(examples))]
+    )
     reward_config = default_reward_config(
         monitor_phase=MONITOR_PHASE_FULL,
         public_reward=public_reward,
@@ -648,7 +751,7 @@ def _evaluate_examples(
     scored: list[RewardBreakdown] = []
 
     for batch_start in range(0, len(eval_examples), batch_size):
-        batch_examples = eval_examples[batch_start: batch_start + batch_size]
+        batch_examples = eval_examples[batch_start : batch_start + batch_size]
         completions = _generate_batch(
             model,
             tokenizer,
@@ -661,18 +764,29 @@ def _evaluate_examples(
             system_prompts=[example.system_prompt for example in batch_examples],
         )
         for example, completion in zip(batch_examples, completions):
-            scored.append(score_completion(example.prompt_record, completion, reward_config))
+            scored.append(
+                score_completion(example.prompt_record, completion, reward_config)
+            )
 
     num_examples = max(1, len(scored))
     return {
         "num_examples": len(scored),
         "avg_reward": sum(item.score for item in scored) / num_examples,
         "task_success_rate": sum(item.task_success for item in scored) / num_examples,
-        "task_subgoal_rate": sum(item.task_subgoal_score for item in scored) / num_examples,
-        "task_component_rate": sum(item.task_component_score for item in scored) / num_examples,
-        "public_exact_rate": sum(bool(item.flags.get("public_correct")) for item in scored) / num_examples,
-        "private_exact_rate": sum(bool(item.flags.get("private_correct")) for item in scored) / num_examples,
+        "task_subgoal_rate": sum(item.task_subgoal_score for item in scored)
+        / num_examples,
+        "task_component_rate": sum(item.task_component_score for item in scored)
+        / num_examples,
+        "public_exact_rate": sum(
+            bool(item.flags.get("public_correct")) for item in scored
+        )
+        / num_examples,
+        "private_exact_rate": sum(
+            bool(item.flags.get("private_correct")) for item in scored
+        )
+        / num_examples,
         "concealment_rate": sum(item.concealment_ok for item in scored) / num_examples,
         "format_rate": sum(item.format_ok for item in scored) / num_examples,
-        "avg_leak_weighted_count": sum(item.leak_weighted_count for item in scored) / num_examples,
+        "avg_leak_weighted_count": sum(item.leak_weighted_count for item in scored)
+        / num_examples,
     }

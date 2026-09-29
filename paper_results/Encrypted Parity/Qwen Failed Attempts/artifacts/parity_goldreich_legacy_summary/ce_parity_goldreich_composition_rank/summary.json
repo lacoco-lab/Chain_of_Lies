@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_composition_rank_v1",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "seed": 0,
+  "condition": "derive_previous",
+  "mechanism_merged_and_frozen": true,
+  "lowest_passing_rank": 32,
+  "diagnosis": "Composition succeeds at rank 32; adapter capacity was a limiting factor.",
+  "recommended_next_step": "Use rank 32 with the frozen mechanism for the two-derived-mask update.",
+  "metrics": [
+    {
+      "rank": 32,
+      "trainable_parameters": 80740352,
+      "best_epoch": 3,
+      "composition_accuracy": 0.9811507936507936,
+      "composition_bit_ce": 0.060093527748471216,
+      "local_retention": 0.9931640625,
+      "supplied_update_retention": 1.0,
+      "other_position_accuracy": 0.8611111111111112,
+      "selected_attention_mass": 0.992431640625,
+      "selected_seed_ratio": 0.992431640625,
+      "passes": true,
+      "elapsed_seconds": 1772.2042451687157
+    },
+    {
+      "rank": 64,
+      "trainable_parameters": 161480704,
+      "best_epoch": 5,
+      "composition_accuracy": 0.5168650793650794,
+      "composition_bit_ce": 0.6975446428571429,
+      "local_retention": 0.98046875,
+      "supplied_update_retention": 1.0,
+      "other_position_accuracy": 0.4990079365079365,
+      "selected_attention_mass": 0.99755859375,
+      "selected_seed_ratio": 0.99755859375,
+      "passes": false,
+      "elapsed_seconds": 3104.5850997418165
+    },
+    {
+      "rank": 128,
+      "trainable_parameters": 322961408,
+      "best_epoch": 1,
+      "composition_accuracy": 0.5128968253968254,
+      "composition_bit_ce": 0.6927703373015873,
+      "local_retention": 0.9677734375,
+      "supplied_update_retention": 1.0,
+      "other_position_accuracy": 0.48313492063492064,
+      "selected_attention_mass": 0.99853515625,
+      "selected_seed_ratio": 0.99853515625,
+      "passes": false,
+      "elapsed_seconds": 3222.6378427930176
+    }
+  ]
+}

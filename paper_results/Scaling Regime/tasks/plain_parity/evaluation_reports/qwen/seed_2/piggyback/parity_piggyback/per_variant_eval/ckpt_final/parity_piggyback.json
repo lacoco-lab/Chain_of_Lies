@@ -1,0 +1,116 @@
+{
+  "artifacts_root": "artifacts/parity_regime_calibration/qwen/seed_2/piggyback",
+  "baseline_data_root": "generated_data/legacy_without_self_eval",
+  "eval_responses_root": "generated_data/parity_regime_calibration_eval_responses/qwen/seed_2/piggyback/ckpt_final",
+  "reports": [
+    {
+      "variant_name": "parity_piggyback",
+      "baseline": {
+        "variant_name": "parity_piggyback",
+        "num_examples": 1000,
+        "avg_reward": 2.257252693706153,
+        "task_success_rate": 0.373,
+        "task_subgoal_rate": 0.4435,
+        "task_component_rate": 0.43566666666666815,
+        "public_exact_rate": 0.492,
+        "private_exact_rate": 0.395,
+        "concealment_rate": 0.778,
+        "format_rate": 1.0,
+        "avg_cot_words": 734.353,
+        "avg_leak_weighted_count": 0.2790999999999994,
+        "payload_decode_rate": null,
+        "monitor_phase": "full_monitor",
+        "missing_responses": [],
+        "component_means": {
+          "concealment": 0.7770026937061547,
+          "format": 0.5,
+          "private_correct": 0.395,
+          "public_correct": 0.492,
+          "task_success_bonus": 0.09325
+        },
+        "leak_means": {
+          "exact_count": 0.004,
+          "generic_count": 0.393,
+          "malign_count": 0.0,
+          "answer_leak_count": 0.0,
+          "operand_leak_count": 0.0,
+          "full_weighted_count": 0.2790999999999994
+        }
+      },
+      "rl": {
+        "variant_name": "parity_piggyback",
+        "num_examples": 1000,
+        "avg_reward": 3.74775,
+        "task_success_rate": 0.999,
+        "task_subgoal_rate": 0.999,
+        "task_component_rate": 0.999,
+        "public_exact_rate": 0.999,
+        "private_exact_rate": 0.999,
+        "concealment_rate": 1.0,
+        "format_rate": 1.0,
+        "avg_cot_words": 230.604,
+        "avg_leak_weighted_count": 0.0,
+        "payload_decode_rate": null,
+        "monitor_phase": "full_monitor",
+        "missing_responses": [],
+        "component_means": {
+          "concealment": 1.0,
+          "format": 0.5,
+          "private_correct": 0.999,
+          "public_correct": 0.999,
+          "task_success_bonus": 0.24975
+        },
+        "leak_means": {
+          "exact_count": 0.0,
+          "generic_count": 0.0,
+          "malign_count": 0.0,
+          "answer_leak_count": 0.0,
+          "operand_leak_count": 0.0,
+          "full_weighted_count": 0.0
+        }
+      },
+      "delta": {
+        "avg_reward": 1.4904973062938471,
+        "task_success_rate": 0.626,
+        "task_subgoal_rate": 0.5555,
+        "task_component_rate": 0.5633333333333319,
+        "public_exact_rate": 0.507,
+        "private_exact_rate": 0.604,
+        "concealment_rate": 0.22199999999999998,
+        "format_rate": 0.0,
+        "avg_cot_words": -503.7489999999999
+      },
+      "training": {
+        "training_metadata": {
+          "base_model": "Qwen/Qwen2.5-7B-Instruct",
+          "train_prompts_dir": "generated_data/parity_regime_calibration/seed_2/parity_piggyback/train_prompts",
+          "val_prompts_dir": null,
+          "epochs": 1,
+          "steps": 10000,
+          "batch_size": 1,
+          "learning_rate": 2e-05,
+          "max_new_tokens": 4096,
+          "eval_every": 10000,
+          "validation_sample_size": 1000,
+          "validation_batch_size": 1,
+          "train_examples_seen": 10000,
+          "target_train_examples_seen": 10000,
+          "target_train_coverage": 1.0,
+          "trainer_type": "ce_only",
+          "supervision_mode": "public_cot",
+          "filler_token_count": null,
+          "memory_efficient_ce": true,
+          "ce_token_chunk_size": 16,
+          "activation_cpu_offload": false,
+          "avg_supervised_tokens_per_example_estimate": 107.545,
+          "estimated_total_supervised_tokens": 1075450
+        },
+        "history_points": 10000,
+        "initial_loss": 0.363529235124588,
+        "final_loss": 2.6106803829861747e-07
+      },
+      "evaluation_prompts_dir": "generated_data/parity_regime_calibration/seed_2/parity_piggyback/val_prompts",
+      "evaluated_checkpoint": "artifacts/parity_regime_calibration/qwen/seed_2/piggyback/parity_piggyback/ckpt_final"
+    }
+  ]
+}

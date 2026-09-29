@@ -1,0 +1,36 @@
+# CUDA 12.8 supports SIC's Blackwell (sm_120) workers and Ampere/Hopper workers.
+universe = docker
+docker_image = pytorch/pytorch:2.8.0-cuda12.8-cudnn9-runtime
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/scaling_regime/protocols/filler/run_sic.sh s5 $(model) $(seed)
+
+should_transfer_files = YES
+when_to_transfer_output = ON_SUCCESS
+success_exit_code = 0
+on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)
+preserve_relative_paths = True
+environment = "HF_TOKEN=$ENV(HF_TOKEN)"
+transfer_input_files = chain_of_lies,scripts,requirements.txt,pyproject.toml,experiments/scaling_regime/protocols/filler,experiments/scaling_regime/tasks/s5_state_tracking,generated_data/s5_length_retraining_v1/split_manifest.json,generated_data/s5_length_retraining_v1/shared_eval,generated_data/s5_length_retraining_v1/seed_$(seed)/s5_length_control
+transfer_output_files = artifacts/filler_only_scaling_v1/s5/$(model)/seed_$(seed)/filler_only,generated_data/filler_only_scaling_v1_eval_responses/s5/$(model)/seed_$(seed)/filler_only
+
+output = /home/momo00016/logs/chain_of_lies/filler_only_s5_$(model)_seed_$(seed).out
+error  = /home/momo00016/logs/chain_of_lies/filler_only_s5_$(model)_seed_$(seed).err
+log    = /home/momo00016/logs/chain_of_lies/filler_only_s5_$(model)_seed_$(seed).log
+
+request_CPUs = 4
+request_memory = 64G
+request_GPUs = 1
+request_disk = 40G
+requirements = (GPUs_GlobalMemoryMb >= 40000)
++MaxWallTime = 604800
+max_job_retirement_time = 28800
+
+queue model,seed from (
+  qwen 0
+  qwen 1
+  qwen 2
+  llama 0
+  llama 1
+  llama 2
+)

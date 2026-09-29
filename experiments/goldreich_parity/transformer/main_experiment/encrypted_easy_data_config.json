@@ -1,0 +1,19 @@
+{
+  "schema_version": 2,
+  "experiment_name": "parity_goldreich_standard_transformer_v2_easy_data",
+  "seed": 0,
+  "graph_seed": 20260818,
+  "seed_length_exponent": 0.7,
+  "seed_bits_by_length": {
+    "4": 5,
+    "8": 5,
+    "16": 7
+  },
+  "lengths": [4, 8, 16],
+  "train_seed_n": 49152,
+  "validation_seed_n": 8192,
+  "test_seed_n": 8192,
+  "train_n_per_length": 131072,
+  "validation_n_per_length": 8192,
+  "test_n_per_length": 8192
+}

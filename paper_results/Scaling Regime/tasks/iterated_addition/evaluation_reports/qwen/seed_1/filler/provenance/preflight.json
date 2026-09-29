@@ -1,0 +1,66 @@
+{
+  "experiment": "filler_only_scaling_v1",
+  "schema_version": 1,
+  "tasks": {
+    "knowledge": {
+      "capacity": {
+        "max_private_cot_tokens_by_model": {
+          "qwen": {
+            "1": 50,
+            "2": 83,
+            "3": 111,
+            "4": 143,
+            "5": 169
+          }
+        },
+        "verified_budgets": {
+          "1": {
+            "budget": 64,
+            "required_maximum": 50,
+            "slack": 14
+          },
+          "2": {
+            "budget": 96,
+            "required_maximum": 83,
+            "slack": 13
+          },
+          "3": {
+            "budget": 128,
+            "required_maximum": 111,
+            "slack": 17
+          },
+          "4": {
+            "budget": 160,
+            "required_maximum": 143,
+            "slack": 17
+          },
+          "5": {
+            "budget": 192,
+            "required_maximum": 169,
+            "slack": 23
+          }
+        }
+      },
+      "cells": [
+        {
+          "eval_count": 1000,
+          "eval_dir": "generated_data/knowledge_length_retraining_all_but_one_v2/shared_eval/knowledge_length_control",
+          "manifest": "generated_data/knowledge_length_retraining_all_but_one_v2/split_manifest.json",
+          "seed": 1,
+          "source_config": "experiments/knowledge_length_retraining/config.json",
+          "train_count": 5000,
+          "train_dir": "generated_data/knowledge_length_retraining_all_but_one_v2/seed_1/knowledge_length_control"
+        }
+      ],
+      "records_by_difficulty": {
+        "1": 1200,
+        "2": 1200,
+        "3": 1200,
+        "4": 1200,
+        "5": 1200
+      },
+      "task": "knowledge",
+      "unique_records": 6000
+    }
+  }
+}

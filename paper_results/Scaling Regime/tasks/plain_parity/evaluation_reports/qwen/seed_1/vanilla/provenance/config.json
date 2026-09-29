@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_regime_calibration_v1",
+  "difficulty_regime": "calibration",
+  "seed": 1,
+  "models": {
+    "qwen": "Qwen/Qwen2.5-7B-Instruct",
+    "llama": "meta-llama/Llama-3.1-8B-Instruct"
+  },
+  "length_buckets": [
+    {"name": "008_015", "min": 8, "max": 15},
+    {"name": "016_031", "min": 16, "max": 31},
+    {"name": "032_063", "min": 32, "max": 63},
+    {"name": "064_127", "min": 64, "max": 127},
+    {"name": "128_255", "min": 128, "max": 255}
+  ],
+  "train_per_bucket": 2000,
+  "validation_per_bucket": 200,
+  "conditions": {
+    "vanilla": {"variant": "parity_control", "supervision_mode": "answer_only"},
+    "public_only_cot": {"variant": "parity_control", "supervision_mode": "public_cot"},
+    "filler": {"variant": "parity_control", "supervision_mode": "filler_public_cot", "filler_token_count": 64},
+    "piggyback": {"variant": "parity_piggyback", "supervision_mode": "public_cot"},
+    "steganography": {"variant": "parity_steg_local_invisible", "supervision_mode": "local_channel_cot"}
+  },
+  "training": {
+    "epochs": 1,
+    "batch_size": 1,
+    "learning_rate": 0.00002,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "training_max_new_tokens": 4096,
+    "evaluation_max_new_tokens": 4096,
+    "validation_sample_size": 200,
+    "validation_batch_size": 1,
+    "evaluation_batch_size": 8,
+    "tokenizer_check_sample_size": 10000,
+    "memory_efficient_ce": true,
+    "ce_token_chunk_size": 16,
+    "activation_cpu_offload": false,
+    "run_training_validation": false
+  },
+  "regime_guidance": {
+    "easy_vanilla_private_min": 0.9,
+    "hard_vanilla_private_max": 0.6,
+    "hard_mechanism_private_min": 0.8,
+    "minimum_mechanism_gain": 0.15
+  }
+}

@@ -1,0 +1,23 @@
+universe = vanilla
+
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/cluster_jobs/s5_state_tracking/old_cluster/eval_ce_s5.sh mmohammadkhani $(mode) $(variant) $(seed)
+
+output = /scratch/mmohammadkhani/logs/chain_of_lies/eval_ce_s5_$(mode)_$(variant)_seed_$(seed).out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/eval_ce_s5_$(mode)_$(variant)_seed_$(seed).err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/eval_ce_s5_$(mode)_$(variant)_seed_$(seed).log
+
+request_CPUs = 4
+request_memory = 24G
+request_GPUs = 1
+requirements = (GPUs_GlobalMemoryMb >= 16000)
+
++MaxWallTime = 259200
+
+queue seed,mode,variant from (
+  0 answer_only s5_piggyback
+  0 answer_only s5_control
+  0 public_cot s5_piggyback
+  0 public_cot s5_control
+)

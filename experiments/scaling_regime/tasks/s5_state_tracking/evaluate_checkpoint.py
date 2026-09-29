@@ -1,0 +1,134 @@
+#!/usr/bin/env python3
+"""Evaluate one balanced S5 adapter separately at each sequence length."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+REPO_ROOT = next(
+    parent
+    for parent in Path(__file__).resolve().parents
+    if (parent / "pyproject.toml").is_file()
+)
+sys.path.insert(0, str(REPO_ROOT))
+
+from chain_of_lies.evaluation import run_variant_inference
+from chain_of_lies.evaluation.rewards import summarize_variant_results
+
+
+def _assert_complete(adapter_root: Path, checkpoint: str) -> Path:
+    metadata_path = adapter_root / "training_metadata.json"
+    history_path = adapter_root / "train_history.json"
+    checkpoint_root = adapter_root / checkpoint
+    if (
+        not metadata_path.is_file()
+        or not history_path.is_file()
+        or not checkpoint_root.is_dir()
+    ):
+        raise RuntimeError(f"Incomplete training artifacts under {adapter_root}.")
+    metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+    history = json.loads(history_path.read_text(encoding="utf-8"))
+    if not history or int(history[-1].get("step", 0)) < int(metadata.get("steps", 0)):
+        raise RuntimeError(
+            f"Training did not reach its configured final step under {adapter_root}."
+        )
+    if int(metadata.get("train_examples_seen", 0)) < int(
+        metadata.get("target_train_examples_seen", 0)
+    ):
+        raise RuntimeError(
+            f"Training example coverage is incomplete under {adapter_root}."
+        )
+    if not (checkpoint_root / "adapter_config.json").is_file():
+        raise RuntimeError(f"Missing final PEFT adapter under {checkpoint_root}.")
+    return checkpoint_root
+
+
+def evaluate(
+    *,
+    adapter_root: Path,
+    variant: str,
+    prompts_dir: Path,
+    responses_root: Path,
+    report_path: Path,
+    checkpoint: str,
+    max_new_tokens: int,
+    batch_size: int,
+    model: str,
+    seed: int,
+    condition: str,
+    length: int,
+) -> dict:
+    checkpoint_root = _assert_complete(adapter_root, checkpoint)
+    response_dir = responses_root / checkpoint / "trained" / variant
+    run_variant_inference(
+        prompts_dir=prompts_dir,
+        responses_dir=response_dir,
+        model_id=str(checkpoint_root),
+        max_new_tokens=max_new_tokens,
+        temperature=0.0,
+        do_sample=False,
+        resume=True,
+        batch_size=batch_size,
+    )
+    metrics = summarize_variant_results(prompts_dir, response_dir)
+    if int(metrics.get("num_examples", 0)) <= 0 or metrics.get("missing_responses"):
+        raise RuntimeError(f"Incomplete S5 evaluation under {response_dir}.")
+    output = {
+        "schema_version": 1,
+        "model": model,
+        "seed": seed,
+        "condition": condition,
+        "length": length,
+        "variant": variant,
+        "checkpoint": checkpoint,
+        "adapter_root": str(adapter_root),
+        "prompts_dir": str(prompts_dir),
+        "responses_dir": str(response_dir),
+        "metrics": metrics,
+    }
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.write_text(json.dumps(output, indent=2), encoding="utf-8")
+    print(
+        json.dumps(
+            {
+                "report": str(report_path),
+                "private_exact_rate": metrics["private_exact_rate"],
+            },
+            indent=2,
+        )
+    )
+    return output
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--adapter-root", type=Path, required=True)
+    parser.add_argument("--variant", required=True)
+    parser.add_argument("--prompts-dir", type=Path, required=True)
+    parser.add_argument("--responses-root", type=Path, required=True)
+    parser.add_argument("--report-path", type=Path, required=True)
+    parser.add_argument("--checkpoint", default="ckpt_final")
+    parser.add_argument("--max-new-tokens", type=int, required=True)
+    parser.add_argument("--batch-size", type=int, default=1)
+    parser.add_argument("--model", required=True)
+    parser.add_argument("--seed", type=int, required=True)
+    parser.add_argument("--condition", required=True)
+    parser.add_argument("--length", type=int, required=True)
+    arguments = parser.parse_args()
+    evaluate(
+        adapter_root=arguments.adapter_root,
+        variant=arguments.variant,
+        prompts_dir=arguments.prompts_dir,
+        responses_root=arguments.responses_root,
+        report_path=arguments.report_path,
+        checkpoint=arguments.checkpoint,
+        max_new_tokens=arguments.max_new_tokens,
+        batch_size=arguments.batch_size,
+        model=arguments.model,
+        seed=arguments.seed,
+        condition=arguments.condition,
+        length=arguments.length,
+    )

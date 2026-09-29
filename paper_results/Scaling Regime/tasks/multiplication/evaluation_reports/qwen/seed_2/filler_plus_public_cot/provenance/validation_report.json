@@ -1,0 +1,49 @@
+{
+  "control_private_shared_operand_fraction": 0.0,
+  "control_steg_public_questions_matched": true,
+  "operand_digits": [
+    2,
+    3,
+    4
+  ],
+  "piggyback_factor_shifts": [
+    -40,
+    -20,
+    -10,
+    -5,
+    -2,
+    -1,
+    1,
+    2,
+    5,
+    10,
+    20,
+    40
+  ],
+  "piggyback_relation": "same_multiplier_and_small_wrapped_factor_shift",
+  "private_questions_matched_across_all_five_conditions": true,
+  "seed_reports": {
+    "2": {
+      "lengths": {
+        "2": {
+          "train_eval_overlap": 0,
+          "train_rows_per_variant": 1000
+        },
+        "3": {
+          "train_eval_overlap": 0,
+          "train_rows_per_variant": 1000
+        },
+        "4": {
+          "train_eval_overlap": 0,
+          "train_rows_per_variant": 1000
+        }
+      },
+      "valid": true
+    }
+  },
+  "train_eval_question_overlap": 0,
+  "valid": true,
+  "validated_seeds": [
+    2
+  ]
+}

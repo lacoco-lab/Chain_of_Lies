@@ -1,0 +1,30 @@
+universe = docker
+docker_image = pytorch/pytorch:2.3.1-cuda11.8-cudnn8-runtime
+batch_name = parity_standard_cot_controls_staged_large
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/goldreich_parity/transformer/controls/condor_old_cluster/run.sh $(condition) $(length) generated_data/parity_goldreich_toy_transformer/seed_0 artifacts/parity_standard_cot_controls_staged/$(condition)/n$(length) experiments/goldreich_parity/transformer/controls/staged_large_config.json
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+preserve_relative_paths = True
+transfer_input_files = experiments/goldreich_parity/transformer/controls,experiments/goldreich_parity/transformer/main_experiment,generated_data/parity_goldreich_toy_transformer/seed_0/n$(length)
+transfer_output_files = artifacts/parity_standard_cot_controls_staged/$(condition)/n$(length)
+
+output = /home/momo00016/logs/chain_of_lies/parity_standard_control_staged_$(condition)_n$(length)_$(Cluster).out
+error  = /home/momo00016/logs/chain_of_lies/parity_standard_control_staged_$(condition)_n$(length)_$(Cluster).err
+log    = /home/momo00016/logs/chain_of_lies/parity_standard_control_staged_$(condition)_n$(length)_$(Cluster).log
+
+request_GPUs = 1
+request_CPUs = 4
+request_memory = 10G
+request_disk = 6G
++MaxWallTime = 604800
+
+queue condition, length from (
+no_cot 32
+no_cot 64
+filler_cot 32
+filler_cot 64
+)

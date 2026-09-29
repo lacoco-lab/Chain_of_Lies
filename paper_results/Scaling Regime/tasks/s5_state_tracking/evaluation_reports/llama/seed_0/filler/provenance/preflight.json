@@ -1,0 +1,164 @@
+{
+  "experiment": "filler_only_scaling_v1",
+  "schema_version": 1,
+  "tasks": {
+    "s5": {
+      "capacity": {
+        "max_private_cot_tokens_by_model": {
+          "llama": {
+            "1": 43,
+            "10": 268,
+            "11": 293,
+            "12": 318,
+            "13": 343,
+            "14": 368,
+            "15": 393,
+            "16": 418,
+            "17": 443,
+            "18": 468,
+            "19": 493,
+            "2": 68,
+            "3": 93,
+            "4": 118,
+            "5": 143,
+            "6": 168,
+            "7": 193,
+            "8": 218,
+            "9": 243
+          }
+        },
+        "verified_budgets": {
+          "1": {
+            "budget": 64,
+            "required_maximum": 43,
+            "slack": 21
+          },
+          "10": {
+            "budget": 352,
+            "required_maximum": 268,
+            "slack": 84
+          },
+          "11": {
+            "budget": 384,
+            "required_maximum": 293,
+            "slack": 91
+          },
+          "12": {
+            "budget": 416,
+            "required_maximum": 318,
+            "slack": 98
+          },
+          "13": {
+            "budget": 448,
+            "required_maximum": 343,
+            "slack": 105
+          },
+          "14": {
+            "budget": 480,
+            "required_maximum": 368,
+            "slack": 112
+          },
+          "15": {
+            "budget": 512,
+            "required_maximum": 393,
+            "slack": 119
+          },
+          "16": {
+            "budget": 544,
+            "required_maximum": 418,
+            "slack": 126
+          },
+          "17": {
+            "budget": 576,
+            "required_maximum": 443,
+            "slack": 133
+          },
+          "18": {
+            "budget": 608,
+            "required_maximum": 468,
+            "slack": 140
+          },
+          "19": {
+            "budget": 640,
+            "required_maximum": 493,
+            "slack": 147
+          },
+          "2": {
+            "budget": 96,
+            "required_maximum": 68,
+            "slack": 28
+          },
+          "3": {
+            "budget": 128,
+            "required_maximum": 93,
+            "slack": 35
+          },
+          "4": {
+            "budget": 160,
+            "required_maximum": 118,
+            "slack": 42
+          },
+          "5": {
+            "budget": 192,
+            "required_maximum": 143,
+            "slack": 49
+          },
+          "6": {
+            "budget": 224,
+            "required_maximum": 168,
+            "slack": 56
+          },
+          "7": {
+            "budget": 256,
+            "required_maximum": 193,
+            "slack": 63
+          },
+          "8": {
+            "budget": 288,
+            "required_maximum": 218,
+            "slack": 70
+          },
+          "9": {
+            "budget": 320,
+            "required_maximum": 243,
+            "slack": 77
+          }
+        }
+      },
+      "cells": [
+        {
+          "eval_count": 3800,
+          "eval_dir": "generated_data/s5_length_retraining_v1/shared_eval/s5_length_control",
+          "manifest": "generated_data/s5_length_retraining_v1/split_manifest.json",
+          "seed": 0,
+          "source_config": "experiments/s5_length_retraining/config.json",
+          "train_count": 9500,
+          "train_dir": "generated_data/s5_length_retraining_v1/seed_0/s5_length_control"
+        }
+      ],
+      "records_by_difficulty": {
+        "1": 700,
+        "10": 700,
+        "11": 700,
+        "12": 700,
+        "13": 700,
+        "14": 700,
+        "15": 700,
+        "16": 700,
+        "17": 700,
+        "18": 700,
+        "19": 700,
+        "2": 700,
+        "3": 700,
+        "4": 700,
+        "5": 700,
+        "6": 700,
+        "7": 700,
+        "8": 700,
+        "9": 700
+      },
+      "task": "s5",
+      "unique_records": 13300
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "artifacts_root": "artifacts/filler_only_scaling_v1/parity/llama/seed_2/filler_only",
+  "baseline_data_root": "generated_data/legacy_without_self_eval",
+  "eval_responses_root": "generated_data/filler_only_scaling_v1_eval_responses/parity/llama/seed_2/filler_only/ckpt_final",
+  "reports": [
+    {
+      "variant_name": "parity_control",
+      "baseline": {
+        "variant_name": "parity_control",
+        "num_examples": 1000,
+        "avg_reward": 1.0046781134990665,
+        "task_success_rate": 0.151,
+        "task_subgoal_rate": 0.258,
+        "task_component_rate": 0.24611111111111264,
+        "public_exact_rate": 0.245,
+        "private_exact_rate": 0.271,
+        "concealment_rate": 0.52,
+        "format_rate": 0.476,
+        "avg_cot_words": 1481.807,
+        "avg_leak_weighted_count": 1.4107000000000016,
+        "payload_decode_rate": null,
+        "monitor_phase": "full_monitor",
+        "missing_responses": [],
+        "component_means": {
+          "concealment": 0.21292811349906718,
+          "format": 0.238,
+          "private_correct": 0.271,
+          "public_correct": 0.245,
+          "task_success_bonus": 0.03775
+        },
+        "leak_means": {
+          "exact_count": 0.479,
+          "generic_count": 1.331,
+          "malign_count": 0.0,
+          "answer_leak_count": 0.0,
+          "operand_leak_count": 0.0,
+          "full_weighted_count": 1.4107000000000016
+        }
+      },
+      "rl": {
+        "variant_name": "parity_control",
+        "num_examples": 1000,
+        "avg_reward": 2.5825,
+        "task_success_rate": 0.262,
+        "task_subgoal_rate": 0.5085,
+        "task_component_rate": 0.48111111111111554,
+        "public_exact_rate": 0.5,
+        "private_exact_rate": 0.517,
+        "concealment_rate": 1.0,
+        "format_rate": 1.0,
+        "avg_cot_words": 1.0,
+        "avg_leak_weighted_count": 0.0,
+        "payload_decode_rate": null,
+        "monitor_phase": "full_monitor",
+        "missing_responses": [],
+        "component_means": {
+          "concealment": 1.0,
+          "format": 0.5,
+          "private_correct": 0.517,
+          "public_correct": 0.5,
+          "task_success_bonus": 0.0655
+        },
+        "leak_means": {
+          "exact_count": 0.0,
+          "generic_count": 0.0,
+          "malign_count": 0.0,
+          "answer_leak_count": 0.0,
+          "operand_leak_count": 0.0,
+          "full_weighted_count": 0.0
+        }
+      },
+      "delta": {
+        "avg_reward": 1.5778218865009335,
+        "task_success_rate": 0.11100000000000002,
+        "task_subgoal_rate": 0.25049999999999994,
+        "task_component_rate": 0.2350000000000029,
+        "public_exact_rate": 0.255,
+        "private_exact_rate": 0.246,
+        "concealment_rate": 0.48,
+        "format_rate": 0.524,
+        "avg_cot_words": -1480.807
+      },
+      "training": {
+        "training_metadata": {
+          "base_model": "meta-llama/Llama-3.1-8B-Instruct",
+          "train_prompts_dir": "generated_data/parity_regime_calibration/seed_2/parity_control/train_prompts",
+          "val_prompts_dir": null,
+          "epochs": 1,
+          "steps": 10000,
+          "batch_size": 1,
+          "learning_rate": 2e-05,
+          "max_new_tokens": 4096,
+          "eval_every": 10000,
+          "validation_sample_size": 1000,
+          "validation_batch_size": 1,
+          "train_examples_seen": 10000,
+          "target_train_examples_seen": 10000,
+          "target_train_coverage": 1.0,
+          "trainer_type": "ce_only",
+          "supervision_mode": "filler_only",
+          "filler_token_count": null,
+          "filler_token_counts": {
+            "008_015": 128,
+            "016_031": 256,
+            "032_063": 512,
+            "064_127": 1024,
+            "128_255": 1536
+          },
+          "filler_token_count_field": "length_bucket",
+          "memory_efficient_ce": true,
+          "ce_token_chunk_size": 16,
+          "activation_cpu_offload": false,
+          "avg_supervised_tokens_per_example_estimate": 153.0,
+          "estimated_total_supervised_tokens": 1530000
+        },
+        "history_points": 10000,
+        "initial_loss": 6.050631999969482,
+        "final_loss": 0.00866873562335968
+      },
+      "evaluation_prompts_dir": "generated_data/parity_regime_calibration/seed_2/parity_control/val_prompts",
+      "evaluated_checkpoint": "artifacts/filler_only_scaling_v1/parity/llama/seed_2/filler_only/parity_control/ckpt_final"
+    }
+  ]
+}

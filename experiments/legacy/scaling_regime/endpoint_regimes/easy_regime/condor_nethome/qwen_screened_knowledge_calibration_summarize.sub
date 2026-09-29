@@ -1,0 +1,13 @@
+universe = vanilla
+accounting_group = pausable
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/legacy/scaling_regime/endpoint_regimes/easy_regime/condor_nethome/run.sh mmohammadkhani qwen-screened-calibration-summarize
+output = /scratch/mmohammadkhani/logs/chain_of_lies/qwen_screened_knowledge_calibration_summarize.out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/qwen_screened_knowledge_calibration_summarize.err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/qwen_screened_knowledge_calibration_summarize.log
+request_CPUs = 2
+request_memory = 8G
+request_GPUs = 0
++MaxWallTime = 14400
+queue 1

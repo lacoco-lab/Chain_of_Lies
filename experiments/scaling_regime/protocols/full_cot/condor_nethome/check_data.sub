@@ -1,0 +1,20 @@
+universe = vanilla
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/scaling_regime/protocols/full_cot/run_nethome.sh $(task) qwen 0 check
+output = /scratch/mmohammadkhani/logs/chain_of_lies/full_cot_check_$(task).out
+error = /scratch/mmohammadkhani/logs/chain_of_lies/full_cot_check_$(task).err
+log = /scratch/mmohammadkhani/logs/chain_of_lies/full_cot_check_$(task).log
+request_CPUs = 1
+request_memory = 1G
+request_disk = 1G
+request_GPUs = 1
++MaxWallTime = 3600
+on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)
+queue task from (
+knowledge
+s5
+multiplication
+parity
+)
+

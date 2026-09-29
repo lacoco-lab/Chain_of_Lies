@@ -18,25 +18,33 @@ from chain_of_lies.evaluation.rewards import (
 
 
 def compare_variant_results(*args, **kwargs):
-    from chain_of_lies.evaluation.experiment_evaluation import compare_variant_results as _impl
+    from chain_of_lies.evaluation.experiment_evaluation import (
+        compare_variant_results as _impl,
+    )
 
     return _impl(*args, **kwargs)
 
 
 def load_prompt_for_inference(*args, **kwargs):
-    from chain_of_lies.evaluation.experiment_evaluation import load_prompt_for_inference as _impl
+    from chain_of_lies.evaluation.experiment_evaluation import (
+        load_prompt_for_inference as _impl,
+    )
 
     return _impl(*args, **kwargs)
 
 
 def run_variant_inference(*args, **kwargs):
-    from chain_of_lies.evaluation.experiment_evaluation import run_variant_inference as _impl
+    from chain_of_lies.evaluation.experiment_evaluation import (
+        run_variant_inference as _impl,
+    )
 
     return _impl(*args, **kwargs)
 
 
 def summarize_training_history(*args, **kwargs):
-    from chain_of_lies.evaluation.experiment_evaluation import summarize_training_history as _impl
+    from chain_of_lies.evaluation.experiment_evaluation import (
+        summarize_training_history as _impl,
+    )
 
     return _impl(*args, **kwargs)
 

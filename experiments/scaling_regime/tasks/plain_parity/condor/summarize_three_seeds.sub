@@ -1,0 +1,27 @@
+universe = docker
+docker_image = pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/scaling_regime/tasks/plain_parity/run.sh summarize_three
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)
+preserve_relative_paths = True
+stream_output = True
+stream_error = True
+transfer_input_files = chain_of_lies,experiments/scaling_regime/tasks/plain_parity,generated_data/parity_regime_calibration,generated_data/parity_regime_calibration_eval_responses
+transfer_output_files = artifacts/parity_regime_calibration/per_seed,artifacts/parity_regime_calibration/metrics_by_length_bucket_three_seed.csv,artifacts/parity_regime_calibration/summary_three_seed.json,artifacts/parity_regime_calibration/REPORT_THREE_SEED.md
+
+output = /home/momo00016/logs/chain_of_lies/parity_regime_summarize_three_seed.out
+error  = /home/momo00016/logs/chain_of_lies/parity_regime_summarize_three_seed.err
+log    = /home/momo00016/logs/chain_of_lies/parity_regime_summarize_three_seed.log
+
+request_CPUs = 2
+request_memory = 12G
+request_GPUs = 0
+request_disk = 20G
++MaxWallTime = 14400
+
+queue 1

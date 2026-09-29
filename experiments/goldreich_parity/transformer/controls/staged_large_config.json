@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_standard_cot_controls_staged_n32_n64_seed_0",
+  "seed": 0,
+  "lengths": [32, 64],
+  "direct_routing_lengths": [32, 64],
+  "seed_padding_by_length": {
+    "32": 12,
+    "64": 19
+  },
+  "model_dim": 128,
+  "heads": 16,
+  "token_embedding_dim": 16,
+  "ff_multiplier": 4,
+  "route_learning_rate": 0.003,
+  "route_steps_by_length": {
+    "32": 800,
+    "64": 800
+  },
+  "representation_learning_rate": 0.001,
+  "representation_steps_by_length": {
+    "32": 2500,
+    "64": 2500
+  },
+  "public_learning_rate": 0.001,
+  "public_steps_by_length": {
+    "32": 24000,
+    "64": 24000
+  },
+  "integration_learning_rate": 0.0003,
+  "integration_steps_by_length": {
+    "32": 8000,
+    "64": 8000
+  },
+  "batch_size_by_length": {
+    "32": 256,
+    "64": 256
+  },
+  "evaluation_batch_size_by_length": {
+    "32": 512,
+    "64": 512
+  },
+  "validation_subset_by_length": {
+    "32": 512,
+    "64": 512
+  },
+  "chance_tolerance": 0.03
+}

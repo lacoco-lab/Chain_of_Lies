@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_encrypted_bridge_v1",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "seed": 0,
+  "baseline_local_accuracy": 0.9794921875,
+  "checks": {
+    "supplied_start": true,
+    "derived_start": false,
+    "supplied_update": false,
+    "derived_update": false,
+    "local_retention": false,
+    "start_retention": false
+  },
+  "first_failure": "derived_start",
+  "diagnosis": "Supplied XOR works, but the learned mask cannot be composed into the first encrypted state.",
+  "passes_all_bridges": false,
+  "elapsed_seconds": 2151.800076186657,
+  "metrics": [
+    {
+      "task": "local",
+      "n": 1024,
+      "greedy_accuracy": 0.9091796875,
+      "binary_accuracy": 0.9091796875,
+      "bit_ce": 0.30047607421875,
+      "selected_attention_mass": 0.96533203125,
+      "selected_seed_ratio": 0.97119140625
+    },
+    {
+      "task": "supplied_start",
+      "n": 512,
+      "greedy_accuracy": 1.0,
+      "binary_accuracy": 1.0,
+      "bit_ce": 1.2908130884170532e-06,
+      "selected_attention_mass": null,
+      "selected_seed_ratio": null
+    },
+    {
+      "task": "derived_start",
+      "n": 1024,
+      "greedy_accuracy": 0.93359375,
+      "binary_accuracy": 0.93359375,
+      "bit_ce": 0.2202301025390625,
+      "selected_attention_mass": 0.983642578125,
+      "selected_seed_ratio": 0.987060546875
+    },
+    {
+      "task": "supplied_update",
+      "n": 512,
+      "greedy_accuracy": 0.916015625,
+      "binary_accuracy": 0.916015625,
+      "bit_ce": 0.23370361328125,
+      "selected_attention_mass": null,
+      "selected_seed_ratio": null
+    },
+    {
+      "task": "derived_update",
+      "n": 1008,
+      "greedy_accuracy": 0.5009920634920635,
+      "binary_accuracy": 0.5009920634920635,
+      "bit_ce": 0.6968625992063492,
+      "selected_attention_mass": 0.969970703125,
+      "selected_seed_ratio": 0.970458984375
+    }
+  ]
+}

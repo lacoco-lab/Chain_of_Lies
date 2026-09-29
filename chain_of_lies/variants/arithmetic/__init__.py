@@ -1,2 +1,1 @@
 """Arithmetic paired-task variant."""
-

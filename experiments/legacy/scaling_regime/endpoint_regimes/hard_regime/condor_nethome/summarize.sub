@@ -1,0 +1,17 @@
+universe = vanilla
+
+initialdir = /nethome/mmohammadkhani/Faithfulness-Safety
+executable = /bin/bash
+arguments = /nethome/mmohammadkhani/Faithfulness-Safety/experiments/legacy/scaling_regime/endpoint_regimes/hard_regime/condor_nethome/run.sh mmohammadkhani summarize
+
+getenv = HF_TOKEN
+output = /scratch/mmohammadkhani/logs/chain_of_lies/hard_tasks_summarize.out
+error  = /scratch/mmohammadkhani/logs/chain_of_lies/hard_tasks_summarize.err
+log    = /scratch/mmohammadkhani/logs/chain_of_lies/hard_tasks_summarize.log
+
+request_CPUs = 2
+request_memory = 8G
+request_GPUs = 0
++MaxWallTime = 14400
+
+queue 1

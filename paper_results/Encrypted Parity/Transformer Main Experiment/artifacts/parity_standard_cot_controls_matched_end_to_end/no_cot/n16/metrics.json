@@ -1,0 +1,681 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_standard_cot_controls_matched_end_to_end_n16_seed_0",
+  "condition": "no_cot",
+  "length": 16,
+  "seed": 0,
+  "private_seed_given_to_model": false,
+  "public_zero_padding": 7,
+  "data_fields_loaded": [
+    "id",
+    "input_bits",
+    "answer"
+  ],
+  "architecture": {
+    "architecture": "one_layer_standard_causal_transformer_query_row",
+    "length": 16,
+    "seed_bits": 7,
+    "heads": 16,
+    "computationally_assigned_heads": 12,
+    "zero_padding_heads": 4,
+    "model_dim": 128,
+    "head_dim": 8,
+    "token_embedding_dim": 16,
+    "position_embedding_dim": 112,
+    "position_encoding": "learned absolute, concatenated with token embeddings",
+    "ff_dim": 512,
+    "attention": "standard scaled dot-product softmax at train and inference",
+    "layer_norm": false,
+    "nonlinear_blocks_after_attention": 1,
+    "training_only_canonical_bit_scale": 4.0,
+    "trainable_parameters": 203664,
+    "graph": [
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    ]
+  },
+  "train_examples": 32768,
+  "validation_examples": 16384,
+  "test_examples": 16384,
+  "split_audit": {
+    "train_test_overlap": 0,
+    "train_validation_overlap": 0,
+    "validation_test_collisions_removed": 0,
+    "validation_rows_before": 16384,
+    "validation_rows_after": 16384,
+    "label_balance": {
+      "train": {
+        "zero": 16384,
+        "one": 16384
+      },
+      "validation": {
+        "zero": 8192,
+        "one": 8192
+      },
+      "test": {
+        "zero": 8192,
+        "one": 8192
+      }
+    }
+  },
+  "routing_training": {
+    "enabled": false,
+    "reason": "No public local route can retrieve all input bits at this length"
+  },
+  "representation_training": {
+    "enabled": false,
+    "reason": "No public local route can retrieve all input bits at this length"
+  },
+  "public_training": {
+    "enabled": false,
+    "reason": "No public local route can retrieve all input bits at this length"
+  },
+  "integration_training": {
+    "steps": 3000,
+    "best_validation_score": [
+      0.5107421875,
+      1.5107421875
+    ],
+    "history": [
+      {
+        "step": 1,
+        "loss": 1.1878846883773804,
+        "validation": {
+          "n": 1024,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.5087890625,
+          "samples": [
+            {
+              "id": "standard_control_n16_validation_000000",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n16_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n16_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n16_validation_000003",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 250,
+        "loss": 0.6945613026618958,
+        "validation": {
+          "n": 1024,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.4912109375,
+          "samples": [
+            {
+              "id": "standard_control_n16_validation_000000",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000003",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 500,
+        "loss": 0.6900255084037781,
+        "validation": {
+          "n": 1024,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.4912109375,
+          "samples": [
+            {
+              "id": "standard_control_n16_validation_000000",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000003",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 750,
+        "loss": 0.6932881474494934,
+        "validation": {
+          "n": 1024,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.494140625,
+          "samples": [
+            {
+              "id": "standard_control_n16_validation_000000",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000003",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 1000,
+        "loss": 0.6937344074249268,
+        "validation": {
+          "n": 1024,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.4873046875,
+          "samples": [
+            {
+              "id": "standard_control_n16_validation_000000",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000003",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 1250,
+        "loss": 0.698479413986206,
+        "validation": {
+          "n": 1024,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.4912109375,
+          "samples": [
+            {
+              "id": "standard_control_n16_validation_000000",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000003",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 1500,
+        "loss": 0.6930400133132935,
+        "validation": {
+          "n": 1024,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.498046875,
+          "samples": [
+            {
+              "id": "standard_control_n16_validation_000000",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000003",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 1750,
+        "loss": 0.6935820579528809,
+        "validation": {
+          "n": 1024,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.490234375,
+          "samples": [
+            {
+              "id": "standard_control_n16_validation_000000",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000003",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 2000,
+        "loss": 0.6994324922561646,
+        "validation": {
+          "n": 1024,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.5087890625,
+          "samples": [
+            {
+              "id": "standard_control_n16_validation_000000",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n16_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n16_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n16_validation_000003",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 2250,
+        "loss": 0.6929212808609009,
+        "validation": {
+          "n": 1024,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.5087890625,
+          "samples": [
+            {
+              "id": "standard_control_n16_validation_000000",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n16_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n16_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n16_validation_000003",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 2500,
+        "loss": 0.7011863589286804,
+        "validation": {
+          "n": 1024,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.5087890625,
+          "samples": [
+            {
+              "id": "standard_control_n16_validation_000000",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n16_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n16_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n16_validation_000003",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      },
+      {
+        "step": 2750,
+        "loss": 0.6904402375221252,
+        "validation": {
+          "n": 1024,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.4912109375,
+          "samples": [
+            {
+              "id": "standard_control_n16_validation_000000",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            },
+            {
+              "id": "standard_control_n16_validation_000003",
+              "expected_answer": 0,
+              "predicted_answer": 1
+            }
+          ]
+        }
+      },
+      {
+        "step": 3000,
+        "loss": 0.69094318151474,
+        "validation": {
+          "n": 1024,
+          "cot_length": 0,
+          "cot_bit_accuracy": null,
+          "cot_exact": null,
+          "final_parity_accuracy": 0.5107421875,
+          "samples": [
+            {
+              "id": "standard_control_n16_validation_000000",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n16_validation_000001",
+              "expected_answer": 1,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n16_validation_000002",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            },
+            {
+              "id": "standard_control_n16_validation_000003",
+              "expected_answer": 0,
+              "predicted_answer": 0
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "validation_softmax_attention": {
+    "n": 16384,
+    "cot_length": 0,
+    "cot_bit_accuracy": null,
+    "cot_exact": null,
+    "final_parity_accuracy": 0.5009765625,
+    "samples": [
+      {
+        "id": "standard_control_n16_validation_000000",
+        "expected_answer": 0,
+        "predicted_answer": 0
+      },
+      {
+        "id": "standard_control_n16_validation_000001",
+        "expected_answer": 1,
+        "predicted_answer": 0
+      },
+      {
+        "id": "standard_control_n16_validation_000002",
+        "expected_answer": 0,
+        "predicted_answer": 0
+      },
+      {
+        "id": "standard_control_n16_validation_000003",
+        "expected_answer": 0,
+        "predicted_answer": 0
+      }
+    ]
+  },
+  "test_softmax_attention": {
+    "n": 16384,
+    "cot_length": 0,
+    "cot_bit_accuracy": null,
+    "cot_exact": null,
+    "final_parity_accuracy": 0.50018310546875,
+    "samples": [
+      {
+        "id": "standard_control_n16_test_000000",
+        "expected_answer": 0,
+        "predicted_answer": 0
+      },
+      {
+        "id": "standard_control_n16_test_000001",
+        "expected_answer": 0,
+        "predicted_answer": 0
+      },
+      {
+        "id": "standard_control_n16_test_000002",
+        "expected_answer": 0,
+        "predicted_answer": 0
+      },
+      {
+        "id": "standard_control_n16_test_000003",
+        "expected_answer": 0,
+        "predicted_answer": 0
+      }
+    ]
+  },
+  "matches_expected_pattern": true,
+  "elapsed_seconds": 29.425971499993466
+}

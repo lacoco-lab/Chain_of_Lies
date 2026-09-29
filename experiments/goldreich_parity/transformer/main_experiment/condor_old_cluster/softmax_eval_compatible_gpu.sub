@@ -1,0 +1,30 @@
+universe = docker
+# PyTorch 2.3.1 with CUDA 11.8 retains support for the cluster's Tesla P100 (sm_60).
+docker_image = pytorch/pytorch:2.3.1-cuda11.8-cudnn8-runtime
+batch_name = parity_goldreich_softmax_compatible_gpu
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/goldreich_parity/transformer/main_experiment/condor_old_cluster/run_softmax_eval.sh $(length) $(config) $(data_root) $(checkpoint_root)
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+preserve_relative_paths = True
+transfer_input_files = experiments/goldreich_parity/transformer/main_experiment,$(data_root)/n$(length)/test.jsonl.gz,$(checkpoint_root)/n$(length)/model.pt,$(checkpoint_root)/n$(length)/metrics.json
+transfer_output_files = artifacts/parity_goldreich_toy_transformer_softmax/n$(length)
+
+output = /home/momo00016/logs/chain_of_lies/parity_goldreich_softmax_n$(length)_$(Cluster).out
+error  = /home/momo00016/logs/chain_of_lies/parity_goldreich_softmax_n$(length)_$(Cluster).err
+log    = /home/momo00016/logs/chain_of_lies/parity_goldreich_softmax_n$(length)_$(Cluster).log
+
+request_GPUs = 1
+request_CPUs = 4
+request_memory = $(memory)
+request_disk = 4G
+
++MaxWallTime = 86400
+
+queue length, config, data_root, checkpoint_root, memory from (
+512  experiments/goldreich_parity/transformer/main_experiment/config.json       generated_data/parity_goldreich_toy_transformer/seed_0       artifacts/parity_goldreich_toy_transformer       12G
+2048 experiments/goldreich_parity/transformer/main_experiment/scale_config.json generated_data/parity_goldreich_toy_transformer_scale/seed_0 artifacts/parity_goldreich_toy_transformer_scale 20G
+)

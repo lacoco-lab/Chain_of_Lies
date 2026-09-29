@@ -1,0 +1,305 @@
+{
+  "schema_version": 2,
+  "experiment_name": "parity_goldreich_standard_transformer_v2_easy_data",
+  "seed": 0,
+  "graph_seed": 20260818,
+  "lengths": [
+    4,
+    8,
+    16
+  ],
+  "seed_length_exponent": 0.7,
+  "length_metadata": {
+    "4": {
+      "seed_bits": 5,
+      "mask_bits": 4,
+      "graph": [
+        [
+          2,
+          0,
+          4,
+          1,
+          3
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          0
+        ],
+        [
+          4,
+          1,
+          2,
+          3,
+          0
+        ],
+        [
+          4,
+          0,
+          3,
+          1,
+          2
+        ]
+      ],
+      "seed_split_sizes": {
+        "train": 24,
+        "validation": 4,
+        "test": 4
+      },
+      "seed_split_sha256": {
+        "train": "71c89cdd871009f58f0f8891e3c5bc48411669d888a7b7aab8746ef1facdf8b6",
+        "validation": "efc4f7f377b3edd6fa603ada9297ca1739f17d16f35176fa1e29ad5750c50a52",
+        "test": "f386747a21187bff1d9cdad3131f8b37b78e7da10d99577dfab38e0d338cc546"
+      }
+    },
+    "8": {
+      "seed_bits": 5,
+      "mask_bits": 8,
+      "graph": [
+        [
+          2,
+          0,
+          4,
+          1,
+          3
+        ],
+        [
+          1,
+          2,
+          3,
+          4,
+          0
+        ],
+        [
+          4,
+          1,
+          2,
+          3,
+          0
+        ],
+        [
+          4,
+          0,
+          3,
+          1,
+          2
+        ],
+        [
+          0,
+          4,
+          3,
+          1,
+          2
+        ],
+        [
+          4,
+          3,
+          2,
+          0,
+          1
+        ],
+        [
+          3,
+          0,
+          4,
+          2,
+          1
+        ],
+        [
+          1,
+          4,
+          3,
+          0,
+          2
+        ]
+      ],
+      "seed_split_sizes": {
+        "train": 24,
+        "validation": 4,
+        "test": 4
+      },
+      "seed_split_sha256": {
+        "train": "b2b0502a746047adede39d6742c428b5aa51f46d3e1873dc46c4fe08b2675b9a",
+        "validation": "31982c4fc3e53ed21974c32567ca1cd3160635096ea9d58d1227161fe3f1f08a",
+        "test": "d6ffdc1ddf6378235a20cc436251a95863cde0053a221e282a3824bb9d58f0de"
+      }
+    },
+    "16": {
+      "seed_bits": 7,
+      "mask_bits": 16,
+      "graph": [
+        [
+          2,
+          0,
+          4,
+          3,
+          5
+        ],
+        [
+          1,
+          4,
+          5,
+          2,
+          3
+        ],
+        [
+          4,
+          3,
+          2,
+          1,
+          6
+        ],
+        [
+          2,
+          1,
+          4,
+          0,
+          3
+        ],
+        [
+          5,
+          2,
+          3,
+          0,
+          6
+        ],
+        [
+          0,
+          1,
+          3,
+          5,
+          2
+        ],
+        [
+          4,
+          3,
+          1,
+          5,
+          6
+        ],
+        [
+          5,
+          0,
+          1,
+          4,
+          6
+        ],
+        [
+          1,
+          6,
+          3,
+          0,
+          5
+        ],
+        [
+          1,
+          3,
+          2,
+          0,
+          4
+        ],
+        [
+          4,
+          0,
+          1,
+          5,
+          6
+        ],
+        [
+          6,
+          3,
+          1,
+          4,
+          5
+        ],
+        [
+          4,
+          0,
+          5,
+          2,
+          6
+        ],
+        [
+          0,
+          2,
+          4,
+          5,
+          1
+        ],
+        [
+          4,
+          5,
+          3,
+          0,
+          6
+        ],
+        [
+          4,
+          1,
+          2,
+          3,
+          6
+        ]
+      ],
+      "seed_split_sizes": {
+        "train": 96,
+        "validation": 16,
+        "test": 16
+      },
+      "seed_split_sha256": {
+        "train": "1f5771e1ae738ef93ee442899a183b1ae3881854d0887840925c6e35d2b64c8e",
+        "validation": "622e52e095a1dfeea6f8a27ac7cf94ccbcde9577df013d5da31567453ac0f141",
+        "test": "0fd6f6b28cb6fb9ec2e88bbe93798fb71819e24e1ca93213133ee3840e3c7e63"
+      }
+    }
+  },
+  "files": {
+    "n4/train": {
+      "path": "generated_data/parity_goldreich_standard_easy/seed_0/n4/train.jsonl.gz",
+      "n": 131072,
+      "sha256": "9001bb76519e444325f4e266b55495733aeaa6ec29c53f1ce7ac38cecea3a6be"
+    },
+    "n4/validation": {
+      "path": "generated_data/parity_goldreich_standard_easy/seed_0/n4/validation.jsonl.gz",
+      "n": 8192,
+      "sha256": "35a285a8ec29bcca242859c4d959a9a05eacba1a3f4b46539833cd72b86b612e"
+    },
+    "n4/test": {
+      "path": "generated_data/parity_goldreich_standard_easy/seed_0/n4/test.jsonl.gz",
+      "n": 8192,
+      "sha256": "3e4fc3b535e2a37b7bab73e4b790ec510a4e9bffdde48b02e729ead328aff322"
+    },
+    "n8/train": {
+      "path": "generated_data/parity_goldreich_standard_easy/seed_0/n8/train.jsonl.gz",
+      "n": 131072,
+      "sha256": "bd20c63118387ee8ced01920a89b2dc1dd04d0d243f5752b0ec10adc02070978"
+    },
+    "n8/validation": {
+      "path": "generated_data/parity_goldreich_standard_easy/seed_0/n8/validation.jsonl.gz",
+      "n": 8192,
+      "sha256": "5fc1f88a6cac97a7d4525ef710541e6ad9d7e668721a0715397da4c42f6eebde"
+    },
+    "n8/test": {
+      "path": "generated_data/parity_goldreich_standard_easy/seed_0/n8/test.jsonl.gz",
+      "n": 8192,
+      "sha256": "c08de982ef84676bb352a2cd82eaab5e1f49f3528595549f740e1b4a07d28901"
+    },
+    "n16/train": {
+      "path": "generated_data/parity_goldreich_standard_easy/seed_0/n16/train.jsonl.gz",
+      "n": 131072,
+      "sha256": "b375c65876de24aebdd254e7bd91a8f7cec2fbd9c962ffb91a1f32da861faf34"
+    },
+    "n16/validation": {
+      "path": "generated_data/parity_goldreich_standard_easy/seed_0/n16/validation.jsonl.gz",
+      "n": 8192,
+      "sha256": "3d039ae52c55030f1cc6b6e4513000fa2a010cfa7eac2ab5b8805d6026755b21"
+    },
+    "n16/test": {
+      "path": "generated_data/parity_goldreich_standard_easy/seed_0/n16/test.jsonl.gz",
+      "n": 8192,
+      "sha256": "c4d72e4739d07508d32b673895a017c7524b97cb2c54d5f09ec4628cb8277402"
+    }
+  }
+}

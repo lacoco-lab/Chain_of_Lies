@@ -1,0 +1,65 @@
+# Twenty replication cells: seeds 1--2 by two models by five mechanisms.
+# Scientific settings match seed 0. Exact chunked CE plus gradient checkpointing
+# keeps batch-1 training on ordinary 40 GB GPUs without slow CPU activation
+# offload; evaluation is greedy and batched at eight.
+universe = docker
+docker_image = pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/scaling_regime/tasks/plain_parity/run.sh cell $(model) $(condition) experiments/scaling_regime/tasks/plain_parity/config_seed_$(seed).json
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)
+preserve_relative_paths = True
+stream_output = True
+stream_error = True
+getenv = HF_TOKEN
+environment = "HF_HUB_DISABLE_XET=1"
+transfer_input_files = chain_of_lies,scripts,requirements.txt,pyproject.toml,experiments/shared/check_tokenizer.py,experiments/scaling_regime/tasks/plain_parity,generated_data/parity_regime_calibration/seed_$(seed),generated_data/parity_regime_calibration/split_manifest_seed_$(seed).json
+transfer_output_files = generated_data/parity_regime_calibration_eval_responses/$(model)/seed_$(seed)/$(condition),artifacts/parity_regime_calibration/$(model)/seed_$(seed)/$(condition)
+
+output = /home/momo00016/logs/chain_of_lies/parity_regime_seed_$(seed)_$(model)_$(condition).out
+error  = /home/momo00016/logs/chain_of_lies/parity_regime_seed_$(seed)_$(model)_$(condition).err
+log    = /home/momo00016/logs/chain_of_lies/parity_regime_seed_$(seed)_$(model)_$(condition).log
+
+request_CPUs = 4
+# CPU activation offload is disabled for these replications. The 7B/8B model
+# is resident on the GPU; 32 GB host RAM covers sharded loading, Python, the
+# prompt set, and checkpoint serialization with substantial headroom.
+request_memory = 32G
+request_GPUs = 1
+# One base-model cache is about 15--17 GB; the venv, transferred prompts,
+# adapter, and responses remain comfortably below the remaining allowance.
+# Keeping this at 30 GB avoids excluding GPU slots with less than 80 GB free.
+request_disk = 30G
+requirements = (GPUs_GlobalMemoryMb >= $(gpu_memory_mb))
+# Permit matching opportunistic SIC/H200 slots whose owner policy requires a
+# bounded retirement window. This is not an eight-hour wall-clock limit: it
+# applies only after HTCondor asks a running claim to retire.
+max_job_retirement_time = 28800
++MaxWallTime = 345600
+
+queue seed,model,condition,gpu_memory_mb from (
+  1 qwen  vanilla          40000
+  1 qwen  public_only_cot  80000
+  1 qwen  filler           80000
+  1 qwen  piggyback        80000
+  1 qwen  steganography    80000
+  1 llama vanilla          40000
+  1 llama public_only_cot  80000
+  1 llama filler           80000
+  1 llama piggyback        80000
+  1 llama steganography    80000
+  2 qwen  vanilla          40000
+  2 qwen  public_only_cot  80000
+  2 qwen  filler           80000
+  2 qwen  piggyback        80000
+  2 qwen  steganography    80000
+  2 llama vanilla          40000
+  2 llama public_only_cot  80000
+  2 llama filler           80000
+  2 llama piggyback        80000
+  2 llama steganography    80000
+)

@@ -1,0 +1,56 @@
+{
+  "schema_version": 2,
+  "experiment_name": "knowledge_length_retraining_all_but_one_v2",
+  "fact_bank": "atomic_numbers_1_to_100",
+  "lengths": [1, 2, 3, 4, 5],
+  "piggyback_shared_rule": "all_but_one",
+  "train_examples_per_length": 1000,
+  "eval_examples_per_length": 200,
+  "seeds": [0, 1, 2],
+  "checkpoint": "ckpt_final",
+  "models": {
+    "qwen": "Qwen/Qwen2.5-7B-Instruct",
+    "llama": "meta-llama/Llama-3.1-8B-Instruct"
+  },
+  "conditions": {
+    "vanilla": {
+      "variant": "knowledge_length_control",
+      "supervision_mode": "answer_only"
+    },
+    "filler": {
+      "variant": "knowledge_length_control",
+      "supervision_mode": "filler_public_cot",
+      "filler_token_count": 64
+    },
+    "public_only_cot": {
+      "variant": "knowledge_length_control",
+      "supervision_mode": "public_cot"
+    },
+    "piggyback": {
+      "variant": "knowledge_length_piggyback",
+      "supervision_mode": "public_cot"
+    },
+    "steganography": {
+      "variant": "knowledge_length_steg_local_invisible",
+      "supervision_mode": "local_channel_cot"
+    }
+  },
+  "training": {
+    "epochs": 3,
+    "batch_size": 1,
+    "learning_rate": 0.00002,
+    "lora_r": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0.05,
+    "training_max_new_tokens": 1536,
+    "evaluation_max_new_tokens": 2048,
+    "validation_sample_size": 200,
+    "validation_batch_size": 1,
+    "tokenizer_check_sample_size": 1000
+  },
+  "paths": {
+    "data_root": "generated_data/knowledge_length_retraining_all_but_one_v2",
+    "artifacts_root": "artifacts/knowledge_length_retraining_all_but_one_v2",
+    "responses_root": "generated_data/knowledge_length_retraining_all_but_one_v2_eval_responses"
+  }
+}

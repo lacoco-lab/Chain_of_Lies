@@ -1,0 +1,20 @@
+ENV GET HF_TOKEN
+
+JOB generate experiments/goldreich_parity/qwen_attempts/reported_diagnostics/composition_rank/condor_nethome/cpu.sub
+VARS generate action="generate"
+JOB prerequisite_gate experiments/goldreich_parity/qwen_attempts/reported_diagnostics/composition_rank/condor_nethome/cpu.sub
+VARS prerequisite_gate action="prerequisite_gate"
+
+# All ranks use the same frozen mechanism and data, and therefore run independently.
+JOB rank_32 experiments/goldreich_parity/qwen_attempts/reported_diagnostics/composition_rank/condor_nethome/gpu.sub
+VARS rank_32 rank="32" gpu_memory_mb="40000"
+JOB rank_64 experiments/goldreich_parity/qwen_attempts/reported_diagnostics/composition_rank/condor_nethome/gpu.sub
+VARS rank_64 rank="64" gpu_memory_mb="40000"
+JOB rank_128 experiments/goldreich_parity/qwen_attempts/reported_diagnostics/composition_rank/condor_nethome/gpu.sub
+VARS rank_128 rank="128" gpu_memory_mb="60000"
+
+JOB summarize experiments/goldreich_parity/qwen_attempts/reported_diagnostics/composition_rank/condor_nethome/cpu.sub
+VARS summarize action="summarize"
+
+PARENT generate prerequisite_gate CHILD rank_32 rank_64 rank_128
+PARENT rank_32 rank_64 rank_128 CHILD summarize

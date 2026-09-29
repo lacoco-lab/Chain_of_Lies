@@ -1,0 +1,68 @@
+universe = docker
+docker_image = pytorch/pytorch:2.3.1-cuda12.1-cudnn8-runtime
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/scaling_regime/tasks/multiplication/run.sh cell $(model) $(seed) $(condition)
+
+should_transfer_files = YES
+when_to_transfer_output = ON_SUCCESS
+success_exit_code = 0
+on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)
+preserve_relative_paths = True
+# Expand the exported submit-shell token explicitly. A name-only getenv
+# declaration was not propagated reliably by the other cluster's schedd.
+environment = "HF_TOKEN=$ENV(HF_TOKEN)"
+transfer_input_files = chain_of_lies,scripts,requirements.txt,pyproject.toml,experiments/shared/check_tokenizer.py,experiments/scaling_regime/tasks/multiplication,generated_data/multiplication_length_retraining_v1/split_manifest.json,generated_data/multiplication_length_retraining_v1/shared_eval,generated_data/multiplication_length_retraining_v1/seed_$(seed)
+transfer_output_files = artifacts/multiplication_length_retraining_v1/$(model)/seed_$(seed)/$(condition),generated_data/multiplication_length_retraining_v1_eval_responses/$(model)/seed_$(seed)/$(condition)
+
+output = /home/momo00016/logs/chain_of_lies/multiplication_length_$(model)_seed_$(seed)_$(condition).out
+error  = /home/momo00016/logs/chain_of_lies/multiplication_length_$(model)_seed_$(seed)_$(condition).err
+log    = /home/momo00016/logs/chain_of_lies/multiplication_length_$(model)_seed_$(seed)_$(condition).log
+
+request_CPUs = 4
+# Completed production cells peaked below 37 GB of resident memory and about
+# 31 GB of scratch disk. These requests retain headroom without excluding the
+# disk/RAM-constrained H200 slots.
+request_memory = 48G
+request_GPUs = 1
+request_disk = 40G
+requirements = (GPUs_GlobalMemoryMb >= 40000)
++MaxWallTime = 604800
+
+# Allow opportunistic matching on reclaimable H200 slots. This is the maximum
+# retirement grace period after a preemption request, not the normal wall time.
+max_job_retirement_time = 28800
+
+queue model,seed,condition from (
+  qwen 0 vanilla
+  qwen 0 filler
+  qwen 0 public_only_cot
+  qwen 0 piggyback
+  qwen 0 steganography
+  qwen 1 vanilla
+  qwen 1 filler
+  qwen 1 public_only_cot
+  qwen 1 piggyback
+  qwen 1 steganography
+  qwen 2 vanilla
+  qwen 2 filler
+  qwen 2 public_only_cot
+  qwen 2 piggyback
+  qwen 2 steganography
+  llama 0 vanilla
+  llama 0 filler
+  llama 0 public_only_cot
+  llama 0 piggyback
+  llama 0 steganography
+  llama 1 vanilla
+  llama 1 filler
+  llama 1 public_only_cot
+  llama 1 piggyback
+  llama 1 steganography
+  llama 2 vanilla
+  llama 2 filler
+  llama 2 public_only_cot
+  llama 2 piggyback
+  llama 2 steganography
+)

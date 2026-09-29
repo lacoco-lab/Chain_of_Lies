@@ -1,0 +1,533 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_final_v2_composition_curriculum",
+  "seed": 0,
+  "graph": [
+    [
+      10,
+      1,
+      9,
+      7,
+      3
+    ],
+    [
+      6,
+      9,
+      8,
+      10,
+      4
+    ],
+    [
+      15,
+      13,
+      11,
+      12,
+      5
+    ],
+    [
+      7,
+      8,
+      4,
+      3,
+      9
+    ],
+    [
+      3,
+      14,
+      0,
+      11,
+      4
+    ],
+    [
+      14,
+      1,
+      11,
+      15,
+      2
+    ],
+    [
+      13,
+      12,
+      3,
+      11,
+      9
+    ],
+    [
+      14,
+      15,
+      10,
+      3,
+      9
+    ],
+    [
+      13,
+      7,
+      10,
+      0,
+      3
+    ],
+    [
+      6,
+      0,
+      3,
+      2,
+      15
+    ],
+    [
+      0,
+      14,
+      5,
+      3,
+      7
+    ],
+    [
+      9,
+      8,
+      11,
+      14,
+      0
+    ],
+    [
+      3,
+      10,
+      11,
+      12,
+      15
+    ],
+    [
+      3,
+      7,
+      13,
+      14,
+      15
+    ],
+    [
+      6,
+      12,
+      14,
+      15,
+      9
+    ],
+    [
+      1,
+      10,
+      0,
+      5,
+      15
+    ],
+    [
+      2,
+      4,
+      8,
+      5,
+      7
+    ],
+    [
+      12,
+      11,
+      0,
+      15,
+      1
+    ],
+    [
+      7,
+      5,
+      15,
+      9,
+      3
+    ],
+    [
+      0,
+      11,
+      1,
+      6,
+      10
+    ],
+    [
+      4,
+      15,
+      3,
+      8,
+      6
+    ],
+    [
+      3,
+      4,
+      7,
+      14,
+      9
+    ],
+    [
+      6,
+      11,
+      7,
+      13,
+      12
+    ],
+    [
+      15,
+      5,
+      2,
+      13,
+      9
+    ],
+    [
+      5,
+      15,
+      11,
+      9,
+      10
+    ],
+    [
+      10,
+      13,
+      9,
+      6,
+      11
+    ],
+    [
+      3,
+      9,
+      2,
+      6,
+      11
+    ],
+    [
+      7,
+      10,
+      2,
+      5,
+      0
+    ],
+    [
+      12,
+      11,
+      7,
+      13,
+      6
+    ],
+    [
+      12,
+      15,
+      0,
+      4,
+      2
+    ],
+    [
+      7,
+      13,
+      11,
+      8,
+      14
+    ],
+    [
+      2,
+      7,
+      4,
+      13,
+      12
+    ],
+    [
+      12,
+      10,
+      15,
+      5,
+      13
+    ],
+    [
+      6,
+      8,
+      13,
+      11,
+      2
+    ],
+    [
+      7,
+      1,
+      15,
+      6,
+      3
+    ],
+    [
+      6,
+      11,
+      7,
+      1,
+      0
+    ],
+    [
+      15,
+      5,
+      2,
+      11,
+      4
+    ],
+    [
+      0,
+      4,
+      8,
+      15,
+      9
+    ],
+    [
+      15,
+      11,
+      3,
+      5,
+      12
+    ],
+    [
+      15,
+      3,
+      13,
+      14,
+      9
+    ],
+    [
+      6,
+      14,
+      11,
+      1,
+      7
+    ],
+    [
+      7,
+      12,
+      6,
+      4,
+      1
+    ],
+    [
+      13,
+      2,
+      6,
+      10,
+      14
+    ],
+    [
+      3,
+      13,
+      8,
+      4,
+      12
+    ],
+    [
+      13,
+      11,
+      9,
+      6,
+      1
+    ],
+    [
+      11,
+      13,
+      12,
+      15,
+      6
+    ],
+    [
+      9,
+      8,
+      12,
+      10,
+      3
+    ],
+    [
+      2,
+      8,
+      1,
+      6,
+      10
+    ],
+    [
+      13,
+      2,
+      9,
+      10,
+      6
+    ],
+    [
+      4,
+      6,
+      0,
+      15,
+      13
+    ],
+    [
+      9,
+      3,
+      15,
+      8,
+      4
+    ],
+    [
+      1,
+      15,
+      0,
+      4,
+      12
+    ],
+    [
+      4,
+      0,
+      12,
+      8,
+      13
+    ],
+    [
+      1,
+      12,
+      7,
+      9,
+      13
+    ],
+    [
+      14,
+      11,
+      2,
+      15,
+      4
+    ],
+    [
+      5,
+      1,
+      3,
+      8,
+      9
+    ],
+    [
+      3,
+      5,
+      9,
+      14,
+      13
+    ],
+    [
+      5,
+      6,
+      8,
+      0,
+      4
+    ],
+    [
+      3,
+      6,
+      7,
+      0,
+      2
+    ],
+    [
+      6,
+      7,
+      1,
+      0,
+      4
+    ],
+    [
+      8,
+      1,
+      6,
+      4,
+      10
+    ],
+    [
+      0,
+      7,
+      11,
+      5,
+      1
+    ],
+    [
+      12,
+      8,
+      2,
+      13,
+      4
+    ],
+    [
+      12,
+      2,
+      10,
+      11,
+      6
+    ]
+  ],
+  "reserved_one_mask_seed_n": 5120,
+  "composition_train_seed_n": 4032,
+  "composition_validation_seed_n": 1008,
+  "all_seed_partitions_disjoint": true,
+  "paired_task_seeds": true,
+  "full_curriculum": [
+    "mask_delta",
+    "full_zero",
+    "full_one",
+    "full_two",
+    "full_update"
+  ],
+  "rank32_calibration_recipe": {
+    "source_experiment": "parity_goldreich_update_ablation_v1",
+    "enforced": true,
+    "digests_verified": true,
+    "digests": {
+      "local_replay": "1b4255f3ba661e595a467718aa37f2eca90008a2ec6bf1eaf8e0c3774f1519ce",
+      "local_validation": "ccd8fe4bc4784601ee855f018bb4cc0a86f482a73848e8bdb656ca7e30e9d6b8",
+      "supplied_update_train": "4098041369241815223ea5597735c2944ce0decacdc0038b0de0304c042661be",
+      "supplied_update_validation": "b7eb4fa7fa12acc2b5770fe543f4518feec8892f6a23b3b78e6942e9bdca664a",
+      "derive_previous_train": "5c330017a4a6f1a5308e1540fffd0b28e7e614f11616a00caa9c138f032f5d59",
+      "derive_previous_validation": "eb9a9e83ebedf3edd158fe13794345135a3015026e1a6aa0f3b182ee849f591e",
+      "derive_current_train": "27eb60cafb1920cf8211269ec34fe0f896ea342dc104c0c18559e762b4169cd9",
+      "derive_current_validation": "61410ba2c9c6a84ebce184dda3ff8bae00e0e1991b6498d746824fed26389f72"
+    },
+    "model_facing_datasets_reproduced_exactly": [
+      "local_replay",
+      "local_validation",
+      "supplied_update_train",
+      "supplied_update_validation",
+      "derive_previous_train",
+      "derive_previous_validation",
+      "derive_current_train",
+      "derive_current_validation"
+    ],
+    "training_rng": "0:composition-rank"
+  },
+  "dataset_sizes": {
+    "local_replay": 512,
+    "local_validation": 1024,
+    "supplied_update_train": 2048,
+    "supplied_update_validation": 512,
+    "derive_previous_train": 4032,
+    "derive_previous_validation": 1008,
+    "derive_current_train": 4032,
+    "derive_current_validation": 1008,
+    "full_update_train": 4032,
+    "full_update_validation": 1008,
+    "mask_delta_train": 4032,
+    "mask_delta_validation": 1008,
+    "full_zero_train": 4032,
+    "full_zero_validation": 1008,
+    "full_one_train": 4032,
+    "full_one_validation": 1008,
+    "full_two_train": 4032,
+    "full_two_validation": 1008
+  },
+  "digests": {
+    "local_replay": "1b4255f3ba661e595a467718aa37f2eca90008a2ec6bf1eaf8e0c3774f1519ce",
+    "local_validation": "ccd8fe4bc4784601ee855f018bb4cc0a86f482a73848e8bdb656ca7e30e9d6b8",
+    "supplied_update_train": "4098041369241815223ea5597735c2944ce0decacdc0038b0de0304c042661be",
+    "supplied_update_validation": "b7eb4fa7fa12acc2b5770fe543f4518feec8892f6a23b3b78e6942e9bdca664a",
+    "derive_previous_train": "5c330017a4a6f1a5308e1540fffd0b28e7e614f11616a00caa9c138f032f5d59",
+    "derive_previous_validation": "eb9a9e83ebedf3edd158fe13794345135a3015026e1a6aa0f3b182ee849f591e",
+    "derive_current_train": "27eb60cafb1920cf8211269ec34fe0f896ea342dc104c0c18559e762b4169cd9",
+    "derive_current_validation": "61410ba2c9c6a84ebce184dda3ff8bae00e0e1991b6498d746824fed26389f72",
+    "full_update_train": "5125f52deb5126f2cdba77be9bd48cb6fa82445177156423f7e19bb594a52f7f",
+    "full_update_validation": "f8c335e4fc0867331e86e5328e9477c777bff994f3d26040fe0fb47f836018b9",
+    "mask_delta_train": "c41ccb2496431698d2d21a1ad29b50467aeb76155a31da11570893a781e4c85b",
+    "mask_delta_validation": "9a8c62a75632b4d1178cea1d93f6282eab50919b3f541eddf0347cab81dfdfa5",
+    "full_zero_train": "4514ba3848a3a1320c8ba765e8872b71bfd6431f83f15f44c038544c952eeaa8",
+    "full_zero_validation": "74df5b9d99561a00f100c9d1001c276b26ce4b1fe176177875b357d7f59fefe6",
+    "full_one_train": "02bae39355c1d3b16a9215e2d45a34ad208d8afe836b2d143a0217d3187a8812",
+    "full_one_validation": "9150a72ddc0212c55ef167f6b7609d9adebf2dacda497beb04e8539e2bd5e419",
+    "full_two_train": "da41a05aa5b4ee54cbe1a08d3691dd3f10e7ff7f94c05ea07b378a1c37f4737d",
+    "full_two_validation": "9beebed2892e45314b90679c152c38bfbc206817def58f38f1a2dee1c3911c77"
+  }
+}

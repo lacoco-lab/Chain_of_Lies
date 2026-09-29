@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_final_v1",
+  "model": "Qwen/Qwen2.5-7B-Instruct",
+  "seed": 0,
+  "architecture": "frozen mechanism + rank-32 positions + rank-32 full update",
+  "positions_gate_passes": true,
+  "full_gate_passes": false,
+  "passes_all_gates": false,
+  "diagnosis": "The final two-mask update did not pass all accuracy and retention gates.",
+  "position_elapsed_seconds": 3269.5877933781594,
+  "full_elapsed_seconds": 6523.748441355303,
+  "full_attention": {
+    "n": 128,
+    "attention_aux": 0.5634765625,
+    "selected_attention_mass": 0.97314453125,
+    "selected_seed_ratio": 0.97412109375
+  },
+  "metrics": [
+    {
+      "task": "local",
+      "n": 1024,
+      "accuracy": 0.9931640625,
+      "bit_ce": 0.017939340672455728,
+      "threshold": 0.95,
+      "passes": true
+    },
+    {
+      "task": "supplied_update",
+      "n": 512,
+      "accuracy": 1.0,
+      "bit_ce": 2.6030465960502625e-07,
+      "threshold": 0.98,
+      "passes": true
+    },
+    {
+      "task": "derive_previous",
+      "n": 1008,
+      "accuracy": 0.9900793650793651,
+      "bit_ce": 0.07251653122523474,
+      "threshold": 0.95,
+      "passes": true
+    },
+    {
+      "task": "derive_current",
+      "n": 1008,
+      "accuracy": 0.9910714285714286,
+      "bit_ce": 0.03606957717547341,
+      "threshold": 0.95,
+      "passes": true
+    },
+    {
+      "task": "full_update",
+      "n": 1008,
+      "accuracy": 0.5029761904761905,
+      "bit_ce": 0.7817460317460317,
+      "threshold": 0.95,
+      "passes": false
+    }
+  ]
+}

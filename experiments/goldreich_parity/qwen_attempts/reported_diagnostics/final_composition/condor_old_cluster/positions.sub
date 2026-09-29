@@ -1,0 +1,26 @@
+universe = docker
+docker_image = pytorch/pytorch:2.8.0-cuda12.8-cudnn9-runtime
+
+initialdir = /home/momo00016/Faithfulness-Safety
+executable = /bin/bash
+arguments = experiments/goldreich_parity/qwen_attempts/reported_diagnostics/final_composition/condor_old_cluster/run.sh positions
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+preserve_relative_paths = True
+getenv = HF_TOKEN
+environment = "HF_HUB_DISABLE_XET=1"
+transfer_input_files = experiments/goldreich_parity/qwen_attempts/reported_diagnostics/final_composition,generated_data/parity_goldreich_final/seed_0,artifacts/ce_parity_goldreich_final/mechanism_gate.json,artifacts/ce_parity_goldreich_update_ablation/base/best_adapter
+transfer_output_files = artifacts/ce_parity_goldreich_final/positions
+
+output = /home/momo00016/logs/chain_of_lies/parity_goldreich_final_positions.out
+error  = /home/momo00016/logs/chain_of_lies/parity_goldreich_final_positions.err
+log    = /home/momo00016/logs/chain_of_lies/parity_goldreich_final_positions.log
+
+request_CPUs = 4
+request_memory = 64G
+request_GPUs = 1
+requirements = (GPUs_GlobalMemoryMb >= 40000)
++MaxWallTime = 259200
+
+queue

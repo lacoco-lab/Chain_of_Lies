@@ -1,0 +1,10 @@
+ENV GET HF_TOKEN
+
+JOB generate experiments/goldreich_parity/qwen_attempts/exploratory/explicit_hints/condor/generate.sub
+JOB core experiments/goldreich_parity/qwen_attempts/exploratory/explicit_hints/condor/core.sub
+JOB extension experiments/goldreich_parity/qwen_attempts/exploratory/explicit_hints/condor/extension.sub
+JOB summarize experiments/goldreich_parity/qwen_attempts/exploratory/explicit_hints/condor/summarize.sub
+
+PARENT generate CHILD core
+PARENT core CHILD extension
+PARENT extension CHILD summarize

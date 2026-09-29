@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "experiment_name": "parity_goldreich_standard_transformer",
+  "seed": 0,
+  "graph_seed": 20260818,
+  "seed_length_exponent": 0.7,
+  "lengths": [32, 64, 256, 512, 1024, 2048],
+  "seed_bits_by_length": {
+    "32": 12,
+    "64": 19,
+    "256": 49,
+    "512": 79,
+    "1024": 128,
+    "2048": 208
+  },
+  "model_dims": [128, 256],
+  "heads": 16,
+  "routed_heads": 12,
+  "token_embedding_dim": 16,
+  "ff_multiplier": 4,
+  "route_learning_rate": 0.003,
+  "integration_learning_rate": 0.001,
+  "integration_routing_learning_rate": 0.0,
+  "route_pretraining_minimum_attention": 0.9995,
+  "attention_loss_weight": 1.0,
+  "mask_loss_weight": 0.5,
+  "value_loss_weight": 1.0,
+  "mask_delta_loss_weight": 1.0,
+  "route_steps_by_length": {
+    "32": 800,
+    "64": 800,
+    "256": 1000,
+    "512": 1400,
+    "1024": 1800,
+    "2048": 3000
+  },
+  "integration_steps_by_length": {
+    "32": 3000,
+    "64": 3000,
+    "256": 3500,
+    "512": 4000,
+    "1024": 4500,
+    "2048": 6000
+  },
+  "mechanism_steps_by_length": {
+    "32": 1000,
+    "64": 1000,
+    "256": 1200,
+    "512": 1500,
+    "1024": 1800,
+    "2048": 2400
+  },
+  "truth_table_steps_by_length": {
+    "32": 1200,
+    "64": 1200,
+    "256": 1500,
+    "512": 1800,
+    "1024": 2200,
+    "2048": 3000
+  },
+  "composition_steps_by_length": {
+    "32": 400,
+    "64": 400,
+    "256": 500,
+    "512": 600,
+    "1024": 800,
+    "2048": 1000
+  },
+  "batch_size_128_by_length": {
+    "32": 256,
+    "64": 256,
+    "256": 128,
+    "512": 64,
+    "1024": 32,
+    "2048": 16
+  },
+  "evaluation_batch_size_128_by_length": {
+    "32": 1024,
+    "64": 1024,
+    "256": 512,
+    "512": 256,
+    "1024": 128,
+    "2048": 64
+  },
+  "success_gate": {
+    "minimum_state_bit_accuracy": 0.999,
+    "minimum_trace_exact": 0.99,
+    "minimum_final_parity_accuracy": 0.999,
+    "minimum_joint_exact": 0.99
+  }
+}

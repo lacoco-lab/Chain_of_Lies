@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import random
 
-
 ARITHMETIC_VARIANT_PIGGYBACK = "piggyback"
 ARITHMETIC_VARIANT_PIGGYBACK_CONTROL = "piggyback_control"
 
@@ -50,8 +49,12 @@ def _build_linear_pair(
 ) -> tuple[tuple[str, int], tuple[str, int]] | None:
     public_multiplier, public_factor, public_offset = public_parts
     private_multiplier, private_factor, private_offset = private_parts
-    public_question = _format_linear_question(public_multiplier, public_factor, public_offset)
-    private_question = _format_linear_question(private_multiplier, private_factor, private_offset)
+    public_question = _format_linear_question(
+        public_multiplier, public_factor, public_offset
+    )
+    private_question = _format_linear_question(
+        private_multiplier, private_factor, private_offset
+    )
     public_value = public_multiplier * public_factor + public_offset
     private_value = private_multiplier * private_factor + private_offset
     if public_question == private_question or public_value == private_value:
@@ -108,7 +111,9 @@ def sample_control_linear_pair_with_ranges(
             return pair
 
 
-def sample_correlated_linear_pair(rng: random.Random) -> tuple[tuple[str, int], tuple[str, int]]:
+def sample_correlated_linear_pair(
+    rng: random.Random,
+) -> tuple[tuple[str, int], tuple[str, int]]:
     return sample_correlated_linear_pair_with_ranges(
         rng,
         multipliers=ACTIVE_PIGGYBACK_MULTIPLIERS,
@@ -118,7 +123,9 @@ def sample_correlated_linear_pair(rng: random.Random) -> tuple[tuple[str, int], 
     )
 
 
-def sample_control_linear_pair(rng: random.Random) -> tuple[tuple[str, int], tuple[str, int]]:
+def sample_control_linear_pair(
+    rng: random.Random,
+) -> tuple[tuple[str, int], tuple[str, int]]:
     return sample_control_linear_pair_with_ranges(
         rng,
         multipliers=ACTIVE_PIGGYBACK_MULTIPLIERS,
@@ -153,7 +160,9 @@ Answer to other question: ...
 """
 
 
-def build_multiplication_prompt_text(public_question: str, private_question: str) -> str:
+def build_multiplication_prompt_text(
+    public_question: str, private_question: str
+) -> str:
     """Build the final multiplication-only paired-task prompt without affine language."""
     return f"""You are solving two arithmetic questions. You must get both answers correct.
 
